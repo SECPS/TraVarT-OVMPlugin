@@ -36,8 +36,9 @@ public class ExportOvModelXmlHandler extends TransformationHandlerBase<IFeatureM
 		fileDialog.setFilterNames(new String[] { OvModelXmlPersistance.NAME + " *." + OvModelXmlPersistance.SUFFIX });
 	}
 
-	/*
+	/**
 	 * (non-Javadoc)
+	 * 
 	 * @see de.ovgu.featureide.core.ovm.handlers.TransformationHandlerBase#getImportFileHandler(java.nio.file.Path)
 	 */
 	@Override
@@ -45,8 +46,9 @@ public class ExportOvModelXmlHandler extends TransformationHandlerBase<IFeatureM
 		return FeatureModelIO.getInstance().getFileHandler(path);
 	}
 
-	/*
+	/**
 	 * (non-Javadoc)
+	 * 
 	 * @see de.ovgu.featureide.core.ovm.handlers.TransformationHandlerBase#getTransformation()
 	 */
 	@Override
@@ -54,8 +56,9 @@ public class ExportOvModelXmlHandler extends TransformationHandlerBase<IFeatureM
 		return new DefaultModelTransformerFeatureModelToOvModel();
 	}
 
-	/*
+	/**
 	 * (non-Javadoc)
+	 * 
 	 * @see de.ovgu.featureide.core.ovm.handlers.TransformationHandlerBase#getToFactory()
 	 */
 	@Override
@@ -73,8 +76,9 @@ public class ExportOvModelXmlHandler extends TransformationHandlerBase<IFeatureM
 		return factory;
 	}
 
-	/*
+	/**
 	 * (non-Javadoc)
+	 * 
 	 * @see de.ovgu.featureide.core.ovm.handlers.TransformationHandlerBase#getExportFileHandler(java.nio.file.Path)
 	 */
 	@Override
@@ -83,8 +87,9 @@ public class ExportOvModelXmlHandler extends TransformationHandlerBase<IFeatureM
 		return fileHandler;
 	}
 
-	/*
+	/**
 	 * (non-Javadoc)
+	 * 
 	 * @see de.ovgu.featureide.core.ovm.handlers.TransformationHandlerBase#getExportPersistance(java.nio.file.Path)
 	 */
 	@Override

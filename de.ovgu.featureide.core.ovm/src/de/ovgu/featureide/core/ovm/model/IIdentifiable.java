@@ -5,8 +5,13 @@ package de.ovgu.featureide.core.ovm.model;
  *
  * @author johannstoebich
  */
-public abstract interface IIdentifyable {
+public abstract interface IIdentifiable {
 
+	/**
+	 * Returns the internal id of an identifiable.
+	 *
+	 * @return
+	 */
 	long getInternalId();
 
 	String getName();

@@ -2,7 +2,7 @@ package de.ovgu.featureide.core.ovm.model.impl;
 
 import java.util.Objects;
 
-import de.ovgu.featureide.core.ovm.model.IIdentifyable;
+import de.ovgu.featureide.core.ovm.model.IIdentifiable;
 import de.ovgu.featureide.core.ovm.model.IOvModelElement;
 
 /**
@@ -10,19 +10,20 @@ import de.ovgu.featureide.core.ovm.model.IOvModelElement;
  *
  * @author johannstoebich
  */
-public abstract class OvModelElement extends Identifyable implements IOvModelElement {
+public abstract class OvModelElement extends Identifiable implements IOvModelElement {
 
-	/*
+	/**
 	 * (non-Javadoc)
-	 * @see de.ovgu.featureide.core.ovm.model.IOvModelElement#getElement(de.ovgu.featureide.core.ovm.model.IIdentifyable)
+	 * 
+	 * @see de.ovgu.featureide.core.ovm.model.IOvModelElement#getElement(de.ovgu.featureide.core.ovm.model.IIdentifiable)
 	 */
 	@Override
-	public IOvModelElement getElement(IIdentifyable identifyable) {
-		if (identifyable == null) {
+	public IOvModelElement getElement(IIdentifiable identifiable) {
+		if (identifiable == null) {
 			return null;
-		} else if (identifyable == this) {
+		} else if (identifiable == this) {
 			return this;
-		} else if (Objects.equals(identifyable.getName(), getName())) {
+		} else if (Objects.equals(identifiable.getName(), getName())) {
 			return this;
 		}
 		return null;

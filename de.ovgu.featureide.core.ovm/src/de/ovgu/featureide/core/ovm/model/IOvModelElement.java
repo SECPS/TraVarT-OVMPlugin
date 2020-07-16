@@ -5,7 +5,7 @@ package de.ovgu.featureide.core.ovm.model;
  *
  * @author johannstoebich
  */
-public abstract interface IOvModelElement extends IIdentifyable {
+public abstract interface IOvModelElement extends IIdentifiable {
 
-	IOvModelElement getElement(IIdentifyable identifyable);
+	IOvModelElement getElement(IIdentifiable identifiable);
 }

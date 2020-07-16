@@ -14,7 +14,9 @@ import de.ovgu.featureide.fm.core.io.UnsupportedModelException;
 import de.ovgu.featureide.fm.core.io.xml.AXMLFormat;
 
 /**
- * TODO description
+ * This class represents an XML-persistance of an OvModel. It implements the AXMLFormat from FeatureIDE.
+ *
+ * It uses the read and write helper of the OVModel plug-in to read and write an OV-Model in a file.
  *
  * @author johannstoebich
  */

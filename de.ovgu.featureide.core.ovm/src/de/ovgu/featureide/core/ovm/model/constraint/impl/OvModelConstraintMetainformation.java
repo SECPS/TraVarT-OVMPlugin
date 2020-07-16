@@ -18,8 +18,9 @@ public class OvModelConstraintMetainformation implements IOvModelConstraintMetai
 		customProperties = new MapPropertyContainer();
 	}
 
-	/*
+	/**
 	 * (non-Javadoc)
+	 * 
 	 * @see de.ovgu.featureide.core.ovm.model.constraint.IOvModelConstraintMetainformation#getDescription()
 	 */
 	@Override
@@ -27,8 +28,9 @@ public class OvModelConstraintMetainformation implements IOvModelConstraintMetai
 		return description;
 	}
 
-	/*
+	/**
 	 * (non-Javadoc)
+	 * 
 	 * @see de.ovgu.featureide.core.ovm.model.constraint.IOvModelConstraintMetainformation#setDescription(java.lang.String)
 	 */
 	@Override
@@ -36,8 +38,9 @@ public class OvModelConstraintMetainformation implements IOvModelConstraintMetai
 		this.description = description;
 	}
 
-	/*
+	/**
 	 * (non-Javadoc)
+	 * 
 	 * @see de.ovgu.featureide.core.ovm.model.IOvModelConstraintMetainformation#getCustomProperties()
 	 */
 	@Override
@@ -45,8 +48,9 @@ public class OvModelConstraintMetainformation implements IOvModelConstraintMetai
 		return customProperties;
 	}
 
-	/*
+	/**
 	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#hashCode()
 	 */
 	@Override
@@ -57,8 +61,9 @@ public class OvModelConstraintMetainformation implements IOvModelConstraintMetai
 		return result;
 	}
 
-	/*
+	/**
 	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override

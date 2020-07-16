@@ -38,7 +38,7 @@ import org.w3c.dom.Node;
 import de.ovgu.featureide.core.ovm.base.impl.OvModelUtils;
 import de.ovgu.featureide.core.ovm.format.impl.exception.OvModelSerialisationException;
 import de.ovgu.featureide.core.ovm.format.impl.exception.OvModelSerialisationNotSupported;
-import de.ovgu.featureide.core.ovm.model.IIdentifyable;
+import de.ovgu.featureide.core.ovm.model.IIdentifiable;
 import de.ovgu.featureide.core.ovm.model.IOvModel;
 import de.ovgu.featureide.core.ovm.model.IOvModelElement;
 import de.ovgu.featureide.core.ovm.model.IOvModelMetainformation;
@@ -52,7 +52,7 @@ import de.ovgu.featureide.core.ovm.model.constraint.IOvModelExcludesConstraint;
 import de.ovgu.featureide.core.ovm.model.constraint.IOvModelRequiresConstraint;
 
 /**
- * TODO description
+ * This classes provides the methods for writing an OvModel to a XML document.
  *
  * @author johannstoebich
  */
@@ -114,7 +114,7 @@ public class WriteHelper {
 			final Element ovModelVariantReference = node.getOwnerDocument().createElement(OV_MODEL_VARIANT_REFERENCE);
 			node.appendChild(ovModelVariantReference);
 
-			writeProperties((IIdentifyable) object, ovModelVariantReference, alreadySerialisedElements);
+			writeProperties((IIdentifiable) object, ovModelVariantReference, alreadySerialisedElements);
 		} else {
 			final Element ovModelVariant = node.getOwnerDocument().createElement(OV_MODEL_VARIANT);
 			node.appendChild(ovModelVariant);
@@ -132,7 +132,7 @@ public class WriteHelper {
 			final Element ovModelVariantReference = node.getOwnerDocument().createElement(OV_MODEL_VARIATION_POINT_REFERENCE);
 			node.appendChild(ovModelVariantReference);
 
-			writeProperties((IIdentifyable) object, ovModelVariantReference, alreadySerialisedElements);
+			writeProperties((IIdentifiable) object, ovModelVariantReference, alreadySerialisedElements);
 		} else {
 
 			final Element ovModelVariationPoint = node.getOwnerDocument().createElement(OV_MODEL_VARIATION_POINT);
@@ -232,7 +232,7 @@ public class WriteHelper {
 			final Element ovModelVariantReference = node.getOwnerDocument().createElement(OV_MODEL_EXCLUDES_CONSTRAINT_REFERENCE);
 			node.appendChild(ovModelVariantReference);
 
-			writeProperties((IIdentifyable) object, ovModelVariantReference, alreadySerialisedElements);
+			writeProperties((IIdentifiable) object, ovModelVariantReference, alreadySerialisedElements);
 		} else {
 			final Element ovModelExcludesConstraint = node.getOwnerDocument().createElement(OV_MODEL_EXCLUDES_CONSTRAINT);
 			node.appendChild(ovModelExcludesConstraint);
@@ -250,7 +250,7 @@ public class WriteHelper {
 			final Element ovModelVariantReference = node.getOwnerDocument().createElement(OV_MODEL_REQUIRES_CONSTRAINT_REFERENCE);
 			node.appendChild(ovModelVariantReference);
 
-			writeProperties((IIdentifyable) object, ovModelVariantReference, alreadySerialisedElements);
+			writeProperties((IIdentifiable) object, ovModelVariantReference, alreadySerialisedElements);
 		} else {
 			final Element ovModelRequiresConstraint = node.getOwnerDocument().createElement(OV_MODEL_REQUIRES_CONSTRAINT);
 			node.appendChild(ovModelRequiresConstraint);
@@ -261,18 +261,18 @@ public class WriteHelper {
 		}
 	}
 
-	public static void writeProperties(IIdentifyable object, Element node, Collection<IOvModelElement> alreadySerialisedElements) {
+	public static void writeProperties(IIdentifiable object, Element node, Collection<IOvModelElement> alreadySerialisedElements) {
 		final Attr name = node.getOwnerDocument().createAttribute(NAME);
 		name.setValue(OvModelUtils.getName(object));
 		node.setAttributeNode(name);
 	}
 
 	public static void writeProperties(IOvModel object, Element node, Collection<IOvModelElement> alreadySerialisedElements) {
-		writeProperties((IIdentifyable) object, node, alreadySerialisedElements);
+		writeProperties((IIdentifiable) object, node, alreadySerialisedElements);
 	}
 
 	public static void writeProperties(IOvModelElement object, Element node, Collection<IOvModelElement> alreadySerialisedElements) {
-		writeProperties((IIdentifyable) object, node, alreadySerialisedElements);
+		writeProperties((IIdentifiable) object, node, alreadySerialisedElements);
 	}
 
 	public static void writeProperties(IOvModelVariationBase object, Element node, Collection<IOvModelElement> alreadySerialisedElements)

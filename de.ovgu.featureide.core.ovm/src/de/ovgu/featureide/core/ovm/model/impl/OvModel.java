@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import de.ovgu.featureide.core.ovm.model.IIdentifyable;
+import de.ovgu.featureide.core.ovm.model.IIdentifiable;
 import de.ovgu.featureide.core.ovm.model.IOvModel;
 import de.ovgu.featureide.core.ovm.model.IOvModelElement;
 import de.ovgu.featureide.core.ovm.model.IOvModelMetainformation;
@@ -17,7 +17,7 @@ import de.ovgu.featureide.fm.core.functional.Functional;
  *
  * @author johannstoebich
  */
-public class OvModel extends Identifyable implements IOvModel {
+public class OvModel extends Identifiable implements IOvModel {
 
 	protected final String factoryId;
 
@@ -41,8 +41,9 @@ public class OvModel extends Identifyable implements IOvModel {
 		metainformation = new OvModelMetainformation();
 	}
 
-	/*
+	/**
 	 * (non-Javadoc)
+	 * 
 	 * @see de.ovgu.featureide.core.ovm.model.IOvModel#getFactoryId()
 	 */
 	@Override
@@ -50,8 +51,9 @@ public class OvModel extends Identifyable implements IOvModel {
 		return factoryId;
 	}
 
-	/*
+	/**
 	 * (non-Javadoc)
+	 * 
 	 * @see de.ovgu.featureide.core.ovm.model.IOvModel#getMetainformation()
 	 */
 	@Override
@@ -59,8 +61,9 @@ public class OvModel extends Identifyable implements IOvModel {
 		return metainformation;
 	}
 
-	/*
+	/**
 	 * (non-Javadoc)
+	 * 
 	 * @see de.ovgu.featureide.core.ovm.model.IOvModel#getSourceFile()
 	 */
 	@Override
@@ -68,8 +71,9 @@ public class OvModel extends Identifyable implements IOvModel {
 		return sourceFile;
 	}
 
-	/*
+	/**
 	 * (non-Javadoc)
+	 * 
 	 * @see de.ovgu.featureide.core.ovm.model.IOvModel#setSourceFile(java.lang.String)
 	 */
 	@Override
@@ -77,8 +81,9 @@ public class OvModel extends Identifyable implements IOvModel {
 		this.sourceFile = sourceFile;
 	}
 
-	/*
+	/**
 	 * (non-Javadoc)
+	 * 
 	 * @see de.ovgu.featureide.core.ovm.model.IOvModel#getNumberOfVariationPoints()
 	 */
 	@Override
@@ -86,8 +91,9 @@ public class OvModel extends Identifyable implements IOvModel {
 		return variationPoints.size();
 	}
 
-	/*
+	/**
 	 * (non-Javadoc)
+	 * 
 	 * @see de.ovgu.featureide.core.ovm.model.IOvModel#addVariationPoint(de.ovgu.featureide.core.ovm.model.IOvModelVariationPoint)
 	 */
 	@Override
@@ -95,8 +101,9 @@ public class OvModel extends Identifyable implements IOvModel {
 		return variationPoints.add(variationPoint);
 	}
 
-	/*
+	/**
 	 * (non-Javadoc)
+	 * 
 	 * @see de.ovgu.featureide.core.ovm.model.IOvModel#getVariationPoints()
 	 */
 	@Override
@@ -104,8 +111,9 @@ public class OvModel extends Identifyable implements IOvModel {
 		return Collections.unmodifiableList(variationPoints);
 	}
 
-	/*
+	/**
 	 * (non-Javadoc)
+	 * 
 	 * @see de.ovgu.featureide.core.ovm.model.IOvModel#deleteVariationPoint(de.ovgu.featureide.core.ovm.model.IOvModelVariationPoint)
 	 */
 	@Override
@@ -113,8 +121,9 @@ public class OvModel extends Identifyable implements IOvModel {
 		return variationPoints.remove(variationPoint);
 	}
 
-	/*
+	/**
 	 * (non-Javadoc)
+	 * 
 	 * @see de.ovgu.featureide.core.ovm.model.base.IOvmModel#addConstraint(de.ovgu.featureide.core.ovm.model.base.IOvmConstraint)
 	 */
 	@Override
@@ -122,8 +131,9 @@ public class OvModel extends Identifyable implements IOvModel {
 		return constraints.add(constraint);
 	}
 
-	/*
+	/**
 	 * (non-Javadoc)
+	 * 
 	 * @see de.ovgu.featureide.core.ovm.model.base.IOvmModel#addConstraint(de.ovgu.featureide.core.ovm.model.base.IOvmConstraint, int)
 	 */
 	@Override
@@ -131,8 +141,9 @@ public class OvModel extends Identifyable implements IOvModel {
 		constraints.add(index, constraint);
 	}
 
-	/*
+	/**
 	 * (non-Javadoc)
+	 * 
 	 * @see de.ovgu.featureide.core.ovm.model.base.IOvmModel#getConstraintCount()
 	 */
 	@Override
@@ -140,8 +151,9 @@ public class OvModel extends Identifyable implements IOvModel {
 		return constraints.size();
 	}
 
-	/*
+	/**
 	 * (non-Javadoc)
+	 * 
 	 * @see de.ovgu.featureide.core.ovm.model.base.IOvmModel#getConstraintIndex(de.ovgu.featureide.core.ovm.model.base.IOvmConstraint)
 	 */
 	@Override
@@ -149,8 +161,9 @@ public class OvModel extends Identifyable implements IOvModel {
 		return constraints.indexOf(constraint);
 	}
 
-	/*
+	/**
 	 * (non-Javadoc)
+	 * 
 	 * @see de.ovgu.featureide.core.ovm.model.base.IOvmModel#getConstraints()
 	 */
 	@Override
@@ -158,8 +171,9 @@ public class OvModel extends Identifyable implements IOvModel {
 		return Collections.unmodifiableList(constraints);
 	}
 
-	/*
+	/**
 	 * (non-Javadoc)
+	 * 
 	 * @see de.ovgu.featureide.core.ovm.model.base.IOvmModel#removeConstraint(de.ovgu.featureide.core.ovm.model.base.IOvmConstraint)
 	 */
 	@Override
@@ -167,8 +181,9 @@ public class OvModel extends Identifyable implements IOvModel {
 		return constraints.remove(constraint);
 	}
 
-	/*
+	/**
 	 * (non-Javadoc)
+	 * 
 	 * @see de.ovgu.featureide.core.ovm.model.base.IOvmModel#removeConstraint(int)
 	 */
 	@Override
@@ -176,8 +191,9 @@ public class OvModel extends Identifyable implements IOvModel {
 		constraints.remove(index);
 	}
 
-	/*
+	/**
 	 * (non-Javadoc)
+	 * 
 	 * @see de.ovgu.featureide.core.ovm.model.base.IOvmModel#replaceConstraint(de.ovgu.featureide.core.ovm.model.base.IOvmConstraint, int)
 	 */
 	@Override
@@ -189,8 +205,9 @@ public class OvModel extends Identifyable implements IOvModel {
 		constraints.set(index, constraint);
 	}
 
-	/*
+	/**
 	 * (non-Javadoc)
+	 * 
 	 * @see de.ovgu.featureide.core.ovm.model.base.IOvmModel#setConstraints(java.lang.Iterable)
 	 */
 	@Override
@@ -199,21 +216,22 @@ public class OvModel extends Identifyable implements IOvModel {
 		this.constraints.addAll(Functional.toList(constraints));
 	}
 
-	/*
+	/**
 	 * (non-Javadoc)
-	 * @see de.ovgu.featureide.core.ovm.model.IOvModel#getElement(de.ovgu.featureide.core.ovm.model.IIdentifyable)
+	 * 
+	 * @see de.ovgu.featureide.core.ovm.model.IOvModel#getElement(de.ovgu.featureide.core.ovm.model.IIdentifiable)
 	 */
 	@Override
-	public IOvModelElement getElement(IIdentifyable identifyable) {
+	public IOvModelElement getElement(IIdentifiable identifiable) {
 		IOvModelElement element;
 		for (final IOvModelVariationPoint variationPoint : variationPoints) {
-			element = variationPoint.getElement(identifyable);
+			element = variationPoint.getElement(identifiable);
 			if (element != null) {
 				return element;
 			}
 		}
 		for (final IOvModelConstraint constraint : constraints) {
-			element = constraint.getElement(identifyable);
+			element = constraint.getElement(identifiable);
 			if (element != null) {
 				return element;
 			}
@@ -221,8 +239,9 @@ public class OvModel extends Identifyable implements IOvModel {
 		return null;
 	}
 
-	/*
+	/**
 	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#hashCode()
 	 */
 	@Override
@@ -235,8 +254,9 @@ public class OvModel extends Identifyable implements IOvModel {
 		return result;
 	}
 
-	/*
+	/**
 	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override

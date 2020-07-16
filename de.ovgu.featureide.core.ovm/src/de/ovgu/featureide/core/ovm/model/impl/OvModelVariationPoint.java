@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import de.ovgu.featureide.core.ovm.model.IIdentifyable;
+import de.ovgu.featureide.core.ovm.model.IIdentifiable;
 import de.ovgu.featureide.core.ovm.model.IOvModelElement;
 import de.ovgu.featureide.core.ovm.model.IOvModelVariationBase;
 import de.ovgu.featureide.core.ovm.model.IOvModelVariationPoint;
@@ -34,8 +34,9 @@ public class OvModelVariationPoint extends OvModelVariationBase implements IOvMo
 		maxChoices = EMPTY_VALUE;
 	}
 
-	/*
+	/**
 	 * (non-Javadoc)
+	 * 
 	 * @see de.ovgu.featureide.core.ovm.model.IOvModelVariationPoint#isAlternative()
 	 */
 	@Override
@@ -43,8 +44,9 @@ public class OvModelVariationPoint extends OvModelVariationBase implements IOvMo
 		return alternative;
 	}
 
-	/*
+	/**
 	 * (non-Javadoc)
+	 * 
 	 * @see de.ovgu.featureide.core.ovm.model.IOvModelVariationPoint#setAlternative(boolean)
 	 */
 	@Override
@@ -52,8 +54,9 @@ public class OvModelVariationPoint extends OvModelVariationBase implements IOvMo
 		this.alternative = alternative;
 	}
 
-	/*
+	/**
 	 * (non-Javadoc)
+	 * 
 	 * @see de.ovgu.featureide.core.ovm.model.IOvModelVariationPoint#hasMinChoices()
 	 */
 	@Override
@@ -61,8 +64,9 @@ public class OvModelVariationPoint extends OvModelVariationBase implements IOvMo
 		return minChoices != EMPTY_VALUE;
 	}
 
-	/*
+	/**
 	 * (non-Javadoc)
+	 * 
 	 * @see de.ovgu.featureide.core.ovm.model.IOvModelVariationPoint#getMinChoices()
 	 */
 	@Override
@@ -70,8 +74,9 @@ public class OvModelVariationPoint extends OvModelVariationBase implements IOvMo
 		return minChoices;
 	}
 
-	/*
+	/**
 	 * (non-Javadoc)
+	 * 
 	 * @see de.ovgu.featureide.core.ovm.model.IOvModelVariationPoint#setMinChoices(int)
 	 */
 	@Override
@@ -79,8 +84,9 @@ public class OvModelVariationPoint extends OvModelVariationBase implements IOvMo
 		this.minChoices = minChoices;
 	}
 
-	/*
+	/**
 	 * (non-Javadoc)
+	 * 
 	 * @see de.ovgu.featureide.core.ovm.model.IOvModelVariationPoint#hasMaxChoices()
 	 */
 	@Override
@@ -88,8 +94,9 @@ public class OvModelVariationPoint extends OvModelVariationBase implements IOvMo
 		return maxChoices != EMPTY_VALUE;
 	}
 
-	/*
+	/**
 	 * (non-Javadoc)
+	 * 
 	 * @see de.ovgu.featureide.core.ovm.model.IOvModelVariationPoint#getMaxChoices()
 	 */
 	@Override
@@ -97,8 +104,9 @@ public class OvModelVariationPoint extends OvModelVariationBase implements IOvMo
 		return maxChoices;
 	}
 
-	/*
+	/**
 	 * (non-Javadoc)
+	 * 
 	 * @see de.ovgu.featureide.core.ovm.model.IOvModelVariationPoint#setMaxChoices(int)
 	 */
 	@Override
@@ -106,8 +114,9 @@ public class OvModelVariationPoint extends OvModelVariationBase implements IOvMo
 		this.maxChoices = maxChoices;
 	}
 
-	/*
+	/**
 	 * (non-Javadoc)
+	 * 
 	 * @see de.ovgu.featureide.core.ovm.model.IOvModelVariationPoint#hasMandatoryChildren()
 	 */
 	@Override
@@ -115,8 +124,9 @@ public class OvModelVariationPoint extends OvModelVariationBase implements IOvMo
 		return mandatoryChildren.size() > 0;
 	}
 
-	/*
+	/**
 	 * (non-Javadoc)
+	 * 
 	 * @see de.ovgu.featureide.core.ovm.model.IOvModelVariationPoint#getMandatoryChildrenCount()
 	 */
 	@Override
@@ -124,8 +134,9 @@ public class OvModelVariationPoint extends OvModelVariationBase implements IOvMo
 		return mandatoryChildren.size();
 	}
 
-	/*
+	/**
 	 * (non-Javadoc)
+	 * 
 	 * @see de.ovgu.featureide.core.ovm.model.IOvModelVariationPoint#getMandatoryChildren()
 	 */
 	@Override
@@ -133,8 +144,9 @@ public class OvModelVariationPoint extends OvModelVariationBase implements IOvMo
 		return Collections.unmodifiableList(mandatoryChildren);
 	}
 
-	/*
+	/**
 	 * (non-Javadoc)
+	 * 
 	 * @see de.ovgu.featureide.core.ovm.model.IOvModelVariationPoint#addMandatoryChild(de.ovgu.featureide.core.ovm.model.IOvModelVariationBase)
 	 */
 	@Override
@@ -142,8 +154,9 @@ public class OvModelVariationPoint extends OvModelVariationBase implements IOvMo
 		return mandatoryChildren.add(mandatoryChild);
 	}
 
-	/*
+	/**
 	 * (non-Javadoc)
+	 * 
 	 * @see de.ovgu.featureide.core.ovm.model.IOvModelVariationPoint#removeMandatoryChild(de.ovgu.featureide.core.ovm.model.IOvModelVariationBase)
 	 */
 	@Override
@@ -151,8 +164,9 @@ public class OvModelVariationPoint extends OvModelVariationBase implements IOvMo
 		return mandatoryChildren.remove(mandatoryChild);
 	}
 
-	/*
+	/**
 	 * (non-Javadoc)
+	 * 
 	 * @see de.ovgu.featureide.core.ovm.model.IOvModelVariationPoint#setMandatoryChildren(java.util.List)
 	 */
 	@Override
@@ -161,8 +175,9 @@ public class OvModelVariationPoint extends OvModelVariationBase implements IOvMo
 		this.mandatoryChildren.addAll(Functional.toList(mandatoryChildren));
 	}
 
-	/*
+	/**
 	 * (non-Javadoc)
+	 * 
 	 * @see de.ovgu.featureide.core.ovm.model.IOvModelVariationPoint#hasOptionalChildren()
 	 */
 	@Override
@@ -170,8 +185,9 @@ public class OvModelVariationPoint extends OvModelVariationBase implements IOvMo
 		return optionalChildren.size() > 0;
 	}
 
-	/*
+	/**
 	 * (non-Javadoc)
+	 * 
 	 * @see de.ovgu.featureide.core.ovm.model.IOvModelVariationPoint#getOptionalChildrenCount()
 	 */
 	@Override
@@ -179,8 +195,9 @@ public class OvModelVariationPoint extends OvModelVariationBase implements IOvMo
 		return optionalChildren.size();
 	}
 
-	/*
+	/**
 	 * (non-Javadoc)
+	 * 
 	 * @see de.ovgu.featureide.core.ovm.model.IOvModelVariationPoint#getOptionalChildren()
 	 */
 	@Override
@@ -188,8 +205,9 @@ public class OvModelVariationPoint extends OvModelVariationBase implements IOvMo
 		return Collections.unmodifiableList(optionalChildren);
 	}
 
-	/*
+	/**
 	 * (non-Javadoc)
+	 * 
 	 * @see de.ovgu.featureide.core.ovm.model.IOvModelVariationPoint#addOptionalChild(de.ovgu.featureide.core.ovm.model.IOvModelVariationBase)
 	 */
 	@Override
@@ -197,8 +215,9 @@ public class OvModelVariationPoint extends OvModelVariationBase implements IOvMo
 		return optionalChildren.add(optionalChild);
 	}
 
-	/*
+	/**
 	 * (non-Javadoc)
+	 * 
 	 * @see de.ovgu.featureide.core.ovm.model.IOvModelVariationPoint#removeOptionalChild(de.ovgu.featureide.core.ovm.model.IOvModelVariationBase)
 	 */
 	@Override
@@ -206,8 +225,9 @@ public class OvModelVariationPoint extends OvModelVariationBase implements IOvMo
 		return optionalChildren.remove(optionalChild);
 	}
 
-	/*
+	/**
 	 * (non-Javadoc)
+	 * 
 	 * @see de.ovgu.featureide.core.ovm.model.IOvModelVariationPoint#setOptionalChildren(java.util.List)
 	 */
 	@Override
@@ -216,26 +236,27 @@ public class OvModelVariationPoint extends OvModelVariationBase implements IOvMo
 		this.optionalChildren.addAll(Functional.toList(optionalChildren));
 	}
 
-	/*
+	/**
 	 * (non-Javadoc)
-	 * @see de.ovgu.featureide.core.ovm.model.IOvModelElement#getElement(de.ovgu.featureide.core.ovm.model.IIdentifyable)
+	 * 
+	 * @see de.ovgu.featureide.core.ovm.model.IOvModelElement#getElement(de.ovgu.featureide.core.ovm.model.IIdentifiable)
 	 */
 	@Override
-	public IOvModelElement getElement(IIdentifyable identifyable) {
-		IOvModelElement element = super.getElement(identifyable);
+	public IOvModelElement getElement(IIdentifiable identifiable) {
+		IOvModelElement element = super.getElement(identifiable);
 		if (element != null) {
 			return element;
 		}
 
 		for (final IOvModelVariationBase mandatoryChild : mandatoryChildren) {
-			element = mandatoryChild.getElement(identifyable);
+			element = mandatoryChild.getElement(identifiable);
 			if (element != null) {
 				return element;
 			}
 		}
 
 		for (final IOvModelVariationBase optionalChild : optionalChildren) {
-			element = optionalChild.getElement(identifyable);
+			element = optionalChild.getElement(identifiable);
 			if (element != null) {
 				return element;
 			}
@@ -243,8 +264,9 @@ public class OvModelVariationPoint extends OvModelVariationBase implements IOvMo
 		return null;
 	}
 
-	/*
+	/**
 	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#hashCode()
 	 */
 	@Override
@@ -259,8 +281,9 @@ public class OvModelVariationPoint extends OvModelVariationBase implements IOvMo
 		return result;
 	}
 
-	/*
+	/**
 	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override

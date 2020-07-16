@@ -23,7 +23,7 @@ import org.prop4j.Not;
 import org.prop4j.Or;
 
 import de.ovgu.featureide.core.ovm.base.impl.OvModelUtils;
-import de.ovgu.featureide.core.ovm.model.IIdentifyable;
+import de.ovgu.featureide.core.ovm.model.IIdentifiable;
 import de.ovgu.featureide.core.ovm.model.IOvModel;
 import de.ovgu.featureide.core.ovm.model.IOvModelElement;
 import de.ovgu.featureide.core.ovm.model.IOvModelVariant;
@@ -43,16 +43,18 @@ import de.ovgu.featureide.fm.core.base.IFeatureModelFactory;
 import de.ovgu.featureide.fm.core.base.IFeatureStructure;
 
 /**
- * TODO description
+ * This transformer transforms an IOvModel to an IFeatureModel.
  *
  * @author johannstoebich
  */
 public class DefaultModelTransformerOvModelToFeatureModel implements IModelTransformer<IOvModel, IFeatureModel> {
 
-	/*
-	 * (non-Javadoc)
-	 * @see de.ovgu.featureid.core.ovm.transformer.IModelTransformer#transform(de.ovgu.featureide.core.ovm.model.IOvModel,
-	 * de.ovgu.featureide.fm.core.base.IFeatureModelFactory)
+	/**
+	 * This method transforms an ovmodel to a a feature model. The factory which is used for creating the new feature model must be passed in.
+	 *
+	 * @param ovModel the model which should be transformed.
+	 * @param factoryTo the factory which is sued to create the model.
+	 * @return the new feature model
 	 */
 	@Override
 	public IFeatureModel transform(IOvModel ovModel, IFactory<IFeatureModel> factoryTo) throws NotSupportedTransformationException {
@@ -112,10 +114,13 @@ public class DefaultModelTransformerOvModelToFeatureModel implements IModelTrans
 	}
 
 	/**
-	 * @param ovModelVariationBase
-	 * @param factory
-	 * @param featureModel
-	 * @return
+	 * This method transforms an ovModelVariationBase to a feature. The ovModelVariationBase should be part of the root feature tree. Otherwise the method
+	 * {@link #variationBaseToNode(IOvModelVariationBase, IFeatureModelFactory, IFeatureModel, Map) should be used.
+	 *
+	 * @param ovModelVariationBase the variation base which should be transformed to a feature.
+	 * @param factory the factory which is used to create the corresponding features.
+	 * @param featureModel the feature model which is build up.
+	 * @return the new feature
 	 */
 	private IFeature ovModelElementToFeature(final IOvModelVariationBase ovModelVariationBase, IFeatureModelFactory factory, final IFeatureModel featureModel) {
 
@@ -147,11 +152,6 @@ public class DefaultModelTransformerOvModelToFeatureModel implements IModelTrans
 			}
 
 			if (OvModelUtils.isAlternative(ovModelVariantionPoint)) {
-				// 23.06.
-				// if ((OvModelUtils.getMandatoryChildrenCount(ovModelVariantionPoint) == 0) && (OvModelUtils.getMinChoices(ovModelVariantionPoint) == 0)
-				// && (OvModelUtils.getMaxChoices(ovModelVariantionPoint) == OvModelUtils.getOptionalChildrenCount(ovModelVariantionPoint))) {
-				// FeatureUtils.setOr(feature);
-				// }
 				if ((OvModelUtils.getMinChoices(ovModelVariantionPoint) == 1) && (OvModelUtils.getMaxChoices(ovModelVariantionPoint) == 1)) {
 					FeatureUtils.setAlternative(feature);
 				} else {
@@ -164,11 +164,23 @@ public class DefaultModelTransformerOvModelToFeatureModel implements IModelTrans
 			throw new NotSupportedTransformationException(ovModelVariationBase.getClass(), IOvModelVariationBase.class);
 		}
 
-		setOvModelVariationBaseProperties(feature, factory, ovModelVariationBase);
+		setOvModelVariationBaseProperties(feature, ovModelVariationBase);
 
 		return feature;
 	}
 
+	/**
+	 * This is a utility function which either calls {@link #constraintToNode(IOvModelConstraint, IFeatureModelFactory, IFeatureModel, Map)} or
+	 * {@link #elementToNode(IOvModelElement, IFeatureModelFactory, IFeatureModel, Map)} depending whether it is a constraint, variation point or variant.
+	 *
+	 * @param ovModelElement the element which should be transformed.
+	 * @param factory the factory which is used to create the new features.
+	 * @param featureModel the feature model where the already transformed constraints are stored.
+	 * @param constraintMemory a memory which contains the already transformed constraints.
+	 *
+	 * @return the transformed node.
+	 * @throws NotSupportedTransformationException
+	 */
 	private Node elementToNode(IOvModelElement ovModelElement, IFeatureModelFactory factory, final IFeatureModel featureModel,
 			final Map<String, Node> constraintMemory) throws NotSupportedTransformationException {
 		if (ovModelElement instanceof IOvModelConstraint) {
@@ -178,6 +190,16 @@ public class DefaultModelTransformerOvModelToFeatureModel implements IModelTrans
 		}
 	}
 
+	/**
+	 * This method converts a constraint to a node.
+	 *
+	 * @param ovModelConstraint the constraint which should be transformed.
+	 * @param factory the factory which is used to create the new features.
+	 * @param featureModel the feature model where the already transformed constraints are stored.
+	 * @param constraintMemory a memory which contains the already transformed constraints.
+	 * @return the transformed node.
+	 * @throws NotSupportedTransformationException
+	 */
 	private Node constraintToNode(IOvModelConstraint ovModelConstraint, IFeatureModelFactory factory, final IFeatureModel featureModel,
 			final Map<String, Node> constraintMemory) throws NotSupportedTransformationException {
 		final String sourceName = OvModelUtils.getName(OvModelUtils.getSource(ovModelConstraint));
@@ -186,7 +208,7 @@ public class DefaultModelTransformerOvModelToFeatureModel implements IModelTrans
 		Node target = elementToNode(OvModelUtils.getTarget(ovModelConstraint), factory, featureModel, constraintMemory);
 
 		if (ovModelConstraint instanceof IOvModelExcludesConstraint) {
-			// The source must be able to ignorable to be transformed.
+			// Drop the source if it is an artificial variation point.
 			if (sourceName.contains(CONSTRAINT_VARIATION_POINT_PREFIX)) {
 				final Not not = new Not(target);
 				constraintMemory.put(OvModelUtils.getName(OvModelUtils.getSource(ovModelConstraint)), not);
@@ -195,6 +217,8 @@ public class DefaultModelTransformerOvModelToFeatureModel implements IModelTrans
 				return new Implies(source, new Not(target));
 			}
 		} else if (ovModelConstraint instanceof IOvModelRequiresConstraint) {
+			// get source and target from the constraint memory. They will only be found if they are as well constraints. Otherwise use the alredy
+			// converted source and targets.
 			if (sourceName.contains(CONSTRAINT_VARIATION_POINT_PREFIX) && constraintMemory.containsKey(sourceName)) {
 				source = constraintMemory.get(sourceName);
 				constraintMemory.remove(targetName);
@@ -211,6 +235,17 @@ public class DefaultModelTransformerOvModelToFeatureModel implements IModelTrans
 		}
 	}
 
+	/**
+	 * This method transforms a variation base to a node. The variation base should not be part of the model root. For features which are part of the model root
+	 * the method {@link #ovModelElementToFeature(IOvModelVariationBase, IFeatureModelFactory, IFeatureModel) should be used.
+	 *
+	 * @param ovModelVariationBase the variation base which should be transformed.
+	 * @param factory the factory which is used to create the new features.
+	 * @param featureModel the feature model where the already transformed constraints are stored.
+	 * @param constraintMemory a memory which contains the already transformed constraints.
+	 * @return the corresponding node of a variation point base.
+	 * @throws NotSupportedTransformationException
+	 */
 	private Node variationBaseToNode(IOvModelVariationBase ovModelVariationBase, IFeatureModelFactory factory, final IFeatureModel featureModel,
 			final Map<String, Node> constraintMemory) throws NotSupportedTransformationException {
 		if (ovModelVariationBase instanceof IOvModelVariant) {
@@ -226,6 +261,7 @@ public class DefaultModelTransformerOvModelToFeatureModel implements IModelTrans
 		} else if (ovModelVariationBase instanceof IOvModelVariationPoint) {
 
 			final IOvModelVariationPoint ovModelVariationPoint = (IOvModelVariationPoint) ovModelVariationBase;
+			// if there is a variation point which is part of root it must be a literal (cannot come from an constraint).
 			if (OvModelUtils.isPartOfOvModelRoot(ovModelVariationPoint)) {
 				final IFeature var = ovModelElementToFeature(ovModelVariationBase, factory, featureModel);
 				if (var != null) {
@@ -273,10 +309,10 @@ public class DefaultModelTransformerOvModelToFeatureModel implements IModelTrans
 				throw new NotSupportedTransformationException(IOvModelConstraint.class, IConstraint.class);
 			}
 
+			// determine type of the node
 			if ((OvModelUtils.getMinChoices(ovModelVariationPoint) == children.size())
 				&& (OvModelUtils.getMaxChoices(ovModelVariationPoint) == children.size())) {
 				return new And(children);
-				// 22.05 OvModelUtils.getMinChoices(ovModelVariationPoint) == 0)
 			} else if ((OvModelUtils.getMinChoices(ovModelVariationPoint) == 1) && (OvModelUtils.getMaxChoices(ovModelVariationPoint) == children.size())) {
 				return new Or(children);
 			} else if (OvModelUtils.getMaxChoices(ovModelVariationPoint) == children.size()) {
@@ -304,7 +340,13 @@ public class DefaultModelTransformerOvModelToFeatureModel implements IModelTrans
 		}
 	}
 
-	private void setOvModelVariationBaseProperties(final IFeature feature, IFeatureModelFactory factory, final IOvModelVariationBase ovModelVariationBase) {
+	/**
+	 * This method overtakes the ovmodel variation base properties from an ovmodelvaraint to a feature.
+	 *
+	 * @param feature the feature for which the properties should be set.
+	 * @param ovModelVariationBase the variation
+	 */
+	private void setOvModelVariationBaseProperties(final IFeature feature, final IOvModelVariationBase ovModelVariationBase) {
 		FeatureUtils.setMandatory(feature, !OvModelUtils.isOptional(ovModelVariationBase));
 		FeatureUtils.setHidden(feature, OvModelUtils.isHidden(ovModelVariationBase));
 
@@ -314,10 +356,13 @@ public class DefaultModelTransformerOvModelToFeatureModel implements IModelTrans
 	}
 
 	/**
-	 * @param featureModel
-	 * @return returns null if the feature is not found
+	 * This method iterates over all given features to find a feature which matches a specific ident.
+	 *
+	 * @param features the features which should be looked threw.
+	 * @param ovModelVariationBase the identifiable for which the feature should be found.
+	 * @return returns returns the searched feature or null if the feature is not found.
 	 */
-	private IFeature findFeatureByName(final Collection<IFeature> features, IIdentifyable ovModelVariationBase) {
+	private IFeature findFeatureByName(final Collection<IFeature> features, IIdentifiable ovModelVariationBase) {
 
 		final Deque<IFeature> stack = new ArrayDeque<IFeature>();
 		stack.addAll(features);
@@ -344,9 +389,10 @@ public class DefaultModelTransformerOvModelToFeatureModel implements IModelTrans
 	/**
 	 * This method returns all constraints which contains a certain element.
 	 *
-	 * @param featureModel
 	 * @param constraints
-	 * @return
+	 * @param element the node which should be found.
+	 * @param isSource if true, only the sources will of the constraints will be looked threw. Otherwise source and target will be checked.
+	 * @return The constraints where the element occurs.
 	 */
 	private List<IConstraint> getConstraintsWhereElementIsContained(final List<IConstraint> constraints, final Node element, boolean isSource) {
 		final List<IConstraint> constraintsWithElement = new ArrayList<IConstraint>();
@@ -379,5 +425,4 @@ public class DefaultModelTransformerOvModelToFeatureModel implements IModelTrans
 
 		return constraintsWithElement;
 	}
-
 }

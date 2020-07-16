@@ -1,52 +1,55 @@
 package de.ovgu.featureide.core.ovm.model.impl;
 
-import de.ovgu.featureide.core.ovm.model.IIdentifyable;
+import de.ovgu.featureide.core.ovm.model.IIdentifiable;
 
 /**
  * TODO description
  *
  * @author johannstoebich
  */
-public abstract class Identifyable implements IIdentifyable {
+public abstract class Identifiable implements IIdentifiable {
 
 	private static long NEXT_ID = 0;
 
 	protected long internalId;
 	protected String name;
 
-	public Identifyable() {
+	public Identifiable() {
 		internalId = getNextId();
 	}
 
-	public Identifyable(long internalId) {
+	public Identifiable(long internalId) {
 		this.internalId = internalId;
 	}
 
+	/**
+	 * (non-Javadoc)
+	 * 
+	 * @see de.ovgu.featureide.core.ovm.model.IIdentifiable#getInternalId()
+	 */
 	@Override
 	public long getInternalId() {
 		return internalId;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see de.ovgu.featureide.core.ovm.model.IIdentifyable#setName(java.lang.String)
-	 */
 	public void setInternalId(long internalId) {
 		this.internalId = internalId;
 	}
 
-	/*
+	/**
 	 * (non-Javadoc)
-	 * @see de.ovgu.featureide.core.ovm.model.IIdentifyable#getName()
+	 * 
+	 * @see de.ovgu.featureide.core.ovm.model.IIdentifiable#getName()
 	 */
 	@Override
 	public String getName() {
 		return name;
 	}
 
-	/*
+	/**
 	 * (non-Javadoc)
-	 * @see de.ovgu.featureide.core.ovm.model.IIdentifyable#setName(java.lang.String)
+	 * 
+	 * @see de.ovgu.featureide.core.ovm.model.IIdentifiable#setName(java.lang.String)
 	 */
 	@Override
 	public void setName(String name) {
@@ -57,8 +60,9 @@ public abstract class Identifyable implements IIdentifyable {
 		return NEXT_ID++;
 	}
 
-	/*
+	/**
 	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#hashCode()
 	 */
 	@Override
@@ -69,8 +73,9 @@ public abstract class Identifyable implements IIdentifyable {
 		return result;
 	}
 
-	/*
+	/**
 	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override
@@ -84,7 +89,7 @@ public abstract class Identifyable implements IIdentifyable {
 		if (getClass() != obj.getClass()) {
 			return false;
 		}
-		final Identifyable other = (Identifyable) obj;
+		final Identifiable other = (Identifiable) obj;
 		if (name == null) {
 			if (other.name != null) {
 				return false;

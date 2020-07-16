@@ -27,8 +27,9 @@ public class OvModelVariationBaseMetainformation implements IOvModelVariationBas
 		customProperties = new MapPropertyContainer();
 	}
 
-	/*
+	/**
 	 * (non-Javadoc)
+	 * 
 	 * @see de.ovgu.featureide.core.ovm.model.IOvModelVariationBaseMetainformation#getCustomProperties()
 	 */
 	@Override
@@ -36,8 +37,9 @@ public class OvModelVariationBaseMetainformation implements IOvModelVariationBas
 		return customProperties;
 	}
 
-	/*
+	/**
 	 * (non-Javadoc)
+	 * 
 	 * @see de.ovgu.featureide.core.ovm.model.IOvModelVariationBaseMetainformation#getDescription()
 	 */
 	@Override
@@ -46,8 +48,9 @@ public class OvModelVariationBaseMetainformation implements IOvModelVariationBas
 		return description;
 	}
 
-	/*
+	/**
 	 * (non-Javadoc)
+	 * 
 	 * @see de.ovgu.featureide.core.ovm.model.IOvModelVariationBaseMetainformation#setDescription(java.lang.CharSequence)
 	 */
 	@Override
@@ -55,8 +58,9 @@ public class OvModelVariationBaseMetainformation implements IOvModelVariationBas
 		this.description = description;
 	}
 
-	/*
+	/**
 	 * (non-Javadoc)
+	 * 
 	 * @see de.ovgu.featureide.core.ovm.model.IOvModelVariationBaseMetainformation#isAbstract()
 	 */
 	@Override
@@ -64,8 +68,9 @@ public class OvModelVariationBaseMetainformation implements IOvModelVariationBas
 		return isAbstract;
 	}
 
-	/*
+	/**
 	 * (non-Javadoc)
+	 * 
 	 * @see de.ovgu.featureide.core.ovm.model.IOvModelVariationBaseMetainformation#setAbstract(boolean)
 	 */
 	@Override
@@ -73,8 +78,9 @@ public class OvModelVariationBaseMetainformation implements IOvModelVariationBas
 		this.isAbstract = isAbstract;
 	}
 
-	/*
+	/**
 	 * (non-Javadoc)
+	 * 
 	 * @see de.ovgu.featureide.core.ovm.model.IOvModelVariationBaseMetainformation#isHidden()
 	 */
 	@Override
@@ -82,8 +88,9 @@ public class OvModelVariationBaseMetainformation implements IOvModelVariationBas
 		return hidden;
 	}
 
-	/*
+	/**
 	 * (non-Javadoc)
+	 * 
 	 * @see de.ovgu.featureide.core.ovm.model.IOvModelVariationBaseMetainformation#setHidden(boolean)
 	 */
 	@Override
@@ -91,8 +98,9 @@ public class OvModelVariationBaseMetainformation implements IOvModelVariationBas
 		this.hidden = hidden;
 	}
 
-	/*
+	/**
 	 * (non-Javadoc)
+	 * 
 	 * @see de.ovgu.featureide.core.ovm.model.IOvModelVariationBaseMetainformation#isPartOfOvModelRoot()
 	 */
 	@Override
@@ -100,8 +108,9 @@ public class OvModelVariationBaseMetainformation implements IOvModelVariationBas
 		return partOfOvModelRoot;
 	}
 
-	/*
+	/**
 	 * (non-Javadoc)
+	 * 
 	 * @see de.ovgu.featureide.core.ovm.model.IOvModelVariationBaseMetainformation#setPartOfOvModelRoot(boolean)
 	 */
 	@Override
@@ -109,8 +118,9 @@ public class OvModelVariationBaseMetainformation implements IOvModelVariationBas
 		this.partOfOvModelRoot = partOfOvModelRoot;
 	}
 
-	/*
+	/**
 	 * (non-Javadoc)
+	 * 
 	 * @see de.ovgu.featureide.core.ovm.model.IOvModelVariationBaseMetainformation#getReferencedConstraints()
 	 */
 	@Override
@@ -118,8 +128,9 @@ public class OvModelVariationBaseMetainformation implements IOvModelVariationBas
 		return referencedConstraints;
 	}
 
-	/*
+	/**
 	 * (non-Javadoc)
+	 * 
 	 * @see de.ovgu.featureide.core.ovm.model.IOvModelVariationBaseMetainformation#setReferencedConstraints(java.util.List)
 	 */
 	@Override
@@ -127,8 +138,9 @@ public class OvModelVariationBaseMetainformation implements IOvModelVariationBas
 		this.referencedConstraints = referencedConstraints;
 	}
 
-	/*
+	/**
 	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#hashCode()
 	 */
 	@Override
@@ -142,8 +154,9 @@ public class OvModelVariationBaseMetainformation implements IOvModelVariationBas
 		return result;
 	}
 
-	/*
+	/**
 	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override

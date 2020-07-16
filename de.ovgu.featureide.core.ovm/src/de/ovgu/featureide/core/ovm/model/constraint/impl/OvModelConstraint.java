@@ -1,6 +1,6 @@
 package de.ovgu.featureide.core.ovm.model.constraint.impl;
 
-import de.ovgu.featureide.core.ovm.model.IIdentifyable;
+import de.ovgu.featureide.core.ovm.model.IIdentifiable;
 import de.ovgu.featureide.core.ovm.model.IOvModelElement;
 import de.ovgu.featureide.core.ovm.model.IOvModelVariationBase;
 import de.ovgu.featureide.core.ovm.model.constraint.IOvModelConstraint;
@@ -24,8 +24,9 @@ public abstract class OvModelConstraint extends OvModelElement implements IOvMod
 		metanformation = new OvModelConstraintMetainformation();
 	}
 
-	/*
+	/**
 	 * (non-Javadoc)
+	 * 
 	 * @see de.ovgu.featureide.core.ovm.model.constraint.IOvModelConstraint#getSource()
 	 */
 	@Override
@@ -33,17 +34,19 @@ public abstract class OvModelConstraint extends OvModelElement implements IOvMod
 		return source;
 	}
 
-	/*
+	/**
 	 * (non-Javadoc)
-	 * @see de.ovgu.featureide.core.ovm.model.constraint.IOvModelConstraint#setSource(de.ovgu.featureide.core.ovm.model.IOvModelElement)
+	 * 
+	 * @see de.ovgu.featureide.core.ovm.model.constraint.IOvModelConstraint#setSource(IOvModelVariationBase)
 	 */
 	@Override
 	public void setSource(IOvModelVariationBase source) {
 		this.source = source;
 	}
 
-	/*
+	/**
 	 * (non-Javadoc)
+	 * 
 	 * @see de.ovgu.featureide.core.ovm.model.constraint.IOvModelConstraint#getTarget()
 	 */
 	@Override
@@ -51,9 +54,10 @@ public abstract class OvModelConstraint extends OvModelElement implements IOvMod
 		return target;
 	}
 
-	/*
+	/**
 	 * (non-Javadoc)
-	 * @see de.ovgu.featureide.core.ovm.model.constraint.IOvModelConstraint#setTarget(de.ovgu.featureide.core.ovm.model.IOvModelElement)
+	 * 
+	 * @see de.ovgu.featureide.core.ovm.model.constraint.IOvModelConstraint#setTarget(IOvModelVariationBase)
 	 */
 	@Override
 	public void setTarget(IOvModelVariationBase target) {
@@ -61,28 +65,36 @@ public abstract class OvModelConstraint extends OvModelElement implements IOvMod
 	}
 
 	/**
-	 * @return the metaInformation
+	 * (non-Javadoc)
+	 * 
+	 * @see de.ovgu.featureide.core.ovm.model.constraint.IOvModelConstraint#getMetainformation()
 	 */
 	@Override
 	public IOvModelConstraintMetainformation getMetainformation() {
 		return metanformation;
 	}
 
+	/**
+	 * (non-Javadoc)
+	 * 
+	 * @see de.ovgu.featureide.core.ovm.model.constraint.IOvModelConstraint#getElement(de.ovgu.featureide.core.ovm.model.IIdentifiable)
+	 */
 	@Override
-	public IOvModelElement getElement(IIdentifyable identifyable) {
+	public IOvModelElement getElement(IIdentifiable identifiable) {
 		IOvModelElement element;
-		if ((element = super.getElement(identifyable)) != null) {
+		if ((element = super.getElement(identifiable)) != null) {
 			return element;
-		} else if ((getSource() != null) && ((element = getSource().getElement(identifyable)) != null)) {
+		} else if ((getSource() != null) && ((element = getSource().getElement(identifiable)) != null)) {
 			return element;
-		} else if ((getTarget() != null) && ((element = getTarget().getElement(identifyable)) != null)) {
+		} else if ((getTarget() != null) && ((element = getTarget().getElement(identifiable)) != null)) {
 			return element;
 		}
 		return null;
 	}
 
-	/*
+	/**
 	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#hashCode()
 	 */
 	@Override
@@ -95,8 +107,9 @@ public abstract class OvModelConstraint extends OvModelElement implements IOvMod
 		return result;
 	}
 
-	/*
+	/**
 	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override

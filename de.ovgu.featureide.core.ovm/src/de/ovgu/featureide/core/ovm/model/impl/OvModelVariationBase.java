@@ -19,8 +19,9 @@ public abstract class OvModelVariationBase extends OvModelElement implements IOv
 		metainformation = new OvModelVariationBaseMetainformation();
 	}
 
-	/*
+	/**
 	 * (non-Javadoc)
+	 * 
 	 * @see de.ovgu.featureide.core.ovm.model.IOvModelVariationBase#getMetaInformation()
 	 */
 	@Override
@@ -28,17 +29,19 @@ public abstract class OvModelVariationBase extends OvModelElement implements IOv
 		return metainformation;
 	}
 
-	/*
+	/**
 	 * (non-Javadoc)
-	 * @see de.ovgu.featureide.core.ovm.model.IOvModelVariationBase#setMetaInformation(de.ovgu.featureide.core.ovm.model.IOvModelMetainformation)
+	 * 
+	 * @see de.ovgu.featureide.core.ovm.model.IOvModelVariationBase#setMetaInformation(IOvModelVariationBaseMetainformation)
 	 */
 	@Override
 	public void setMetaInformation(IOvModelVariationBaseMetainformation metaInformation) {
-		this.metainformation = metaInformation;
+		metainformation = metaInformation;
 	}
 
-	/*
+	/**
 	 * (non-Javadoc)
+	 * 
 	 * @see de.ovgu.featureide.core.ovm.model.IOvModelVariationBase#isOptional()
 	 */
 	@Override
@@ -46,8 +49,9 @@ public abstract class OvModelVariationBase extends OvModelElement implements IOv
 		return optional;
 	}
 
-	/*
+	/**
 	 * (non-Javadoc)
+	 * 
 	 * @see de.ovgu.featureide.core.ovm.model.IOvModelVariationBase#setOptional(boolean)
 	 */
 	@Override
@@ -55,8 +59,9 @@ public abstract class OvModelVariationBase extends OvModelElement implements IOv
 		this.optional = optional;
 	}
 
-	/*
+	/**
 	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#hashCode()
 	 */
 	@Override
@@ -68,8 +73,9 @@ public abstract class OvModelVariationBase extends OvModelElement implements IOv
 		return result;
 	}
 
-	/*
+	/**
 	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override

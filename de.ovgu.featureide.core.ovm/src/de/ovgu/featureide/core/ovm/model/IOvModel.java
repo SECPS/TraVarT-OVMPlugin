@@ -7,7 +7,7 @@ import de.ovgu.featureide.fm.core.base.IConstraint;
 import de.ovgu.featureide.fm.core.base.IFeature;
 import de.ovgu.featureide.fm.core.base.IFeatureModelProperty;
 
-public interface IOvModel extends IIdentifyable, Cloneable {
+public interface IOvModel extends IIdentifiable, Cloneable {
 
 	String getFactoryId();
 
@@ -301,8 +301,8 @@ public interface IOvModel extends IIdentifyable, Cloneable {
 	void setConstraints(final Iterable<IOvModelConstraint> constraints);
 
 	/**
-	 * @param iIdentifyable
+	 * @param iIdentifiable
 	 * @return
 	 */
-	IOvModelElement getElement(IIdentifyable identifyable);
+	IOvModelElement getElement(IIdentifiable identifiable);
 }

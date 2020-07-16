@@ -7,7 +7,8 @@ import de.ovgu.featureide.fm.core.base.IPropertyContainer;
 import de.ovgu.featureide.fm.core.io.xml.XmlFeatureModelFormat;
 
 /**
- * TODO description
+ * This class represents an extension of the XmlFeatureModelFormat. It is used to store the properties precisely by using the provided methods of the base
+ * class.
  *
  * @author johannstoebich
  */

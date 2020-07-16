@@ -19,8 +19,9 @@ public class OvModelMetainformation implements IOvModelMetainformation {
 		customProperties = new MapPropertyContainer();
 	}
 
-	/*
+	/**
 	 * (non-Javadoc)
+	 *
 	 * @see de.ovgu.featureide.core.ovm.model.IOvModelMetainformation#getCustomProperties()
 	 */
 	@Override
@@ -28,8 +29,9 @@ public class OvModelMetainformation implements IOvModelMetainformation {
 		return customProperties;
 	}
 
-	/*
+	/**
 	 * (non-Javadoc)
+	 *
 	 * @see de.ovgu.featureide.core.ovm.model.IOvModelMetainformation#getDescription()
 	 */
 	@Override
@@ -38,17 +40,19 @@ public class OvModelMetainformation implements IOvModelMetainformation {
 		return description;
 	}
 
-	/*
+	/**
 	 * (non-Javadoc)
-	 * @see de.ovgu.featureide.core.ovm.model.IOvModelMetainformation#setDescription(java.lang.CharSequence)
+	 *
+	 * @see de.ovgu.featureide.core.ovm.model.IOvModelMetainformation#setDescription(String)
 	 */
 	@Override
 	public void setDescription(String description) {
 		this.description = description;
 	}
 
-	/*
+	/**
 	 * (non-Javadoc)
+	 *
 	 * @see java.lang.Object#hashCode()
 	 */
 	@Override
@@ -59,8 +63,9 @@ public class OvModelMetainformation implements IOvModelMetainformation {
 		return result;
 	}
 
-	/*
+	/**
 	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override

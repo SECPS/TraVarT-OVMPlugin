@@ -39,7 +39,7 @@ import de.ovgu.featureide.core.ovm.factory.IOvModelFactory;
 import de.ovgu.featureide.core.ovm.format.impl.exception.OvModelSerialisationException;
 import de.ovgu.featureide.core.ovm.format.impl.exception.OvModelWrongCountOfElements;
 import de.ovgu.featureide.core.ovm.format.impl.exception.OvModelWrongElementException;
-import de.ovgu.featureide.core.ovm.model.IIdentifyable;
+import de.ovgu.featureide.core.ovm.model.IIdentifiable;
 import de.ovgu.featureide.core.ovm.model.IOvModel;
 import de.ovgu.featureide.core.ovm.model.IOvModelElement;
 import de.ovgu.featureide.core.ovm.model.IOvModelMetainformation;
@@ -53,7 +53,7 @@ import de.ovgu.featureide.core.ovm.model.constraint.IOvModelExcludesConstraint;
 import de.ovgu.featureide.core.ovm.model.constraint.IOvModelRequiresConstraint;
 
 /**
- * TODO description
+ * This classes provides the methods for reading an OvModel from a XML document.
  *
  * @author johannstoebich
  */
@@ -115,7 +115,7 @@ public class ReadHelper {
 			return ovModelRequiresConstraint;
 		} else if (type.equals(OV_MODEL_VARIANT_REFERENCE) || type.equals(OV_MODEL_VARIATION_POINT_REFERENCE)
 			|| type.equals(OV_MODEL_EXCLUDES_CONSTRAINT_REFERENCE) || type.equals(OV_MODEL_REQUIRES_CONSTRAINT_REFERENCE)) {
-				final IOvModelElement element = ovModel.getElement(factory.createIdentifyable(0, name));
+				final IOvModelElement element = ovModel.getElement(factory.createIdentifiable(0, name));
 				if (element == null) {
 					throw new OvModelWrongElementException(type, name);
 				}
@@ -228,16 +228,16 @@ public class ReadHelper {
 		readProperties(node, object, ovModel, factory);
 	}
 
-	public static void readProperties(Element node, IIdentifyable object, IOvModel ovModel, IOvModelFactory factory) {
+	public static void readProperties(Element node, IIdentifiable object, IOvModel ovModel, IOvModelFactory factory) {
 		OvModelUtils.setName(object, node.getAttribute(NAME));
 	}
 
 	public static void readProperties(Element node, IOvModel object, IOvModel ovModel, IOvModelFactory factory) {
-		readProperties(node, (IIdentifyable) object, ovModel, factory);
+		readProperties(node, (IIdentifiable) object, ovModel, factory);
 	}
 
 	public static void readProperties(Element node, IOvModelElement object, IOvModel ovModel, IOvModelFactory factory) {
-		readProperties(node, (IIdentifyable) object, ovModel, factory);
+		readProperties(node, (IIdentifiable) object, ovModel, factory);
 	}
 
 	public static void readProperties(Element node, IOvModelVariationBase object, IOvModel ovModel, IOvModelFactory factory)

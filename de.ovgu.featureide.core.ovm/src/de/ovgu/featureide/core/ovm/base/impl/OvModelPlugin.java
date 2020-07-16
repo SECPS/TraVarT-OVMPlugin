@@ -6,7 +6,8 @@ import org.osgi.framework.BundleContext;
 import de.ovgu.featureide.fm.core.init.LibraryManager;
 
 /**
- * The activator class controls the plug-in life cycle
+ * The activator class controls the plug-in life cycle. This class provides the setup functions of the plug-in. They are called when the plug-in is first
+ * started and when the plug-in is stopped.
  */
 public class OvModelPlugin extends Plugin {
 
