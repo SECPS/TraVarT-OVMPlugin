@@ -10,10 +10,11 @@ import de.ovgu.featureide.core.ovm.model.IOvModelElement;
 import de.ovgu.featureide.core.ovm.model.IOvModelMetainformation;
 import de.ovgu.featureide.core.ovm.model.IOvModelVariationPoint;
 import de.ovgu.featureide.core.ovm.model.constraint.IOvModelConstraint;
+import de.ovgu.featureide.fm.core.base.impl.FeatureModel;
 import de.ovgu.featureide.fm.core.functional.Functional;
 
 /**
- * TODO description
+ * Legal Notice: Some of this code or comments are overtaken from the FeatrueIDE's {@link FeatureModel}.
  *
  * @author johannstoebich
  */
@@ -43,7 +44,7 @@ public class OvModel extends Identifiable implements IOvModel {
 
 	/**
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see de.ovgu.featureide.core.ovm.model.IOvModel#getFactoryId()
 	 */
 	@Override
@@ -53,7 +54,7 @@ public class OvModel extends Identifiable implements IOvModel {
 
 	/**
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see de.ovgu.featureide.core.ovm.model.IOvModel#getMetainformation()
 	 */
 	@Override
@@ -63,7 +64,7 @@ public class OvModel extends Identifiable implements IOvModel {
 
 	/**
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see de.ovgu.featureide.core.ovm.model.IOvModel#getSourceFile()
 	 */
 	@Override
@@ -73,7 +74,7 @@ public class OvModel extends Identifiable implements IOvModel {
 
 	/**
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see de.ovgu.featureide.core.ovm.model.IOvModel#setSourceFile(java.lang.String)
 	 */
 	@Override
@@ -83,7 +84,7 @@ public class OvModel extends Identifiable implements IOvModel {
 
 	/**
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see de.ovgu.featureide.core.ovm.model.IOvModel#getNumberOfVariationPoints()
 	 */
 	@Override
@@ -93,7 +94,7 @@ public class OvModel extends Identifiable implements IOvModel {
 
 	/**
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see de.ovgu.featureide.core.ovm.model.IOvModel#addVariationPoint(de.ovgu.featureide.core.ovm.model.IOvModelVariationPoint)
 	 */
 	@Override
@@ -103,7 +104,7 @@ public class OvModel extends Identifiable implements IOvModel {
 
 	/**
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see de.ovgu.featureide.core.ovm.model.IOvModel#getVariationPoints()
 	 */
 	@Override
@@ -113,7 +114,7 @@ public class OvModel extends Identifiable implements IOvModel {
 
 	/**
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see de.ovgu.featureide.core.ovm.model.IOvModel#deleteVariationPoint(de.ovgu.featureide.core.ovm.model.IOvModelVariationPoint)
 	 */
 	@Override
@@ -123,7 +124,7 @@ public class OvModel extends Identifiable implements IOvModel {
 
 	/**
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see de.ovgu.featureide.core.ovm.model.base.IOvmModel#addConstraint(de.ovgu.featureide.core.ovm.model.base.IOvmConstraint)
 	 */
 	@Override
@@ -133,7 +134,7 @@ public class OvModel extends Identifiable implements IOvModel {
 
 	/**
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see de.ovgu.featureide.core.ovm.model.base.IOvmModel#addConstraint(de.ovgu.featureide.core.ovm.model.base.IOvmConstraint, int)
 	 */
 	@Override
@@ -143,7 +144,7 @@ public class OvModel extends Identifiable implements IOvModel {
 
 	/**
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see de.ovgu.featureide.core.ovm.model.base.IOvmModel#getConstraintCount()
 	 */
 	@Override
@@ -153,7 +154,7 @@ public class OvModel extends Identifiable implements IOvModel {
 
 	/**
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see de.ovgu.featureide.core.ovm.model.base.IOvmModel#getConstraintIndex(de.ovgu.featureide.core.ovm.model.base.IOvmConstraint)
 	 */
 	@Override
@@ -163,7 +164,7 @@ public class OvModel extends Identifiable implements IOvModel {
 
 	/**
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see de.ovgu.featureide.core.ovm.model.base.IOvmModel#getConstraints()
 	 */
 	@Override
@@ -173,7 +174,7 @@ public class OvModel extends Identifiable implements IOvModel {
 
 	/**
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see de.ovgu.featureide.core.ovm.model.base.IOvmModel#removeConstraint(de.ovgu.featureide.core.ovm.model.base.IOvmConstraint)
 	 */
 	@Override
@@ -183,7 +184,7 @@ public class OvModel extends Identifiable implements IOvModel {
 
 	/**
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see de.ovgu.featureide.core.ovm.model.base.IOvmModel#removeConstraint(int)
 	 */
 	@Override
@@ -193,7 +194,7 @@ public class OvModel extends Identifiable implements IOvModel {
 
 	/**
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see de.ovgu.featureide.core.ovm.model.base.IOvmModel#replaceConstraint(de.ovgu.featureide.core.ovm.model.base.IOvmConstraint, int)
 	 */
 	@Override
@@ -207,7 +208,7 @@ public class OvModel extends Identifiable implements IOvModel {
 
 	/**
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see de.ovgu.featureide.core.ovm.model.base.IOvmModel#setConstraints(java.lang.Iterable)
 	 */
 	@Override
@@ -218,7 +219,7 @@ public class OvModel extends Identifiable implements IOvModel {
 
 	/**
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see de.ovgu.featureide.core.ovm.model.IOvModel#getElement(de.ovgu.featureide.core.ovm.model.IIdentifiable)
 	 */
 	@Override
@@ -241,7 +242,7 @@ public class OvModel extends Identifiable implements IOvModel {
 
 	/**
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see java.lang.Object#hashCode()
 	 */
 	@Override
@@ -256,7 +257,7 @@ public class OvModel extends Identifiable implements IOvModel {
 
 	/**
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override

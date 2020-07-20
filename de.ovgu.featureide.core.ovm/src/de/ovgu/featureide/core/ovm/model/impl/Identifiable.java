@@ -3,7 +3,7 @@ package de.ovgu.featureide.core.ovm.model.impl;
 import de.ovgu.featureide.core.ovm.model.IIdentifiable;
 
 /**
- * TODO description
+ *
  *
  * @author johannstoebich
  */
@@ -24,7 +24,7 @@ public abstract class Identifiable implements IIdentifiable {
 
 	/**
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see de.ovgu.featureide.core.ovm.model.IIdentifiable#getInternalId()
 	 */
 	@Override
@@ -38,7 +38,7 @@ public abstract class Identifiable implements IIdentifiable {
 
 	/**
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see de.ovgu.featureide.core.ovm.model.IIdentifiable#getName()
 	 */
 	@Override
@@ -48,7 +48,7 @@ public abstract class Identifiable implements IIdentifiable {
 
 	/**
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see de.ovgu.featureide.core.ovm.model.IIdentifiable#setName(java.lang.String)
 	 */
 	@Override
@@ -62,7 +62,7 @@ public abstract class Identifiable implements IIdentifiable {
 
 	/**
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see java.lang.Object#hashCode()
 	 */
 	@Override
@@ -75,7 +75,7 @@ public abstract class Identifiable implements IIdentifiable {
 
 	/**
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override
