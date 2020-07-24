@@ -7,8 +7,8 @@ import de.ovgu.featureide.fm.core.base.IPropertyContainer;
 import de.ovgu.featureide.fm.core.io.xml.XmlFeatureModelFormat;
 
 /**
- * This class represents an extension of the XmlFeatureModelFormat. It is used to store the properties precisely by using the provided methods of the base
- * class.
+ * This class represents an extension of the {@link XmlFeatureModelFormat}. It is used to store the properties of a feature model precisely by using the
+ * provided methods of the base class. These properties are for example the location of the file menu.
  *
  * @author johannstoebich
  */
@@ -20,6 +20,11 @@ public class PropertyHelper extends XmlFeatureModelFormat {
 
 	}
 
+	/**
+	 * This method returns the singelton instance of the PropertyHelper.
+	 *
+	 * @return the instance.
+	 */
 	public static PropertyHelper getSingeltonInstance() {
 		if (instance == null) {
 			instance = new PropertyHelper();
@@ -27,14 +32,32 @@ public class PropertyHelper extends XmlFeatureModelFormat {
 		return instance;
 	}
 
-	public static void writeProperties(Document doc, IPropertyContainer properties, Element fnod) {
-		getSingeltonInstance().addProperties(doc, properties, fnod);
+	/**
+	 * This method writes the feature model properties into an element. This properties can be separated into GRAPHICS, CALCULATIONS and PROPERTY properties.
+	 *
+	 * @param doc the document in which the properties should be written.
+	 * @param properties the container which contains the properties.
+	 * @param element the element where the properties should be stored.
+	 */
+	public static void writeProperties(Document doc, IPropertyContainer properties, Element element) {
+		getSingeltonInstance().addProperties(doc, properties, element);
 	}
 
-	public static void readProperties(IPropertyContainer properties, Element e) {
-		getSingeltonInstance().parseFeatureModelProperties(properties, e);
+	/**
+	 * This method read the feature model properties. This properties can be separated into GRAPHICS, CALCULATIONS and PROPERTY elements.
+	 *
+	 * @param properties the container in which the properties should be stored.
+	 * @param element the element containing the properties.
+	 */
+	public static void readProperties(IPropertyContainer properties, Element element) {
+		getSingeltonInstance().parseFeatureModelProperties(properties, element);
 	}
 
+	/**
+	 * This method checks the element contains feature model properties. This properties can be separated into GRAPHICS, CALCULATIONS and PROPERTY elements.
+	 *
+	 * @param element the element containing the properties.
+	 */
 	public boolean isFeatureModelProperties(Element e) {
 		final String nodeName = e.getNodeName();
 		switch (nodeName) {

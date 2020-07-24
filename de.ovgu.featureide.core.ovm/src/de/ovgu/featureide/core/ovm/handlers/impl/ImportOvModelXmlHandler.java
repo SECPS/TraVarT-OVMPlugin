@@ -21,12 +21,19 @@ import de.ovgu.featureide.fm.core.io.IPersistentFormat;
 import de.ovgu.featureide.fm.core.io.manager.FileHandler;
 
 /**
- * TODO description
+ * (non-Javadoc)
+ *
+ * @see TransformationHandlerBase
  *
  * @author johannstoebich
  */
 public class ImportOvModelXmlHandler extends TransformationHandlerBase<IOvModel, IFeatureModel> {
 
+	/**
+	 * (non-Javadoc)
+	 *
+	 * @see de.ovgu.featureide.core.ovm.handlers.TransformationHandlerBase#configureFileDialog(org.eclipse.swt.widgets.FileDialog);
+	 */
 	@Override
 	protected void configureFileDialog(FileDialog fileDialog) {
 		super.configureFileDialog(fileDialog);
@@ -58,7 +65,7 @@ public class ImportOvModelXmlHandler extends TransformationHandlerBase<IOvModel,
 
 	/**
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see de.ovgu.featureide.core.ovm.handlers.TransformationHandlerBase#getImportFileHandler(java.nio.file.Path)
 	 */
 	@Override
@@ -68,7 +75,7 @@ public class ImportOvModelXmlHandler extends TransformationHandlerBase<IOvModel,
 
 	/**
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see de.ovgu.featureide.core.ovm.handlers.TransformationHandlerBase#getTransformation()
 	 */
 	@Override
@@ -78,7 +85,7 @@ public class ImportOvModelXmlHandler extends TransformationHandlerBase<IOvModel,
 
 	/**
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see de.ovgu.featureide.core.ovm.handlers.TransformationHandlerBase#getExportFactory()
 	 */
 	@Override
@@ -97,7 +104,7 @@ public class ImportOvModelXmlHandler extends TransformationHandlerBase<IOvModel,
 
 	/**
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see de.ovgu.featureide.core.ovm.handlers.TransformationHandlerBase#getExportFileHandler(java.nio.file.Path)
 	 */
 	@Override
@@ -108,7 +115,7 @@ public class ImportOvModelXmlHandler extends TransformationHandlerBase<IOvModel,
 
 	/**
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see de.ovgu.featureide.core.ovm.handlers.TransformationHandlerBase#getExportPersistance(java.nio.file.Path)
 	 */
 	@Override

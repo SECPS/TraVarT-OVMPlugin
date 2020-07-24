@@ -12,7 +12,7 @@ import de.ovgu.featureide.fm.core.job.LongRunningCore;
 import de.ovgu.featureide.fm.core.job.LongRunningWrapper;
 
 /**
- * The methods in this class are called from the OvModelPlugin on startup and on stop.
+ * The methods in this class are called from the {@link OvModelPlugin} on startup and on stop.
  *
  * @author johannstoebich
  */

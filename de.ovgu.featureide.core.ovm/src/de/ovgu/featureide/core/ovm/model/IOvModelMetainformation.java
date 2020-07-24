@@ -4,8 +4,8 @@ import de.ovgu.featureide.fm.core.base.IPropertyContainer;
 import de.ovgu.featureide.fm.core.base.impl.FeatureModel;
 
 /**
- * Manages all additional properties of a OVM. The metainformation stores all information which is defined for a feature model in FeatureIDE however cannot be
- * represented by an OVM. In this case it is solely the description and the properties.
+ * Manages all additional properties of an {link IOvModel}. The metainformation stores all information which is defined for a feature model in FeatureIDE
+ * however cannot be represented by an {link IOvModel}. In this case it is solely the description and the properties.
  *
  */
 public interface IOvModelMetainformation {

@@ -7,7 +7,8 @@ import de.ovgu.featureide.fm.core.base.impl.FeatureModel;
 
 /**
  *
- * This class represents a base class for an OvModel. It stores all referenced constraint and variation points.
+ * This class represents an OVM as it is defined by K. Pohl, G. Böckle, and F. Linden in Software Product Line Engineering: Foundations, Principles, and
+ * Techniques in 2005. It stores all referenced constraint and variation points.
  *
  * @author johannstoebich
  *

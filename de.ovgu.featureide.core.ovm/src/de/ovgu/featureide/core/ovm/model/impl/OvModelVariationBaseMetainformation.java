@@ -9,7 +9,9 @@ import de.ovgu.featureide.fm.core.base.IPropertyContainer;
 import de.ovgu.featureide.fm.core.base.impl.MapPropertyContainer;
 
 /**
- * TODO description
+ * Represents a concrete implementation of {@link IOvModelVariationBaseMetainformation}.
+ *
+ * @see IOvModelVariationBaseMetainformation
  *
  * @author johannstoebich
  */
@@ -29,7 +31,7 @@ public class OvModelVariationBaseMetainformation implements IOvModelVariationBas
 
 	/**
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see de.ovgu.featureide.core.ovm.model.IOvModelVariationBaseMetainformation#getCustomProperties()
 	 */
 	@Override
@@ -39,18 +41,17 @@ public class OvModelVariationBaseMetainformation implements IOvModelVariationBas
 
 	/**
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see de.ovgu.featureide.core.ovm.model.IOvModelVariationBaseMetainformation#getDescription()
 	 */
 	@Override
 	public String getDescription() {
-		// TODO Auto-generated method stub
 		return description;
 	}
 
 	/**
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see de.ovgu.featureide.core.ovm.model.IOvModelVariationBaseMetainformation#setDescription(java.lang.CharSequence)
 	 */
 	@Override
@@ -60,7 +61,7 @@ public class OvModelVariationBaseMetainformation implements IOvModelVariationBas
 
 	/**
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see de.ovgu.featureide.core.ovm.model.IOvModelVariationBaseMetainformation#isAbstract()
 	 */
 	@Override
@@ -70,7 +71,7 @@ public class OvModelVariationBaseMetainformation implements IOvModelVariationBas
 
 	/**
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see de.ovgu.featureide.core.ovm.model.IOvModelVariationBaseMetainformation#setAbstract(boolean)
 	 */
 	@Override
@@ -80,7 +81,7 @@ public class OvModelVariationBaseMetainformation implements IOvModelVariationBas
 
 	/**
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see de.ovgu.featureide.core.ovm.model.IOvModelVariationBaseMetainformation#isHidden()
 	 */
 	@Override
@@ -90,7 +91,7 @@ public class OvModelVariationBaseMetainformation implements IOvModelVariationBas
 
 	/**
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see de.ovgu.featureide.core.ovm.model.IOvModelVariationBaseMetainformation#setHidden(boolean)
 	 */
 	@Override
@@ -100,7 +101,7 @@ public class OvModelVariationBaseMetainformation implements IOvModelVariationBas
 
 	/**
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see de.ovgu.featureide.core.ovm.model.IOvModelVariationBaseMetainformation#isPartOfOvModelRoot()
 	 */
 	@Override
@@ -110,7 +111,7 @@ public class OvModelVariationBaseMetainformation implements IOvModelVariationBas
 
 	/**
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see de.ovgu.featureide.core.ovm.model.IOvModelVariationBaseMetainformation#setPartOfOvModelRoot(boolean)
 	 */
 	@Override
@@ -120,7 +121,7 @@ public class OvModelVariationBaseMetainformation implements IOvModelVariationBas
 
 	/**
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see de.ovgu.featureide.core.ovm.model.IOvModelVariationBaseMetainformation#getReferencedConstraints()
 	 */
 	@Override
@@ -130,7 +131,7 @@ public class OvModelVariationBaseMetainformation implements IOvModelVariationBas
 
 	/**
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see de.ovgu.featureide.core.ovm.model.IOvModelVariationBaseMetainformation#setReferencedConstraints(java.util.List)
 	 */
 	@Override
@@ -140,7 +141,7 @@ public class OvModelVariationBaseMetainformation implements IOvModelVariationBas
 
 	/**
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see java.lang.Object#hashCode()
 	 */
 	@Override
@@ -156,7 +157,7 @@ public class OvModelVariationBaseMetainformation implements IOvModelVariationBas
 
 	/**
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override

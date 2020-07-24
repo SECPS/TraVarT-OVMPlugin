@@ -34,7 +34,7 @@ import de.ovgu.featureide.fm.core.base.IFeature;
 import de.ovgu.featureide.fm.core.base.IFeatureModel;
 
 /**
- * This transformer transforms an IFeatureModel to an IOvModel.
+ * This transformer transforms an {@link IFeatureModel} to an {@link IOvModel}.
  *
  * @author johannstoebich
  */
@@ -43,9 +43,9 @@ public class DefaultModelTransformerFeatureModelToOvModel implements IModelTrans
 	private Integer sequence = 0;
 
 	/**
-	 * This method transforms a featureModel to an ovModel. The method {@link #featureToOvModelElement(IFeature, IFeatureModel, IOvModelFactory, IOvModel)} is
-	 * used to transform all variation points and the method {@link #nodeToConstraints(Node, IFeatureModel, IOvModelFactory, IOvModel)} is used to transform the
-	 * constraints.
+	 * This method transforms a {@link IFeatureModel} to an {@link IOvModel}. The method
+	 * {@link #featureToOvModelElement(IFeature, IFeatureModel, IOvModelFactory, IOvModel)} is used to transform all variation points and the method
+	 * {@link #nodeToConstraints(Node, IFeatureModel, IOvModelFactory, IOvModel)} is used to transform the constraints.
 	 *
 	 * @param featureModel the feature model which should be transformed.
 	 * @param factoryTo the factory which is used to create new elements.

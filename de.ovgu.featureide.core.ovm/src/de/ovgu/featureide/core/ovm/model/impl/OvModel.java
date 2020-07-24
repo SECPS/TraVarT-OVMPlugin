@@ -16,6 +16,10 @@ import de.ovgu.featureide.fm.core.functional.Functional;
 /**
  * Legal Notice: Some of this code or comments are overtaken from the FeatrueIDE's {@link FeatureModel}.
  *
+ * Represents a concrete implementation of {@link IOvModel}.
+ *
+ * @see IOvModel
+ *
  * @author johannstoebich
  */
 public class OvModel extends Identifiable implements IOvModel {

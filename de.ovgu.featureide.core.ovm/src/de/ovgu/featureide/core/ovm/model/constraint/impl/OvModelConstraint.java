@@ -8,7 +8,9 @@ import de.ovgu.featureide.core.ovm.model.constraint.IOvModelConstraintMetainform
 import de.ovgu.featureide.core.ovm.model.impl.OvModelElement;
 
 /**
- * TODO description
+ * Represents a concrete implementation of {@link IOvModelConstraint}.
+ *
+ * @see IOvModelConstraint
  *
  * @author johannstoebich
  */
@@ -26,7 +28,7 @@ public abstract class OvModelConstraint extends OvModelElement implements IOvMod
 
 	/**
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see de.ovgu.featureide.core.ovm.model.constraint.IOvModelConstraint#getSource()
 	 */
 	@Override
@@ -36,7 +38,7 @@ public abstract class OvModelConstraint extends OvModelElement implements IOvMod
 
 	/**
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see de.ovgu.featureide.core.ovm.model.constraint.IOvModelConstraint#setSource(IOvModelVariationBase)
 	 */
 	@Override
@@ -46,7 +48,7 @@ public abstract class OvModelConstraint extends OvModelElement implements IOvMod
 
 	/**
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see de.ovgu.featureide.core.ovm.model.constraint.IOvModelConstraint#getTarget()
 	 */
 	@Override
@@ -56,7 +58,7 @@ public abstract class OvModelConstraint extends OvModelElement implements IOvMod
 
 	/**
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see de.ovgu.featureide.core.ovm.model.constraint.IOvModelConstraint#setTarget(IOvModelVariationBase)
 	 */
 	@Override
@@ -66,7 +68,7 @@ public abstract class OvModelConstraint extends OvModelElement implements IOvMod
 
 	/**
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see de.ovgu.featureide.core.ovm.model.constraint.IOvModelConstraint#getMetainformation()
 	 */
 	@Override
@@ -76,7 +78,7 @@ public abstract class OvModelConstraint extends OvModelElement implements IOvMod
 
 	/**
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see de.ovgu.featureide.core.ovm.model.constraint.IOvModelConstraint#getElement(de.ovgu.featureide.core.ovm.model.IIdentifiable)
 	 */
 	@Override
@@ -94,7 +96,7 @@ public abstract class OvModelConstraint extends OvModelElement implements IOvMod
 
 	/**
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see java.lang.Object#hashCode()
 	 */
 	@Override
@@ -109,7 +111,7 @@ public abstract class OvModelConstraint extends OvModelElement implements IOvMod
 
 	/**
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override

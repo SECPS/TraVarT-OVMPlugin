@@ -1,7 +1,7 @@
-package de.ovgu.featureide.core.ovm.format.impl.exception;
+package de.ovgu.featureide.core.ovm.format.impl.exc;
 
 /**
- * TODO description
+ * This exception should be thrown whenever a specific type is expected however it is found somewhere different.
  *
  * @author johannstoebich
  */

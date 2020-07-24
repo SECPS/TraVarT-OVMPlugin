@@ -9,7 +9,7 @@ import de.ovgu.featureide.core.ovm.model.constraint.IOvModelRequiresConstraint;
 import de.ovgu.featureide.fm.core.base.IFactory;
 
 /**
- * The factories for producing a new OV-Models or items of an OV-Model should implement this interface.
+ * The factories for producing a new OvModels or items of an OvModel should implement this interface.
  *
  * @author johannstoebich
  */
@@ -25,7 +25,7 @@ public interface IOvModelFactory extends IFactory<IOvModel> {
 	IIdentifiable createIdentifiable(int internalId, String name);
 
 	/**
-	 * Creates a new variant.
+	 * This method creates a new variant.
 	 *
 	 * @param ovModel the model for which the variant should be created.
 	 * @param name the name of the new variant.
@@ -34,9 +34,9 @@ public interface IOvModelFactory extends IFactory<IOvModel> {
 	IOvModelVariant createVariant(IOvModel ovModel, String name);
 
 	/**
-	 * Creates a new variation point.
+	 * This method creates a new variation point.
 	 *
-	 * @param ovModel the model for which the variation point should be created.
+	 * @param ovModel the OvModel for which the variation point should be created.
 	 * @param name the name of the variation point.
 	 * @return the newly created variation point.
 	 */
@@ -45,7 +45,7 @@ public interface IOvModelFactory extends IFactory<IOvModel> {
 	/**
 	 * This method creates a required constraint.
 	 *
-	 * @param ovModel the OV-Model for which the requires constraint is created.
+	 * @param ovModel the OvModel for which the requires constraint is created.
 	 * @return the newly created requires constraint.
 	 */
 	IOvModelRequiresConstraint createRequiresConstraint(IOvModel ovModel);
@@ -53,7 +53,7 @@ public interface IOvModelFactory extends IFactory<IOvModel> {
 	/**
 	 * The method creates an excludes constraint.
 	 *
-	 * @param ovModel the OV-Model for which the excludes constraint is created.
+	 * @param ovModel the OvModel for which the excludes constraint is created.
 	 * @return the newly created excludes constraint.
 	 */
 	IOvModelExcludesConstraint createExcludesConstraint(IOvModel ovModel);

@@ -5,7 +5,9 @@ import de.ovgu.featureide.fm.core.base.IPropertyContainer;
 import de.ovgu.featureide.fm.core.base.impl.MapPropertyContainer;
 
 /**
- * TODO description
+ * Represents a concrete implementation of {@link IOvModelConstraintMetainformation}.
+ *
+ * @see IOvModelConstraintMetainformation
  *
  * @author johannstoebich
  */
@@ -20,7 +22,7 @@ public class OvModelConstraintMetainformation implements IOvModelConstraintMetai
 
 	/**
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see de.ovgu.featureide.core.ovm.model.constraint.IOvModelConstraintMetainformation#getDescription()
 	 */
 	@Override
@@ -30,7 +32,7 @@ public class OvModelConstraintMetainformation implements IOvModelConstraintMetai
 
 	/**
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see de.ovgu.featureide.core.ovm.model.constraint.IOvModelConstraintMetainformation#setDescription(java.lang.String)
 	 */
 	@Override
@@ -40,7 +42,7 @@ public class OvModelConstraintMetainformation implements IOvModelConstraintMetai
 
 	/**
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see de.ovgu.featureide.core.ovm.model.IOvModelConstraintMetainformation#getCustomProperties()
 	 */
 	@Override
@@ -50,7 +52,7 @@ public class OvModelConstraintMetainformation implements IOvModelConstraintMetai
 
 	/**
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see java.lang.Object#hashCode()
 	 */
 	@Override
@@ -63,7 +65,7 @@ public class OvModelConstraintMetainformation implements IOvModelConstraintMetai
 
 	/**
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override

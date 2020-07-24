@@ -1,7 +1,7 @@
-package de.ovgu.featureide.core.ovm.format.impl.exception;
+package de.ovgu.featureide.core.ovm.format.impl.exc;
 
 /**
- * TODO description
+ * This is a base class for all exceptions which can be thrown during serialization and deserialization.
  *
  * @author johannstoebich
  */

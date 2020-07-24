@@ -4,7 +4,8 @@ import de.ovgu.featureide.core.ovm.model.IOvModelElement;
 import de.ovgu.featureide.core.ovm.model.IOvModelVariationBase;
 
 /**
- * TODO description
+ * This is the base interface for an {@link IOvModelExcludesConstraint} and for an {@link IOvModelRequiresConstraint}. It contains the common properties of
+ * these two constraints.
  *
  * @author johannstoebich
  */

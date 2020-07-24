@@ -4,8 +4,9 @@ import de.ovgu.featureide.fm.core.base.IPropertyContainer;
 import de.ovgu.featureide.fm.core.base.impl.Constraint;
 
 /**
- * Manages all additional properties of a constraint. or variant. A constraint stores all information which is defined for a constraint in FeatureIDE however
- * cannot be represented by an OVM. In this case it is solely the description and the properties.
+ * Manages all additional properties of an {@link IOvModelConstraint} and therefore for an {@link IOvModelExcludesConstraint} and
+ * {@link IOvModelRequiresConstraint}. The metainformation stores all information which is defined for a constraint in FeatureIDE however cannot be represented
+ * by an {@link IOvModelConstraint}.
  *
  */
 public interface IOvModelConstraintMetainformation {

@@ -6,7 +6,7 @@ import org.w3c.dom.Document;
 
 import de.ovgu.featureide.core.ovm.base.impl.OvModelFactoryManager;
 import de.ovgu.featureide.core.ovm.factory.IOvModelFactory;
-import de.ovgu.featureide.core.ovm.format.impl.exception.OvModelSerialisationException;
+import de.ovgu.featureide.core.ovm.format.impl.exc.OvModelSerialisationException;
 import de.ovgu.featureide.core.ovm.model.IOvModel;
 import de.ovgu.featureide.fm.core.ExtensionManager.NoSuchExtensionException;
 import de.ovgu.featureide.fm.core.io.Problem;
@@ -14,9 +14,9 @@ import de.ovgu.featureide.fm.core.io.UnsupportedModelException;
 import de.ovgu.featureide.fm.core.io.xml.AXMLFormat;
 
 /**
- * This class represents an XML-persistance of an OvModel. It implements the AXMLFormat from FeatureIDE.
+ * This class represents an XML-persistence of an OvModel. It implements the AXMLFormat from FeatureIDE.
  *
- * It uses the read and write helper of the OVModel plug-in to read and write an OV-Model in a file.
+ * It uses a read and write helper to read and write an OvModel into a file.
  *
  * @author johannstoebich
  */
@@ -28,8 +28,9 @@ public class OvModelXmlPersistance extends AXMLFormat<IOvModel> {
 
 	public static final String SUFFIX = "ovm";
 
-	/*
+	/**
 	 * (non-Javadoc)
+	 *
 	 * @see de.ovgu.featureide.fm.core.io.IPersistentFormat#getName()
 	 */
 	@Override
@@ -37,8 +38,9 @@ public class OvModelXmlPersistance extends AXMLFormat<IOvModel> {
 		return NAME;
 	}
 
-	/*
+	/**
 	 * (non-Javadoc)
+	 *
 	 * @see de.ovgu.featureide.fm.core.IExtension#getId()
 	 */
 	@Override
@@ -46,8 +48,9 @@ public class OvModelXmlPersistance extends AXMLFormat<IOvModel> {
 		return ID;
 	}
 
-	/*
+	/**
 	 * (non-Javadoc)
+	 *
 	 * @see de.ovgu.featureide.fm.core.io.xml.AXMLFormat#getSuffix()
 	 */
 	@Override
@@ -55,8 +58,9 @@ public class OvModelXmlPersistance extends AXMLFormat<IOvModel> {
 		return SUFFIX;
 	}
 
-	/*
+	/**
 	 * (non-Javadoc)
+	 *
 	 * @see de.ovgu.featureide.fm.core.io.xml.AXMLFormat#readDocument(org.w3c.dom.Document, java.util.List)
 	 */
 	@Override
@@ -69,8 +73,9 @@ public class OvModelXmlPersistance extends AXMLFormat<IOvModel> {
 		}
 	}
 
-	/*
+	/**
 	 * (non-Javadoc)
+	 *
 	 * @see de.ovgu.featureide.fm.core.io.xml.AXMLFormat#writeDocument(org.w3c.dom.Document)
 	 */
 	@Override

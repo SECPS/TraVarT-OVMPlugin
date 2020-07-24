@@ -3,7 +3,8 @@ package de.ovgu.featureide.core.ovm.model;
 import java.util.List;
 
 /**
- * TODO description
+ * This interface represents a variation point in OVM as it is defined by K. Pohl, G. Böckle, and F. Linden in Software Product Line Engineering: Foundations,
+ * Principles, and Techniques in 2005.
  *
  * @author johannstoebich
  */
@@ -95,7 +96,7 @@ public interface IOvModelVariationPoint extends IOvModelVariationBase {
 
 	/**
 	 * This method removes a mandatory child from a variation point. Which child should be removed is determined by the equals method.
-	 * 
+	 *
 	 * @param mandatoryChild the mandatory child which should be removed.
 	 */
 	boolean removeMandatoryChild(IOvModelVariationBase mandatoryChild);
@@ -137,7 +138,7 @@ public interface IOvModelVariationPoint extends IOvModelVariationBase {
 
 	/**
 	 * This method removes an optional child from a variation point. Which child should be removed is determined by the equals method.
-	 * 
+	 *
 	 * @param optionalChild the optional child which should be removed.
 	 */
 	boolean removeOptionalChild(IOvModelVariationBase optionalChild);

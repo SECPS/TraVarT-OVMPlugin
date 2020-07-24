@@ -5,7 +5,9 @@ import de.ovgu.featureide.fm.core.base.IPropertyContainer;
 import de.ovgu.featureide.fm.core.base.impl.MapPropertyContainer;
 
 /**
- * TODO description
+ * Represents a concrete implementation of {@link IOvModelMetainformation}.
+ *
+ * @see IOvModelMetainformation
  *
  * @author johannstoebich
  */
@@ -36,7 +38,6 @@ public class OvModelMetainformation implements IOvModelMetainformation {
 	 */
 	@Override
 	public String getDescription() {
-		// TODO Auto-generated method stub
 		return description;
 	}
 
@@ -65,7 +66,7 @@ public class OvModelMetainformation implements IOvModelMetainformation {
 
 	/**
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override

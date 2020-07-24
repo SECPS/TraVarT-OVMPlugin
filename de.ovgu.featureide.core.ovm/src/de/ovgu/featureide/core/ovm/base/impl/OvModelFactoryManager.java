@@ -12,9 +12,9 @@ import de.ovgu.featureide.fm.core.io.IPersistentFormat;
 
 /**
  *
- * This class represents an factory manager for OvModels. It extends the abstract factory manager of FeatureIDE. Only the method <code>getFactory</code> is
- * overridden. The other ones cast only the return value correctly.
- * 
+ * This class represents an factory manager for {@link IOvModel}. It extends the abstract factory manager of FeatureIDE. Only the method <code>getFactory</code>
+ * is overridden. The other overrides are for casting the return value correctly.
+ *
  * @author johannstoebich
  */
 public final class OvModelFactoryManager extends FactoryManager<IOvModel> {
@@ -37,7 +37,7 @@ public final class OvModelFactoryManager extends FactoryManager<IOvModel> {
 	 *
 	 * @param object the ov model.
 	 *
-	 * @return Returns the OV-Model factory for the given ov model.
+	 * @return Returns the OvModel factory for the given ov model.
 	 */
 	@Override
 	public IOvModelFactory getFactory(IOvModel object) {

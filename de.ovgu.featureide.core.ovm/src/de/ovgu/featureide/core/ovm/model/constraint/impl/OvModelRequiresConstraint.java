@@ -3,7 +3,9 @@ package de.ovgu.featureide.core.ovm.model.constraint.impl;
 import de.ovgu.featureide.core.ovm.model.constraint.IOvModelRequiresConstraint;
 
 /**
- * TODO description
+ * Represents a concrete implementation of {@link IOvModelRequiresConstraint}.
+ *
+ * @see IOvModelRequiresConstraint
  *
  * @author johannstoebich
  */

@@ -3,7 +3,9 @@ package de.ovgu.featureide.core.ovm.model.constraint.impl;
 import de.ovgu.featureide.core.ovm.model.constraint.IOvModelExcludesConstraint;
 
 /**
- * TODO description
+ * Represents a concrete implementation of {@link IOvModelExcludesConstraint}.
+ *
+ * @see IOvModelExcludesConstraint
  *
  * @author johannstoebich
  */

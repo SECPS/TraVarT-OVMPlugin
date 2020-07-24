@@ -4,7 +4,9 @@ import de.ovgu.featureide.core.ovm.model.IOvModelVariationBase;
 import de.ovgu.featureide.core.ovm.model.IOvModelVariationBaseMetainformation;
 
 /**
- * TODO description
+ * Represents a concrete implementation of {@link IOvModelVariationBase}.
+ *
+ * @see IOvModelVariationBase
  *
  * @author johannstoebich
  */
@@ -21,7 +23,7 @@ public abstract class OvModelVariationBase extends OvModelElement implements IOv
 
 	/**
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see de.ovgu.featureide.core.ovm.model.IOvModelVariationBase#getMetaInformation()
 	 */
 	@Override
@@ -31,7 +33,7 @@ public abstract class OvModelVariationBase extends OvModelElement implements IOv
 
 	/**
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see de.ovgu.featureide.core.ovm.model.IOvModelVariationBase#setMetaInformation(IOvModelVariationBaseMetainformation)
 	 */
 	@Override
@@ -41,7 +43,7 @@ public abstract class OvModelVariationBase extends OvModelElement implements IOv
 
 	/**
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see de.ovgu.featureide.core.ovm.model.IOvModelVariationBase#isOptional()
 	 */
 	@Override
@@ -51,7 +53,7 @@ public abstract class OvModelVariationBase extends OvModelElement implements IOv
 
 	/**
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see de.ovgu.featureide.core.ovm.model.IOvModelVariationBase#setOptional(boolean)
 	 */
 	@Override
@@ -61,7 +63,7 @@ public abstract class OvModelVariationBase extends OvModelElement implements IOv
 
 	/**
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see java.lang.Object#hashCode()
 	 */
 	@Override
@@ -75,7 +77,7 @@ public abstract class OvModelVariationBase extends OvModelElement implements IOv
 
 	/**
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override

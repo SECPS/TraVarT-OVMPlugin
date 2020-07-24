@@ -1,7 +1,7 @@
 package de.ovgu.featureide.core.ovm.model;
 
 /**
- * This is an base class for all elements. Elements are constraints, variants or variation points.
+ * This class represents an element. Elements are constraints, variants or variation points.
  *
  * @author johannstoebich
  */

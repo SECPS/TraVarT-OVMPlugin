@@ -6,7 +6,7 @@ import de.ovgu.featureide.fm.core.base.impl.FormatManager;
 import de.ovgu.featureide.fm.core.io.manager.AbstractIO;
 
 /**
- * File handling operations for ov-models
+ * This class constrains the file handling operations for OvModels. It returns the format manager and the factory manager.
  *
  */
 public class OvModelIO extends AbstractIO<IOvModel> {

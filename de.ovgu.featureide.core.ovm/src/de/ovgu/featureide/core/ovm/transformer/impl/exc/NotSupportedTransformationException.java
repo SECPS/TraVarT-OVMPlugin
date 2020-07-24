@@ -13,6 +13,7 @@ public class NotSupportedTransformationException extends IllegalStateException {
 	private static final long serialVersionUID = 1L;
 
 	/**
+	 * Constructs the exception with the respective parameters.
 	 *
 	 * @param from the class from which the model should be transformed.
 	 * @param to the class to which the model should be transformed.

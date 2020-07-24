@@ -11,7 +11,7 @@ import de.ovgu.featureide.fm.ui.handlers.base.SelectionWrapper;
 
 /**
  *
- * This tests wheaten a given model complies to a specific format. This tester can be used in the eclipse ui handlers.
+ * This tests whether a given model complies to a specific format. This tester can be used in the eclipse's plug-in handlers (plug-in.xml).
  *
  * @author johannstoebich
  */

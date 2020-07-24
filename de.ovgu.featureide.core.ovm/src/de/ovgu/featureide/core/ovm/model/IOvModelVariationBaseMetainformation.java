@@ -7,8 +7,8 @@ import de.ovgu.featureide.fm.core.base.IPropertyContainer;
 import de.ovgu.featureide.fm.core.base.impl.Feature;
 
 /**
- * Manages all additional properties of a OVM. The metainformation stores all information which is defined for a feature in FeatureIDE however cannot be
- * represented by a variation base.
+ * Manages all additional properties of an {@link IOvModelVariationBase} and therefore for an {@link IOvModelVariationPoint} and {@link IOvModelVariant}. The
+ * metainformation stores all information which is defined for a feature in FeatureIDE however cannot be represented by an {@link IOvModelVariationBase}.
  *
  */
 public interface IOvModelVariationBaseMetainformation {

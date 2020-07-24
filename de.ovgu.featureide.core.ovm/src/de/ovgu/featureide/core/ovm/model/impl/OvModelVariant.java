@@ -3,7 +3,9 @@ package de.ovgu.featureide.core.ovm.model.impl;
 import de.ovgu.featureide.core.ovm.model.IOvModelVariant;
 
 /**
- * TODO description
+ * Represents a concrete implementation of {@link IOvModelVariant}.
+ *
+ * @see IOvModelVariant
  *
  * @author johannstoebich
  */

@@ -6,7 +6,9 @@ import de.ovgu.featureide.core.ovm.model.IIdentifiable;
 import de.ovgu.featureide.core.ovm.model.IOvModelElement;
 
 /**
- * TODO description
+ * Represents a concrete implementation of {@link IOvModelElement}.
+ *
+ * @see IOvModelElement
  *
  * @author johannstoebich
  */
@@ -14,7 +16,7 @@ public abstract class OvModelElement extends Identifiable implements IOvModelEle
 
 	/**
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see de.ovgu.featureide.core.ovm.model.IOvModelElement#getElement(de.ovgu.featureide.core.ovm.model.IIdentifiable)
 	 */
 	@Override

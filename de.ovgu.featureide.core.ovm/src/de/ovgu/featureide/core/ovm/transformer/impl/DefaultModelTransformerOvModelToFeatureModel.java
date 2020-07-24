@@ -43,14 +43,14 @@ import de.ovgu.featureide.fm.core.base.IFeatureModelFactory;
 import de.ovgu.featureide.fm.core.base.IFeatureStructure;
 
 /**
- * This transformer transforms an IOvModel to an IFeatureModel.
+ * This transformer transforms an {@link IOvModel} to an {@link IFeatureModel}.
  *
  * @author johannstoebich
  */
 public class DefaultModelTransformerOvModelToFeatureModel implements IModelTransformer<IOvModel, IFeatureModel> {
 
 	/**
-	 * This method transforms an ovmodel to a a feature model. The factory which is used for creating the new feature model must be passed in.
+	 * This method transforms an {@link IOvModel} to a a {@link IFeatureModel}. The factory which is used for creating the new feature model must be passed in.
 	 *
 	 * @param ovModel the model which should be transformed.
 	 * @param factoryTo the factory which is sued to create the model.

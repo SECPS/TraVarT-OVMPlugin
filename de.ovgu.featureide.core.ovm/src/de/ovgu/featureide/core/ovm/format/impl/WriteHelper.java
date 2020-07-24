@@ -36,8 +36,8 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
 import de.ovgu.featureide.core.ovm.base.impl.OvModelUtils;
-import de.ovgu.featureide.core.ovm.format.impl.exception.OvModelSerialisationException;
-import de.ovgu.featureide.core.ovm.format.impl.exception.OvModelSerialisationNotSupported;
+import de.ovgu.featureide.core.ovm.format.impl.exc.OvModelSerialisationException;
+import de.ovgu.featureide.core.ovm.format.impl.exc.OvModelSerialisationNotSupported;
 import de.ovgu.featureide.core.ovm.model.IIdentifiable;
 import de.ovgu.featureide.core.ovm.model.IOvModel;
 import de.ovgu.featureide.core.ovm.model.IOvModelElement;
@@ -58,6 +58,14 @@ import de.ovgu.featureide.core.ovm.model.constraint.IOvModelRequiresConstraint;
  */
 public class WriteHelper {
 
+	/**
+	 * This method is a helper method which provides functionalities to write an {@link IOvModel} into an XML-Document. First the variation points which are
+	 * part of the root feature tree, then the constraints and finally the variation points which are not part of the root feature tree are written.
+	 *
+	 * @param ovModel the {@link IOvModel} which should be written.
+	 * @param doc the document to which the {@link IOvModel} should be written.
+	 * @throws OvModelSerialisationException
+	 */
 	public static void writeModel(IOvModel ovModel, Document doc) throws OvModelSerialisationException {
 		final List<IOvModelElement> alreadySerialisedElements = new ArrayList<IOvModelElement>();
 
@@ -70,7 +78,8 @@ public class WriteHelper {
 
 		write(ovModel.getMetainformation(), ovModelElement, alreadySerialisedElements);
 
-		// write variant points of constraints after the constraints itself which will leads to nicer serialisation.
+		// write variant points of constraints after the constraints itself which will leads to nicer serialisation
+		// (because they can then refer to constraints with a Reference).
 		final List<IOvModelVariationPoint> variantPointsNotPartOfRoot = new ArrayList<IOvModelVariationPoint>();
 		for (final IOvModelVariationPoint variationPoint : OvModelUtils.getVariationPoints(ovModel)) {
 			if (OvModelUtils.isPartOfOvModelRoot(variationPoint)) {
@@ -94,21 +103,38 @@ public class WriteHelper {
 		}
 	}
 
-	private static void write(IOvModelElement target, Node node, Collection<IOvModelElement> alreadySerialisedElements) throws OvModelSerialisationException {
+	/**
+	 * This method writes an {@link IOvModelElement} to an XML-Node. It uses other write methods to write the content respectively, because
+	 * {@link IOvModelElement} is abstract.
+	 *
+	 * @param object the content which should be written.
+	 * @param node the node which will be populated.
+	 * @param alreadySerialisedElements the OvElements which already have been serialized (is used for creating references to already serialized elements).
+	 * @throws OvModelSerialisationException
+	 */
+	private static void write(IOvModelElement object, Node node, Collection<IOvModelElement> alreadySerialisedElements) throws OvModelSerialisationException {
 
-		if (target instanceof IOvModelVariant) {
-			write((IOvModelVariant) target, node, alreadySerialisedElements);
-		} else if (target instanceof IOvModelVariationPoint) {
-			write((IOvModelVariationPoint) target, node, alreadySerialisedElements);
-		} else if (target instanceof IOvModelExcludesConstraint) {
-			write((IOvModelExcludesConstraint) target, node, alreadySerialisedElements);
-		} else if (target instanceof IOvModelRequiresConstraint) {
-			write((IOvModelRequiresConstraint) target, node, alreadySerialisedElements);
+		if (object instanceof IOvModelVariant) {
+			write((IOvModelVariant) object, node, alreadySerialisedElements);
+		} else if (object instanceof IOvModelVariationPoint) {
+			write((IOvModelVariationPoint) object, node, alreadySerialisedElements);
+		} else if (object instanceof IOvModelExcludesConstraint) {
+			write((IOvModelExcludesConstraint) object, node, alreadySerialisedElements);
+		} else if (object instanceof IOvModelRequiresConstraint) {
+			write((IOvModelRequiresConstraint) object, node, alreadySerialisedElements);
 		} else {
-			throw new OvModelSerialisationNotSupported(target.getClass());
+			throw new OvModelSerialisationNotSupported(object.getClass());
 		}
 	}
 
+	/**
+	 * This method writes an {@link IOvModelVariant} to an XML-Node.
+	 *
+	 * @param object the content which should be written.
+	 * @param node the node which will be populated.
+	 * @param alreadySerialisedElements the OvElements which already have been serialized (is used for creating references to already serialized elements).
+	 * @throws OvModelSerialisationException
+	 */
 	public static void write(IOvModelVariant object, Node node, Collection<IOvModelElement> alreadySerialisedElements) throws OvModelSerialisationException {
 		if (alreadySerialisedElements.contains(object)) {
 			final Element ovModelVariantReference = node.getOwnerDocument().createElement(OV_MODEL_VARIANT_REFERENCE);
@@ -126,6 +152,14 @@ public class WriteHelper {
 
 	}
 
+	/**
+	 * This method writes an {@link IOvModelVariationPoint} to an XML-Node.
+	 *
+	 * @param object the content which should be written.
+	 * @param node the node which should be populated.
+	 * @param alreadySerialisedElements the OvElements which already have been serialized (is used for creating references to already serialized elements).
+	 * @throws OvModelSerialisationException
+	 */
 	public static void write(IOvModelVariationPoint object, Node node, Collection<IOvModelElement> alreadySerialisedElements)
 			throws OvModelSerialisationException {
 		if (alreadySerialisedElements.contains(object)) {
@@ -172,6 +206,14 @@ public class WriteHelper {
 		}
 	}
 
+	/**
+	 * This method writes an {@link IOvModelMetainformation} to an XML-Node.
+	 *
+	 * @param object the content which should be written.
+	 * @param node the node which should be populated.
+	 * @param alreadySerialisedElements the OvElements which already have been serialized (is used for creating references to already serialized elements).
+	 * @throws OvModelSerialisationException
+	 */
 	public static void write(IOvModelMetainformation object, Node node, Collection<IOvModelElement> alreadySerialisedElements) {
 		final Element ovModelMetainformation = node.getOwnerDocument().createElement(OV_MODEL_METAINFORMATION);
 		node.appendChild(ovModelMetainformation);
@@ -183,6 +225,14 @@ public class WriteHelper {
 		PropertyHelper.writeProperties(node.getOwnerDocument(), object.getCustomProperties(), ovModelMetainformation);
 	}
 
+	/**
+	 * This method writes an {@link IOvModelVariationBaseMetainformation} to an XML-Node.
+	 *
+	 * @param object the content which should be written.
+	 * @param node the node which should be populated.
+	 * @param alreadySerialisedElements the OvElements which already have been serialized (is used for creating references to already serialized elements).
+	 * @throws OvModelSerialisationException
+	 */
 	public static void write(IOvModelVariationBaseMetainformation object, Node node, Collection<IOvModelElement> alreadySerialisedElements)
 			throws OvModelSerialisationException {
 		final Element ovModelMetainformation = node.getOwnerDocument().createElement(OV_MODEL_VARIATION_BASE_METAINFORMATION);
@@ -215,6 +265,14 @@ public class WriteHelper {
 		PropertyHelper.writeProperties(node.getOwnerDocument(), object.getCustomProperties(), ovModelMetainformation);
 	}
 
+	/**
+	 * This method writes an {@link IOvModelConstraintMetainformation} to an XML-Node.
+	 *
+	 * @param object the content which should be written.
+	 * @param node the node which should be populated.
+	 * @param alreadySerialisedElements the OvElements which already have been serialized (is used for creating references to already serialized elements).
+	 * @throws OvModelSerialisationException
+	 */
 	public static void write(IOvModelConstraintMetainformation object, Node node, Collection<IOvModelElement> alreadySerialisedElements) {
 		final Element ovModelMetainformation = node.getOwnerDocument().createElement(OV_MODEL_CONSTRAINT_METAINFORMATION);
 		node.appendChild(ovModelMetainformation);
@@ -226,6 +284,14 @@ public class WriteHelper {
 		PropertyHelper.writeProperties(node.getOwnerDocument(), object.getCustomProperties(), ovModelMetainformation);
 	}
 
+	/**
+	 * This method writes an {@link IOvModelExcludesConstraint} to an XML-Node.
+	 *
+	 * @param object the content which should be written.
+	 * @param node the node which should be populated.
+	 * @param alreadySerialisedElements the OvElements which already have been serialized (is used for creating references to already serialized elements).
+	 * @throws OvModelSerialisationException
+	 */
 	public static void write(IOvModelExcludesConstraint object, Node node, Collection<IOvModelElement> alreadySerialisedElements)
 			throws OvModelSerialisationException {
 		if (alreadySerialisedElements.contains(object)) {
@@ -243,6 +309,14 @@ public class WriteHelper {
 		}
 	}
 
+	/**
+	 * This method writes an {@link IOvModelRequiresConstraint} to an XML-Node.
+	 *
+	 * @param object the content which should be written.
+	 * @param node the node which should be populated.
+	 * @param alreadySerialisedElements the OvElements which already have been serialized (is used for creating references to already serialized elements).
+	 * @throws OvModelSerialisationException
+	 */
 	public static void write(IOvModelRequiresConstraint object, Node node, Collection<IOvModelElement> alreadySerialisedElements)
 			throws OvModelSerialisationException {
 
@@ -261,38 +335,73 @@ public class WriteHelper {
 		}
 	}
 
-	public static void writeProperties(IIdentifiable object, Element node, Collection<IOvModelElement> alreadySerialisedElements) {
-		final Attr name = node.getOwnerDocument().createAttribute(NAME);
+	/**
+	 * This method is a helper method which provides functionalities to write the properties of an {@link IIdentifiable}.
+	 *
+	 * @param object the {@link IIdentifiable} which should be written.
+	 * @param element the element which should be populated.
+	 * @param alreadySerialisedElements the OvElements which already have been serialized (is used for creating references to already serialized elements).
+	 */
+	public static void writeProperties(IIdentifiable object, Element element, Collection<IOvModelElement> alreadySerialisedElements) {
+		final Attr name = element.getOwnerDocument().createAttribute(NAME);
 		name.setValue(OvModelUtils.getName(object));
-		node.setAttributeNode(name);
+		element.setAttributeNode(name);
 	}
 
-	public static void writeProperties(IOvModel object, Element node, Collection<IOvModelElement> alreadySerialisedElements) {
-		writeProperties((IIdentifiable) object, node, alreadySerialisedElements);
+	/**
+	 * This method is a helper method which provides functionalities to write the properties of an {@link IOvModel}.
+	 *
+	 * @param object the {@link IOvModel} which should be written.
+	 * @param element the element which should be populated.
+	 * @param alreadySerialisedElements the OvElements which already have been serialized (is used for creating references to already serialized elements).
+	 */
+	public static void writeProperties(IOvModel object, Element element, Collection<IOvModelElement> alreadySerialisedElements) {
+		writeProperties((IIdentifiable) object, element, alreadySerialisedElements);
 	}
 
-	public static void writeProperties(IOvModelElement object, Element node, Collection<IOvModelElement> alreadySerialisedElements) {
-		writeProperties((IIdentifiable) object, node, alreadySerialisedElements);
+	/**
+	 * This method is a helper method which provides functionalities to write the properties of an {@link IOvModelElement}.
+	 *
+	 * @param object the {@link IOvModelElement} which should be written.
+	 * @param element the element which should be populated.
+	 * @param alreadySerialisedElements the OvElements which already have been serialized (is used for creating references to already serialized elements).
+	 */
+	public static void writeProperties(IOvModelElement object, Element element, Collection<IOvModelElement> alreadySerialisedElements) {
+		writeProperties((IIdentifiable) object, element, alreadySerialisedElements);
 	}
 
-	public static void writeProperties(IOvModelVariationBase object, Element node, Collection<IOvModelElement> alreadySerialisedElements)
+	/**
+	 * This method is a helper method which provides functionalities to write the properties of an {@link IOvModelVariationBase}.
+	 *
+	 * @param object the {@link IOvModelVariationBase} which should be written.
+	 * @param element the element which should be populated.
+	 * @param alreadySerialisedElements the OvElements which already have been serialized (is used for creating references to already serialized elements).
+	 */
+	public static void writeProperties(IOvModelVariationBase object, Element element, Collection<IOvModelElement> alreadySerialisedElements)
 			throws OvModelSerialisationException {
-		writeProperties((IOvModelElement) object, node, alreadySerialisedElements);
+		writeProperties((IOvModelElement) object, element, alreadySerialisedElements);
 
-		final Attr optional = node.getOwnerDocument().createAttribute(OPTIONAL);
+		final Attr optional = element.getOwnerDocument().createAttribute(OPTIONAL);
 		optional.setValue(String.valueOf(OvModelUtils.isOptional(object)));
-		node.setAttributeNode(optional);
+		element.setAttributeNode(optional);
 
-		write(object.getMetainformation(), node, alreadySerialisedElements);
+		write(object.getMetainformation(), element, alreadySerialisedElements);
 	}
 
-	public static void writeProperties(IOvModelConstraint object, Element node, Collection<IOvModelElement> alreadySerialisedElements)
+	/**
+	 * This method is a helper method which provides functionalities to write the properties of an {@link IOvModelConstraint}.
+	 *
+	 * @param object the {@link IOvModelConstraint} which should be written.
+	 * @param element the element which should be populated.
+	 * @param alreadySerialisedElements the OvElements which already have been serialized (is used for creating references to already serialized elements).
+	 */
+	public static void writeProperties(IOvModelConstraint object, Element element, Collection<IOvModelElement> alreadySerialisedElements)
 			throws OvModelSerialisationException {
-		writeProperties((IOvModelElement) object, node, alreadySerialisedElements);
+		writeProperties((IOvModelElement) object, element, alreadySerialisedElements);
 
-		write(object.getMetainformation(), node, alreadySerialisedElements);
+		write(object.getMetainformation(), element, alreadySerialisedElements);
 
-		write(OvModelUtils.getSource(object), node, alreadySerialisedElements);
-		write(OvModelUtils.getTarget(object), node, alreadySerialisedElements);
+		write(OvModelUtils.getSource(object), element, alreadySerialisedElements);
+		write(OvModelUtils.getTarget(object), element, alreadySerialisedElements);
 	}
 }

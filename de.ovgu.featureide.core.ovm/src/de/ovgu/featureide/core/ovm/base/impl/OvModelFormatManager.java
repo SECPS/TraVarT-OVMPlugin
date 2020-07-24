@@ -6,7 +6,7 @@ import de.ovgu.featureide.fm.core.base.impl.FormatManager;
 import de.ovgu.featureide.fm.core.io.IPersistentFormat;
 
 /**
- * Extends the abstract FormatManager from FeatureIDE for OVModels. It returns the default persistence of OV-Models.
+ * Extends the abstract FormatManager from FeatureIDE for OVModels. It returns the default persistence of OvModels.
  *
  * @author johannstoebich
  */

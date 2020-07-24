@@ -1,4 +1,4 @@
 /**
- * This package contains the exception throw in the transformation process..
+ * This package contains the exceptions throw by the transformers.
  */
 package de.ovgu.featureide.core.ovm.transformer.impl.exc;

@@ -1,5 +1,4 @@
 /**
- * This package contains the transformers which transforms a feature model to OVM or transforms a OVM to feature model. The properties are extracted to a
- * separate class.
+ * This package contains the transformers which transform a feature model to an OvModel or transform an OvModel to a feature model.
  */
 package de.ovgu.featureide.core.ovm.transformer.impl;

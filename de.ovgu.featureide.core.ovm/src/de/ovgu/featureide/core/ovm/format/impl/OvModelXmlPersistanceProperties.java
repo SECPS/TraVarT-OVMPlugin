@@ -1,7 +1,7 @@
 package de.ovgu.featureide.core.ovm.format.impl;
 
 /**
- * This calls contains all texts used for serialization. For example, all XML-Elements are stated.
+ * This class contains all texts used for serialization.
  *
  * @author johannstoebich
  */
