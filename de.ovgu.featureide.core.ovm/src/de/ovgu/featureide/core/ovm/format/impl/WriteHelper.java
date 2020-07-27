@@ -52,7 +52,7 @@ import de.ovgu.featureide.core.ovm.model.constraint.IOvModelExcludesConstraint;
 import de.ovgu.featureide.core.ovm.model.constraint.IOvModelRequiresConstraint;
 
 /**
- * This classes provides the methods for writing an OvModel to a XML document.
+ * This class provides the methods for writing an {@link IOvModel} to an XML-document.
  *
  * @author johannstoebich
  */
@@ -78,7 +78,7 @@ public class WriteHelper {
 
 		write(ovModel.getMetainformation(), ovModelElement, alreadySerialisedElements);
 
-		// write variant points of constraints after the constraints itself which will leads to nicer serialisation
+		// write variant points of constraints after the constraints itself which will leads to nicer serialization
 		// (because they can then refer to constraints with a Reference).
 		final List<IOvModelVariationPoint> variantPointsNotPartOfRoot = new ArrayList<IOvModelVariationPoint>();
 		for (final IOvModelVariationPoint variationPoint : OvModelUtils.getVariationPoints(ovModel)) {
@@ -97,18 +97,18 @@ public class WriteHelper {
 			}
 		}
 
-		// write variant points of constraints after the constraints itself which will leads to nicer serialisation.
+		// write variant points of constraints after the constraints itself which will leads to nicer serialization.
 		for (final IOvModelVariationPoint variationPoint : variantPointsNotPartOfRoot) {
 			write(variationPoint, ovModelElement, alreadySerialisedElements);
 		}
 	}
 
 	/**
-	 * This method writes an {@link IOvModelElement} to an XML-Node. It uses other write methods to write the content respectively, because
+	 * This method writes an {@link IOvModelElement} to an XML-{@link Node}. It uses other write methods to write the content respectively because
 	 * {@link IOvModelElement} is abstract.
 	 *
 	 * @param object the content which should be written.
-	 * @param node the node which will be populated.
+	 * @param node the XML-{@link Node} which will be populated.
 	 * @param alreadySerialisedElements the OvElements which already have been serialized (is used for creating references to already serialized elements).
 	 * @throws OvModelSerialisationException
 	 */
@@ -128,10 +128,10 @@ public class WriteHelper {
 	}
 
 	/**
-	 * This method writes an {@link IOvModelVariant} to an XML-Node.
+	 * This method writes an {@link IOvModelVariant} to an XML-{@link Node}.
 	 *
 	 * @param object the content which should be written.
-	 * @param node the node which will be populated.
+	 * @param node the XML-{@link Node} which will be populated.
 	 * @param alreadySerialisedElements the OvElements which already have been serialized (is used for creating references to already serialized elements).
 	 * @throws OvModelSerialisationException
 	 */
@@ -153,10 +153,10 @@ public class WriteHelper {
 	}
 
 	/**
-	 * This method writes an {@link IOvModelVariationPoint} to an XML-Node.
+	 * This method writes an {@link IOvModelVariationPoint} to an XML-{@link Node}.
 	 *
 	 * @param object the content which should be written.
-	 * @param node the node which should be populated.
+	 * @param node the XML-{@link Node} which should be populated.
 	 * @param alreadySerialisedElements the OvElements which already have been serialized (is used for creating references to already serialized elements).
 	 * @throws OvModelSerialisationException
 	 */
@@ -207,10 +207,10 @@ public class WriteHelper {
 	}
 
 	/**
-	 * This method writes an {@link IOvModelMetainformation} to an XML-Node.
+	 * This method writes an {@link IOvModelMetainformation} to an XML-{@link Node}.
 	 *
 	 * @param object the content which should be written.
-	 * @param node the node which should be populated.
+	 * @param node the XML-{@link Node} which should be populated.
 	 * @param alreadySerialisedElements the OvElements which already have been serialized (is used for creating references to already serialized elements).
 	 * @throws OvModelSerialisationException
 	 */
@@ -226,10 +226,10 @@ public class WriteHelper {
 	}
 
 	/**
-	 * This method writes an {@link IOvModelVariationBaseMetainformation} to an XML-Node.
+	 * This method writes an {@link IOvModelVariationBaseMetainformation} to an XML-{@link Node}.
 	 *
 	 * @param object the content which should be written.
-	 * @param node the node which should be populated.
+	 * @param node the XML-{@link Node} which should be populated.
 	 * @param alreadySerialisedElements the OvElements which already have been serialized (is used for creating references to already serialized elements).
 	 * @throws OvModelSerialisationException
 	 */
@@ -266,10 +266,10 @@ public class WriteHelper {
 	}
 
 	/**
-	 * This method writes an {@link IOvModelConstraintMetainformation} to an XML-Node.
+	 * This method writes an {@link IOvModelConstraintMetainformation} to an XML-{@link Node}.
 	 *
 	 * @param object the content which should be written.
-	 * @param node the node which should be populated.
+	 * @param node the XML-{@link Node} which should be populated.
 	 * @param alreadySerialisedElements the OvElements which already have been serialized (is used for creating references to already serialized elements).
 	 * @throws OvModelSerialisationException
 	 */
@@ -285,10 +285,10 @@ public class WriteHelper {
 	}
 
 	/**
-	 * This method writes an {@link IOvModelExcludesConstraint} to an XML-Node.
+	 * This method writes an {@link IOvModelExcludesConstraint} to an XML-{@link Node}.
 	 *
 	 * @param object the content which should be written.
-	 * @param node the node which should be populated.
+	 * @param node the XML-{@link Node} which should be populated.
 	 * @param alreadySerialisedElements the OvElements which already have been serialized (is used for creating references to already serialized elements).
 	 * @throws OvModelSerialisationException
 	 */
@@ -310,10 +310,10 @@ public class WriteHelper {
 	}
 
 	/**
-	 * This method writes an {@link IOvModelRequiresConstraint} to an XML-Node.
+	 * This method writes an {@link IOvModelRequiresConstraint} to an XML-{@link Node}.
 	 *
 	 * @param object the content which should be written.
-	 * @param node the node which should be populated.
+	 * @param node the XML-{@link Node} which should be populated.
 	 * @param alreadySerialisedElements the OvElements which already have been serialized (is used for creating references to already serialized elements).
 	 * @throws OvModelSerialisationException
 	 */
@@ -339,7 +339,7 @@ public class WriteHelper {
 	 * This method is a helper method which provides functionalities to write the properties of an {@link IIdentifiable}.
 	 *
 	 * @param object the {@link IIdentifiable} which should be written.
-	 * @param element the element which should be populated.
+	 * @param element the XML-{@link Element} which should be populated.
 	 * @param alreadySerialisedElements the OvElements which already have been serialized (is used for creating references to already serialized elements).
 	 */
 	public static void writeProperties(IIdentifiable object, Element element, Collection<IOvModelElement> alreadySerialisedElements) {
@@ -352,7 +352,7 @@ public class WriteHelper {
 	 * This method is a helper method which provides functionalities to write the properties of an {@link IOvModel}.
 	 *
 	 * @param object the {@link IOvModel} which should be written.
-	 * @param element the element which should be populated.
+	 * @param element the XML-{@link Element} which should be populated.
 	 * @param alreadySerialisedElements the OvElements which already have been serialized (is used for creating references to already serialized elements).
 	 */
 	public static void writeProperties(IOvModel object, Element element, Collection<IOvModelElement> alreadySerialisedElements) {
@@ -363,7 +363,7 @@ public class WriteHelper {
 	 * This method is a helper method which provides functionalities to write the properties of an {@link IOvModelElement}.
 	 *
 	 * @param object the {@link IOvModelElement} which should be written.
-	 * @param element the element which should be populated.
+	 * @param element the XML-{@link Element} which should be populated.
 	 * @param alreadySerialisedElements the OvElements which already have been serialized (is used for creating references to already serialized elements).
 	 */
 	public static void writeProperties(IOvModelElement object, Element element, Collection<IOvModelElement> alreadySerialisedElements) {
@@ -374,7 +374,7 @@ public class WriteHelper {
 	 * This method is a helper method which provides functionalities to write the properties of an {@link IOvModelVariationBase}.
 	 *
 	 * @param object the {@link IOvModelVariationBase} which should be written.
-	 * @param element the element which should be populated.
+	 * @param element the XML-{@link Element} which should be populated.
 	 * @param alreadySerialisedElements the OvElements which already have been serialized (is used for creating references to already serialized elements).
 	 */
 	public static void writeProperties(IOvModelVariationBase object, Element element, Collection<IOvModelElement> alreadySerialisedElements)
@@ -392,7 +392,7 @@ public class WriteHelper {
 	 * This method is a helper method which provides functionalities to write the properties of an {@link IOvModelConstraint}.
 	 *
 	 * @param object the {@link IOvModelConstraint} which should be written.
-	 * @param element the element which should be populated.
+	 * @param element the XML-{@link Element} which should be populated.
 	 * @param alreadySerialisedElements the OvElements which already have been serialized (is used for creating references to already serialized elements).
 	 */
 	public static void writeProperties(IOvModelConstraint object, Element element, Collection<IOvModelElement> alreadySerialisedElements)

@@ -25,15 +25,15 @@ public abstract interface IOvModelVariationBase extends IOvModelElement {
 	void setMetaInformation(IOvModelVariationBaseMetainformation metaInformation);
 
 	/**
-	 * This method returns the property optional. The property optional is not part of the metainformation because it is defined in the OVM.
+	 * This method returns the property optional. The property optional is not part of the metainformation because it is defined in OVM.
 	 *
 	 * @return the property optional.
 	 */
 	boolean isOptional();
 
 	/**
-	 * This method sets the property optional of an OvModelVariationBase (variation point or variant).The property optional is not part of the metainformation
-	 * because it is defined in the OVM.
+	 * This method sets the property optional of an {@link IOvModelVariationBase} (variation point or variant). The property optional is not part of the
+	 * metainformation because it is defined in OVM.
 	 *
 	 *
 	 * @param optional the value which will be set.

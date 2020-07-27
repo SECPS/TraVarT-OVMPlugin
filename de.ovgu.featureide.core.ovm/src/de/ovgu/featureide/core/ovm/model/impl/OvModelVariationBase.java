@@ -4,7 +4,7 @@ import de.ovgu.featureide.core.ovm.model.IOvModelVariationBase;
 import de.ovgu.featureide.core.ovm.model.IOvModelVariationBaseMetainformation;
 
 /**
- * Represents a concrete implementation of {@link IOvModelVariationBase}.
+ * Represents a concrete implementation of an {@link IOvModelVariationBase}.
  *
  * @see IOvModelVariationBase
  *

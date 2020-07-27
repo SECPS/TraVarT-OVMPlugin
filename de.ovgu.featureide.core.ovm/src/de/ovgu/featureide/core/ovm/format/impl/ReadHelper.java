@@ -53,20 +53,20 @@ import de.ovgu.featureide.core.ovm.model.constraint.IOvModelExcludesConstraint;
 import de.ovgu.featureide.core.ovm.model.constraint.IOvModelRequiresConstraint;
 
 /**
- * This classes provides the methods for reading an {@link IOvModel} from a XML document.
+ * This class provides the methods for reading an {@link IOvModel} from a XML document.
  *
  * @author johannstoebich
  */
 public class ReadHelper {
 
 	/**
-	 * This method reads an {@link IOvModel} from an document. First it reads the properties, then the metafinormation and finally its variation points and
+	 * This method reads an {@link IOvModel} from an document. First it reads the properties, then the metainformation and finally its variation points and
 	 * constraints.
 	 *
 	 * @param document the XML-document from which the {@link IOvModel} should be read.
 	 * @param ovModel the model to which the read elements should be added.
 	 * @param factory the factory which creates the {@link IOvModel}.
-	 * @return the value finally read {@link IOvModel}
+	 * @return the finally read {@link IOvModel}
 	 * @throws OvModelSerialisationException
 	 */
 	public static IOvModel readModel(Document document, IOvModel ovModel, IOvModelFactory factory) throws OvModelSerialisationException {
@@ -104,10 +104,10 @@ public class ReadHelper {
 	}
 
 	/**
-	 * This method reads the elements of an {@link IOvModel}. Elements are either variants, variation points, excludes constraints or requires constraints. This
+	 * This method reads the XML-{@link Element}s of an {@link IOvModel}. Elements are either variants, variation points, excludes constraints or requires constraints. This
 	 * mehtod can also handle references to one of these elements.
 	 *
-	 * @param element the element of the document which should be parsed.
+	 * @param element the XML-{@link Element} of the document which should be parsed.
 	 * @param ovModel the model which contains the already serialized objects.
 	 * @param factory the factory used to create new elements.
 	 * @return the created element.
@@ -148,10 +148,10 @@ public class ReadHelper {
 	/**
 	 * This method populates an {@link IOvModelVariant}.
 	 *
-	 * @param element the element which contains the serialization of the variant.
+	 * @param element the XML-{@link Element} which contains the serialization of the variant.
 	 * @param object the {@link IOvModelVariant} which should be populated.
 	 * @param ovModel the {@link IOvModel} the newly created variant belongs to.
-	 * @param factory the factory that should be used for creating the contents of the {@link IOvModelVariant}.
+	 * @param factory the factory that should be used for creating the contents of the {@link IOvModel}.
 	 * @throws OvModelSerialisationException
 	 */
 	public static void read(Element element, IOvModelVariant object, IOvModel ovModel, IOvModelFactory factory) throws OvModelSerialisationException {
@@ -161,10 +161,10 @@ public class ReadHelper {
 	/**
 	 * This method populates an {@link IOvModelVariationPoint}.
 	 *
-	 * @param element the element which contains the serialization of the variation point.
+	 * @param element the XML-{@link Element} which contains the serialization of the variation point.
 	 * @param object the {@link IOvModelVariationPoint} which should be populated.
 	 * @param ovModel the {@link IOvModel} the newly created variation point belongs to.
-	 * @param factory the factory that should be used for creating the contents of the {@link IOvModelVariant}.
+	 * @param factory the factory that should be used for creating the contents of the {@link IOvModel}.
 	 * @throws OvModelSerialisationException
 	 */
 	public static void read(Element element, IOvModelVariationPoint object, IOvModel ovModel, IOvModelFactory factory) throws OvModelSerialisationException {
@@ -207,10 +207,10 @@ public class ReadHelper {
 	/**
 	 * This method populates an {@link IOvModelMetainformation}.
 	 *
-	 * @param element the element which contains the serialization of the metainformation.
+	 * @param element the XML-{@link Element} which contains the serialization of the metainformation.
 	 * @param object the {@link IOvModelMetainformation} which should be populated.
 	 * @param ovModel the {@link IOvModel} the newly created metainformation belongs to.
-	 * @param factory the factory that should be used for creating the contents of the {@link IOvModelMetainformation}.
+	 * @param factory the factory that should be used for creating the contents of the {@link IOvModel}.
 	 * @throws OvModelSerialisationException
 	 */
 	public static void read(Element element, IOvModelMetainformation object, IOvModel ovModel, IOvModelFactory factory) {
@@ -223,10 +223,10 @@ public class ReadHelper {
 	/**
 	 * This method populates an {@link IOvModelVariationBaseMetainformation}.
 	 *
-	 * @param element the element which contains the serialization of the metainformation.
+	 * @param element the XML-{@link Element} which contains the serialization of the metainformation.
 	 * @param object the {@link IOvModelVariationBaseMetainformation} which should be populated.
 	 * @param ovModel the {@link IOvModel} the newly created metainformation belongs to.
-	 * @param factory the factory that should be used for creating the contents of the {@link IOvModelVariationBaseMetainformation}.
+	 * @param factory the factory that should be used for creating the contents of the {@link IOvModel}.
 	 * @throws OvModelSerialisationException
 	 */
 	public static void read(Element element, IOvModelVariationBaseMetainformation object, IOvModel ovModel, IOvModelFactory factory)
@@ -272,10 +272,10 @@ public class ReadHelper {
 	/**
 	 * This method populates an {@link IOvModelConstraintMetainformation}.
 	 *
-	 * @param element the element which contains the serialization of the metainformation.
+	 * @param element the XML-{@link Element} which contains the serialization of the metainformation.
 	 * @param object the {@link IOvModelConstraintMetainformation} which should be populated.
 	 * @param ovModel the {@link IOvModel} the newly created metainformation belongs to.
-	 * @param factory the factory that should be used for creating the contents of the {@link IOvModelConstraintMetainformation}.
+	 * @param factory the factory that should be used for creating the contents of the {@link IOvModel}.
 	 * @throws OvModelSerialisationException
 	 */
 	public static void read(Element element, IOvModelConstraintMetainformation object, IOvModel ovModel, IOvModelFactory factory) {
@@ -288,10 +288,10 @@ public class ReadHelper {
 	/**
 	 * This method populates an {@link IOvModelExcludesConstraint}.
 	 *
-	 * @param element the element which contains the serialization of the constraint.
+	 * @param element the XML-{@link Element} which contains the serialization of the constraint.
 	 * @param object the {@link IOvModelExcludesConstraint} which should be populated.
 	 * @param ovModel the {@link IOvModel} the newly created constraint belongs to.
-	 * @param factory the factory that should be used for creating the contents of the {@link IOvModelExcludesConstraint}.
+	 * @param factory the factory that should be used for creating the contents of the {@link IOvModel}.
 	 * @throws OvModelSerialisationException
 	 */
 	public static void read(Element element, IOvModelExcludesConstraint object, IOvModel ovModel, IOvModelFactory factory)
@@ -302,10 +302,10 @@ public class ReadHelper {
 	/**
 	 * This method populates an {@link IOvModelRequiresConstraint}.
 	 *
-	 * @param element the element which contains the serialization of the constraint.
+	 * @param element the XML-{@link Element} which contains the serialization of the constraint.
 	 * @param object the {@link IOvModelRequiresConstraint} which should be populated.
 	 * @param ovModel the {@link IOvModel} the newly created constraint belongs to.
-	 * @param factory the factory that should be used for creating the contents of the {@link IOvModelRequiresConstraint}.
+	 * @param factory the factory that should be used for creating the contents of the {@link IOvModel}.
 	 * @throws OvModelSerialisationException
 	 */
 	public static void read(Element element, IOvModelRequiresConstraint object, IOvModel ovModel, IOvModelFactory factory)
@@ -317,10 +317,10 @@ public class ReadHelper {
 	 * This method is a helper method which provides functionalities to read the content of an {@link IIdentifiable}. An {@link IIdentifiable} is an interface
 	 * which is extended multiple times and therefore this shared method is created to read its properties.
 	 *
-	 * @param element the element which contains the serialization of the {@link IIdentifiable}.
+	 * @param element the XML-{@link Element} which contains the serialization of the {@link IIdentifiable}.
 	 * @param object the {@link IIdentifiable} which should be populated.
 	 * @param ovModel the {@link IOvModel} the newly created identifiable belongs to.
-	 * @param factory the factory that should be used for creating the contents of the {@link IIdentifiable}.
+	 * @param factory the factory that should be used for creating the contents of the {@link IOvModel}.
 	 */
 	public static void readProperties(Element element, IIdentifiable object, IOvModel ovModel, IOvModelFactory factory) {
 		OvModelUtils.setName(object, element.getAttribute(NAME));
@@ -329,9 +329,9 @@ public class ReadHelper {
 	/**
 	 * This method is a helper method which provides functionalities to read the content of an {@link IOvModel}.
 	 *
-	 * @param element the element which contains the serialization of the {@link IOvModel}.
+	 * @param element the XML-{@link Element} which contains the serialization of the {@link IOvModel}.
 	 * @param object the {@link IOvModel} which should be populated.
-	 * @param ovModel the {@link IOvModel} the newly created model belongs to.
+	 * @param ovModel the newly created {@link IOvModel}.
 	 * @param factory the factory that should be used for creating the contents of the {@link IOvModel}.
 	 */
 	public static void readProperties(Element element, IOvModel object, IOvModel ovModel, IOvModelFactory factory) {
@@ -342,10 +342,10 @@ public class ReadHelper {
 	 * This method is a helper method which provides functionalities to read the content of an {@link IOvModelElement}. An {@link IOvModelElement} is an
 	 * interface which is extended multiple times and therefore this shared method is created to read its properties.
 	 *
-	 * @param element the element which contains the serialization of the {@link IOvModelElement}.
+	 * @param element the XML-{@link Element} which contains the serialization of the {@link IOvModelElement}.
 	 * @param object the {@link IOvModelElement} which should be populated.
 	 * @param ovModel the {@link IOvModel} the newly created OvElement belongs to.
-	 * @param factory the factory that should be used for creating the contents of the {@link IOvModelElement}.
+	 * @param factory the factory that should be used for creating the contents of the {@link IOvModel}.
 	 */
 	public static void readProperties(Element element, IOvModelElement object, IOvModel ovModel, IOvModelFactory factory) {
 		readProperties(element, (IIdentifiable) object, ovModel, factory);
@@ -355,10 +355,10 @@ public class ReadHelper {
 	 * This method is a helper method which provides functionalities to read the content of an {@link IOvModelVariationBase}. An {@link IOvModelVariationBase}
 	 * is an interface which is extended by variation points and variants and therefore this shared method is created to read its properties.
 	 *
-	 * @param element the element which contains the serialization of the {@link IOvModelVariationBase}.
+	 * @param element the XML-{@link Element} which contains the serialization of the {@link IOvModelVariationBase}.
 	 * @param object the {@link IOvModelVariationBase} which should be populated.
-	 * @param ovModel the {@link IOvModel} the newly created base variation belongs to.
-	 * @param factory the factory that should be used for creating the contents of the {@link IOvModelVariationBase}.
+	 * @param ovModel the {@link IOvModel} the newly created variation base belongs to.
+	 * @param factory the factory that should be used for creating the contents of the {@link IOvModel}.
 	 */
 	public static void readProperties(Element element, IOvModelVariationBase object, IOvModel ovModel, IOvModelFactory factory)
 			throws OvModelSerialisationException {
@@ -379,10 +379,10 @@ public class ReadHelper {
 	 * This method is a helper method which provides functionalities to read the content of an {@link IOvModelConstraint}. An {@link IOvModelConstraint} is an
 	 * interface which is extended by excludes and requires constraints and therefore this shared method is created to read its properties.
 	 *
-	 * @param element the element which contains the serialization of the {@link IOvModelConstraint}.
+	 * @param element the XML-{@link Element} which contains the serialization of the {@link IOvModelConstraint}.
 	 * @param object the {@link IOvModelConstraint} which should be populated.
 	 * @param ovModel the {@link IOvModel} the newly created constraint belongs to.
-	 * @param factory the factory that should be used for creating the contents of the {@link IOvModelConstraint}.
+	 * @param factory the factory that should be used for creating the contents of the {@link IOvModel}.
 	 */
 	public static void readProperties(Element node, IOvModelConstraint object, IOvModel ovModel, IOvModelFactory factory) throws OvModelSerialisationException {
 		readProperties(node, (IOvModelElement) object, ovModel, factory);
@@ -413,9 +413,9 @@ public class ReadHelper {
 	/**
 	 * This method searches threw all child elements and returns the first child-element if found. If more than one have been found an excpetion is thrown.
 	 *
-	 * @param parent the element which should be searched threw.
+	 * @param element the XML-{@link Element} which should be searched threw.
 	 * @param throwExceptionWhenNotFound determines if when no elements have been found an exception should be thrown or null should be returned.
-	 * @param name the name which the element must match.
+	 * @param name the name which the XML-{@link Element} must match.
 	 * @return the found element, otherwise null or an exception.
 	 * @throws OvModelSerialisationException
 	 */
@@ -431,10 +431,10 @@ public class ReadHelper {
 	}
 
 	/**
-	 * This method searches threw all child elements to find a specific element.
+	 * This method searches threw all child elements to find all elements having a specific name.
 	 *
-	 * @param parent the element which should be searched threw.
-	 * @param name the name which the element must match.
+	 * @param parent the XML-{@link Element} which should be searched threw.
+	 * @param name the name which the XML-{@link Element} must match.
 	 * @return the found elements, otherwise an empty list.
 	 * @throws OvModelSerialisationException
 	 */
@@ -451,8 +451,8 @@ public class ReadHelper {
 	/**
 	 * This method returns all child elements from an element.
 	 *
-	 * @param parent the element where all child elements should be returned.
-	 * @param thowExceptionOnEverythingElseThanElementAndText determines whether an exception should be throw whenever the element contains something else than
+	 * @param parent the XML-{@link Element} where all child elements should be returned.
+	 * @param thowExceptionOnEverythingElseThanElementAndText determines whether an exception should be throw whenever the XML-{@link Element} contains something else than
 	 *        child-elements and texts.
 	 * @return the list of elements.
 	 * @throws OvModelSerialisationException

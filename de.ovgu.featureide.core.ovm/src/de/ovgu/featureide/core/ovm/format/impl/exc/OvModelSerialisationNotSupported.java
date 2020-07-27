@@ -1,7 +1,7 @@
 package de.ovgu.featureide.core.ovm.format.impl.exc;
 
 /**
- * This exception should be thrown whenever a class should be serialized where no serialisation algorithm exists.
+ * This exception should be thrown whenever a class should be serialized where no serialization algorithm exists.
  *
  * @author johannstoebich
  */

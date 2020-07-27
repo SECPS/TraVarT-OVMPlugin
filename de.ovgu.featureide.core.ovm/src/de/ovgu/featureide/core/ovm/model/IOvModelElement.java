@@ -8,8 +8,8 @@ package de.ovgu.featureide.core.ovm.model;
 public abstract interface IOvModelElement extends IIdentifiable {
 
 	/**
-	 * This method searches for an element identified by an identifiable. If the name of the identifiable matches the constraint's, variation point's or
-	 * variant's name it is returned.
+	 * This method searches for an element identified by an {@link IIdentifiable}. The constraint, variation point or variant which matches the idenfiable's
+	 * name is returned. Each element's name is unique for all elements in an {@link IOvModel}.
 	 *
 	 * @param identifiable the identifiable which should be found.
 	 * @return the element which should be found, otherwise <code>null</code>.

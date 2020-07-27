@@ -1,7 +1,7 @@
 package de.ovgu.featureide.core.ovm.model.constraint;
 
+import de.ovgu.featureide.fm.core.base.IConstraint;
 import de.ovgu.featureide.fm.core.base.IPropertyContainer;
-import de.ovgu.featureide.fm.core.base.impl.Constraint;
 
 /**
  * Manages all additional properties of an {@link IOvModelConstraint} and therefore for an {@link IOvModelExcludesConstraint} and
@@ -13,21 +13,21 @@ public interface IOvModelConstraintMetainformation {
 
 	/**
 	 * This method returns the custom properties of a constraint. The custom properties represent additional properties of a constraint overtaken from a feature
-	 * model constraint {@link Constraint}. They have been added to a constraint as well so that no information is lost during transformation.
+	 * model {@link IConstraint} during transformation. They have been added to a constraint so that no information will be lost during transformation.
 	 *
 	 * @return The returned properties.
 	 */
 	IPropertyContainer getCustomProperties();
 
 	/**
-	 * This method returns the description of a constraint.
+	 * This method returns the description of the constraint.
 	 *
 	 * @return The description of the constraint
 	 */
 	String getDescription();
 
 	/**
-	 * This method sets the description of a constraint.
+	 * This method sets the description of the constraint.
 	 *
 	 * @param description the description which will be set.
 	 */

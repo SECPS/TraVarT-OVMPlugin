@@ -5,7 +5,7 @@ import de.ovgu.featureide.fm.core.base.IPropertyContainer;
 import de.ovgu.featureide.fm.core.base.impl.MapPropertyContainer;
 
 /**
- * Represents a concrete implementation of {@link IOvModelConstraintMetainformation}.
+ * Represents a concrete implementation of an {@link IOvModelConstraintMetainformation}.
  *
  * @see IOvModelConstraintMetainformation
  *

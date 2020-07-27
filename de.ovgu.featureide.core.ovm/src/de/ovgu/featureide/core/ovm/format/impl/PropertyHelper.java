@@ -37,29 +37,30 @@ public class PropertyHelper extends XmlFeatureModelFormat {
 	 *
 	 * @param doc the document in which the properties should be written.
 	 * @param properties the container which contains the properties.
-	 * @param element the element where the properties should be stored.
+	 * @param element the XML-{@link Element} where the properties should be stored.
 	 */
 	public static void writeProperties(Document doc, IPropertyContainer properties, Element element) {
 		getSingeltonInstance().addProperties(doc, properties, element);
 	}
 
 	/**
-	 * This method read the feature model properties. This properties can be separated into GRAPHICS, CALCULATIONS and PROPERTY elements.
+	 * This method read the feature model properties. This properties can be separated into GRAPHICS, CALCULATIONS and PROPERTY properties.
 	 *
 	 * @param properties the container in which the properties should be stored.
-	 * @param element the element containing the properties.
+	 * @param element the XML-{@link Element} containing the properties.
 	 */
 	public static void readProperties(IPropertyContainer properties, Element element) {
 		getSingeltonInstance().parseFeatureModelProperties(properties, element);
 	}
 
 	/**
-	 * This method checks the element contains feature model properties. This properties can be separated into GRAPHICS, CALCULATIONS and PROPERTY elements.
+	 * This method checks if the XML-{@link Element} contains feature model properties. This properties can be separated into GRAPHICS, CALCULATIONS and PROPERTY
+	 * properties.
 	 *
-	 * @param element the element containing the properties.
+	 * @param element the XML-{@link Element} containing the properties.
 	 */
-	public boolean isFeatureModelProperties(Element e) {
-		final String nodeName = e.getNodeName();
+	public boolean isFeatureModelProperties(Element element) {
+		final String nodeName = element.getNodeName();
 		switch (nodeName) {
 		case GRAPHICS:
 		case CALCULATIONS:

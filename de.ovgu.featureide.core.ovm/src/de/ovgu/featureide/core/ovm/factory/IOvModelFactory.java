@@ -9,18 +9,18 @@ import de.ovgu.featureide.core.ovm.model.constraint.IOvModelRequiresConstraint;
 import de.ovgu.featureide.fm.core.base.IFactory;
 
 /**
- * The factories for producing a new OvModels or items of an OvModel should implement this interface.
+ * The factories which produce new OvModels or items of an {@link IOvModel} should implement this interface.
  *
  * @author johannstoebich
  */
 public interface IOvModelFactory extends IFactory<IOvModel> {
 
 	/**
-	 * Create a new identifiable for an OvModel. Each element of an OvModel is uniquely identified with an identfyable.
+	 * Create a new {@link IIdentifiable} for an {@link IOvModel}. Each element of an {@link IOvModel} is uniquely identified with an identfyable.
 	 *
-	 * @param internalId the internal id of the identifiable.
-	 * @param name the name of the identifiable
-	 * @return the new created identifiable
+	 * @param internalId the internal id of the {@link IIdentifiable}.
+	 * @param name the name of the {@link IIdentifiable}
+	 * @return the new created {@link IIdentifiable}
 	 */
 	IIdentifiable createIdentifiable(int internalId, String name);
 
@@ -43,7 +43,7 @@ public interface IOvModelFactory extends IFactory<IOvModel> {
 	IOvModelVariationPoint createVariationPoint(IOvModel ovModel, String name);
 
 	/**
-	 * This method creates a required constraint.
+	 * This method creates a requires constraint.
 	 *
 	 * @param ovModel the OvModel for which the requires constraint is created.
 	 * @return the newly created requires constraint.

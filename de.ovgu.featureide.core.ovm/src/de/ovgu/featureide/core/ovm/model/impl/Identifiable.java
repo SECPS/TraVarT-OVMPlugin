@@ -3,7 +3,7 @@ package de.ovgu.featureide.core.ovm.model.impl;
 import de.ovgu.featureide.core.ovm.model.IIdentifiable;
 
 /**
- * Represents a concrete implementation of {@link IIdentifiable}.
+ * Represents a concrete implementation of an {@link IIdentifiable}.
  *
  * @see IIdentifiable
  *

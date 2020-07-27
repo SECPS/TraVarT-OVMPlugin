@@ -3,8 +3,9 @@ package de.ovgu.featureide.core.ovm.model;
 import java.util.List;
 
 import de.ovgu.featureide.core.ovm.model.constraint.IOvModelConstraint;
+import de.ovgu.featureide.fm.core.base.IConstraint;
+import de.ovgu.featureide.fm.core.base.IFeature;
 import de.ovgu.featureide.fm.core.base.IPropertyContainer;
-import de.ovgu.featureide.fm.core.base.impl.Feature;
 
 /**
  * Manages all additional properties of an {@link IOvModelVariationBase} and therefore for an {@link IOvModelVariationPoint} and {@link IOvModelVariant}. The
@@ -15,8 +16,8 @@ public interface IOvModelVariationBaseMetainformation {
 
 	/**
 	 * This method returns the custom properties of a variation base (variation point or variant). The custom properties represent additional properties of a
-	 * variation base overtaken from a feature {@link Feature}. They have been added to a variation base as well so that no information is lost during
-	 * transformation.
+	 * variation base overtaken from an {@link IFeature} during transformation. They have been added to a variation base so that no information will be lost
+	 * during transformation.
 	 *
 	 * @return The returned properties.
 	 */
@@ -44,7 +45,7 @@ public interface IOvModelVariationBaseMetainformation {
 	boolean isAbstract();
 
 	/**
-	 * This method sets the property abstract of an OvModelVariationBase.
+	 * This method sets the property abstract of an {@link IOvModelVariationBase}.
 	 *
 	 * @param isAbstract the value which will be set.
 	 */
@@ -58,41 +59,45 @@ public interface IOvModelVariationBaseMetainformation {
 	boolean isHidden();
 
 	/**
-	 * This method sets the property hidden of an OvModelVariationBase.
+	 * This method sets the property hidden of an {@link IOvModelVariationBase}.
 	 *
 	 * @param hidden the value which will be set.
 	 */
 	void setHidden(boolean hidden);
 
 	/**
-	 * This method returns the property partOfModelRoot. This property determines if the variation point came from a feature model constraint or from an
-	 * feature.
+	 * This method returns the property partOfModelRoot. This property determines if the variation base (variation point or variant) came from a feature or a
+	 * feature model constraint.
 	 *
-	 * @return the property isPartOfModel root.
+	 * @return the property isPartOfModelRoot.
 	 */
 	boolean isPartOfOvModelRoot();
 
 	/**
-	 * This method sets the property partOfModel of an OvModelVariationBase. This property determines if the variation point came from a feature model
-	 * constraint or from an feature.
+	 * This method sets the property partOfModel of an {@link IOvModelVariationBase}. This property determines if the variation base (variation point or
+	 * variant) came from a feature or a feature model constraint.
 	 *
-	 * @param partOfOvModelRoot sets the parameter to true.
+	 * @param partOfOvModelRoot the value of the parameter.
 	 */
 	void setPartOfOvModelRoot(boolean partOfOvModelRoot);
 
 	/**
-	 * This method returns the referenced constraints. If the child of a variation point which came from a constraint is a OvModel constraint, it is stored here
-	 * which constraint it is exactly. This is used for transforming the model back to a feature model.
+	 * This method returns the referenced constraints. If a variation point came from a feature model {@link IConstraint} and its child have been transformed to
+	 * an {@link IOvModel} constraint, this constraint is referenced here. This is required for reconstructing the feature model from the corresponding OvModel
+	 * correctly.
 	 *
-	 * @return the constraints which are returned.
+	 * @return the constraints which are referenced.
+	 * @see #isPartOfOvModelRoot() to determine if a variation point came from a feature model {@link IConstraint}.
 	 */
 	List<IOvModelConstraint> getReferencedConstraints();
 
 	/**
-	 * The referenced constraint which is added to to an OvModel variation base. If the child of a variation point which came from a constraint is a OvModel
-	 * constraint, it is stored here which constraint it is exactly. This is used for transforming the model back to a feature model.
+	 * This method sets (overwrites) the referenced constraints of a variation base (variation point or variant). If a variation point came from a feature model
+	 * {@link IConstraint} and its child have been transformed to an {@link IOvModel} constraint, this constraint is referenced here. This is required for
+	 * reconstructing the feature model from the corresponding OvModel correctly.
 	 *
-	 * @param referencedConstraints the constraint which will be added.
+	 * @param referencedConstraints the constraints which will be set.
+	 * @see #isPartOfOvModelRoot() to determine if a variation point came from a feature model {@link IConstraint}.
 	 */
 	void setReferencedConstraints(List<IOvModelConstraint> referencedConstraints);
 

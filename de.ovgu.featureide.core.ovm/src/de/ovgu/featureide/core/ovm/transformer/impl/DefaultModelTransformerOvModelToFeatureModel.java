@@ -50,10 +50,10 @@ import de.ovgu.featureide.fm.core.base.IFeatureStructure;
 public class DefaultModelTransformerOvModelToFeatureModel implements IModelTransformer<IOvModel, IFeatureModel> {
 
 	/**
-	 * This method transforms an {@link IOvModel} to a a {@link IFeatureModel}. The factory which is used for creating the new feature model must be passed in.
+	 * This method transforms an {@link IOvModel} to an {@link IFeatureModel}. The factory which is used for creating the new feature model must be passed in.
 	 *
 	 * @param ovModel the model which should be transformed.
-	 * @param factoryTo the factory which is sued to create the model.
+	 * @param factoryTo the factory which is used to create the model.
 	 * @return the new feature model
 	 */
 	@Override
@@ -114,8 +114,8 @@ public class DefaultModelTransformerOvModelToFeatureModel implements IModelTrans
 	}
 
 	/**
-	 * This method transforms an ovModelVariationBase to a feature. The ovModelVariationBase should be part of the root feature tree. Otherwise the method
-	 * {@link #variationBaseToNode(IOvModelVariationBase, IFeatureModelFactory, IFeatureModel, Map) should be used.
+	 * This method transforms an {@link IOvModelVariationBase} to an {@link IFeature}. The {@link IOvModelVariationBase} should be part of the root feature
+	 * tree. Otherwise the method {@link #variationBaseToNode(IOvModelVariationBase, IFeatureModelFactory, IFeatureModel, Map)} should be used.
 	 *
 	 * @param ovModelVariationBase the variation base which should be transformed to a feature.
 	 * @param factory the factory which is used to create the corresponding features.
@@ -171,7 +171,8 @@ public class DefaultModelTransformerOvModelToFeatureModel implements IModelTrans
 
 	/**
 	 * This is a utility function which either calls {@link #constraintToNode(IOvModelConstraint, IFeatureModelFactory, IFeatureModel, Map)} or
-	 * {@link #elementToNode(IOvModelElement, IFeatureModelFactory, IFeatureModel, Map)} depending whether it is a constraint, variation point or variant.
+	 * {@link #variationBaseToNode(IOvModelVariationBase, IFeatureModelFactory, IFeatureModel, Map)} depending on whether it is a constraint, variation point or
+	 * variant.
 	 *
 	 * @param ovModelElement the element which should be transformed.
 	 * @param factory the factory which is used to create the new features.
@@ -237,7 +238,7 @@ public class DefaultModelTransformerOvModelToFeatureModel implements IModelTrans
 
 	/**
 	 * This method transforms a variation base to a node. The variation base should not be part of the model root. For features which are part of the model root
-	 * the method {@link #ovModelElementToFeature(IOvModelVariationBase, IFeatureModelFactory, IFeatureModel) should be used.
+	 * the method {@link #ovModelElementToFeature(IOvModelVariationBase, IFeatureModelFactory, IFeatureModel)} should be used.
 	 *
 	 * @param ovModelVariationBase the variation base which should be transformed.
 	 * @param factory the factory which is used to create the new features.
@@ -341,10 +342,10 @@ public class DefaultModelTransformerOvModelToFeatureModel implements IModelTrans
 	}
 
 	/**
-	 * This method overtakes the ovmodel variation base properties from an ovmodelvaraint to a feature.
+	 * This method overtakes the OvModel variation base properties to a feature.
 	 *
 	 * @param feature the feature for which the properties should be set.
-	 * @param ovModelVariationBase the variation
+	 * @param ovModelVariationBase the variation base.
 	 */
 	private void setOvModelVariationBaseProperties(final IFeature feature, final IOvModelVariationBase ovModelVariationBase) {
 		FeatureUtils.setMandatory(feature, !OvModelUtils.isOptional(ovModelVariationBase));
@@ -356,11 +357,11 @@ public class DefaultModelTransformerOvModelToFeatureModel implements IModelTrans
 	}
 
 	/**
-	 * This method iterates over all given features to find a feature which matches a specific ident.
+	 * This method iterates over all given features to find a feature which matches a specific identifier.
 	 *
 	 * @param features the features which should be looked threw.
-	 * @param ovModelVariationBase the identifiable for which the feature should be found.
-	 * @return returns returns the searched feature or null if the feature is not found.
+	 * @param ovModelVariationBase the identifier for which the feature should be found.
+	 * @return returns the searched feature or null if the feature is not found.
 	 */
 	private IFeature findFeatureByName(final Collection<IFeature> features, IIdentifiable ovModelVariationBase) {
 
@@ -387,11 +388,11 @@ public class DefaultModelTransformerOvModelToFeatureModel implements IModelTrans
 	}
 
 	/**
-	 * This method returns all constraints which contains a certain element.
+	 * This method returns all constraints which contain a certain element.
 	 *
-	 * @param constraints
-	 * @param element the node which should be found.
-	 * @param isSource if true, only the sources will of the constraints will be looked threw. Otherwise source and target will be checked.
+	 * @param constraints the constraints which should be searched threw.
+	 * @param element the element which should be found.
+	 * @param isSource if <code>true</code>, only the sources of the constraints will be checked. Otherwise source and target will be checked.
 	 * @return The constraints where the element occurs.
 	 */
 	private List<IConstraint> getConstraintsWhereElementIsContained(final List<IConstraint> constraints, final Node element, boolean isSource) {

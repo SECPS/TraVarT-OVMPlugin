@@ -10,13 +10,12 @@ import de.ovgu.featureide.core.ovm.model.IOvModelElement;
 import de.ovgu.featureide.core.ovm.model.IOvModelMetainformation;
 import de.ovgu.featureide.core.ovm.model.IOvModelVariationPoint;
 import de.ovgu.featureide.core.ovm.model.constraint.IOvModelConstraint;
-import de.ovgu.featureide.fm.core.base.impl.FeatureModel;
 import de.ovgu.featureide.fm.core.functional.Functional;
 
 /**
  * Legal Notice: Some of this code or comments are overtaken from the FeatrueIDE's {@link FeatureModel}.
  *
- * Represents a concrete implementation of {@link IOvModel}.
+ * Represents a concrete implementation of an {@link IOvModel}.
  *
  * @see IOvModel
  *

@@ -11,7 +11,7 @@ import de.ovgu.featureide.core.ovm.model.IOvModelVariationPoint;
 import de.ovgu.featureide.fm.core.functional.Functional;
 
 /**
- * Represents a concrete implementation of {@link IOvModelVariationPoint}.
+ * Represents a concrete implementation of an {@link IOvModelVariationPoint}.
  *
  * @see IOvModelVariationPoint
  *

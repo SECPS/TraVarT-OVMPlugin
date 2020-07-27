@@ -1,7 +1,7 @@
 package de.ovgu.featureide.core.ovm.transformer.impl;
 
 /**
- * This class contains some static final properties which are used in the transformation from an OVM to a Feature Model and backwards.
+ * This class contains some static final properties which are used in the transformation of an OVM to a feature model and backwards.
  *
  * @author johannstoebich
  */
@@ -13,7 +13,7 @@ public class DefaultModelTransformerProperties {
 	public static final String VARIANT_PREFIX = "VARIANT_";
 
 	/**
-	 * The prefix constraint will get.
+	 * The prefix constraints will get.
 	 */
 	public static final String CONSTRAINT_PREFIX = "CONSTRAINT_";
 

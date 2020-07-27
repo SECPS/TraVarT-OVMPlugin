@@ -6,7 +6,7 @@ import de.ovgu.featureide.core.ovm.model.IIdentifiable;
 import de.ovgu.featureide.core.ovm.model.IOvModelElement;
 
 /**
- * Represents a concrete implementation of {@link IOvModelElement}.
+ * Represents a concrete implementation of an {@link IOvModelElement}.
  *
  * @see IOvModelElement
  *

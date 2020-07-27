@@ -1,7 +1,7 @@
 package de.ovgu.featureide.core.ovm.format.impl;
 
 /**
- * This class contains all texts used for serialization.
+ * This class contains all texts used in the serialization.
  *
  * @author johannstoebich
  */

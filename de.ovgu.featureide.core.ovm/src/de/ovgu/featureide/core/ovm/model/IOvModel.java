@@ -3,7 +3,6 @@ package de.ovgu.featureide.core.ovm.model;
 import java.util.List;
 
 import de.ovgu.featureide.core.ovm.model.constraint.IOvModelConstraint;
-import de.ovgu.featureide.fm.core.base.impl.FeatureModel;
 
 /**
  *
@@ -12,12 +11,11 @@ import de.ovgu.featureide.fm.core.base.impl.FeatureModel;
  *
  * @author johannstoebich
  *
- *         Legal Notice: Some of this code or comments are overtaken from the FeatrueIDE's {@link FeatureModel}.
  */
 public interface IOvModel extends IIdentifiable, Cloneable {
 
 	/**
-	 * Returns the factoryId which created this OvModel.
+	 * Returns the factoryId which created this {@link IOvModel}.
 	 *
 	 * @return the factoryId
 	 */
@@ -31,28 +29,28 @@ public interface IOvModel extends IIdentifiable, Cloneable {
 	String getSourceFile();
 
 	/**
-	 * Update the storage location of this OvModel.
+	 * Update the storage location of this {@link IOvModel}.
 	 *
-	 * @param sourceFile the location of this OvModel.
+	 * @param sourceFile the location of this {@link IOvModel}.
 	 */
 	void setSourceFile(String sourceFile);
 
 	/**
-	 * Returns the number of variation points stored in this OvModel.
+	 * Returns the number of variation points stored in this {@link IOvModel}.
 	 *
 	 * @return number of variation points in this model
 	 */
 	int getNumberOfVariationPoints();
 
 	/**
-	 * This method gets all variation points stored in this OvModel.
+	 * This method returns all variation points stored in this {@link IOvModel}.
 	 *
 	 * @return the list of variation points.
 	 */
 	List<IOvModelVariationPoint> getVariationPoints();
 
 	/**
-	 * This method adds a variation point to an OvModel.
+	 * This method adds a variation point to an {@link IOvModel}.
 	 *
 	 * @param variationPoint the variation point which is added.
 	 */
@@ -67,23 +65,23 @@ public interface IOvModel extends IIdentifiable, Cloneable {
 	boolean removeVariationPoint(IOvModelVariationPoint variationPoint);
 
 	/**
-	 * This method returns the number of constraints contained in this OvModel.
+	 * This method returns the number of constraints contained in this {@link IOvModel}.
 	 *
-	 * @return the number of constraints contained in this OvModel.
+	 * @return the number of constraints contained in this {@link IOvModel}.
 	 *
 	 */
 	int getConstraintCount();
 
 	/**
-	 * This method adds a constraint to an OvModel. A constraint represents a restriction on the model.
+	 * This method adds a constraint to an {@link IOvModel}. A constraint represents a restriction on the model.
 	 *
 	 * @param constraint the constraint which is added.
 	 */
 	boolean addConstraint(IOvModelConstraint constraint);
 
 	/**
-	 * This method adds a constraint to an OvModel. A constraint represents a restriction on the model. The constraint is added at a specific index where all
-	 * later occurenecs are shifted to re right.
+	 * This method adds a constraint to an {@link IOvModel}. A constraint represents a restriction on the model. The constraint is added at a specific index
+	 * where all later occurenecs are shifted to re right.
 	 *
 	 * @param constraint the constraint which is added.
 	 * @param index the index where the constraint is added.
@@ -102,32 +100,32 @@ public interface IOvModel extends IIdentifiable, Cloneable {
 	int getConstraintIndex(IOvModelConstraint constraint);
 
 	/**
-	 * Returns the list of constraints stored in this OvModel. <br> <br> <b>Note</b>: The returned list should be <b>unmodifiable</b> to avoid external access
-	 * to internal data
+	 * Returns the list of constraints stored in this {@link IOvModel}. <br> <br> <b>Note</b>: The returned list should be <b>unmodifiable</b> to avoid external
+	 * access to internal data
 	 *
-	 * @return All constraints stored in this OvModel.
+	 * @return All constraints stored in this {@link IOvModel}.
 	 */
 	List<IOvModelConstraint> getConstraints();
 
 	/**
-	 * Returns the model properties attached to this OvModel. These properties contain at least comments and properties. The properties returned by this model
-	 * is implementation specific and might contain additional properties.
+	 * Returns the model properties attached to this {@link IOvModel}. These properties contain at least comments and properties. The properties returned by
+	 * this model is implementation specific and might contain additional properties.
 	 *
 	 * @return OvModel properties
 	 */
 	IOvModelMetainformation getMetainformation();
 
 	/**
-	 * Removes the first occurrence of <code>constraint</code> from the collection of constraints in this OvModel, if it is present. Otherwise there is no
-	 * effect to this OvModel.
+	 * Removes the first occurrence of <code>constraint</code> from the collection of constraints in this {@link IOvModel}, if it is present. Otherwise there is
+	 * no effect to this {@link IOvModel}.
 	 *
 	 * @param constraint The constraint to be removed
 	 */
 	boolean removeConstraint(IOvModelConstraint constraint);
 
 	/**
-	 * Removes the constraint at the specified position <code>index</code> in this collection of constraints in this OvModel. When a constraint was removed, the
-	 * remaining constraints to the right are shifted one position to the left.
+	 * Removes the constraint at the specified position <code>index</code> in this collection of constraints in this {@link IOvModel}. When a constraint was
+	 * removed, the remaining constraints to the right are shifted one position to the left.
 	 *
 	 * @param index position of the constraint to be removed
 	 *
@@ -136,7 +134,7 @@ public interface IOvModel extends IIdentifiable, Cloneable {
 	void removeConstraint(int index);
 
 	/**
-	 * Replaces the constraint <code>constraint</code> at the specified position <code>index</code> in the collection of constraints of this OvModel.
+	 * Replaces the constraint <code>constraint</code> at the specified position <code>index</code> in the collection of constraints of this {@link IOvModel}.
 	 *
 	 * @param constraint constraint which should be stored at <code>index</code>
 	 * @param index position for replacement
@@ -151,7 +149,7 @@ public interface IOvModel extends IIdentifiable, Cloneable {
 	 * Sets the collections of constraints to the ones yielded by <code>constraints</code>. Existing constraint in the collection will be removed before this
 	 * operation.
 	 *
-	 * @param constraints Source of constraints which should be copied into this OvModel.
+	 * @param constraints Source of constraints which should be copied into this {@link IOvModel}.
 	 */
 	void setConstraints(final Iterable<IOvModelConstraint> constraints);
 

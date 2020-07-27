@@ -53,17 +53,17 @@ public abstract class TransformationHandlerBase<FROM, TO> extends AFileHandler {
 	}
 
 	/**
-	 * This method returns the import handler which is able to read a model.
+	 * This method returns the import handler which is able to read a model from a path.
 	 *
-	 * @param path
+	 * @param path the path where the file should be read.
 	 * @return
 	 */
 	protected abstract FileHandler<FROM> getImportFileHandler(Path path);
 
 	/**
-	 * This method returns transformation which is able to transform the source model to a new target datatype.
+	 * This method returns a transformation which is able to transform the source model into a new target model.
 	 *
-	 * @return the transformed mdoel.
+	 * @return the transformed model.
 	 */
 	protected abstract IModelTransformer<FROM, TO> getTransformation();
 
@@ -76,7 +76,7 @@ public abstract class TransformationHandlerBase<FROM, TO> extends AFileHandler {
 	protected abstract IFactory<TO> getExportFactory(Path path);
 
 	/**
-	 * The file handler which is able to write a target model.
+	 * The file handler which is able to write a target model into a given location.
 	 *
 	 * @param path the path where the file should be written.
 	 * @return

@@ -8,7 +8,7 @@ import de.ovgu.featureide.core.ovm.model.constraint.IOvModelConstraintMetainform
 import de.ovgu.featureide.core.ovm.model.impl.OvModelElement;
 
 /**
- * Represents a concrete implementation of {@link IOvModelConstraint}.
+ * Represents a concrete implementation of an {@link IOvModelConstraint}.
  *
  * @see IOvModelConstraint
  *

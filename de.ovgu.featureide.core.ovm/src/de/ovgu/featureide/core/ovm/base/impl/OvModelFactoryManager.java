@@ -12,8 +12,8 @@ import de.ovgu.featureide.fm.core.io.IPersistentFormat;
 
 /**
  *
- * This class represents an factory manager for {@link IOvModel}. It extends the abstract factory manager of FeatureIDE. Only the method <code>getFactory</code>
- * is overridden. The other overrides are for casting the return value correctly.
+ * This class represents a factory manager for {@link IOvModel}. It extends the abstract factory manager of FeatureIDE. Only the method <code>getFactory</code>
+ * is truly overridden. The other overrides are solely for casting the return value correctly.
  *
  * @author johannstoebich
  */
@@ -33,11 +33,11 @@ public final class OvModelFactoryManager extends FactoryManager<IOvModel> {
 	private OvModelFactoryManager() {}
 
 	/**
-	 * Returns the ov model factory that was used to create the given model (if the factory is not available the default factory is returned).
+	 * Returns the OvModel factory that was used to create the given model (if the factory is not available the default factory is returned).
 	 *
-	 * @param object the ov model.
+	 * @param object the OvModel.
 	 *
-	 * @return Returns the OvModel factory for the given ov model.
+	 * @return Returns the OvModel factory for the given {@link IOvModel}.
 	 */
 	@Override
 	public IOvModelFactory getFactory(IOvModel object) {

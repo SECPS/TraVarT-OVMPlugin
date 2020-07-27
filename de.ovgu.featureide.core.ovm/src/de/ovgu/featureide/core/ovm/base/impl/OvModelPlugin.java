@@ -36,7 +36,7 @@ public class OvModelPlugin extends Plugin {
 	}
 
 	/**
-	 * Returns the shared instance
+	 * Returns the shared instance.
 	 *
 	 * @return the shared instance
 	 */

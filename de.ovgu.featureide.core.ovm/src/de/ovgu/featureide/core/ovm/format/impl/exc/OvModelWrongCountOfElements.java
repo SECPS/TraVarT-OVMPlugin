@@ -1,7 +1,7 @@
 package de.ovgu.featureide.core.ovm.format.impl.exc;
 
 /**
- * This exception should be thrown whenever a certain amount of elements is required however not given.
+ * This exception should be thrown whenever a certain amount of required elements has not been matched.
  *
  * @author johannstoebich
  */

@@ -43,7 +43,7 @@ public class DefaultModelTransformerFeatureModelToOvModel implements IModelTrans
 	private Integer sequence = 0;
 
 	/**
-	 * This method transforms a {@link IFeatureModel} to an {@link IOvModel}. The method
+	 * This method transforms an {@link IFeatureModel} to an {@link IOvModel}. The method
 	 * {@link #featureToOvModelElement(IFeature, IFeatureModel, IOvModelFactory, IOvModel)} is used to transform all variation points and the method
 	 * {@link #nodeToConstraints(Node, IFeatureModel, IOvModelFactory, IOvModel)} is used to transform the constraints.
 	 *
@@ -91,7 +91,7 @@ public class DefaultModelTransformerFeatureModelToOvModel implements IModelTrans
 	 *
 	 * @param feature The feature which should be transformed.
 	 * @param factory The factory to create new variation points.
-	 * @param ovModel The new OvModel containing the already transformed variation points and variants.
+	 * @param ovModel The new {@link IOvModel} containing the already transformed variation points and variants.
 	 * @return The new variation point or variant.
 	 */
 	private IOvModelVariationBase featureToOvModelElement(final IFeature feature, final IOvModelFactory factory, final IOvModel ovModel) {
@@ -148,10 +148,10 @@ public class DefaultModelTransformerFeatureModelToOvModel implements IModelTrans
 	}
 
 	/**
-	 * This method searches for a variation point or variant in the given <code>OvModel</code> by using the feature name.
+	 * This method searches for a variation point or variant in the given {@link IOvModel} by using the feature's name.
 	 *
-	 * @param feature The feature which name should be searched.
-	 * @param factory The factory used to create an identifiable for searching in the OvModel.
+	 * @param feature The feature which should be found by the given name.
+	 * @param factory The factory used to create an identifiable for searching in the {@link IOvModel}.
 	 * @param ovModel The model which should be searched threw.
 	 * @return
 	 */
@@ -165,8 +165,8 @@ public class DefaultModelTransformerFeatureModelToOvModel implements IModelTrans
 	 *
 	 * @param node The node which should be transformed.
 	 * @param featureModel The feature model used to retrieve a specific feature.
-	 * @param factory The factory to create new variation points.
-	 * @param ovModel The new OvModel containing the already transformed variation points and variants.
+	 * @param factory The factory to create new constraints or variation points.
+	 * @param ovModel The new {@link IOvModel} containing the already transformed constraints or variation points.
 	 * @return The new variation point or constraint.
 	 */
 	private IOvModelElement nodeToConstraints(Node node, IFeatureModel featureModel, IOvModelFactory factory, IOvModel ovModel)
@@ -300,8 +300,8 @@ public class DefaultModelTransformerFeatureModelToOvModel implements IModelTrans
 	/**
 	 * This method sets the name, source and the target of a constraint.
 	 *
-	 * @param node Node from which name should be generated.
-	 * @param ovModelConstraint The constraint to which the soruce and the target sould be added.
+	 * @param node Node from which the name should be generated.
+	 * @param ovModelConstraint The constraint to which the source and the target should be added.
 	 * @param source The source.
 	 * @param target The target.
 	 */
@@ -313,8 +313,8 @@ public class DefaultModelTransformerFeatureModelToOvModel implements IModelTrans
 	}
 
 	/**
-	 * This method overtakes the properties of a <code>Feature</code> to a <code>OvModelVariationBase</code>. It is overtaken whether the variation base is
-	 * optional, hidden, abstract or part of the root feature tree. Furthermore the description and the custom properties are overtaken.
+	 * This method overtakes the properties of an {@link IFeature} to an {@link IOvModelVariationBase}. It is overtaken whether the variation base is optional,
+	 * hidden, abstract or part of the root feature tree. Furthermore the description and the custom properties are overtaken.
 	 *
 	 * @param ovModelVariationBase The target model.
 	 * @param feature The feature from which the properties should be taken from.
@@ -330,18 +330,18 @@ public class DefaultModelTransformerFeatureModelToOvModel implements IModelTrans
 	}
 
 	/**
-	 * This method sets the properties of a <code>OvModelVariationBase</code>. It is sets whether the variation base is optional, hidden, abstract or part of
-	 * the root feature tree. Furthermore a description is created.
+	 * This method sets the properties of an {@link IOvModelVariationBase} when it was created because of a constraint. It is sets whether the variation base is
+	 * optional, hidden, abstract or part of the root feature tree. Furthermore a description is created.
 	 *
 	 * @param ovModelVariationBase The target model.
-	 * @param feature The feature from which the properties should be taken from.
+	 * @param node The node from which the properties should be taken from.
 	 */
-	private void setOvModelVariationBaseProperties(final IOvModelVariationBase ovModelVariationPoint, final Node node) {
-		OvModelUtils.setOptional(ovModelVariationPoint, false);
-		OvModelUtils.setHidden(ovModelVariationPoint, false);
-		OvModelUtils.setAbstract(ovModelVariationPoint, false);
-		OvModelUtils.setDescription(ovModelVariationPoint, "This variant point arises from the constraint " + node.toString() + ".");
-		OvModelUtils.setPartOfOvModelRoot(ovModelVariationPoint, false);
+	private void setOvModelVariationBaseProperties(final IOvModelVariationBase ovModelVariationBase, final Node node) {
+		OvModelUtils.setOptional(ovModelVariationBase, false);
+		OvModelUtils.setHidden(ovModelVariationBase, false);
+		OvModelUtils.setAbstract(ovModelVariationBase, false);
+		OvModelUtils.setDescription(ovModelVariationBase, "This variant point arises from the constraint " + node.toString() + ".");
+		OvModelUtils.setPartOfOvModelRoot(ovModelVariationBase, false);
 	}
 
 	private String nodeToUniqueString(Node node) {

@@ -17,14 +17,14 @@ public abstract interface IIdentifiable {
 	long getInternalId();
 
 	/**
-	 * This method returns the name of an IIdentifiable. The name must be unique within an OvModel.
+	 * This method returns the name of an IIdentifiable. The name must be unique within an {@link IOvModel}.
 	 *
 	 * @return the name of the identifiable.
 	 */
 	String getName();
 
 	/**
-	 * This method sets the name of an IIdentifiable. The name must be unique within an OvModel.
+	 * This method sets the name of an IIdentifiable. The name must be unique within an {@link IOvModel}.
 	 *
 	 * @param name the name.
 	 */

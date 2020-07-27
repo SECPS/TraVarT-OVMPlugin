@@ -1,7 +1,7 @@
 package de.ovgu.featureide.core.ovm.format.impl.exc;
 
 /**
- * This exception should be thrown whenever a specific type is expected however a wrong type has been returned.
+ * This exception should be thrown whenever a specific type is expected however another type has been given.
  *
  * @author johannstoebich
  */
