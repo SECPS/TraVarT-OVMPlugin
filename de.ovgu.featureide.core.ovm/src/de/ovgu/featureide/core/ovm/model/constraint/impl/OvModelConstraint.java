@@ -69,6 +69,18 @@ public abstract class OvModelConstraint extends OvModelElement implements IOvMod
 	/**
 	 * (non-Javadoc)
 	 *
+	 * @see de.ovgu.featureide.core.configuration.IValidate#isValid()
+	 */
+	@Override
+	public boolean isValid() {
+		boolean isValid = true;
+		isValid = isValid && (source != null) && (target != null);
+		return isValid;
+	}
+
+	/**
+	 * (non-Javadoc)
+	 *
 	 * @see de.ovgu.featureide.core.ovm.model.constraint.IOvModelConstraint#getMetainformation()
 	 */
 	@Override

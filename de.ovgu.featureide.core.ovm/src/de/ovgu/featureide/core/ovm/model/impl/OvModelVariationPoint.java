@@ -241,6 +241,48 @@ public class OvModelVariationPoint extends OvModelVariationBase implements IOvMo
 	/**
 	 * (non-Javadoc)
 	 *
+	 * @see de.ovgu.featureide.core.configuration.IValidateInternal#isValid(boolean)
+	 */
+	@Override
+	public boolean isValid(boolean isMandatory) {
+		boolean isValid = super.isValid(isMandatory);
+		if (isSelected()) { // execute check only if the variation point is selected
+			// all mandatory children have to be checked
+			for (final IOvModelVariationBase mandatoryChild : mandatoryChildren) {
+				isValid = isValid && mandatoryChild.isSelected();
+			}
+
+			// check the ranges
+			if (isAlternative()) {
+				long selected = mandatoryChildren.stream().filter(child -> child.isSelected()).count();
+				selected = selected + optionalChildren.stream().filter(child -> child.isSelected()).count();
+				if ((selected < minChoices) || (selected > maxChoices)) {
+					isValid = false;
+				}
+				isValid = isValid && (minChoices != EMPTY_VALUE) && (maxChoices != EMPTY_VALUE);
+			} else {
+				isValid = isValid && (minChoices == EMPTY_VALUE) && (maxChoices == EMPTY_VALUE);
+			}
+
+			// check mandatory children
+			for (final IOvModelVariationBase mandatoryChild : mandatoryChildren) {
+				isValid = isValid && mandatoryChild.isValid(true);
+			}
+
+			// check optional children
+			for (final IOvModelVariationBase optionalChild : optionalChildren) {
+				isValid = isValid && optionalChild.isValid(false);
+			}
+
+			isValid = isValid && ((optionalChildren.size() + mandatoryChildren.size()) > 0);
+		}
+
+		return isValid;
+	}
+
+	/**
+	 * (non-Javadoc)
+	 *
 	 * @see de.ovgu.featureide.core.ovm.model.IOvModelElement#getElement(de.ovgu.featureide.core.ovm.model.IIdentifiable)
 	 */
 	@Override

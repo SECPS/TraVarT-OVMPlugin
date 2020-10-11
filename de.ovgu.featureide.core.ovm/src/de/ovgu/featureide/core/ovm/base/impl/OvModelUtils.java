@@ -1,11 +1,15 @@
 package de.ovgu.featureide.core.ovm.base.impl;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
+import de.ovgu.featureide.core.configuration.IConfigurable;
 import de.ovgu.featureide.core.ovm.model.IIdentifiable;
 import de.ovgu.featureide.core.ovm.model.IOvModel;
+import de.ovgu.featureide.core.ovm.model.IOvModelVariant;
 import de.ovgu.featureide.core.ovm.model.IOvModelVariationBase;
 import de.ovgu.featureide.core.ovm.model.IOvModelVariationPoint;
 import de.ovgu.featureide.core.ovm.model.constraint.IOvModelConstraint;
@@ -574,4 +578,26 @@ public class OvModelUtils {
 		ovModelConstraint.setTarget(target);
 	}
 
+	public static Map<IConfigurable, Boolean> getIConfigurable(IOvModel ovModel) {
+		final Map<IConfigurable, Boolean> configurables = new HashMap<IConfigurable, Boolean>();
+		fillListConfigurable(ovModel.getVariationPoints(), configurables);
+		return configurables;
+	}
+
+	private static void fillListConfigurable(List<? extends IOvModelVariationBase> ovModelElements, Map<IConfigurable, Boolean> configurables) {
+		for (final IOvModelVariationBase ovModelVariationBase : ovModelElements) {
+			if (!configurables.containsKey(ovModelVariationBase)) {
+				configurables.put(ovModelVariationBase, ovModelVariationBase.isSelected());
+			}
+
+			if (ovModelVariationBase instanceof IOvModelVariationPoint) {
+				fillListConfigurable(((IOvModelVariationPoint) ovModelVariationBase).getMandatoryChildren(), configurables);
+				fillListConfigurable(((IOvModelVariationPoint) ovModelVariationBase).getOptionalChildren(), configurables);
+			} else if (ovModelVariationBase instanceof IOvModelVariant) {
+				return;
+			} else {
+				throw new RuntimeException();
+			}
+		}
+	}
 }

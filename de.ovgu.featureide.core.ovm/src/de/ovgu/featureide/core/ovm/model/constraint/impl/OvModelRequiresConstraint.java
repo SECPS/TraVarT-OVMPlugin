@@ -11,4 +11,15 @@ import de.ovgu.featureide.core.ovm.model.constraint.IOvModelRequiresConstraint;
  */
 public class OvModelRequiresConstraint extends OvModelConstraint implements IOvModelRequiresConstraint {
 
+	/**
+	 * (non-Javadoc)
+	 *
+	 * @see de.ovgu.featureide.core.configuration.IValidate#isValid()
+	 */
+	@Override
+	public boolean isValid() {
+		boolean isValid = super.isValid();
+		isValid = isValid && (!source.isSelected() || target.isSelected());
+		return isValid;
+	}
 }

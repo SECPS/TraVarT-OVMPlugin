@@ -299,4 +299,20 @@ public class OvModel extends Identifiable implements IOvModel {
 		return true;
 	}
 
+	/**
+	 * (non-Javadoc)
+	 *
+	 * @see de.ovgu.featureide.core.configuration.IValidate#isValid()
+	 */
+	@Override
+	public boolean isValid() {
+		boolean isValid = true;
+		for (final IOvModelVariationPoint variationPoint : variationPoints) {
+			isValid = isValid && variationPoint.isValid(!variationPoint.isOptional());
+		}
+		for (final IOvModelConstraint constraint : constraints) {
+			isValid = isValid && constraint.isValid();
+		}
+		return isValid;
+	}
 }

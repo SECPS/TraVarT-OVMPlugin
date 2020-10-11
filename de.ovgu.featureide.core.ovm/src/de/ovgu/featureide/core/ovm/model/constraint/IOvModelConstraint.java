@@ -1,5 +1,7 @@
 package de.ovgu.featureide.core.ovm.model.constraint;
 
+import de.ovgu.featureide.core.configuration.IValidate;
+import de.ovgu.featureide.core.ovm.model.IOvModel;
 import de.ovgu.featureide.core.ovm.model.IOvModelElement;
 import de.ovgu.featureide.core.ovm.model.IOvModelVariationBase;
 
@@ -9,7 +11,7 @@ import de.ovgu.featureide.core.ovm.model.IOvModelVariationBase;
  *
  * @author johannstoebich
  */
-public abstract interface IOvModelConstraint extends IOvModelElement {
+public abstract interface IOvModelConstraint extends IOvModelElement, IValidate {
 
 	/**
 	 * This method returns the metainformation of this constraint. It stores all information which is defined for a constraint in FeatureIDE however cannot be

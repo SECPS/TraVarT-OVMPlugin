@@ -35,4 +35,5 @@ public abstract interface IIdentifiable {
 
 	@Override
 	boolean equals(Object obj);
+
 }

@@ -13,8 +13,8 @@ import de.ovgu.featureide.core.ovm.model.IOvModelVariationBaseMetainformation;
 public abstract class OvModelVariationBase extends OvModelElement implements IOvModelVariationBase {
 
 	protected IOvModelVariationBaseMetainformation metainformation;
-
 	protected boolean optional;
+	private boolean selected;
 
 	public OvModelVariationBase() {
 		super();
@@ -59,6 +59,36 @@ public abstract class OvModelVariationBase extends OvModelElement implements IOv
 	@Override
 	public void setOptional(boolean optional) {
 		this.optional = optional;
+	}
+
+	/**
+	 * (non-Javadoc)
+	 *
+	 * @see de.ovgu.featureide.core.configuration.IConfigurable#isSelected()
+	 */
+	@Override
+	public boolean isSelected() {
+		return selected;
+	}
+
+	/**
+	 * (non-Javadoc)
+	 *
+	 * @see de.ovgu.featureide.core.configuration.IConfigurable#setSelected(boolean)
+	 */
+	@Override
+	public void setSelected(boolean selected) {
+		this.selected = selected;
+	}
+
+	/**
+	 * (non-Javadoc)
+	 *
+	 * @see de.ovgu.featureide.core.configuration.IValidateInternal#isValid(boolean)
+	 */
+	@Override
+	public boolean isValid(boolean isMandatory) {
+		return (!isMandatory || isSelected());
 	}
 
 	/**

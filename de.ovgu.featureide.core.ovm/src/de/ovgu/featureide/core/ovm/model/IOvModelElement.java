@@ -15,4 +15,5 @@ public abstract interface IOvModelElement extends IIdentifiable {
 	 * @return the element which should be found, otherwise <code>null</code>.
 	 */
 	IOvModelElement getElement(IIdentifiable identifiable);
+
 }

@@ -1,11 +1,14 @@
 package de.ovgu.featureide.core.ovm.model;
 
+import de.ovgu.featureide.core.configuration.IConfigurable;
+import de.ovgu.featureide.core.configuration.IValidateInternal;
+
 /**
  * This is the base interface for an {@link IOvModelVariant} and for an {@link IOvModelVariationPoint}. It contains the common properties of these two classes.
  *
  * @author johannstoebich
  */
-public abstract interface IOvModelVariationBase extends IOvModelElement {
+public abstract interface IOvModelVariationBase extends IOvModelElement, IValidateInternal, IConfigurable {
 
 	/**
 	 * This method returns the metainformation of a variation base (variation point or variant). It stores all information which is defined for a feature in

@@ -107,8 +107,8 @@ public class DefaultModelTransformerFeatureModelToOvModel implements IModelTrans
 
 			final IOvModelVariant ovModelVariant = factory.createVariant(ovModel, VARIANT_PREFIX + FeatureUtils.getName(feature));
 			OvModelUtils.setPartOfOvModelRoot(ovModelVariant, true);
-			OvModelUtils.setMaxChoices(ovModelVariationPoint, 1);
-			OvModelUtils.setMinChoices(ovModelVariationPoint, 1);
+			OvModelUtils.setMaxChoices(ovModelVariationPoint, -1);
+			OvModelUtils.setMinChoices(ovModelVariationPoint, -1);
 			OvModelUtils.addMandatoryChild(ovModelVariationPoint, ovModelVariant);
 
 		} else if (FeatureUtils.hasChildren(feature)) {

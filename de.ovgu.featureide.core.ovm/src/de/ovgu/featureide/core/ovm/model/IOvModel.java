@@ -2,6 +2,7 @@ package de.ovgu.featureide.core.ovm.model;
 
 import java.util.List;
 
+import de.ovgu.featureide.core.configuration.IValidate;
 import de.ovgu.featureide.core.ovm.model.constraint.IOvModelConstraint;
 
 /**
@@ -12,7 +13,7 @@ import de.ovgu.featureide.core.ovm.model.constraint.IOvModelConstraint;
  * @author johannstoebich
  *
  */
-public interface IOvModel extends IIdentifiable, Cloneable {
+public interface IOvModel extends IIdentifiable, IValidate {
 
 	/**
 	 * Returns the factoryId which created this {@link IOvModel}.
@@ -161,4 +162,5 @@ public interface IOvModel extends IIdentifiable, Cloneable {
 	 * @return the element which should be found, otherwise <code>null</code>.
 	 */
 	IOvModelElement getElement(IIdentifiable identifiable);
+
 }
