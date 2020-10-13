@@ -20,4 +20,6 @@ public interface IConfigurable {
 	 * @param selected
 	 */
 	void setSelected(boolean selected);
+
+	String getName();
 }

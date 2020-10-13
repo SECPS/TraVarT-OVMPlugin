@@ -281,7 +281,14 @@ public class DefaultModelTransformerOvModelToFeatureModel implements IModelTrans
 			final List<IOvModelConstraint> foundConstraints = new ArrayList<IOvModelConstraint>();
 			for (final IOvModelVariationBase ovModelChild : ovModelChildren) {
 
-				final Node element = elementToNode(ovModelChild, factory, featureModel, constraintMemory);
+				Node element;
+				if (constraintMemory.containsKey(ovModelChild.getName())) {
+					element = constraintMemory.get(ovModelChild.getName());
+					constraintMemory.remove(ovModelChild.getName());
+				} else {
+					element = elementToNode(ovModelChild, factory, featureModel, constraintMemory);
+				}
+
 				// on suspicion if there is a constraint used this. Either of these two cases can lead to invalid models.
 				final List<IConstraint> constraintsWhereElementIsContained =
 					getConstraintsWhereElementIsContained(featureModel.getConstraints(), element, true);
