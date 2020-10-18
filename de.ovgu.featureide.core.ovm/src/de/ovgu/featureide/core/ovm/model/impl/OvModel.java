@@ -10,6 +10,8 @@ import de.ovgu.featureide.core.ovm.model.IOvModelElement;
 import de.ovgu.featureide.core.ovm.model.IOvModelMetainformation;
 import de.ovgu.featureide.core.ovm.model.IOvModelVariationPoint;
 import de.ovgu.featureide.core.ovm.model.constraint.IOvModelConstraint;
+import de.ovgu.featureide.core.ovm.model.constraint.IOvModelExcludesConstraint;
+import de.ovgu.featureide.core.ovm.transformer.impl.DefaultModelTransformerProperties;
 import de.ovgu.featureide.fm.core.functional.Functional;
 
 /**
@@ -314,5 +316,25 @@ public class OvModel extends Identifiable implements IOvModel {
 			isValid = isValid && constraint.isValid();
 		}
 		return isValid;
+	}
+
+	/**
+	 * (non-Javadoc)
+	 *
+	 * @see de.ovgu.featureide.core.ovm.model.IOvModel#afterSelection()
+	 */
+	@Override
+	public void afterSelection() {
+		for (final IOvModelConstraint constraint : constraints) {
+			if (constraint instanceof IOvModelExcludesConstraint) {
+				final IOvModelExcludesConstraint excludesConstraint = (IOvModelExcludesConstraint) constraint;
+				if (excludesConstraint.getSource().getName().startsWith(DefaultModelTransformerProperties.CONSTRAINT_VARIATION_POINT_PREFIX)) {
+					excludesConstraint.getSource().setSelected(!excludesConstraint.getTarget().isSelected());
+				}
+				if (excludesConstraint.getTarget().getName().startsWith(DefaultModelTransformerProperties.CONSTRAINT_VARIATION_POINT_PREFIX)) {
+					excludesConstraint.getTarget().setSelected(!excludesConstraint.getSource().isSelected());
+				}
+			}
+		}
 	}
 }

@@ -163,4 +163,9 @@ public interface IOvModel extends IIdentifiable, IValidate {
 	 */
 	IOvModelElement getElement(IIdentifiable identifiable);
 
+	/**
+	 * This method finalizes the selection so that all virtual points will be set correctly. It should be called every time the selection has changed.
+	 */
+	void afterSelection();
+
 }

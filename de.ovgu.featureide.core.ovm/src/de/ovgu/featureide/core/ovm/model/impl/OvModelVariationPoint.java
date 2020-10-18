@@ -8,6 +8,7 @@ import de.ovgu.featureide.core.ovm.model.IIdentifiable;
 import de.ovgu.featureide.core.ovm.model.IOvModelElement;
 import de.ovgu.featureide.core.ovm.model.IOvModelVariationBase;
 import de.ovgu.featureide.core.ovm.model.IOvModelVariationPoint;
+import de.ovgu.featureide.core.ovm.transformer.impl.DefaultModelTransformerProperties;
 import de.ovgu.featureide.fm.core.functional.Functional;
 
 /**
@@ -246,7 +247,16 @@ public class OvModelVariationPoint extends OvModelVariationBase implements IOvMo
 	@Override
 	public boolean isValid(boolean isMandatory) {
 		boolean isValid = super.isValid(isMandatory);
-		if (isSelected()) { // execute check only if the variation point is selected
+
+		if (isSelected()) {
+			// Shortcut (do not check artificial variants)
+			if ((mandatoryChildren.size() == 1) && (mandatoryChildren.get(0) != null) && (mandatoryChildren.get(0).getName() != null)
+				&& mandatoryChildren.get(0).getName().startsWith(DefaultModelTransformerProperties.VARIANT_PREFIX)
+				&& mandatoryChildren.get(0).getName().endsWith(getName())) {
+				return isValid;
+			}
+
+			// execute check only if the variation point is selected
 			// all mandatory children have to be checked
 			for (final IOvModelVariationBase mandatoryChild : mandatoryChildren) {
 				isValid = isValid && mandatoryChild.isSelected();
@@ -276,7 +286,6 @@ public class OvModelVariationPoint extends OvModelVariationBase implements IOvMo
 
 			isValid = isValid && ((optionalChildren.size() + mandatoryChildren.size()) > 0);
 		}
-
 		return isValid;
 	}
 

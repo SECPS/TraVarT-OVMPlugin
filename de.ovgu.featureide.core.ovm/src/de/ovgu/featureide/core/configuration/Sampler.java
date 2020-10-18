@@ -44,6 +44,7 @@ public class Sampler {
 			}
 			System.out.println("Check configuratoin " + bin + ".");
 			applyConfiguration(configurables, bin);
+			ovModel.afterSelection();
 
 			if (ovModel.isValid()) {
 				validConfigs.add(OvModelUtils.getIConfigurable(ovModel));
@@ -115,5 +116,6 @@ public class Sampler {
 			}
 			((IConfigurable) element).setSelected(true);
 		}
+		ovm.afterSelection();
 	}
 }
