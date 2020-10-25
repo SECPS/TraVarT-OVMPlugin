@@ -72,10 +72,21 @@ public class DefaultModelTransformerOvModelToFeatureModel implements IModelTrans
 				if (feature != null) {
 					FeatureUtils.addFeature(featureModel, feature);
 				}
-				if (featureModel.getStructure().getRoot() != null) {
-					throw new NotSupportedTransformationException(null, null);
+				if ((featureModel.getStructure().getRoot() != null)
+					&& FeatureUtils.getName(featureModel.getStructure().getRoot().getFeature()).equals(DefaultModelTransformerProperties.ROOT_FEATURE_NAME)) {
+					final IFeature rootFeature = featureModel.getStructure().getRoot().getFeature();
+					FeatureUtils.addChild(rootFeature, feature);
+
+				} else if ((featureModel.getStructure().getRoot() != null)) {
+					final IFeature rootFeature = factory.createFeature(featureModel, DefaultModelTransformerProperties.ROOT_FEATURE_NAME);
+					FeatureUtils.addFeature(featureModel, rootFeature);
+					FeatureUtils.setOr(rootFeature);
+					FeatureUtils.addChild(rootFeature, featureModel.getStructure().getRoot().getFeature());
+					FeatureUtils.addChild(rootFeature, feature);
+					featureModel.getStructure().setRoot(rootFeature.getStructure());
+				} else {
+					featureModel.getStructure().setRoot(feature.getStructure());
 				}
-				featureModel.getStructure().setRoot(feature.getStructure());
 			} else {
 				featureConstraintMemory.put(ovModelVariationPoint.getName(), ovModelVariationPoint);
 			}

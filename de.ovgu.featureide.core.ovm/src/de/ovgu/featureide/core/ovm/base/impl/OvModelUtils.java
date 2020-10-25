@@ -1,6 +1,7 @@
 package de.ovgu.featureide.core.ovm.base.impl;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -581,6 +582,11 @@ public class OvModelUtils {
 	public static Map<IConfigurable, Boolean> getIConfigurable(IOvModel ovModel) {
 		final Map<IConfigurable, Boolean> configurables = new HashMap<IConfigurable, Boolean>();
 		fillListConfigurable(ovModel.getVariationPoints(), configurables);
+
+		for (final IOvModelConstraint constraint : ovModel.getConstraints()) {
+			fillListConfigurable(Arrays.asList(constraint.getSource()), configurables);
+			fillListConfigurable(Arrays.asList(constraint.getTarget()), configurables);
+		}
 		return configurables;
 	}
 

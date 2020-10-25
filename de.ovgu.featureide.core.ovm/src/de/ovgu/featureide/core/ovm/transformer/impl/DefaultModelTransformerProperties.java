@@ -21,4 +21,9 @@ public class DefaultModelTransformerProperties {
 	 * The prefix new variation points during the constraint transformation will get.
 	 */
 	public static final String CONSTRAINT_VARIATION_POINT_PREFIX = "VIRTUAL_";
+
+	/**
+	 * The prefix new variation points during the constraint transformation will get.
+	 */
+	public static final String ROOT_FEATURE_NAME = "VIRTUAL_ROOT";
 }

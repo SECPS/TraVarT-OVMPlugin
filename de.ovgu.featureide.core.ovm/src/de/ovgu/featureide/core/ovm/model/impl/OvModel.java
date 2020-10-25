@@ -2,15 +2,18 @@ package de.ovgu.featureide.core.ovm.model.impl;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
+import de.ovgu.featureide.core.configuration.IConfigurable;
+import de.ovgu.featureide.core.ovm.base.impl.OvModelUtils;
 import de.ovgu.featureide.core.ovm.model.IIdentifiable;
 import de.ovgu.featureide.core.ovm.model.IOvModel;
 import de.ovgu.featureide.core.ovm.model.IOvModelElement;
 import de.ovgu.featureide.core.ovm.model.IOvModelMetainformation;
 import de.ovgu.featureide.core.ovm.model.IOvModelVariationPoint;
 import de.ovgu.featureide.core.ovm.model.constraint.IOvModelConstraint;
-import de.ovgu.featureide.core.ovm.model.constraint.IOvModelExcludesConstraint;
 import de.ovgu.featureide.core.ovm.transformer.impl.DefaultModelTransformerProperties;
 import de.ovgu.featureide.fm.core.functional.Functional;
 
@@ -325,16 +328,53 @@ public class OvModel extends Identifiable implements IOvModel {
 	 */
 	@Override
 	public void afterSelection() {
-		for (final IOvModelConstraint constraint : constraints) {
-			if (constraint instanceof IOvModelExcludesConstraint) {
-				final IOvModelExcludesConstraint excludesConstraint = (IOvModelExcludesConstraint) constraint;
-				if (excludesConstraint.getSource().getName().startsWith(DefaultModelTransformerProperties.CONSTRAINT_VARIATION_POINT_PREFIX)) {
-					excludesConstraint.getSource().setSelected(!excludesConstraint.getTarget().isSelected());
-				}
-				if (excludesConstraint.getTarget().getName().startsWith(DefaultModelTransformerProperties.CONSTRAINT_VARIATION_POINT_PREFIX)) {
-					excludesConstraint.getTarget().setSelected(!excludesConstraint.getSource().isSelected());
-				}
+		/*
+		 * for (final IOvModelConstraint constraint : constraints) { if (constraint instanceof IOvModelExcludesConstraint) { final IOvModelExcludesConstraint
+		 * excludesConstraint = (IOvModelExcludesConstraint) constraint; if
+		 * (excludesConstraint.getSource().getName().startsWith(DefaultModelTransformerProperties.CONSTRAINT_VARIATION_POINT_PREFIX)) {
+		 * excludesConstraint.getSource().setSelected(!excludesConstraint.getTarget().isSelected()); } if
+		 * (excludesConstraint.getTarget().getName().startsWith(DefaultModelTransformerProperties.CONSTRAINT_VARIATION_POINT_PREFIX)) {
+		 * excludesConstraint.getTarget().setSelected(!excludesConstraint.getSource().isSelected()); } } }
+		 */
+
+		final Set<IConfigurable> configurables = OvModelUtils.getIConfigurable(this).keySet();
+		final Set<IConfigurable> virtualVariationsPoints = new HashSet<IConfigurable>();
+		for (final IConfigurable configurable : configurables) {
+			if (configurable.getName().startsWith(DefaultModelTransformerProperties.CONSTRAINT_VARIATION_POINT_PREFIX)) {
+				virtualVariationsPoints.add(configurable);
+			}
+		}
+		for (int i = 0; i < Math.pow(2, virtualVariationsPoints.size()); i++) {
+			String bin = Integer.toBinaryString(i);
+
+			while (bin.length() < virtualVariationsPoints.size()) {
+				bin = bin + "0";
+			}
+			System.out.println("Check configuratoin " + bin + ".");
+			applyConfiguration(virtualVariationsPoints, bin);
+
+			if (isValid()) {
+				return;
 			}
 		}
 	}
+
+	/**
+	 * This method applys an binary configuration to the set of configuration.
+	 *
+	 * @param configuration
+	 * @param bin
+	 */
+	private void applyConfiguration(Set<IConfigurable> configurations, String bin) {
+		if (configurations.size() != bin.length()) {
+			throw new IllegalArgumentException("Lenghts must be of the same size.");
+		}
+
+		int i = 0;
+		for (final IConfigurable configuration : configurations) {
+			configuration.setSelected(bin.charAt(i) == '1');
+			i++;
+		}
+	}
+
 }
