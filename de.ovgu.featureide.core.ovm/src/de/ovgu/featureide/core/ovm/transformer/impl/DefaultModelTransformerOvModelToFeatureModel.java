@@ -81,6 +81,8 @@ public class DefaultModelTransformerOvModelToFeatureModel implements IModelTrans
 					final IFeature rootFeature = factory.createFeature(featureModel, DefaultModelTransformerProperties.ROOT_FEATURE_NAME);
 					FeatureUtils.addFeature(featureModel, rootFeature);
 					FeatureUtils.setOr(rootFeature);
+					FeatureUtils.setAbstract(rootFeature, true);
+					FeatureUtils.setHidden(rootFeature, true);
 					FeatureUtils.addChild(rootFeature, featureModel.getStructure().getRoot().getFeature());
 					FeatureUtils.addChild(rootFeature, feature);
 					featureModel.getStructure().setRoot(rootFeature.getStructure());

@@ -32,6 +32,7 @@ import de.ovgu.featureide.fm.core.base.IConstraint;
 import de.ovgu.featureide.fm.core.base.IFactory;
 import de.ovgu.featureide.fm.core.base.IFeature;
 import de.ovgu.featureide.fm.core.base.IFeatureModel;
+import de.ovgu.featureide.fm.core.base.IFeatureStructure;
 
 /**
  * This transformer transforms an {@link IFeatureModel} to an {@link IOvModel}.
@@ -57,8 +58,17 @@ public class DefaultModelTransformerFeatureModelToOvModel implements IModelTrans
 		final IOvModel ovModel = factory.create();
 		OvModelUtils.setCustomPropertiesEntries(ovModel, featureModel.getProperty().getProperties());
 
-		final IOvModelVariationPoint modelVariantPoint = (IOvModelVariationPoint) featureToOvModelElement(FeatureUtils.getRoot(featureModel), factory, ovModel);
-		OvModelUtils.addVariationPoint(ovModel, modelVariantPoint);
+		if (FeatureUtils.getRoot(featureModel).getName().contentEquals(DefaultModelTransformerProperties.ROOT_FEATURE_NAME)) {
+			for (final IFeatureStructure structure : FeatureUtils.getRoot(featureModel).getStructure().getChildren()) {
+				final IOvModelVariationPoint modelVariantPoint = (IOvModelVariationPoint) featureToOvModelElement(structure.getFeature(), factory, ovModel);
+				OvModelUtils.addVariationPoint(ovModel, modelVariantPoint);
+			}
+
+		} else {
+			final IOvModelVariationPoint modelVariantPoint =
+				(IOvModelVariationPoint) featureToOvModelElement(FeatureUtils.getRoot(featureModel), factory, ovModel);
+			OvModelUtils.addVariationPoint(ovModel, modelVariantPoint);
+		}
 
 		for (final IConstraint constraint : FeatureUtils.getConstraints(featureModel)) {
 			final IOvModelElement ovModelElement = nodeToConstraints(FeatureUtils.getNode(constraint), featureModel, factory, ovModel);
