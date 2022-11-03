@@ -12,9 +12,9 @@
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
-        <plugin.id>ovm-plugin</plugin.id>
+        <plugin.id>ppr-dsl-plugin</plugin.id>
         <plugin.class>at.jku.cps.travart.plugin.ovm.OVMPlugin</plugin.class>
-        <plugin.version>0.0.1</plugin.version>w
+        <plugin.version>0.0.1</plugin.version>
         <plugin.provider>CPS</plugin.provider>
         <plugin.dependencies/>
         <javadoc.disabled>true</javadoc.disabled>
