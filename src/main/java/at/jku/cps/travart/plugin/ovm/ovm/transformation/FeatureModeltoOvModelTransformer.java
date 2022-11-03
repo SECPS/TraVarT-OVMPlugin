@@ -1,18 +1,17 @@
 package at.jku.cps.travart.plugin.ovm.ovm.transformation;
 
-import at.jku.cps.travart.core.common.IModelTransformer;
-import at.jku.cps.travart.core.common.exc.NotSupportedVariablityTypeException;
+import at.jku.cps.travart.core.exception.NotSupportedVariabilityTypeException;
 import at.jku.cps.travart.core.transformation.DefaultModelTransformationProperties;
-import at.jku.cps.travart.ovm.common.OvModelUtils;
-import at.jku.cps.travart.ovm.factory.IOvModelFactory;
-import at.jku.cps.travart.ovm.factory.impl.OvModelFactory;
-import at.jku.cps.travart.ovm.model.IOvModel;
-import at.jku.cps.travart.ovm.model.IOvModelElement;
-import at.jku.cps.travart.ovm.model.IOvModelVariant;
-import at.jku.cps.travart.ovm.model.IOvModelVariationBase;
-import at.jku.cps.travart.ovm.model.IOvModelVariationPoint;
-import at.jku.cps.travart.ovm.model.constraint.IOvModelConstraint;
-import at.jku.cps.travart.ovm.transformation.exc.NotSupportedTransformationException;
+import at.jku.cps.travart.plugin.ovm.ovm.common.OvModelUtils;
+import at.jku.cps.travart.plugin.ovm.ovm.factory.IOvModelFactory;
+import at.jku.cps.travart.plugin.ovm.ovm.factory.impl.OvModelFactory;
+import at.jku.cps.travart.plugin.ovm.ovm.model.IOvModel;
+import at.jku.cps.travart.plugin.ovm.ovm.model.IOvModelElement;
+import at.jku.cps.travart.plugin.ovm.ovm.model.IOvModelVariant;
+import at.jku.cps.travart.plugin.ovm.ovm.model.IOvModelVariationBase;
+import at.jku.cps.travart.plugin.ovm.ovm.model.IOvModelVariationPoint;
+import at.jku.cps.travart.plugin.ovm.ovm.model.constraint.IOvModelConstraint;
+import at.jku.cps.travart.plugin.ovm.ovm.transformation.exc.NotSupportedTransformationException;
 import de.ovgu.featureide.fm.core.base.FeatureUtils;
 import de.ovgu.featureide.fm.core.base.IConstraint;
 import de.ovgu.featureide.fm.core.base.IFeature;
@@ -36,7 +35,7 @@ import java.util.List;
  *
  * @author johannstoebich
  */
-public class FeatureModeltoOvModelTransformer implements IModelTransformer<IFeatureModel, IOvModel> {
+public class FeatureModeltoOvModelTransformer {
 
     private Integer sequence = 0;
 
@@ -52,15 +51,14 @@ public class FeatureModeltoOvModelTransformer implements IModelTransformer<IFeat
      * @param factoryTo    the factory which is used to create new elements.
      * @returns a new ovModel
      */
-    @Override
     public IOvModel transform(IFeatureModel featureModel, String modelName)
-            throws NotSupportedVariablityTypeException {
+            throws NotSupportedVariabilityTypeException {
         IOvModelFactory factory = OvModelFactory.getInstance();
         IOvModel ovModel = factory.create();
         OvModelUtils.setCustomPropertiesEntries(ovModel, featureModel.getProperty().getProperties());
 
         if (FeatureUtils.getRoot(featureModel).getName()
-                .contentEquals(DefaultModelTransformationProperties.ARTIFICAL_MODEL_NAME)) {
+                .contentEquals(DefaultModelTransformationProperties.ARTIFICIAL_MODEL_NAME)) {
             for (IFeatureStructure structure : FeatureUtils.getRoot(featureModel).getStructure().getChildren()) {
                 IOvModelVariationPoint modelVariantPoint = (IOvModelVariationPoint) this.featureToOvModelElement(
                         structure.getFeature(), factory, ovModel);
@@ -227,7 +225,7 @@ public class FeatureModeltoOvModelTransformer implements IModelTransformer<IFeat
                 }
             }
 
-            setOvModelVariationBaseProperties(ovModelVariationPoint, node);
+            this.setOvModelVariationBaseProperties(ovModelVariationPoint, node);
 
             if (node instanceof And) {
                 OvModelUtils.setAlternative(ovModelVariationPoint, false);
@@ -297,7 +295,7 @@ public class FeatureModeltoOvModelTransformer implements IModelTransformer<IFeat
             IOvModelVariationPoint ovModelVariationPoint = factory.createVariationPoint(ovModel,
                     DefaultOvModelTransformationProperties.CONSTRAINT_VARIATION_POINT_PREFIX + uniqueString);
             constraint = ovModelVariationPoint;
-            setOvModelVariationBaseProperties(ovModelVariationPoint, node);
+            this.setOvModelVariationBaseProperties(ovModelVariationPoint, node);
             OvModelUtils.setAlternative(ovModelVariationPoint, false);
             OvModelUtils.setMaxChoices(ovModelVariationPoint, 1);
             OvModelUtils.setMinChoices(ovModelVariationPoint, 1);
@@ -306,7 +304,7 @@ public class FeatureModeltoOvModelTransformer implements IModelTransformer<IFeat
             IOvModelVariant ovModelVariant = factory.createVariant(ovModel,
                     DefaultOvModelTransformationProperties.VARIANT_PREFIX
                             + DefaultOvModelTransformationProperties.CONSTRAINT_VARIATION_POINT_PREFIX + uniqueString);
-            setOvModelVariationBaseProperties(ovModelVariant, node);
+            this.setOvModelVariationBaseProperties(ovModelVariant, node);
             ovModelVariationPoint.addMandatoryChild(ovModelVariant);
 
             IOvModelConstraint ovModelExcludesConstraint = factory.createExcludesConstraint(ovModel);

@@ -1,9 +1,9 @@
 package at.jku.cps.travart.plugin.ovm.ovm.format.impl;
 
-import at.jku.cps.travart.ovm.common.OvModelFactoryManager;
-import at.jku.cps.travart.ovm.factory.IOvModelFactory;
-import at.jku.cps.travart.ovm.format.impl.exc.OvModelSerialisationException;
-import at.jku.cps.travart.ovm.model.IOvModel;
+import at.jku.cps.travart.plugin.ovm.ovm.common.OvModelFactoryManager;
+import at.jku.cps.travart.plugin.ovm.ovm.factory.IOvModelFactory;
+import at.jku.cps.travart.plugin.ovm.ovm.format.impl.exc.OvModelSerialisationException;
+import at.jku.cps.travart.plugin.ovm.ovm.model.IOvModel;
 import de.ovgu.featureide.fm.core.ExtensionManager.NoSuchExtensionException;
 import de.ovgu.featureide.fm.core.io.Problem;
 import de.ovgu.featureide.fm.core.io.UnsupportedModelException;
@@ -69,7 +69,7 @@ public class OvModelXmlPersistance extends AXMLFormat<IOvModel> {
     protected void readDocument(Document doc, List<Problem> warnings) throws UnsupportedModelException {
         try {
             IOvModelFactory factory = OvModelFactoryManager.getInstance().getFactory(this);
-            at.jku.cps.travart.ovm.format.impl.ReadHelper.readModel(doc, this.object, factory);
+            at.jku.cps.travart.plugin.ovm.ovm.format.impl.ReadHelper.readModel(doc, this.object, factory);
         } catch (NoSuchExtensionException | OvModelSerialisationException e) {
             warnings.add(new Problem(e));
         }
@@ -83,7 +83,7 @@ public class OvModelXmlPersistance extends AXMLFormat<IOvModel> {
     @Override
     protected void writeDocument(Document doc) {
         try {
-            at.jku.cps.travart.ovm.format.impl.WriteHelper.writeModel(this.object, doc);
+            at.jku.cps.travart.plugin.ovm.ovm.format.impl.WriteHelper.writeModel(this.object, doc);
         } catch (OvModelSerialisationException e) {
             throw new RuntimeException(e);
         }

@@ -1,7 +1,7 @@
 package at.jku.cps.travart.plugin.ovm.ovm.model.impl;
 
-import at.jku.cps.travart.ovm.model.IIdentifiable;
-import at.jku.cps.travart.ovm.model.IOvModelElement;
+import at.jku.cps.travart.plugin.ovm.ovm.model.IIdentifiable;
+import at.jku.cps.travart.plugin.ovm.ovm.model.IOvModelElement;
 
 import java.util.Objects;
 

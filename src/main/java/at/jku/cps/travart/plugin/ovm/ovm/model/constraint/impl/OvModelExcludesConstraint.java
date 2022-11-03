@@ -1,6 +1,6 @@
 package at.jku.cps.travart.plugin.ovm.ovm.model.constraint.impl;
 
-import at.jku.cps.travart.ovm.model.constraint.IOvModelExcludesConstraint;
+import at.jku.cps.travart.plugin.ovm.ovm.model.constraint.IOvModelExcludesConstraint;
 
 /**
  * Represents a concrete implementation of an
@@ -19,7 +19,7 @@ public class OvModelExcludesConstraint extends OvModelConstraint implements IOvM
     @Override
     public boolean isValid() {
         boolean isValid = super.isValid();
-        isValid = isValid && (!source.isSelected() || !target.isSelected());
+        isValid = isValid && (!this.source.isSelected() || !this.target.isSelected());
         return isValid;
     }
 }

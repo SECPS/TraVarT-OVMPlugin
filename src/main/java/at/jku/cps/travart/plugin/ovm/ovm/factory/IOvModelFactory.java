@@ -1,11 +1,11 @@
 package at.jku.cps.travart.plugin.ovm.ovm.factory;
 
-import at.jku.cps.travart.ovm.model.IIdentifiable;
-import at.jku.cps.travart.ovm.model.IOvModel;
-import at.jku.cps.travart.ovm.model.IOvModelVariant;
-import at.jku.cps.travart.ovm.model.IOvModelVariationPoint;
-import at.jku.cps.travart.ovm.model.constraint.IOvModelExcludesConstraint;
-import at.jku.cps.travart.ovm.model.constraint.IOvModelRequiresConstraint;
+import at.jku.cps.travart.plugin.ovm.ovm.model.IIdentifiable;
+import at.jku.cps.travart.plugin.ovm.ovm.model.IOvModel;
+import at.jku.cps.travart.plugin.ovm.ovm.model.IOvModelVariant;
+import at.jku.cps.travart.plugin.ovm.ovm.model.IOvModelVariationPoint;
+import at.jku.cps.travart.plugin.ovm.ovm.model.constraint.IOvModelExcludesConstraint;
+import at.jku.cps.travart.plugin.ovm.ovm.model.constraint.IOvModelRequiresConstraint;
 import de.ovgu.featureide.fm.core.base.IFactory;
 
 /**

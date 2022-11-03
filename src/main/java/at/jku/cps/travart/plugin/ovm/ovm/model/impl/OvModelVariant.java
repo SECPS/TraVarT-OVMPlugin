@@ -1,6 +1,6 @@
 package at.jku.cps.travart.plugin.ovm.ovm.model.impl;
 
-import at.jku.cps.travart.ovm.model.IOvModelVariant;
+import at.jku.cps.travart.plugin.ovm.ovm.model.IOvModelVariant;
 
 /**
  * Represents a concrete implementation of an {@link IOvModelVariant}.

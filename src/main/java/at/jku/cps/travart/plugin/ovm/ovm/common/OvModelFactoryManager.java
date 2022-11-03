@@ -1,8 +1,8 @@
 package at.jku.cps.travart.plugin.ovm.ovm.common;
 
-import at.jku.cps.travart.ovm.factory.IOvModelFactory;
-import at.jku.cps.travart.ovm.factory.impl.OvModelFactory;
-import at.jku.cps.travart.ovm.model.IOvModel;
+import at.jku.cps.travart.plugin.ovm.ovm.factory.IOvModelFactory;
+import at.jku.cps.travart.plugin.ovm.ovm.factory.impl.OvModelFactory;
+import at.jku.cps.travart.plugin.ovm.ovm.model.IOvModel;
 import de.ovgu.featureide.fm.core.Logger;
 import de.ovgu.featureide.fm.core.base.IFactory;
 import de.ovgu.featureide.fm.core.base.impl.FactoryManager;
@@ -44,7 +44,7 @@ public final class OvModelFactoryManager extends FactoryManager<IOvModel> {
     @Override
     public IOvModelFactory getFactory(IOvModel object) {
         try {
-            return getFactory(object.getFactoryId());
+            return this.getFactory(object.getFactoryId());
         } catch (NoSuchExtensionException e) {
             Logger.logError(e);
             return OvModelFactory.getInstance();

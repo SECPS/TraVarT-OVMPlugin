@@ -1,7 +1,7 @@
 package at.jku.cps.travart.plugin.ovm.ovm.model.impl;
 
-import at.jku.cps.travart.ovm.model.IOvModelVariationBase;
-import at.jku.cps.travart.ovm.model.IOvModelVariationBaseMetainformation;
+import at.jku.cps.travart.plugin.ovm.ovm.model.IOvModelVariationBase;
+import at.jku.cps.travart.plugin.ovm.ovm.model.IOvModelVariationBaseMetainformation;
 
 /**
  * Represents a concrete implementation of an {@link IOvModelVariationBase}.

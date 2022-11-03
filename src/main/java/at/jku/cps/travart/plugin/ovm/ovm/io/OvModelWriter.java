@@ -1,10 +1,10 @@
 package at.jku.cps.travart.plugin.ovm.ovm.io;
 
 import at.jku.cps.travart.core.common.IWriter;
-import at.jku.cps.travart.core.common.exc.NotSupportedVariablityTypeException;
-import at.jku.cps.travart.ovm.format.impl.WriteHelper;
-import at.jku.cps.travart.ovm.format.impl.exc.OvModelSerialisationException;
-import at.jku.cps.travart.ovm.model.IOvModel;
+import at.jku.cps.travart.core.exception.NotSupportedVariabilityTypeException;
+import at.jku.cps.travart.plugin.ovm.ovm.format.impl.WriteHelper;
+import at.jku.cps.travart.plugin.ovm.ovm.format.impl.exc.OvModelSerialisationException;
+import at.jku.cps.travart.plugin.ovm.ovm.model.IOvModel;
 import org.w3c.dom.Document;
 
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -29,7 +29,7 @@ public class OvModelWriter implements IWriter<IOvModel> {
     private static final String DEFAULT_INDET_NUMBER = "4";
 
     @Override
-    public void write(IOvModel ovModel, Path path) throws IOException, NotSupportedVariablityTypeException {
+    public void write(IOvModel ovModel, Path path) throws IOException, NotSupportedVariabilityTypeException {
         try {
             Document document = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
             WriteHelper.writeModel(ovModel, document);

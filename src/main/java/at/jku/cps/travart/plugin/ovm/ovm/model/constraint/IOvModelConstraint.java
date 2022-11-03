@@ -1,9 +1,9 @@
 package at.jku.cps.travart.plugin.ovm.ovm.model.constraint;
 
 import at.jku.cps.travart.core.common.IValidate;
-import at.jku.cps.travart.ovm.model.IOvModel;
-import at.jku.cps.travart.ovm.model.IOvModelElement;
-import at.jku.cps.travart.ovm.model.IOvModelVariationBase;
+import at.jku.cps.travart.plugin.ovm.ovm.model.IOvModel;
+import at.jku.cps.travart.plugin.ovm.ovm.model.IOvModelElement;
+import at.jku.cps.travart.plugin.ovm.ovm.model.IOvModelVariationBase;
 
 /**
  * This is the base interface for an {@link IOvModelExcludesConstraint} and for

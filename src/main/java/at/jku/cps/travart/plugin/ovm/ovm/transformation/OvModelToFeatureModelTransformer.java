@@ -1,19 +1,18 @@
 package at.jku.cps.travart.plugin.ovm.ovm.transformation;
 
-import at.jku.cps.travart.core.common.IModelTransformer;
-import at.jku.cps.travart.core.common.exc.NotSupportedVariablityTypeException;
+import at.jku.cps.travart.core.exception.NotSupportedVariabilityTypeException;
 import at.jku.cps.travart.core.transformation.DefaultModelTransformationProperties;
-import at.jku.cps.travart.ovm.common.OvModelUtils;
-import at.jku.cps.travart.ovm.model.IIdentifiable;
-import at.jku.cps.travart.ovm.model.IOvModel;
-import at.jku.cps.travart.ovm.model.IOvModelElement;
-import at.jku.cps.travart.ovm.model.IOvModelVariant;
-import at.jku.cps.travart.ovm.model.IOvModelVariationBase;
-import at.jku.cps.travart.ovm.model.IOvModelVariationPoint;
-import at.jku.cps.travart.ovm.model.constraint.IOvModelConstraint;
-import at.jku.cps.travart.ovm.model.constraint.IOvModelExcludesConstraint;
-import at.jku.cps.travart.ovm.model.constraint.IOvModelRequiresConstraint;
-import at.jku.cps.travart.ovm.transformation.exc.NotSupportedTransformationException;
+import at.jku.cps.travart.plugin.ovm.ovm.common.OvModelUtils;
+import at.jku.cps.travart.plugin.ovm.ovm.model.IIdentifiable;
+import at.jku.cps.travart.plugin.ovm.ovm.model.IOvModel;
+import at.jku.cps.travart.plugin.ovm.ovm.model.IOvModelElement;
+import at.jku.cps.travart.plugin.ovm.ovm.model.IOvModelVariant;
+import at.jku.cps.travart.plugin.ovm.ovm.model.IOvModelVariationBase;
+import at.jku.cps.travart.plugin.ovm.ovm.model.IOvModelVariationPoint;
+import at.jku.cps.travart.plugin.ovm.ovm.model.constraint.IOvModelConstraint;
+import at.jku.cps.travart.plugin.ovm.ovm.model.constraint.IOvModelExcludesConstraint;
+import at.jku.cps.travart.plugin.ovm.ovm.model.constraint.IOvModelRequiresConstraint;
+import at.jku.cps.travart.plugin.ovm.ovm.transformation.exc.NotSupportedTransformationException;
 import de.ovgu.featureide.fm.core.ExtensionManager.NoSuchExtensionException;
 import de.ovgu.featureide.fm.core.base.FeatureUtils;
 import de.ovgu.featureide.fm.core.base.IConstraint;
@@ -49,7 +48,7 @@ import java.util.Objects;
  *
  * @author johannstoebich
  */
-public class OvModelToFeatureModelTransformer implements IModelTransformer<IOvModel, IFeatureModel> {
+public class OvModelToFeatureModelTransformer {
 
     static {
         LibraryManager.registerLibrary(FMCoreLibrary.getInstance());
@@ -63,9 +62,8 @@ public class OvModelToFeatureModelTransformer implements IModelTransformer<IOvMo
      * @param factoryTo the factory which is used to create the model.
      * @return the new feature model
      */
-    @Override
     public IFeatureModel transform(IOvModel ovModel, String modelName)
-            throws NotSupportedVariablityTypeException {
+            throws NotSupportedVariabilityTypeException {
         try {
             IFeatureModelFactory factory = FMFactoryManager.getInstance()
                     .getFactory(DefaultFeatureModelFactory.ID);
@@ -86,12 +84,12 @@ public class OvModelToFeatureModelTransformer implements IModelTransformer<IOvMo
                     }
                     if (FeatureUtils.getRoot(featureModel) != null
                             && FeatureUtils.getName(FeatureUtils.getRoot(featureModel))
-                            .equals(DefaultModelTransformationProperties.ARTIFICAL_MODEL_NAME)) {
+                            .equals(DefaultModelTransformationProperties.ARTIFICIAL_MODEL_NAME)) {
                         IFeature rootFeature = FeatureUtils.getRoot(featureModel);
                         FeatureUtils.addChild(rootFeature, feature);
                     } else if (FeatureUtils.getRoot(featureModel) != null) {
                         IFeature rootFeature = factory.createFeature(featureModel,
-                                DefaultModelTransformationProperties.ARTIFICAL_MODEL_NAME);
+                                DefaultModelTransformationProperties.ARTIFICIAL_MODEL_NAME);
                         FeatureUtils.addFeature(featureModel, rootFeature);
                         FeatureUtils.setOr(rootFeature);
                         FeatureUtils.setAbstract(rootFeature, true);
@@ -140,7 +138,7 @@ public class OvModelToFeatureModelTransformer implements IModelTransformer<IOvMo
 //			}
             return featureModel;
         } catch (NoSuchExtensionException | NotSupportedTransformationException e) {
-            throw new NotSupportedVariablityTypeException(e);
+            throw new NotSupportedVariabilityTypeException(e);
         }
     }
 

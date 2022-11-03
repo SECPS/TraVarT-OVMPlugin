@@ -1,7 +1,7 @@
 package at.jku.cps.travart.plugin.ovm.ovm.model;
 
-import at.jku.cps.travart.configuration.IValidateInternal;
 import at.jku.cps.travart.core.common.IConfigurable;
+import at.jku.cps.travart.plugin.ovm.configuration.IValidateInternal;
 
 /**
  * This is the base interface for an {@link IOvModelVariant} and for an

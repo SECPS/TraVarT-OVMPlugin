@@ -1,22 +1,22 @@
 package at.jku.cps.travart.plugin.ovm.ovm.format.impl;
 
-import at.jku.cps.travart.ovm.common.OvModelUtils;
-import at.jku.cps.travart.ovm.factory.IOvModelFactory;
-import at.jku.cps.travart.ovm.format.impl.exc.OvModelSerialisationException;
-import at.jku.cps.travart.ovm.format.impl.exc.OvModelWrongCountOfElements;
-import at.jku.cps.travart.ovm.format.impl.exc.OvModelWrongElementException;
-import at.jku.cps.travart.ovm.model.IIdentifiable;
-import at.jku.cps.travart.ovm.model.IOvModel;
-import at.jku.cps.travart.ovm.model.IOvModelElement;
-import at.jku.cps.travart.ovm.model.IOvModelMetainformation;
-import at.jku.cps.travart.ovm.model.IOvModelVariant;
-import at.jku.cps.travart.ovm.model.IOvModelVariationBase;
-import at.jku.cps.travart.ovm.model.IOvModelVariationBaseMetainformation;
-import at.jku.cps.travart.ovm.model.IOvModelVariationPoint;
-import at.jku.cps.travart.ovm.model.constraint.IOvModelConstraint;
-import at.jku.cps.travart.ovm.model.constraint.IOvModelConstraintMetainformation;
-import at.jku.cps.travart.ovm.model.constraint.IOvModelExcludesConstraint;
-import at.jku.cps.travart.ovm.model.constraint.IOvModelRequiresConstraint;
+import at.jku.cps.travart.plugin.ovm.ovm.common.OvModelUtils;
+import at.jku.cps.travart.plugin.ovm.ovm.factory.IOvModelFactory;
+import at.jku.cps.travart.plugin.ovm.ovm.format.impl.exc.OvModelSerialisationException;
+import at.jku.cps.travart.plugin.ovm.ovm.format.impl.exc.OvModelWrongCountOfElements;
+import at.jku.cps.travart.plugin.ovm.ovm.format.impl.exc.OvModelWrongElementException;
+import at.jku.cps.travart.plugin.ovm.ovm.model.IIdentifiable;
+import at.jku.cps.travart.plugin.ovm.ovm.model.IOvModel;
+import at.jku.cps.travart.plugin.ovm.ovm.model.IOvModelElement;
+import at.jku.cps.travart.plugin.ovm.ovm.model.IOvModelMetainformation;
+import at.jku.cps.travart.plugin.ovm.ovm.model.IOvModelVariant;
+import at.jku.cps.travart.plugin.ovm.ovm.model.IOvModelVariationBase;
+import at.jku.cps.travart.plugin.ovm.ovm.model.IOvModelVariationBaseMetainformation;
+import at.jku.cps.travart.plugin.ovm.ovm.model.IOvModelVariationPoint;
+import at.jku.cps.travart.plugin.ovm.ovm.model.constraint.IOvModelConstraint;
+import at.jku.cps.travart.plugin.ovm.ovm.model.constraint.IOvModelConstraintMetainformation;
+import at.jku.cps.travart.plugin.ovm.ovm.model.constraint.IOvModelExcludesConstraint;
+import at.jku.cps.travart.plugin.ovm.ovm.model.constraint.IOvModelRequiresConstraint;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -26,30 +26,30 @@ import org.w3c.dom.Text;
 import java.util.ArrayList;
 import java.util.List;
 
-import static at.jku.cps.travart.ovm.format.impl.OvModelXmlPersistanceProperties.ABSTRACT;
-import static at.jku.cps.travart.ovm.format.impl.OvModelXmlPersistanceProperties.ALTERNATIVE;
-import static at.jku.cps.travart.ovm.format.impl.OvModelXmlPersistanceProperties.DESCRIPTION;
-import static at.jku.cps.travart.ovm.format.impl.OvModelXmlPersistanceProperties.HIDDEN;
-import static at.jku.cps.travart.ovm.format.impl.OvModelXmlPersistanceProperties.MANDATORY_CHILDREN;
-import static at.jku.cps.travart.ovm.format.impl.OvModelXmlPersistanceProperties.MAX_CHOICES;
-import static at.jku.cps.travart.ovm.format.impl.OvModelXmlPersistanceProperties.MIN_CHOICES;
-import static at.jku.cps.travart.ovm.format.impl.OvModelXmlPersistanceProperties.NAME;
-import static at.jku.cps.travart.ovm.format.impl.OvModelXmlPersistanceProperties.OPTIONAL;
-import static at.jku.cps.travart.ovm.format.impl.OvModelXmlPersistanceProperties.OPTIONAL_CHILDREN;
-import static at.jku.cps.travart.ovm.format.impl.OvModelXmlPersistanceProperties.OV_MODEL;
-import static at.jku.cps.travart.ovm.format.impl.OvModelXmlPersistanceProperties.OV_MODEL_CONSTRAINT_METAINFORMATION;
-import static at.jku.cps.travart.ovm.format.impl.OvModelXmlPersistanceProperties.OV_MODEL_EXCLUDES_CONSTRAINT;
-import static at.jku.cps.travart.ovm.format.impl.OvModelXmlPersistanceProperties.OV_MODEL_EXCLUDES_CONSTRAINT_REFERENCE;
-import static at.jku.cps.travart.ovm.format.impl.OvModelXmlPersistanceProperties.OV_MODEL_METAINFORMATION;
-import static at.jku.cps.travart.ovm.format.impl.OvModelXmlPersistanceProperties.OV_MODEL_REQUIRES_CONSTRAINT;
-import static at.jku.cps.travart.ovm.format.impl.OvModelXmlPersistanceProperties.OV_MODEL_REQUIRES_CONSTRAINT_REFERENCE;
-import static at.jku.cps.travart.ovm.format.impl.OvModelXmlPersistanceProperties.OV_MODEL_VARIANT;
-import static at.jku.cps.travart.ovm.format.impl.OvModelXmlPersistanceProperties.OV_MODEL_VARIANT_REFERENCE;
-import static at.jku.cps.travart.ovm.format.impl.OvModelXmlPersistanceProperties.OV_MODEL_VARIATION_BASE_METAINFORMATION;
-import static at.jku.cps.travart.ovm.format.impl.OvModelXmlPersistanceProperties.OV_MODEL_VARIATION_POINT;
-import static at.jku.cps.travart.ovm.format.impl.OvModelXmlPersistanceProperties.OV_MODEL_VARIATION_POINT_REFERENCE;
-import static at.jku.cps.travart.ovm.format.impl.OvModelXmlPersistanceProperties.PART_OF_OVMODEL_ROOT;
-import static at.jku.cps.travart.ovm.format.impl.OvModelXmlPersistanceProperties.REFERENCED_CONSTRAINTS;
+import static at.jku.cps.travart.plugin.ovm.ovm.format.impl.OvModelXmlPersistanceProperties.ABSTRACT;
+import static at.jku.cps.travart.plugin.ovm.ovm.format.impl.OvModelXmlPersistanceProperties.ALTERNATIVE;
+import static at.jku.cps.travart.plugin.ovm.ovm.format.impl.OvModelXmlPersistanceProperties.DESCRIPTION;
+import static at.jku.cps.travart.plugin.ovm.ovm.format.impl.OvModelXmlPersistanceProperties.HIDDEN;
+import static at.jku.cps.travart.plugin.ovm.ovm.format.impl.OvModelXmlPersistanceProperties.MANDATORY_CHILDREN;
+import static at.jku.cps.travart.plugin.ovm.ovm.format.impl.OvModelXmlPersistanceProperties.MAX_CHOICES;
+import static at.jku.cps.travart.plugin.ovm.ovm.format.impl.OvModelXmlPersistanceProperties.MIN_CHOICES;
+import static at.jku.cps.travart.plugin.ovm.ovm.format.impl.OvModelXmlPersistanceProperties.NAME;
+import static at.jku.cps.travart.plugin.ovm.ovm.format.impl.OvModelXmlPersistanceProperties.OPTIONAL;
+import static at.jku.cps.travart.plugin.ovm.ovm.format.impl.OvModelXmlPersistanceProperties.OPTIONAL_CHILDREN;
+import static at.jku.cps.travart.plugin.ovm.ovm.format.impl.OvModelXmlPersistanceProperties.OV_MODEL;
+import static at.jku.cps.travart.plugin.ovm.ovm.format.impl.OvModelXmlPersistanceProperties.OV_MODEL_CONSTRAINT_METAINFORMATION;
+import static at.jku.cps.travart.plugin.ovm.ovm.format.impl.OvModelXmlPersistanceProperties.OV_MODEL_EXCLUDES_CONSTRAINT;
+import static at.jku.cps.travart.plugin.ovm.ovm.format.impl.OvModelXmlPersistanceProperties.OV_MODEL_EXCLUDES_CONSTRAINT_REFERENCE;
+import static at.jku.cps.travart.plugin.ovm.ovm.format.impl.OvModelXmlPersistanceProperties.OV_MODEL_METAINFORMATION;
+import static at.jku.cps.travart.plugin.ovm.ovm.format.impl.OvModelXmlPersistanceProperties.OV_MODEL_REQUIRES_CONSTRAINT;
+import static at.jku.cps.travart.plugin.ovm.ovm.format.impl.OvModelXmlPersistanceProperties.OV_MODEL_REQUIRES_CONSTRAINT_REFERENCE;
+import static at.jku.cps.travart.plugin.ovm.ovm.format.impl.OvModelXmlPersistanceProperties.OV_MODEL_VARIANT;
+import static at.jku.cps.travart.plugin.ovm.ovm.format.impl.OvModelXmlPersistanceProperties.OV_MODEL_VARIANT_REFERENCE;
+import static at.jku.cps.travart.plugin.ovm.ovm.format.impl.OvModelXmlPersistanceProperties.OV_MODEL_VARIATION_BASE_METAINFORMATION;
+import static at.jku.cps.travart.plugin.ovm.ovm.format.impl.OvModelXmlPersistanceProperties.OV_MODEL_VARIATION_POINT;
+import static at.jku.cps.travart.plugin.ovm.ovm.format.impl.OvModelXmlPersistanceProperties.OV_MODEL_VARIATION_POINT_REFERENCE;
+import static at.jku.cps.travart.plugin.ovm.ovm.format.impl.OvModelXmlPersistanceProperties.PART_OF_OVMODEL_ROOT;
+import static at.jku.cps.travart.plugin.ovm.ovm.format.impl.OvModelXmlPersistanceProperties.REFERENCED_CONSTRAINTS;
 
 /**
  * This class provides the methods for reading an {@link IOvModel} from a XML
@@ -88,7 +88,7 @@ public class ReadHelper {
         read(metainformation, ovModel.getMetainformation(), ovModel, factory);
 
         for (Element element : getChildElements((Element) node, true)) {
-            if (at.jku.cps.travart.ovm.format.impl.PropertyHelper.getSingeltonInstance().isFeatureModelProperties(element)) {
+            if (at.jku.cps.travart.plugin.ovm.ovm.format.impl.PropertyHelper.getSingeltonInstance().isFeatureModelProperties(element)) {
                 continue;
             }
             if (element.getNodeName().contentEquals(OV_MODEL_METAINFORMATION)) {
@@ -237,7 +237,7 @@ public class ReadHelper {
         String description = element.getAttribute(DESCRIPTION);
         object.setDescription(description);
 
-        at.jku.cps.travart.ovm.format.impl.PropertyHelper.readProperties(object.getCustomProperties(), element);
+        at.jku.cps.travart.plugin.ovm.ovm.format.impl.PropertyHelper.readProperties(object.getCustomProperties(), element);
     }
 
     /**
@@ -290,7 +290,7 @@ public class ReadHelper {
             }
         }
 
-        at.jku.cps.travart.ovm.format.impl.PropertyHelper.readProperties(object.getCustomProperties(), element);
+        at.jku.cps.travart.plugin.ovm.ovm.format.impl.PropertyHelper.readProperties(object.getCustomProperties(), element);
     }
 
     /**
@@ -311,7 +311,7 @@ public class ReadHelper {
         String description = element.getAttribute(DESCRIPTION);
         object.setDescription(description);
 
-        at.jku.cps.travart.ovm.format.impl.PropertyHelper.readProperties(object.getCustomProperties(), element);
+        at.jku.cps.travart.plugin.ovm.ovm.format.impl.PropertyHelper.readProperties(object.getCustomProperties(), element);
     }
 
     /**

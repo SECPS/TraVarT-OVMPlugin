@@ -145,7 +145,7 @@ public class OvModelSampler implements ISampler<IOvModel> {
     /**
      * This method applys an binary configuration to the set of configuration.
      *
-     * @param configuration
+     * @param configurations
      * @param bin
      */
     private void applyConfiguration(Set<IConfigurable> configurations, String bin) {
@@ -162,7 +162,7 @@ public class OvModelSampler implements ISampler<IOvModel> {
     /**
      * This method resets an binary configuration to the set of configuration.
      *
-     * @param configuration
+     * @param configurations
      */
     private void resetConfiguration(Set<IConfigurable> configurations) {
         for (IConfigurable configuration : configurations) {
@@ -173,8 +173,8 @@ public class OvModelSampler implements ISampler<IOvModel> {
     /**
      * Verifys a a sample OVModel.
      *
-     * @param ovm     The OVM which should be verified.
-     * @param samples The samples which should be set.
+     * @param ovm    The OVM which should be verified.
+     * @param sample The samples which should be set.
      * @return
      */
     @Override

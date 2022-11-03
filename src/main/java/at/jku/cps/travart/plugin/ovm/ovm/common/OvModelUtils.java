@@ -1,13 +1,13 @@
 package at.jku.cps.travart.plugin.ovm.ovm.common;
 
 import at.jku.cps.travart.core.common.IConfigurable;
-import at.jku.cps.travart.ovm.model.IIdentifiable;
-import at.jku.cps.travart.ovm.model.IOvModel;
-import at.jku.cps.travart.ovm.model.IOvModelVariant;
-import at.jku.cps.travart.ovm.model.IOvModelVariationBase;
-import at.jku.cps.travart.ovm.model.IOvModelVariationPoint;
-import at.jku.cps.travart.ovm.model.constraint.IOvModelConstraint;
-import at.jku.cps.travart.ovm.transformation.DefaultOvModelTransformationProperties;
+import at.jku.cps.travart.plugin.ovm.ovm.model.IIdentifiable;
+import at.jku.cps.travart.plugin.ovm.ovm.model.IOvModel;
+import at.jku.cps.travart.plugin.ovm.ovm.model.IOvModelVariant;
+import at.jku.cps.travart.plugin.ovm.ovm.model.IOvModelVariationBase;
+import at.jku.cps.travart.plugin.ovm.ovm.model.IOvModelVariationPoint;
+import at.jku.cps.travart.plugin.ovm.ovm.model.constraint.IOvModelConstraint;
+import at.jku.cps.travart.plugin.ovm.ovm.transformation.DefaultOvModelTransformationProperties;
 import de.ovgu.featureide.fm.core.base.IConstraint;
 import de.ovgu.featureide.fm.core.base.IFeature;
 import de.ovgu.featureide.fm.core.base.IFeatureModel;

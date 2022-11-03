@@ -1,11 +1,11 @@
 package at.jku.cps.travart.plugin.ovm.ovm.model.constraint.impl;
 
-import at.jku.cps.travart.ovm.model.IIdentifiable;
-import at.jku.cps.travart.ovm.model.IOvModelElement;
-import at.jku.cps.travart.ovm.model.IOvModelVariationBase;
-import at.jku.cps.travart.ovm.model.constraint.IOvModelConstraint;
-import at.jku.cps.travart.ovm.model.constraint.IOvModelConstraintMetainformation;
-import at.jku.cps.travart.ovm.model.impl.OvModelElement;
+import at.jku.cps.travart.plugin.ovm.ovm.model.IIdentifiable;
+import at.jku.cps.travart.plugin.ovm.ovm.model.IOvModelElement;
+import at.jku.cps.travart.plugin.ovm.ovm.model.IOvModelVariationBase;
+import at.jku.cps.travart.plugin.ovm.ovm.model.constraint.IOvModelConstraint;
+import at.jku.cps.travart.plugin.ovm.ovm.model.constraint.IOvModelConstraintMetainformation;
+import at.jku.cps.travart.plugin.ovm.ovm.model.impl.OvModelElement;
 
 /**
  * Represents a concrete implementation of an {@link IOvModelConstraint}.

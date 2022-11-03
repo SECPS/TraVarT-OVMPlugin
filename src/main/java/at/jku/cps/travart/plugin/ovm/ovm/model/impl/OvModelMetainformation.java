@@ -1,6 +1,6 @@
 package at.jku.cps.travart.plugin.ovm.ovm.model.impl;
 
-import at.jku.cps.travart.ovm.model.IOvModelMetainformation;
+import at.jku.cps.travart.plugin.ovm.ovm.model.IOvModelMetainformation;
 import de.ovgu.featureide.fm.core.base.IPropertyContainer;
 import de.ovgu.featureide.fm.core.base.impl.MapPropertyContainer;
 

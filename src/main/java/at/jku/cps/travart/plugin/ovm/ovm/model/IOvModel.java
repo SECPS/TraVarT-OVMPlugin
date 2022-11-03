@@ -1,7 +1,7 @@
 package at.jku.cps.travart.plugin.ovm.ovm.model;
 
 import at.jku.cps.travart.core.common.IValidate;
-import at.jku.cps.travart.ovm.model.constraint.IOvModelConstraint;
+import at.jku.cps.travart.plugin.ovm.ovm.model.constraint.IOvModelConstraint;
 
 import java.util.List;
 
