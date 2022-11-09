@@ -8,11 +8,11 @@ import at.jku.cps.travart.plugin.ovm.ovm.model.IOvModelVariationBase;
 import at.jku.cps.travart.plugin.ovm.ovm.model.IOvModelVariationPoint;
 import at.jku.cps.travart.plugin.ovm.ovm.model.constraint.IOvModelConstraint;
 import at.jku.cps.travart.plugin.ovm.ovm.transformation.DefaultOvModelTransformationProperties;
-import de.ovgu.featureide.fm.core.base.IConstraint;
-import de.ovgu.featureide.fm.core.base.IFeature;
-import de.ovgu.featureide.fm.core.base.IFeatureModel;
 import de.ovgu.featureide.fm.core.base.IPropertyContainer;
 import de.ovgu.featureide.fm.core.base.IPropertyContainer.Entry;
+import de.vill.model.Feature;
+import de.vill.model.FeatureModel;
+import de.vill.model.constraint.Constraint;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -50,8 +50,10 @@ public class OvModelUtils {
      * @return the list of virtual variation points.
      */
     public static List<IOvModelVariationPoint> getVirtualVariationPoints(IOvModel ovModel) {
-        return ovModel.getVariationPoints().stream().filter(
-                        vp -> vp.getName().startsWith(DefaultOvModelTransformationProperties.CONSTRAINT_VARIATION_POINT_PREFIX))
+        return ovModel.getVariationPoints().stream()
+                .filter(
+                        vp -> vp.getName().startsWith(DefaultOvModelTransformationProperties.CONSTRAINT_VARIATION_POINT_PREFIX)
+                )
                 .collect(Collectors.toList());
     }
 
@@ -91,7 +93,7 @@ public class OvModelUtils {
     /**
      * This method returns the custom properties of the {@link IOvModel}. The custom
      * properties represent additional properties of an {@link IOvModel} overtaken
-     * from the {@link IFeatureModel}. They have been added so that no information
+     * from the {@link FeatureModel}. They have been added so that no information
      * will be lost during transformation.
      *
      * @param ovModel the {@link IOvModel} for which the properties will be
@@ -105,7 +107,7 @@ public class OvModelUtils {
     /**
      * This method returns the custom properties of the {@link IOvModel} as a set.
      * The custom properties represent additional properties of an {@link IOvModel}
-     * overtaken from the {@link IFeatureModel}. They have been added so that no
+     * overtaken from the {@link FeatureModel}. They have been added so that no
      * information will be lost during transformation.
      *
      * @param ovModel the {@link IOvModel} for which the properties will be
@@ -119,7 +121,7 @@ public class OvModelUtils {
     /**
      * This method sets the properties of the OvModel. The custom properties
      * represent additional properties of an {@link IOvModel} overtaken from the
-     * {@link IFeatureModel}. They have been added so that no information will be
+     * {@link FeatureModel}. They have been added so that no information will be
      * lost during transformation.
      *
      * @param ovModel    the {@link IOvModel} for which the properties will be set.
@@ -179,7 +181,7 @@ public class OvModelUtils {
     /**
      * This method returns the custom properties of a variation base (variation
      * point or variant). The custom properties represent additional properties of a
-     * variation base overtaken from an {@link IFeature} during transformation. They
+     * variation base overtaken from an {@link Feature} during transformation. They
      * have been added to a variation base so that no information will be lost
      * during transformation.
      *
@@ -194,7 +196,7 @@ public class OvModelUtils {
     /**
      * This method returns the custom properties of a variation base (variation
      * point or variant) as a set. The custom properties represent additional
-     * properties of a variation base overtaken from an {@link IFeature} during
+     * properties of a variation base overtaken from an {@link Feature} during
      * transformation. They have been added to a variation base so that no
      * information will be lost during transformation.
      *
@@ -210,7 +212,7 @@ public class OvModelUtils {
     /**
      * This method sets the properties of a variation base (variation point or
      * variant). The custom properties represent additional properties of a
-     * variation base overtaken from an {@link IFeature} during transformation. They
+     * variation base overtaken from an {@link Feature} during transformation. They
      * have been added to a variation base so that no information will be lost
      * during transformation.
      *
@@ -226,11 +228,11 @@ public class OvModelUtils {
     /**
      * This method returns the custom properties of a constraint. The custom
      * properties represent additional properties of a constraint overtaken from a
-     * feature model {@link IConstraint}. They have been added to a constraint so
+     * feature model {@link Constraint}. They have been added to a constraint so
      * that no information will be lost during transformation.
      *
-     * @param ovModelVariationBase the variation base (variation point or variant)
-     *                             for which the properties will be returned.
+     * @param ovModelConstraint the variation base (variation point or variant)
+     *                          for which the properties will be returned.
      * @return The returned properties.
      */
     public static IPropertyContainer getCustomProperties(IOvModelConstraint ovModelConstraint) {
@@ -240,12 +242,12 @@ public class OvModelUtils {
     /**
      * This method returns the custom properties of a constraint as a set. The
      * custom properties represent additional properties of a constraint overtaken
-     * from a feature model {@link IConstraint}. They have been added to a
+     * from a feature model {@link Constraint}. They have been added to a
      * constraint so that no information will be lost during transformation.
      *
-     * @param ovModelVariationBase the variation base (variation point or variant)
-     *                             for which the properties will be returned as a
-     *                             set.
+     * @param ovModelConstraint the variation base (variation point or variant)
+     *                          for which the properties will be returned as a
+     *                          set.
      * @return The returned properties.
      */
     public static Set<Entry> getCustomPropertiesEntries(IOvModelConstraint ovModelConstraint) {
@@ -255,7 +257,7 @@ public class OvModelUtils {
     /**
      * This method sets the properties of a constraint. The custom properties
      * represent additional properties of a constraint overtaken from a feature
-     * model {@link IConstraint} during transformation. They have been added to a
+     * model {@link Constraint} during transformation. They have been added to a
      * constraint so that no information will be lost during transformation.
      *
      * @param ovModelConstraint the constraint where the properties will be set.

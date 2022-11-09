@@ -8,14 +8,14 @@ import de.vill.model.FeatureModel;
 public class ModelTransformerImpl implements IModelTransformer<IOvModel> {
 
     @Override
-    public FeatureModel transform(IOvModel ovModel, String name) throws NotSupportedVariabilityTypeException {
-        OvModelToFeatureModelTransformer ovModelToFeatureModelTransformer = new OvModelToFeatureModelTransformer();
-        ovModelToFeatureModelTransformer.transform(ovModel, name);
+    public FeatureModel transform(final IOvModel ovModel, final String name) throws NotSupportedVariabilityTypeException {
+        final OvModelToFeatureModelTransformer ovModelToFeatureModelTransformer = new OvModelToFeatureModelTransformer();
+        return ovModelToFeatureModelTransformer.transform(ovModel, name);
     }
 
     @Override
-    public IOvModel transform(FeatureModel featureModel, String name) throws NotSupportedVariabilityTypeException {
-        FeatureModeltoOvModelTransformer featureModeltoOvModelTransformer = new FeatureModeltoOvModelTransformer();
+    public IOvModel transform(final FeatureModel featureModel, final String name) throws NotSupportedVariabilityTypeException {
+        final FeatureModelToOvModelTransformer featureModeltoOvModelTransformer = new FeatureModelToOvModelTransformer();
         return featureModeltoOvModelTransformer.transform(featureModel, name);
     }
 }

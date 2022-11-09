@@ -193,12 +193,12 @@ public class ReadHelper {
 
         String minChoices = element.getAttribute(MIN_CHOICES);
         if (minChoices != null) {
-            OvModelUtils.setMinChoices(object, Integer.valueOf(minChoices));
+            OvModelUtils.setMinChoices(object, Integer.parseInt(minChoices));
         }
 
         String maxChoices = element.getAttribute(MAX_CHOICES);
         if (maxChoices != null) {
-            OvModelUtils.setMaxChoices(object, Integer.valueOf(maxChoices));
+            OvModelUtils.setMaxChoices(object, Integer.parseInt(maxChoices));
         }
 
         Element ovMandatoryChildren = getChildElementByTagName(element, MANDATORY_CHILDREN, false);
@@ -256,25 +256,13 @@ public class ReadHelper {
     public static void read(Element element, IOvModelVariationBaseMetainformation object, IOvModel ovModel,
                             IOvModelFactory factory) throws OvModelSerialisationException {
         String abstractStr = element.getAttribute(ABSTRACT);
-        if (abstractStr != null && abstractStr.contentEquals(String.valueOf(true))) {
-            object.setAbstract(true);
-        } else {
-            object.setAbstract(false);
-        }
+        object.setAbstract(abstractStr != null && abstractStr.contentEquals(String.valueOf(true)));
 
         String hidden = element.getAttribute(HIDDEN);
-        if (hidden != null && hidden.contentEquals(String.valueOf(true))) {
-            object.setHidden(true);
-        } else {
-            object.setHidden(false);
-        }
+        object.setHidden(hidden != null && hidden.contentEquals(String.valueOf(true)));
 
         String partOfOvModelRoot = element.getAttribute(PART_OF_OVMODEL_ROOT);
-        if (partOfOvModelRoot != null && partOfOvModelRoot.contentEquals(String.valueOf(true))) {
-            object.setPartOfOvModelRoot(true);
-        } else {
-            object.setPartOfOvModelRoot(false);
-        }
+        object.setPartOfOvModelRoot(partOfOvModelRoot != null && partOfOvModelRoot.contentEquals(String.valueOf(true)));
 
         String description = element.getAttribute(DESCRIPTION);
         object.setDescription(description);
@@ -436,7 +424,7 @@ public class ReadHelper {
      * interface which is extended by excludes and requires constraints and
      * therefore this shared method is created to read its properties.
      *
-     * @param element the XML-{@link Element} which contains the serialization of
+     * @param node    the XML-{@link Element} which contains the serialization of
      *                the {@link IOvModelConstraint}.
      * @param object  the {@link IOvModelConstraint} which should be populated.
      * @param ovModel the {@link IOvModel} the newly created constraint belongs to.

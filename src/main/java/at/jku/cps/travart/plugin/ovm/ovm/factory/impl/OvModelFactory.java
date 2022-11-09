@@ -1,8 +1,5 @@
 package at.jku.cps.travart.plugin.ovm.ovm.factory.impl;
 
-import at.jku.cps.travart.ovm.factory.IOvModelFactory;
-import at.jku.cps.travart.ovm.model.IOvModel;
-import at.jku.cps.travart.ovm.model.impl.OvModel;
 import at.jku.cps.travart.plugin.ovm.ovm.factory.IOvModelFactory;
 import at.jku.cps.travart.plugin.ovm.ovm.model.IIdentifiable;
 import at.jku.cps.travart.plugin.ovm.ovm.model.IOvModel;
@@ -13,6 +10,7 @@ import at.jku.cps.travart.plugin.ovm.ovm.model.constraint.IOvModelRequiresConstr
 import at.jku.cps.travart.plugin.ovm.ovm.model.constraint.impl.OvModelExcludesConstraint;
 import at.jku.cps.travart.plugin.ovm.ovm.model.constraint.impl.OvModelRequiresConstraint;
 import at.jku.cps.travart.plugin.ovm.ovm.model.impl.Identifiable;
+import at.jku.cps.travart.plugin.ovm.ovm.model.impl.OvModel;
 import at.jku.cps.travart.plugin.ovm.ovm.model.impl.OvModelVariant;
 import at.jku.cps.travart.plugin.ovm.ovm.model.impl.OvModelVariationPoint;
 
@@ -55,7 +53,7 @@ public class OvModelFactory implements IOvModelFactory {
     /**
      * (non-Javadoc)
      *
-     * @see de.ovgu.featureide.core.ovm.factory.IOvModelFactory#createVariant(de.ovgu.featureide.core.ovm.model.IOvModel,
+     * @see at.jku.cps.travart.plugin.ovm.ovm.factory.IOvModelFactory#createVariant(at.jku.cps.travart.plugin.ovm.ovm.model.IOvModel,
      * String)
      */
     @Override
@@ -68,7 +66,7 @@ public class OvModelFactory implements IOvModelFactory {
     /**
      * (non-Javadoc)
      *
-     * @see de.ovgu.featureide.core.ovm.factory.IOvModelFactory#createVariationPoint(de.ovgu.featureide.core.ovm.model.IOvModel,
+     * @see at.jku.cps.travart.plugin.ovm.ovm.factory.IOvModelFactory#createVariationPoint(at.jku.cps.travart.plugin.ovm.ovm.model.IOvModel,
      * String)
      */
     @Override
@@ -81,7 +79,7 @@ public class OvModelFactory implements IOvModelFactory {
     /**
      * (non-Javadoc)
      *
-     * @see de.ovgu.featureide.core.ovm.factory.IOvModelFactory#createRequiresConstraint(de.ovgu.featureide.core.ovm.model.IOvModel)
+     * @see at.jku.cps.travart.plugin.ovm.ovm.factory.IOvModelFactory#createRequiresConstraint(at.jku.cps.travart.plugin.ovm.ovm.model.IOvModel)
      */
     @Override
     public IOvModelRequiresConstraint createRequiresConstraint(IOvModel ovModel) {
@@ -92,7 +90,7 @@ public class OvModelFactory implements IOvModelFactory {
     /**
      * (non-Javadoc)
      *
-     * @see de.ovgu.featureide.core.ovm.factory.IOvModelFactory#createExcludesConstraint(de.ovgu.featureide.core.ovm.model.IOvModel)
+     * @see at.jku.cps.travart.plugin.ovm.ovm.factory.IOvModelFactory#createExcludesConstraint(at.jku.cps.travart.plugin.ovm.ovm.model.IOvModel)
      */
     @Override
     public IOvModelExcludesConstraint createExcludesConstraint(IOvModel ovModel) {
@@ -103,7 +101,7 @@ public class OvModelFactory implements IOvModelFactory {
     /**
      * (non-Javadoc)
      *
-     * @see de.ovgu.featureide.core.ovm.factory.IOvModelFactory#createIdentifiable(int,
+     * @see at.jku.cps.travart.plugin.ovm.ovm.factory.IOvModelFactory#createIdentifiable(int,
      * String)
      */
     @Override

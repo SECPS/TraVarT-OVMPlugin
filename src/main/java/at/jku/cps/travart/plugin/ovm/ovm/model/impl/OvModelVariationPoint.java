@@ -34,7 +34,7 @@ public class OvModelVariationPoint extends OvModelVariationBase implements IOvMo
     /**
      * (non-Javadoc)
      *
-     * @see de.ovgu.featureide.core.ovm.model.IOvModelVariationPoint#isAlternative()
+     * @see at.jku.cps.travart.plugin.ovm.ovm.model.IOvModelVariationPoint#isAlternative()
      */
     @Override
     public boolean isAlternative() {
@@ -44,17 +44,17 @@ public class OvModelVariationPoint extends OvModelVariationBase implements IOvMo
     /**
      * (non-Javadoc)
      *
-     * @see de.ovgu.featureide.core.ovm.model.IOvModelVariationPoint#setAlternative(boolean)
+     * @see at.jku.cps.travart.plugin.ovm.ovm.model.IOvModelVariationPoint#setAlternative(boolean)
      */
     @Override
-    public void setAlternative(boolean alternative) {
+    public void setAlternative(final boolean alternative) {
         this.alternative = alternative;
     }
 
     /**
      * (non-Javadoc)
      *
-     * @see de.ovgu.featureide.core.ovm.model.IOvModelVariationPoint#hasMinChoices()
+     * @see at.jku.cps.travart.plugin.ovm.ovm.model.IOvModelVariationPoint#hasMinChoices()
      */
     @Override
     public boolean hasMinChoices() {
@@ -64,7 +64,7 @@ public class OvModelVariationPoint extends OvModelVariationBase implements IOvMo
     /**
      * (non-Javadoc)
      *
-     * @see de.ovgu.featureide.core.ovm.model.IOvModelVariationPoint#getMinChoices()
+     * @see at.jku.cps.travart.plugin.ovm.ovm.model.IOvModelVariationPoint#getMinChoices()
      */
     @Override
     public int getMinChoices() {
@@ -74,17 +74,17 @@ public class OvModelVariationPoint extends OvModelVariationBase implements IOvMo
     /**
      * (non-Javadoc)
      *
-     * @see de.ovgu.featureide.core.ovm.model.IOvModelVariationPoint#setMinChoices(int)
+     * @see at.jku.cps.travart.plugin.ovm.ovm.model.IOvModelVariationPoint#setMinChoices(int)
      */
     @Override
-    public void setMinChoices(int minChoices) {
+    public void setMinChoices(final int minChoices) {
         this.minChoices = minChoices;
     }
 
     /**
      * (non-Javadoc)
      *
-     * @see de.ovgu.featureide.core.ovm.model.IOvModelVariationPoint#hasMaxChoices()
+     * @see at.jku.cps.travart.plugin.ovm.ovm.model.IOvModelVariationPoint#hasMaxChoices()
      */
     @Override
     public boolean hasMaxChoices() {
@@ -94,7 +94,7 @@ public class OvModelVariationPoint extends OvModelVariationBase implements IOvMo
     /**
      * (non-Javadoc)
      *
-     * @see de.ovgu.featureide.core.ovm.model.IOvModelVariationPoint#getMaxChoices()
+     * @see at.jku.cps.travart.plugin.ovm.ovm.model.IOvModelVariationPoint#getMaxChoices()
      */
     @Override
     public int getMaxChoices() {
@@ -104,17 +104,17 @@ public class OvModelVariationPoint extends OvModelVariationBase implements IOvMo
     /**
      * (non-Javadoc)
      *
-     * @see de.ovgu.featureide.core.ovm.model.IOvModelVariationPoint#setMaxChoices(int)
+     * @see at.jku.cps.travart.plugin.ovm.ovm.model.IOvModelVariationPoint#setMaxChoices(int)
      */
     @Override
-    public void setMaxChoices(int maxChoices) {
+    public void setMaxChoices(final int maxChoices) {
         this.maxChoices = maxChoices;
     }
 
     /**
      * (non-Javadoc)
      *
-     * @see de.ovgu.featureide.core.ovm.model.IOvModelVariationPoint#hasMandatoryChildren()
+     * @see at.jku.cps.travart.plugin.ovm.ovm.model.IOvModelVariationPoint#hasMandatoryChildren()
      */
     @Override
     public boolean hasMandatoryChildren() {
@@ -124,7 +124,7 @@ public class OvModelVariationPoint extends OvModelVariationBase implements IOvMo
     /**
      * (non-Javadoc)
      *
-     * @see de.ovgu.featureide.core.ovm.model.IOvModelVariationPoint#getMandatoryChildrenCount()
+     * @see at.jku.cps.travart.plugin.ovm.ovm.model.IOvModelVariationPoint#getMandatoryChildrenCount()
      */
     @Override
     public int getMandatoryChildrenCount() {
@@ -134,7 +134,7 @@ public class OvModelVariationPoint extends OvModelVariationBase implements IOvMo
     /**
      * (non-Javadoc)
      *
-     * @see de.ovgu.featureide.core.ovm.model.IOvModelVariationPoint#getMandatoryChildren()
+     * @see at.jku.cps.travart.plugin.ovm.ovm.model.IOvModelVariationPoint#getMandatoryChildren()
      */
     @Override
     public List<IOvModelVariationBase> getMandatoryChildren() {
@@ -144,10 +144,10 @@ public class OvModelVariationPoint extends OvModelVariationBase implements IOvMo
     /**
      * (non-Javadoc)
      *
-     * @see de.ovgu.featureide.core.ovm.model.IOvModelVariationPoint#setMandatoryChildren(List)
+     * @see at.jku.cps.travart.plugin.ovm.ovm.model.IOvModelVariationPoint#setMandatoryChildren(List)
      */
     @Override
-    public void setMandatoryChildren(List<IOvModelVariationBase> mandatoryChildren) {
+    public void setMandatoryChildren(final List<IOvModelVariationBase> mandatoryChildren) {
         this.mandatoryChildren.clear();
         this.mandatoryChildren.addAll(Functional.toList(mandatoryChildren));
     }
@@ -155,27 +155,27 @@ public class OvModelVariationPoint extends OvModelVariationBase implements IOvMo
     /**
      * (non-Javadoc)
      *
-     * @see de.ovgu.featureide.core.ovm.model.IOvModelVariationPoint#addMandatoryChild(de.ovgu.featureide.core.ovm.model.IOvModelVariationBase)
+     * @see at.jku.cps.travart.plugin.ovm.ovm.model.IOvModelVariationPoint#addMandatoryChild(at.jku.cps.travart.plugin.ovm.ovm.model.IOvModelVariationBase)
      */
     @Override
-    public boolean addMandatoryChild(IOvModelVariationBase mandatoryChild) {
+    public boolean addMandatoryChild(final IOvModelVariationBase mandatoryChild) {
         return this.mandatoryChildren.add(mandatoryChild);
     }
 
     /**
      * (non-Javadoc)
      *
-     * @see de.ovgu.featureide.core.ovm.model.IOvModelVariationPoint#removeMandatoryChild(de.ovgu.featureide.core.ovm.model.IOvModelVariationBase)
+     * @see at.jku.cps.travart.plugin.ovm.ovm.model.IOvModelVariationPoint#removeMandatoryChild(at.jku.cps.travart.plugin.ovm.ovm.model.IOvModelVariationBase)
      */
     @Override
-    public boolean removeMandatoryChild(IOvModelVariationBase mandatoryChild) {
+    public boolean removeMandatoryChild(final IOvModelVariationBase mandatoryChild) {
         return this.mandatoryChildren.remove(mandatoryChild);
     }
 
     /**
      * (non-Javadoc)
      *
-     * @see de.ovgu.featureide.core.ovm.model.IOvModelVariationPoint#hasOptionalChildren()
+     * @see at.jku.cps.travart.plugin.ovm.ovm.model.IOvModelVariationPoint#hasOptionalChildren()
      */
     @Override
     public boolean hasOptionalChildren() {
@@ -185,7 +185,7 @@ public class OvModelVariationPoint extends OvModelVariationBase implements IOvMo
     /**
      * (non-Javadoc)
      *
-     * @see de.ovgu.featureide.core.ovm.model.IOvModelVariationPoint#getOptionalChildrenCount()
+     * @see at.jku.cps.travart.plugin.ovm.ovm.model.IOvModelVariationPoint#getOptionalChildrenCount()
      */
     @Override
     public int getOptionalChildrenCount() {
@@ -195,7 +195,7 @@ public class OvModelVariationPoint extends OvModelVariationBase implements IOvMo
     /**
      * (non-Javadoc)
      *
-     * @see de.ovgu.featureide.core.ovm.model.IOvModelVariationPoint#getOptionalChildren()
+     * @see at.jku.cps.travart.plugin.ovm.ovm.model.IOvModelVariationPoint#getOptionalChildren()
      */
     @Override
     public List<IOvModelVariationBase> getOptionalChildren() {
@@ -205,10 +205,10 @@ public class OvModelVariationPoint extends OvModelVariationBase implements IOvMo
     /**
      * (non-Javadoc)
      *
-     * @see de.ovgu.featureide.core.ovm.model.IOvModelVariationPoint#setOptionalChildren(List)
+     * @see at.jku.cps.travart.plugin.ovm.ovm.model.IOvModelVariationPoint#setOptionalChildren(List)
      */
     @Override
-    public void setOptionalChildren(List<IOvModelVariationBase> optionalChildren) {
+    public void setOptionalChildren(final List<IOvModelVariationBase> optionalChildren) {
         this.optionalChildren.clear();
         this.optionalChildren.addAll(Functional.toList(optionalChildren));
     }
@@ -216,34 +216,32 @@ public class OvModelVariationPoint extends OvModelVariationBase implements IOvMo
     /**
      * (non-Javadoc)
      *
-     * @see de.ovgu.featureide.core.ovm.model.IOvModelVariationPoint#addOptionalChild(de.ovgu.featureide.core.ovm.model.IOvModelVariationBase)
+     * @see at.jku.cps.travart.plugin.ovm.ovm.model.IOvModelVariationPoint#addOptionalChild(at.jku.cps.travart.plugin.ovm.ovm.model.IOvModelVariationBase)
      */
     @Override
-    public boolean addOptionalChild(IOvModelVariationBase optionalChild) {
+    public boolean addOptionalChild(final IOvModelVariationBase optionalChild) {
         return this.optionalChildren.add(optionalChild);
     }
 
     /**
      * (non-Javadoc)
      *
-     * @see de.ovgu.featureide.core.ovm.model.IOvModelVariationPoint#removeOptionalChild(de.ovgu.featureide.core.ovm.model.IOvModelVariationBase)
+     * @see at.jku.cps.travart.plugin.ovm.ovm.model.IOvModelVariationPoint#removeOptionalChild(at.jku.cps.travart.plugin.ovm.ovm.model.IOvModelVariationBase)
      */
     @Override
-    public boolean removeOptionalChild(IOvModelVariationBase optionalChild) {
+    public boolean removeOptionalChild(final IOvModelVariationBase optionalChild) {
         return this.optionalChildren.remove(optionalChild);
     }
 
     /**
      * (non-Javadoc)
-     *
-     * @see at.jku.cps.vmt.core.common.core.configuration.IConfigurable#setSelected(boolean)
      */
     @Override
-    public void setSelected(boolean selected) {
+    public void setSelected(final boolean selected) {
         super.setSelected(selected);
         if (this.mandatoryChildren.size() == 1) {
-            IOvModelVariationBase mandatoryChild = this.mandatoryChildren.get(0);
-            String mandatoryChildName = mandatoryChild.getName();
+            final IOvModelVariationBase mandatoryChild = this.mandatoryChildren.get(0);
+            final String mandatoryChildName = mandatoryChild.getName();
             if (mandatoryChildName.contains(DefaultOvModelTransformationProperties.VARIANT_PREFIX)
                     && mandatoryChildName.endsWith(this.getName())) {
                 mandatoryChild.setSelected(selected);
@@ -257,7 +255,7 @@ public class OvModelVariationPoint extends OvModelVariationBase implements IOvMo
      * @see de.ovgu.featureide.core.configuration.IValidateInternal#isValid(boolean)
      */
     @Override
-    public boolean isValid(boolean isMandatory) {
+    public boolean isValid(final boolean isMandatory) {
         boolean isValid = super.isValid(isMandatory);
         if (isValid && this.isSelected()) { // execute check only if the variation point is selected
             // Shortcut (do not check artificial variants)
@@ -271,16 +269,16 @@ public class OvModelVariationPoint extends OvModelVariationBase implements IOvMo
                 return isValid;
             }
             // all mandatory children have to be checked
-            for (IOvModelVariationBase mandatoryChild : this.mandatoryChildren) {
+            for (final IOvModelVariationBase mandatoryChild : this.mandatoryChildren) {
                 isValid = isValid && mandatoryChild.isSelected();
                 if (!isValid) {
                     return false;
                 }
             }
 
-            long mandatoryCount = this.mandatoryChildren.stream().filter(IOvModelVariationBase::isSelected).count();
-            long optionalCount = this.optionalChildren.stream().filter(IOvModelVariationBase::isSelected).count();
-            long selected = mandatoryCount + optionalCount;
+            final long mandatoryCount = this.mandatoryChildren.stream().filter(IOvModelVariationBase::isSelected).count();
+            final long optionalCount = this.optionalChildren.stream().filter(IOvModelVariationBase::isSelected).count();
+            final long selected = mandatoryCount + optionalCount;
             // check the ranges
             if (this.isAlternative()) {
                 if (selected < this.minChoices || selected > this.maxChoices) {
@@ -296,7 +294,7 @@ public class OvModelVariationPoint extends OvModelVariationBase implements IOvMo
             }
 
             // check mandatory children
-            for (IOvModelVariationBase mandatoryChild : this.mandatoryChildren) {
+            for (final IOvModelVariationBase mandatoryChild : this.mandatoryChildren) {
                 isValid = isValid && mandatoryChild.isValid(true);
                 if (!isValid) {
                     return false;
@@ -304,7 +302,7 @@ public class OvModelVariationPoint extends OvModelVariationBase implements IOvMo
             }
 
             // check optional children
-            for (IOvModelVariationBase optionalChild : this.optionalChildren) {
+            for (final IOvModelVariationBase optionalChild : this.optionalChildren) {
                 isValid = isValid && optionalChild.isValid(false);
                 if (!isValid) {
                     return false;
@@ -327,13 +325,13 @@ public class OvModelVariationPoint extends OvModelVariationBase implements IOvMo
                 return isValid;
             }
             // all mandatory children have to be checked
-            for (IOvModelVariationBase mandatoryChild : this.mandatoryChildren) {
+            for (final IOvModelVariationBase mandatoryChild : this.mandatoryChildren) {
                 isValid = isValid && !mandatoryChild.isSelected();
                 if (!isValid) {
                     return false;
                 }
             }
-            for (IOvModelVariationBase optionalChild : this.optionalChildren) {
+            for (final IOvModelVariationBase optionalChild : this.optionalChildren) {
                 isValid = isValid && !optionalChild.isSelected();
                 if (!isValid) {
                     return false;
@@ -349,20 +347,20 @@ public class OvModelVariationPoint extends OvModelVariationBase implements IOvMo
      * @see de.ovgu.featureide.core.ovm.model.IOvModelElement#getElement(de.ovgu.featureide.core.ovm.model.IIdentifiable)
      */
     @Override
-    public IOvModelElement getElement(IIdentifiable identifiable) {
+    public IOvModelElement getElement(final IIdentifiable identifiable) {
         IOvModelElement element = super.getElement(identifiable);
         if (element != null) {
             return element;
         }
 
-        for (IOvModelVariationBase mandatoryChild : this.mandatoryChildren) {
+        for (final IOvModelVariationBase mandatoryChild : this.mandatoryChildren) {
             element = mandatoryChild.getElement(identifiable);
             if (element != null) {
                 return element;
             }
         }
 
-        for (IOvModelVariationBase optionalChild : this.optionalChildren) {
+        for (final IOvModelVariationBase optionalChild : this.optionalChildren) {
             element = optionalChild.getElement(identifiable);
             if (element != null) {
                 return element;
@@ -394,7 +392,7 @@ public class OvModelVariationPoint extends OvModelVariationBase implements IOvMo
      * @see Object#equals(Object)
      */
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(final Object obj) {
         if (this == obj) {
             return true;
         }
@@ -404,7 +402,7 @@ public class OvModelVariationPoint extends OvModelVariationBase implements IOvMo
         if (this.getClass() != obj.getClass()) {
             return false;
         }
-        OvModelVariationPoint other = (OvModelVariationPoint) obj;
+        final OvModelVariationPoint other = (OvModelVariationPoint) obj;
         if (this.alternative != other.alternative) {
             return false;
         }

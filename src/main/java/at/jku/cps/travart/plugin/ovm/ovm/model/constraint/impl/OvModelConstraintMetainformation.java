@@ -23,7 +23,7 @@ public class OvModelConstraintMetainformation implements IOvModelConstraintMetai
     /**
      * (non-Javadoc)
      *
-     * @see de.ovgu.featureide.core.ovm.model.constraint.IOvModelConstraintMetainformation#getDescription()
+     * @see at.jku.cps.travart.plugin.ovm.ovm.model.constraint.IOvModelConstraintMetainformation#getDescription()
      */
     @Override
     public String getDescription() {
@@ -33,7 +33,7 @@ public class OvModelConstraintMetainformation implements IOvModelConstraintMetai
     /**
      * (non-Javadoc)
      *
-     * @see de.ovgu.featureide.core.ovm.model.constraint.IOvModelConstraintMetainformation#setDescription(String)
+     * @see at.jku.cps.travart.plugin.ovm.ovm.model.constraint.IOvModelConstraintMetainformation#setDescription(String)
      */
     @Override
     public void setDescription(String description) {
@@ -43,7 +43,7 @@ public class OvModelConstraintMetainformation implements IOvModelConstraintMetai
     /**
      * (non-Javadoc)
      *
-     * @see de.ovgu.featureide.core.ovm.model.IOvModelConstraintMetainformation#getCustomProperties()
+     * @see at.jku.cps.travart.plugin.ovm.ovm.model.constraint.IOvModelConstraintMetainformation#getCustomProperties()
      */
     @Override
     public IPropertyContainer getCustomProperties() {

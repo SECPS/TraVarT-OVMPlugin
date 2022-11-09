@@ -45,6 +45,6 @@ public class OVMIPluginImpl implements IPlugin {
 
     @Override
     public List<String> getSupportedFileExtensions() {
-        return List.of(".dsl");
+        return List.of(".ovm");
     }
 }

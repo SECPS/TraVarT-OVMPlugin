@@ -13,8 +13,6 @@ public class OvModelExcludesConstraint extends OvModelConstraint implements IOvM
 
     /**
      * (non-Javadoc)
-     *
-     * @see de.ovgu.featureide.core.configuration.IValidate#isValid()
      */
     @Override
     public boolean isValid() {

@@ -69,7 +69,7 @@ public final class OvModelFactoryManager extends FactoryManager<IOvModel> {
 
     @Override
     public boolean addExtension(IFactory<IOvModel> extension) {
-        return extension instanceof IOvModelFactory ? super.addExtension(extension) : false;
+        return extension instanceof IOvModelFactory && super.addExtension(extension);
     }
 
 }

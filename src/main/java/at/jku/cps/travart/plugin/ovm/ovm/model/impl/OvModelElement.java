@@ -16,10 +16,10 @@ public abstract class OvModelElement extends Identifiable implements IOvModelEle
     /**
      * (non-Javadoc)
      *
-     * @see de.ovgu.featureide.core.ovm.model.IOvModelElement#getElement(de.ovgu.featureide.core.ovm.model.IIdentifiable)
+     * @see at.jku.cps.travart.plugin.ovm.ovm.model.IOvModelElement#getElement(at.jku.cps.travart.plugin.ovm.ovm.model.IIdentifiable)
      */
     @Override
-    public IOvModelElement getElement(IIdentifiable identifiable) {
+    public IOvModelElement getElement(final IIdentifiable identifiable) {
         if (identifiable == null) {
             return null;
         } else if (identifiable == this) {

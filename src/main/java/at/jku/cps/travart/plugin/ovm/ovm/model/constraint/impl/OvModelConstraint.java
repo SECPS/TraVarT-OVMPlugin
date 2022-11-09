@@ -28,7 +28,7 @@ public abstract class OvModelConstraint extends OvModelElement implements IOvMod
     /**
      * (non-Javadoc)
      *
-     * @see de.ovgu.featureide.core.ovm.model.constraint.IOvModelConstraint#getSource()
+     * @see at.jku.cps.travart.plugin.ovm.ovm.model.constraint.IOvModelConstraint#getSource()
      */
     @Override
     public IOvModelVariationBase getSource() {
@@ -38,7 +38,7 @@ public abstract class OvModelConstraint extends OvModelElement implements IOvMod
     /**
      * (non-Javadoc)
      *
-     * @see de.ovgu.featureide.core.ovm.model.constraint.IOvModelConstraint#setSource(IOvModelVariationBase)
+     * @see at.jku.cps.travart.plugin.ovm.ovm.model.constraint.IOvModelConstraint#setSource(IOvModelVariationBase)
      */
     @Override
     public void setSource(IOvModelVariationBase source) {
@@ -48,7 +48,7 @@ public abstract class OvModelConstraint extends OvModelElement implements IOvMod
     /**
      * (non-Javadoc)
      *
-     * @see de.ovgu.featureide.core.ovm.model.constraint.IOvModelConstraint#getTarget()
+     * @see at.jku.cps.travart.plugin.ovm.ovm.model.constraint.IOvModelConstraint#getTarget()
      */
     @Override
     public IOvModelVariationBase getTarget() {
@@ -58,7 +58,7 @@ public abstract class OvModelConstraint extends OvModelElement implements IOvMod
     /**
      * (non-Javadoc)
      *
-     * @see de.ovgu.featureide.core.ovm.model.constraint.IOvModelConstraint#setTarget(IOvModelVariationBase)
+     * @see at.jku.cps.travart.plugin.ovm.ovm.model.constraint.IOvModelConstraint#setTarget(IOvModelVariationBase)
      */
     @Override
     public void setTarget(IOvModelVariationBase target) {
@@ -67,8 +67,6 @@ public abstract class OvModelConstraint extends OvModelElement implements IOvMod
 
     /**
      * (non-Javadoc)
-     *
-     * @see de.ovgu.featureide.core.configuration.IValidate#isValid()
      */
     @Override
     public boolean isValid() {
@@ -80,7 +78,7 @@ public abstract class OvModelConstraint extends OvModelElement implements IOvMod
     /**
      * (non-Javadoc)
      *
-     * @see de.ovgu.featureide.core.ovm.model.constraint.IOvModelConstraint#getMetainformation()
+     * @see at.jku.cps.travart.plugin.ovm.ovm.model.constraint.IOvModelConstraint#getMetainformation()
      */
     @Override
     public IOvModelConstraintMetainformation getMetainformation() {
@@ -90,7 +88,7 @@ public abstract class OvModelConstraint extends OvModelElement implements IOvMod
     /**
      * (non-Javadoc)
      *
-     * @see de.ovgu.featureide.core.ovm.model.constraint.IOvModelConstraint#getElement(de.ovgu.featureide.core.ovm.model.IIdentifiable)
+     * @see at.jku.cps.travart.plugin.ovm.ovm.model.constraint.IOvModelConstraint#getElement(de.ovgu.featureide.core.ovm.model.IIdentifiable)
      */
     @Override
     public IOvModelElement getElement(IIdentifiable identifiable) {

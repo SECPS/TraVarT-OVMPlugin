@@ -23,7 +23,7 @@ public class OvModelMetainformation implements IOvModelMetainformation {
     /**
      * (non-Javadoc)
      *
-     * @see de.ovgu.featureide.core.ovm.model.IOvModelMetainformation#getCustomProperties()
+     * @see at.jku.cps.travart.plugin.ovm.ovm.model.IOvModelMetainformation#getCustomProperties()
      */
     @Override
     public IPropertyContainer getCustomProperties() {
@@ -33,7 +33,7 @@ public class OvModelMetainformation implements IOvModelMetainformation {
     /**
      * (non-Javadoc)
      *
-     * @see de.ovgu.featureide.core.ovm.model.IOvModelMetainformation#getDescription()
+     * @see at.jku.cps.travart.plugin.ovm.ovm.model.IOvModelMetainformation#getDescription()
      */
     @Override
     public String getDescription() {
@@ -43,10 +43,10 @@ public class OvModelMetainformation implements IOvModelMetainformation {
     /**
      * (non-Javadoc)
      *
-     * @see de.ovgu.featureide.core.ovm.model.IOvModelMetainformation#setDescription(String)
+     * @see at.jku.cps.travart.plugin.ovm.ovm.model.IOvModelMetainformation#setDescription(String)
      */
     @Override
-    public void setDescription(String description) {
+    public void setDescription(final String description) {
         this.description = description;
     }
 
@@ -69,7 +69,7 @@ public class OvModelMetainformation implements IOvModelMetainformation {
      * @see Object#equals(Object)
      */
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(final Object obj) {
         if (this == obj) {
             return true;
         }
@@ -79,7 +79,7 @@ public class OvModelMetainformation implements IOvModelMetainformation {
         if (this.getClass() != obj.getClass()) {
             return false;
         }
-        OvModelMetainformation other = (OvModelMetainformation) obj;
+        final OvModelMetainformation other = (OvModelMetainformation) obj;
         if (this.description == null) {
             if (other.description != null) {
                 return false;

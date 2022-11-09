@@ -16,7 +16,6 @@ import de.ovgu.featureide.fm.core.base.impl.FeatureModel;
 import de.ovgu.featureide.fm.core.functional.Functional;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -34,38 +33,37 @@ import java.util.stream.Collectors;
  * @see IOvModel
  */
 public class OvModel extends Identifiable implements IOvModel {
-
     protected final String factoryId;
     protected final IOvModelMetainformation metainformation;
     protected final List<IOvModelVariationPoint> variationPoints = new ArrayList<>();
     protected final List<IOvModelConstraint> constraints = new ArrayList<>();
     protected String sourceFile;
 
-    public OvModel(String factoryId) {
+    public OvModel(final String factoryId) {
         super();
         this.factoryId = factoryId;
         this.metainformation = new OvModelMetainformation();
     }
 
-    public OvModel(String factoryId, long id) {
+    public OvModel(final String factoryId, final long id) {
         super(id);
         this.factoryId = factoryId;
         this.metainformation = new OvModelMetainformation();
     }
 
-    private static Map<IOvModelVariationBase, Boolean> getOptionalMap(IOvModel ovModel) {
-        Map<IOvModelVariationBase, Boolean> optionalMap = new HashMap<>();
+    private static Map<IOvModelVariationBase, Boolean> getOptionalMap(final IOvModel ovModel) {
+        final Map<IOvModelVariationBase, Boolean> optionalMap = new HashMap<>();
         fillListOptional(ovModel.getVariationPoints(), optionalMap);
-        for (IOvModelConstraint constraint : ovModel.getConstraints()) {
-            fillListOptional(Arrays.asList(constraint.getSource()), optionalMap);
-            fillListOptional(Arrays.asList(constraint.getTarget()), optionalMap);
+        for (final IOvModelConstraint constraint : ovModel.getConstraints()) {
+            fillListOptional(List.of(constraint.getSource()), optionalMap);
+            fillListOptional(List.of(constraint.getTarget()), optionalMap);
         }
         return optionalMap;
     }
 
-    private static void fillListOptional(List<? extends IOvModelVariationBase> ovModelElements,
-                                         Map<IOvModelVariationBase, Boolean> optionalMap) {
-        for (IOvModelVariationBase ovModelVariationBase : ovModelElements) {
+    private static void fillListOptional(final List<? extends IOvModelVariationBase> ovModelElements,
+                                         final Map<IOvModelVariationBase, Boolean> optionalMap) {
+        for (final IOvModelVariationBase ovModelVariationBase : ovModelElements) {
             if (ovModelVariationBase instanceof IOvModelVariationPoint) {
                 ((IOvModelVariationPoint) ovModelVariationBase).getMandatoryChildren().forEach(mandatoryChild -> {
                     optionalMap.put(mandatoryChild, false);
@@ -79,19 +77,20 @@ public class OvModel extends Identifiable implements IOvModel {
         }
     }
 
-    private static List<IOvModelVariationBase> getIConfigurable(IOvModel ovModel) {
-        List<IOvModelVariationBase> configurables = new ArrayList<>();
+    private static List<IOvModelVariationBase> getIConfigurable(final IOvModel ovModel) {
+        final List<IOvModelVariationBase> configurables = new ArrayList<>();
         fillListConfigurable(ovModel.getVariationPoints(), configurables);
-        for (IOvModelConstraint constraint : ovModel.getConstraints()) {
-            fillListConfigurable(Arrays.asList(constraint.getSource()), configurables);
-            fillListConfigurable(Arrays.asList(constraint.getTarget()), configurables);
+        for (final IOvModelConstraint constraint : ovModel.getConstraints()) {
+            fillListConfigurable(List.of(constraint.getSource()), configurables);
+            fillListConfigurable(List.of(constraint.getTarget()), configurables);
         }
+
         return configurables;
     }
 
-    private static void fillListConfigurable(List<? extends IOvModelVariationBase> ovModelElements,
-                                             List<IOvModelVariationBase> configurables) {
-        for (IOvModelVariationBase ovModelVariationBase : ovModelElements) {
+    private static void fillListConfigurable(final List<? extends IOvModelVariationBase> ovModelElements,
+                                             final List<IOvModelVariationBase> configurables) {
+        for (final IOvModelVariationBase ovModelVariationBase : ovModelElements) {
 
             if (ovModelVariationBase instanceof IOvModelVariationPoint) {
                 fillListConfigurable(((IOvModelVariationPoint) ovModelVariationBase).getMandatoryChildren(),
@@ -112,7 +111,7 @@ public class OvModel extends Identifiable implements IOvModel {
      * @see de.ovgu.featureide.core.ovm.model.base.IOvmModel#addConstraint(de.ovgu.featureide.core.ovm.model.base.IOvmConstraint)
      */
     @Override
-    public boolean addConstraint(IOvModelConstraint constraint) {
+    public boolean addConstraint(final IOvModelConstraint constraint) {
         return this.constraints.add(constraint);
     }
 
@@ -123,7 +122,7 @@ public class OvModel extends Identifiable implements IOvModel {
      * int)
      */
     @Override
-    public void addConstraint(IOvModelConstraint constraint, int index) {
+    public void addConstraint(final IOvModelConstraint constraint, final int index) {
         this.constraints.add(index, constraint);
     }
 
@@ -133,7 +132,7 @@ public class OvModel extends Identifiable implements IOvModel {
      * @see de.ovgu.featureide.core.ovm.model.IOvModel#addVariationPoint(de.ovgu.featureide.core.ovm.model.IOvModelVariationPoint)
      */
     @Override
-    public boolean addVariationPoint(IOvModelVariationPoint variationPoint) {
+    public boolean addVariationPoint(final IOvModelVariationPoint variationPoint) {
         return this.variationPoints.add(variationPoint);
     }
 
@@ -144,10 +143,10 @@ public class OvModel extends Identifiable implements IOvModel {
      */
     @Override
     public void afterSelection() {
-        List<IOvModelVariationBase> configurables = getIConfigurable(this);
-        Map<IOvModelVariationBase, Boolean> optionalMap = getOptionalMap(this);
-        Map<IOvModelVariationBase, CanAssume> store = new HashMap<>();
-        for (IOvModelVariationBase vb : configurables) {
+        final List<IOvModelVariationBase> configurables = getIConfigurable(this);
+        final Map<IOvModelVariationBase, Boolean> optionalMap = getOptionalMap(this);
+        final Map<IOvModelVariationBase, CanAssume> store = new HashMap<>();
+        for (final IOvModelVariationBase vb : configurables) {
             if (!this.isVirtual(vb)) {
                 store.put(vb, vb.isSelected() ? CanAssume.ASSUME_SELECTED_TRUE : CanAssume.ASSUME_SELECTED_FALSE);
                 continue;
@@ -160,10 +159,10 @@ public class OvModel extends Identifiable implements IOvModel {
                 store.put(vb, optionalMap.get(vb) ? CanAssume.ASSUME_SELECTED_TRUE : CanAssume.CANT_ASSUME);
             }
             if (vb instanceof IOvModelVariationPoint) {
-                IOvModelVariationPoint vp = (IOvModelVariationPoint) vb;
+                final IOvModelVariationPoint vp = (IOvModelVariationPoint) vb;
                 boolean canAssumeTrue = true;
-                for (IOvModelVariationBase mandatoryChild : vp.getMandatoryChildren()) {
-                    CanAssume stored = store.get(mandatoryChild);
+                for (final IOvModelVariationBase mandatoryChild : vp.getMandatoryChildren()) {
+                    final CanAssume stored = store.get(mandatoryChild);
                     // must be already part of the store as bottom-up approach
                     assert stored != null;
                     canAssumeTrue = canAssumeTrue && stored == CanAssume.ASSUME_SELECTED_TRUE;
@@ -171,13 +170,13 @@ public class OvModel extends Identifiable implements IOvModel {
                 store.put(vp, canAssumeTrue ? CanAssume.ASSUME_SELECTED_TRUE : CanAssume.CANT_ASSUME);
             }
         }
-        for (IOvModelConstraint constraint : this.getConstraints()) {
+        for (final IOvModelConstraint constraint : this.getConstraints()) {
             if (constraint instanceof IOvModelExcludesConstraint) {
 //					s: FALSE -> don't care
 //					s: True -> false
                 if (!this.isVirtual(constraint.getSource()) && this.isVirtual(constraint.getTarget())) {
-                    CanAssume canAssume = store.get(constraint.getTarget());
-                    CanAssume newAssume = constraint.getSource().isSelected() ? CanAssume.ASSUME_SELECTED_FALSE
+                    final CanAssume canAssume = store.get(constraint.getTarget());
+                    final CanAssume newAssume = constraint.getSource().isSelected() ? CanAssume.ASSUME_SELECTED_FALSE
                             : CanAssume.CANT_ASSUME;
 
                     if (canAssume == CanAssume.ASSUME_SELECTED_TRUE && newAssume == CanAssume.ASSUME_SELECTED_FALSE) {
@@ -185,8 +184,8 @@ public class OvModel extends Identifiable implements IOvModel {
                     }
                     store.put(constraint.getTarget(), newAssume);
                 } else if (this.isVirtual(constraint.getSource()) && !this.isVirtual(constraint.getTarget())) {
-                    CanAssume canAssume = store.get(constraint.getSource());
-                    CanAssume newAssume = constraint.getTarget().isSelected() ? CanAssume.ASSUME_SELECTED_FALSE
+                    final CanAssume canAssume = store.get(constraint.getSource());
+                    final CanAssume newAssume = constraint.getTarget().isSelected() ? CanAssume.ASSUME_SELECTED_FALSE
                             : CanAssume.CANT_ASSUME;
 
                     if (canAssume == CanAssume.ASSUME_SELECTED_TRUE && newAssume == CanAssume.ASSUME_SELECTED_FALSE) {
@@ -198,8 +197,8 @@ public class OvModel extends Identifiable implements IOvModel {
 //					s: TRUE -> True
 //					s: FALSE -> don't care
                 if (!this.isVirtual(constraint.getSource()) && this.isVirtual(constraint.getTarget())) {
-                    CanAssume canAssume = store.get(constraint.getTarget());
-                    CanAssume newAssume = constraint.getSource().isSelected() ? CanAssume.ASSUME_SELECTED_TRUE
+                    final CanAssume canAssume = store.get(constraint.getTarget());
+                    final CanAssume newAssume = constraint.getSource().isSelected() ? CanAssume.ASSUME_SELECTED_TRUE
                             : CanAssume.CANT_ASSUME;
 
                     if (canAssume == CanAssume.ASSUME_SELECTED_FALSE && newAssume == CanAssume.ASSUME_SELECTED_TRUE) {
@@ -207,8 +206,8 @@ public class OvModel extends Identifiable implements IOvModel {
                     }
                     store.put(constraint.getTarget(), newAssume);
                 } else if (this.isVirtual(constraint.getSource()) && !this.isVirtual(constraint.getTarget())) {
-                    CanAssume canAssume = store.get(constraint.getSource());
-                    CanAssume newAssume = constraint.getTarget().isSelected() ? CanAssume.ASSUME_SELECTED_TRUE
+                    final CanAssume canAssume = store.get(constraint.getSource());
+                    final CanAssume newAssume = constraint.getTarget().isSelected() ? CanAssume.ASSUME_SELECTED_TRUE
                             : CanAssume.CANT_ASSUME;
 
                     if (canAssume == CanAssume.ASSUME_SELECTED_FALSE && newAssume == CanAssume.ASSUME_SELECTED_TRUE) {
@@ -218,10 +217,10 @@ public class OvModel extends Identifiable implements IOvModel {
                 }
             }
         }
-        for (IOvModelVariationPoint vp : this.getVariationPoints()) {
+        for (final IOvModelVariationPoint vp : this.getVariationPoints()) {
             this.isPossibleToSelect(vp, store);
         }
-        for (Entry<IOvModelVariationBase, CanAssume> entry : store.entrySet()) {
+        for (final Entry<IOvModelVariationBase, CanAssume> entry : store.entrySet()) {
             if (entry.getValue() == CanAssume.ASSUME_SELECTED_TRUE) {
                 entry.getKey().setSelected(true);
             }
@@ -237,23 +236,23 @@ public class OvModel extends Identifiable implements IOvModel {
 //		}
     }
 
-    private void isPossibleToSelect(IOvModelVariationBase vb, Map<IOvModelVariationBase, CanAssume> store) {
+    private void isPossibleToSelect(final IOvModelVariationBase vb, final Map<IOvModelVariationBase, CanAssume> store) {
         if (vb instanceof IOvModelVariationPoint) {
-            IOvModelVariationPoint vp = (IOvModelVariationPoint) vb;
+            final IOvModelVariationPoint vp = (IOvModelVariationPoint) vb;
             vp.getMandatoryChildren().forEach(child -> this.isPossibleToSelect(child, store));
             vp.getOptionalChildren().forEach(child -> this.isPossibleToSelect(child, store));
         }
         if (vb instanceof IOvModelVariationPoint && store.get(vb) == CanAssume.CANT_ASSUME) {
-            IOvModelVariationPoint vp = (IOvModelVariationPoint) vb;
-            List<IOvModelVariationBase> cantDecideMandatoryVbs = this.getVariationBaseElements(vp.getMandatoryChildren(),
+            final IOvModelVariationPoint vp = (IOvModelVariationPoint) vb;
+            final List<IOvModelVariationBase> cantDecideMandatoryVbs = this.getVariationBaseElements(vp.getMandatoryChildren(),
                     store, CanAssume.CANT_ASSUME);
-            List<IOvModelVariationBase> selectedMandatoryVbs = this.getVariationBaseElements(vp.getMandatoryChildren(),
+            final List<IOvModelVariationBase> selectedMandatoryVbs = this.getVariationBaseElements(vp.getMandatoryChildren(),
                     store, CanAssume.ASSUME_SELECTED_TRUE);
-            List<IOvModelVariationBase> selectedOptionalVbs = this.getVariationBaseElements(vp.getOptionalChildren(), store,
+            final List<IOvModelVariationBase> selectedOptionalVbs = this.getVariationBaseElements(vp.getOptionalChildren(), store,
                     CanAssume.ASSUME_SELECTED_TRUE);
-            List<IOvModelVariationBase> cantDecideOptionalVbs = this.getVariationBaseElements(vp.getOptionalChildren(),
+            final List<IOvModelVariationBase> cantDecideOptionalVbs = this.getVariationBaseElements(vp.getOptionalChildren(),
                     store, CanAssume.CANT_ASSUME);
-            long mandatoryCount = selectedMandatoryVbs.size() + cantDecideMandatoryVbs.size();
+            final long mandatoryCount = selectedMandatoryVbs.size() + cantDecideMandatoryVbs.size();
             if (vp.isAlternative()) {
                 if (mandatoryCount + selectedOptionalVbs.size() > vp.getMaxChoices()) {
                     store.put(vp, CanAssume.ASSUME_SELECTED_FALSE);
@@ -280,16 +279,16 @@ public class OvModel extends Identifiable implements IOvModel {
                 }
             }
         } else if (vb instanceof IOvModelVariationPoint && store.get(vb) == CanAssume.ASSUME_SELECTED_TRUE) {
-            IOvModelVariationPoint vp = (IOvModelVariationPoint) vb;
-            List<IOvModelVariationBase> cantDecideMandatoryVbs = this.getVariationBaseElements(vp.getMandatoryChildren(),
+            final IOvModelVariationPoint vp = (IOvModelVariationPoint) vb;
+            final List<IOvModelVariationBase> cantDecideMandatoryVbs = this.getVariationBaseElements(vp.getMandatoryChildren(),
                     store, CanAssume.CANT_ASSUME);
-            List<IOvModelVariationBase> selectedMandatoryVbs = this.getVariationBaseElements(vp.getMandatoryChildren(),
+            final List<IOvModelVariationBase> selectedMandatoryVbs = this.getVariationBaseElements(vp.getMandatoryChildren(),
                     store, CanAssume.ASSUME_SELECTED_TRUE);
-            List<IOvModelVariationBase> selectedOptionalVbs = this.getVariationBaseElements(vp.getOptionalChildren(), store,
+            final List<IOvModelVariationBase> selectedOptionalVbs = this.getVariationBaseElements(vp.getOptionalChildren(), store,
                     CanAssume.ASSUME_SELECTED_TRUE);
-            List<IOvModelVariationBase> cantDecideOptionalVbs = this.getVariationBaseElements(vp.getOptionalChildren(),
+            final List<IOvModelVariationBase> cantDecideOptionalVbs = this.getVariationBaseElements(vp.getOptionalChildren(),
                     store, CanAssume.CANT_ASSUME);
-            long mandatoryCount = selectedMandatoryVbs.size() + cantDecideMandatoryVbs.size();
+            final long mandatoryCount = selectedMandatoryVbs.size() + cantDecideMandatoryVbs.size();
             if (vp.isAlternative()) {
                 if (mandatoryCount + selectedOptionalVbs.size() > vp.getMaxChoices()) {
                     return;
@@ -317,12 +316,12 @@ public class OvModel extends Identifiable implements IOvModel {
         }
     }
 
-    private List<IOvModelVariationBase> getVariationBaseElements(List<? extends IOvModelVariationBase> vb,
-                                                                 Map<IOvModelVariationBase, CanAssume> store, CanAssume enumValue) {
+    private List<IOvModelVariationBase> getVariationBaseElements(final List<? extends IOvModelVariationBase> vb,
+                                                                 final Map<IOvModelVariationBase, CanAssume> store, final CanAssume enumValue) {
         return vb.stream().filter(child -> store.get(child) == enumValue).collect(Collectors.toList());
     }
 
-    private boolean isVirtual(IConfigurable configurable) {
+    private boolean isVirtual(final IConfigurable configurable) {
         return configurable.getName()
                 .contains(DefaultOvModelTransformationProperties.CONSTRAINT_VARIATION_POINT_PREFIX);
     }
@@ -333,7 +332,7 @@ public class OvModel extends Identifiable implements IOvModel {
      * @see Object#equals(Object)
      */
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(final Object obj) {
         if (this == obj) {
             return true;
         }
@@ -343,7 +342,7 @@ public class OvModel extends Identifiable implements IOvModel {
         if (this.getClass() != obj.getClass()) {
             return false;
         }
-        OvModel other = (OvModel) obj;
+        final OvModel other = (OvModel) obj;
         if (this.constraints == null) {
             if (other.constraints != null) {
                 return false;
@@ -384,7 +383,7 @@ public class OvModel extends Identifiable implements IOvModel {
      * @see de.ovgu.featureide.core.ovm.model.base.IOvmModel#getConstraintIndex(de.ovgu.featureide.core.ovm.model.base.IOvmConstraint)
      */
     @Override
-    public int getConstraintIndex(IOvModelConstraint constraint) {
+    public int getConstraintIndex(final IOvModelConstraint constraint) {
         return this.constraints.indexOf(constraint);
     }
 
@@ -404,7 +403,7 @@ public class OvModel extends Identifiable implements IOvModel {
      * @see de.ovgu.featureide.core.ovm.model.base.IOvmModel#setConstraints(Iterable)
      */
     @Override
-    public void setConstraints(Iterable<IOvModelConstraint> constraints) {
+    public void setConstraints(final Iterable<IOvModelConstraint> constraints) {
         this.constraints.clear();
         this.constraints.addAll(Functional.toList(constraints));
     }
@@ -415,15 +414,15 @@ public class OvModel extends Identifiable implements IOvModel {
      * @see de.ovgu.featureide.core.ovm.model.IOvModel#getElement(de.ovgu.featureide.core.ovm.model.IIdentifiable)
      */
     @Override
-    public IOvModelElement getElement(IIdentifiable identifiable) {
+    public IOvModelElement getElement(final IIdentifiable identifiable) {
         IOvModelElement element;
-        for (IOvModelVariationPoint variationPoint : this.variationPoints) {
+        for (final IOvModelVariationPoint variationPoint : this.variationPoints) {
             element = variationPoint.getElement(identifiable);
             if (element != null) {
                 return element;
             }
         }
-        for (IOvModelConstraint constraint : this.constraints) {
+        for (final IOvModelConstraint constraint : this.constraints) {
             element = constraint.getElement(identifiable);
             if (element != null) {
                 return element;
@@ -478,7 +477,7 @@ public class OvModel extends Identifiable implements IOvModel {
      * @see de.ovgu.featureide.core.ovm.model.IOvModel#setSourceFile(String)
      */
     @Override
-    public void setSourceFile(String sourceFile) {
+    public void setSourceFile(final String sourceFile) {
         this.sourceFile = sourceFile;
     }
 
@@ -515,13 +514,13 @@ public class OvModel extends Identifiable implements IOvModel {
     @Override
     public boolean isValid() {
         boolean isValid = true;
-        for (IOvModelVariationPoint variationPoint : this.variationPoints) {
+        for (final IOvModelVariationPoint variationPoint : this.variationPoints) {
             isValid = isValid && variationPoint.isValid(!variationPoint.isOptional());
             if (!isValid) {
                 return false;
             }
         }
-        for (IOvModelConstraint constraint : this.constraints) {
+        for (final IOvModelConstraint constraint : this.constraints) {
             isValid = isValid && constraint.isValid();
             if (!isValid) {
                 return false;
@@ -536,7 +535,7 @@ public class OvModel extends Identifiable implements IOvModel {
      * @see de.ovgu.featureide.core.ovm.model.base.IOvmModel#removeConstraint(int)
      */
     @Override
-    public void removeConstraint(int index) {
+    public void removeConstraint(final int index) {
         this.constraints.remove(index);
     }
 
@@ -546,7 +545,7 @@ public class OvModel extends Identifiable implements IOvModel {
      * @see de.ovgu.featureide.core.ovm.model.base.IOvmModel#removeConstraint(de.ovgu.featureide.core.ovm.model.base.IOvmConstraint)
      */
     @Override
-    public boolean removeConstraint(IOvModelConstraint constraint) {
+    public boolean removeConstraint(final IOvModelConstraint constraint) {
         return this.constraints.remove(constraint);
     }
 
@@ -556,7 +555,7 @@ public class OvModel extends Identifiable implements IOvModel {
      * @see de.ovgu.featureide.core.ovm.model.IOvModel#deleteVariationPoint(de.ovgu.featureide.core.ovm.model.IOvModelVariationPoint)
      */
     @Override
-    public boolean removeVariationPoint(IOvModelVariationPoint variationPoint) {
+    public boolean removeVariationPoint(final IOvModelVariationPoint variationPoint) {
         return this.variationPoints.remove(variationPoint);
     }
 
@@ -567,7 +566,7 @@ public class OvModel extends Identifiable implements IOvModel {
      * int)
      */
     @Override
-    public void replaceConstraint(IOvModelConstraint constraint, int index) {
+    public void replaceConstraint(final IOvModelConstraint constraint, final int index) {
         if (constraint == null) {
             throw new NullPointerException();
         }

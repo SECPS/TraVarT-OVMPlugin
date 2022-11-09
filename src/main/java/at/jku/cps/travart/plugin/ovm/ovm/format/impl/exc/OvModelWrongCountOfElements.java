@@ -14,7 +14,9 @@ public class OvModelWrongCountOfElements extends OvModelSerialisationException {
     private static final long serialVersionUID = 1L;
 
     /**
-     * @param message
+     * @param type
+     * @param expected
+     * @param actual
      */
     public OvModelWrongCountOfElements(String type, int expected, int actual) {
         super("The wrong size of " + type + ". Expected: " + expected + "; Actual: " + actual + ".");

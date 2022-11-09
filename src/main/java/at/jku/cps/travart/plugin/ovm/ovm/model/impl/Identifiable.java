@@ -30,7 +30,7 @@ public abstract class Identifiable implements IIdentifiable {
     /**
      * (non-Javadoc)
      *
-     * @see de.ovgu.featureide.core.ovm.model.IIdentifiable#getInternalId()
+     * @see at.jku.cps.travart.plugin.ovm.ovm.model.IIdentifiable#getInternalId()
      */
     @Override
     public long getInternalId() {
@@ -44,7 +44,7 @@ public abstract class Identifiable implements IIdentifiable {
     /**
      * (non-Javadoc)
      *
-     * @see de.ovgu.featureide.core.ovm.model.IIdentifiable#getName()
+     * @see at.jku.cps.travart.plugin.ovm.ovm.model.IIdentifiable#getName()
      */
     @Override
     public String getName() {
@@ -54,7 +54,7 @@ public abstract class Identifiable implements IIdentifiable {
     /**
      * (non-Javadoc)
      *
-     * @see de.ovgu.featureide.core.ovm.model.IIdentifiable#setName(String)
+     * @see at.jku.cps.travart.plugin.ovm.ovm.model.IIdentifiable#setName(String)
      */
     @Override
     public void setName(String name) {

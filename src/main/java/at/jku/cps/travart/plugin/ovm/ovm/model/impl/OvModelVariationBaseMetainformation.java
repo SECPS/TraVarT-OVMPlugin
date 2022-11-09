@@ -32,7 +32,7 @@ public class OvModelVariationBaseMetainformation implements IOvModelVariationBas
     /**
      * (non-Javadoc)
      *
-     * @see de.ovgu.featureide.core.ovm.model.IOvModelVariationBaseMetainformation#getCustomProperties()
+     * @see at.jku.cps.travart.plugin.ovm.ovm.model.IOvModelVariationBaseMetainformation#getCustomProperties()
      */
     @Override
     public IPropertyContainer getCustomProperties() {
@@ -42,7 +42,7 @@ public class OvModelVariationBaseMetainformation implements IOvModelVariationBas
     /**
      * (non-Javadoc)
      *
-     * @see de.ovgu.featureide.core.ovm.model.IOvModelVariationBaseMetainformation#getDescription()
+     * @see at.jku.cps.travart.plugin.ovm.ovm.model.IOvModelVariationBaseMetainformation#getDescription()
      */
     @Override
     public String getDescription() {
@@ -52,17 +52,17 @@ public class OvModelVariationBaseMetainformation implements IOvModelVariationBas
     /**
      * (non-Javadoc)
      *
-     * @see de.ovgu.featureide.core.ovm.model.IOvModelVariationBaseMetainformation#setDescription(CharSequence)
+     * @see at.jku.cps.travart.plugin.ovm.ovm.model.IOvModelVariationBaseMetainformation#setDescription(String)
      */
     @Override
-    public void setDescription(String description) {
+    public void setDescription(final String description) {
         this.description = description;
     }
 
     /**
      * (non-Javadoc)
      *
-     * @see de.ovgu.featureide.core.ovm.model.IOvModelVariationBaseMetainformation#isAbstract()
+     * @see at.jku.cps.travart.plugin.ovm.ovm.model.IOvModelVariationBaseMetainformation#isAbstract()
      */
     @Override
     public boolean isAbstract() {
@@ -72,17 +72,17 @@ public class OvModelVariationBaseMetainformation implements IOvModelVariationBas
     /**
      * (non-Javadoc)
      *
-     * @see de.ovgu.featureide.core.ovm.model.IOvModelVariationBaseMetainformation#setAbstract(boolean)
+     * @see at.jku.cps.travart.plugin.ovm.ovm.model.IOvModelVariationBaseMetainformation#setAbstract(boolean)
      */
     @Override
-    public void setAbstract(boolean isAbstract) {
+    public void setAbstract(final boolean isAbstract) {
         this.isAbstract = isAbstract;
     }
 
     /**
      * (non-Javadoc)
      *
-     * @see de.ovgu.featureide.core.ovm.model.IOvModelVariationBaseMetainformation#isHidden()
+     * @see at.jku.cps.travart.plugin.ovm.ovm.model.IOvModelVariationBaseMetainformation#isHidden()
      */
     @Override
     public boolean isHidden() {
@@ -92,17 +92,17 @@ public class OvModelVariationBaseMetainformation implements IOvModelVariationBas
     /**
      * (non-Javadoc)
      *
-     * @see de.ovgu.featureide.core.ovm.model.IOvModelVariationBaseMetainformation#setHidden(boolean)
+     * @see at.jku.cps.travart.plugin.ovm.ovm.model.IOvModelVariationBaseMetainformation#setHidden(boolean)
      */
     @Override
-    public void setHidden(boolean hidden) {
+    public void setHidden(final boolean hidden) {
         this.hidden = hidden;
     }
 
     /**
      * (non-Javadoc)
      *
-     * @see de.ovgu.featureide.core.ovm.model.IOvModelVariationBaseMetainformation#isPartOfOvModelRoot()
+     * @see at.jku.cps.travart.plugin.ovm.ovm.model.IOvModelVariationBaseMetainformation#isPartOfOvModelRoot()
      */
     @Override
     public boolean isPartOfOvModelRoot() {
@@ -112,17 +112,17 @@ public class OvModelVariationBaseMetainformation implements IOvModelVariationBas
     /**
      * (non-Javadoc)
      *
-     * @see de.ovgu.featureide.core.ovm.model.IOvModelVariationBaseMetainformation#setPartOfOvModelRoot(boolean)
+     * @see at.jku.cps.travart.plugin.ovm.ovm.model.IOvModelVariationBaseMetainformation#setPartOfOvModelRoot(boolean)
      */
     @Override
-    public void setPartOfOvModelRoot(boolean partOfOvModelRoot) {
+    public void setPartOfOvModelRoot(final boolean partOfOvModelRoot) {
         this.partOfOvModelRoot = partOfOvModelRoot;
     }
 
     /**
      * (non-Javadoc)
      *
-     * @see de.ovgu.featureide.core.ovm.model.IOvModelVariationBaseMetainformation#getReferencedConstraints()
+     * @see at.jku.cps.travart.plugin.ovm.ovm.model.IOvModelVariationBaseMetainformation#getReferencedConstraints()
      */
     @Override
     public List<IOvModelConstraint> getReferencedConstraints() {
@@ -132,10 +132,10 @@ public class OvModelVariationBaseMetainformation implements IOvModelVariationBas
     /**
      * (non-Javadoc)
      *
-     * @see de.ovgu.featureide.core.ovm.model.IOvModelVariationBaseMetainformation#setReferencedConstraints(List)
+     * @see at.jku.cps.travart.plugin.ovm.ovm.model.IOvModelVariationBaseMetainformation#setReferencedConstraints(List)
      */
     @Override
-    public void setReferencedConstraints(List<IOvModelConstraint> referencedConstraints) {
+    public void setReferencedConstraints(final List<IOvModelConstraint> referencedConstraints) {
         this.referencedConstraints = referencedConstraints;
     }
 
@@ -161,7 +161,7 @@ public class OvModelVariationBaseMetainformation implements IOvModelVariationBas
      * @see Object#equals(Object)
      */
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(final Object obj) {
         if (this == obj) {
             return true;
         }
@@ -171,7 +171,7 @@ public class OvModelVariationBaseMetainformation implements IOvModelVariationBas
         if (this.getClass() != obj.getClass()) {
             return false;
         }
-        OvModelVariationBaseMetainformation other = (OvModelVariationBaseMetainformation) obj;
+        final OvModelVariationBaseMetainformation other = (OvModelVariationBaseMetainformation) obj;
         if (this.description == null) {
             if (other.description != null) {
                 return false;
