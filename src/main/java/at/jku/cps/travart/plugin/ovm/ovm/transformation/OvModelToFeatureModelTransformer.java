@@ -1,9 +1,9 @@
 package at.jku.cps.travart.plugin.ovm.ovm.transformation;
 
 import at.jku.cps.travart.core.exception.NotSupportedVariabilityTypeException;
+import at.jku.cps.travart.core.helpers.TraVarTUtils;
 import at.jku.cps.travart.core.transformation.DefaultModelTransformationProperties;
 import at.jku.cps.travart.plugin.ovm.ovm.common.OvModelUtils;
-import at.jku.cps.travart.plugin.ovm.ovm.model.IIdentifiable;
 import at.jku.cps.travart.plugin.ovm.ovm.model.IOvModel;
 import at.jku.cps.travart.plugin.ovm.ovm.model.IOvModelElement;
 import at.jku.cps.travart.plugin.ovm.ovm.model.IOvModelVariant;
@@ -13,29 +13,17 @@ import at.jku.cps.travart.plugin.ovm.ovm.model.constraint.IOvModelConstraint;
 import at.jku.cps.travart.plugin.ovm.ovm.model.constraint.IOvModelExcludesConstraint;
 import at.jku.cps.travart.plugin.ovm.ovm.model.constraint.IOvModelRequiresConstraint;
 import at.jku.cps.travart.plugin.ovm.ovm.transformation.exc.NotSupportedTransformationException;
-import de.ovgu.featureide.fm.core.ExtensionManager.NoSuchExtensionException;
-import de.ovgu.featureide.fm.core.base.FeatureUtils;
-import de.ovgu.featureide.fm.core.base.IConstraint;
-import de.ovgu.featureide.fm.core.base.IFeature;
-import de.ovgu.featureide.fm.core.base.IFeatureModel;
-import de.ovgu.featureide.fm.core.base.IFeatureModelFactory;
-import de.ovgu.featureide.fm.core.base.IFeatureStructure;
-import de.ovgu.featureide.fm.core.base.impl.DefaultFeatureModelFactory;
-import de.ovgu.featureide.fm.core.base.impl.FMFactoryManager;
-import de.ovgu.featureide.fm.core.init.FMCoreLibrary;
-import de.ovgu.featureide.fm.core.init.LibraryManager;
-import org.prop4j.And;
-import org.prop4j.AtLeast;
-import org.prop4j.AtMost;
-import org.prop4j.Choose;
-import org.prop4j.Implies;
-import org.prop4j.Literal;
-import org.prop4j.Node;
-import org.prop4j.Not;
-import org.prop4j.Or;
+import de.vill.model.Attribute;
+import de.vill.model.Feature;
+import de.vill.model.FeatureModel;
+import de.vill.model.Group;
+import de.vill.model.constraint.Constraint;
+import de.vill.model.constraint.ImplicationConstraint;
+import de.vill.model.constraint.LiteralConstraint;
+import de.vill.model.constraint.NotConstraint;
+import org.logicng.formulas.FormulaFactory;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Deque;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -43,236 +31,258 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
+import static at.jku.cps.travart.core.transformation.DefaultModelTransformationProperties.ABSTRACT_ATTRIBUTE;
+import static at.jku.cps.travart.core.transformation.DefaultModelTransformationProperties.HIDDEN_ATTRIBUTE;
+
 /**
- * This transformer transforms an {@link IOvModel} to an {@link IFeatureModel}.
+ * This transformer transforms an {@link IOvModel} to an {@link FeatureModel}.
  *
  * @author johannstoebich
  */
 public class OvModelToFeatureModelTransformer {
-
-    static {
-        LibraryManager.registerLibrary(FMCoreLibrary.getInstance());
-    }
+    private FeatureModel featureModel;
 
     /**
-     * This method transforms an {@link IOvModel} to an {@link IFeatureModel}. The
+     * This method transforms an {@link IOvModel} to an {@link FeatureModel}. The
      * factory which is used for creating the new feature model must be passed in.
      *
      * @param ovModel   the model which should be transformed.
-     * @param factoryTo the factory which is used to create the model.
+     * @param modelName name of the model
      * @return the new feature model
      */
-    public IFeatureModel transform(IOvModel ovModel, String modelName)
+    public FeatureModel transform(final IOvModel ovModel, final String modelName)
             throws NotSupportedVariabilityTypeException {
         try {
-            IFeatureModelFactory factory = FMFactoryManager.getInstance()
-                    .getFactory(DefaultFeatureModelFactory.ID);
-            IFeatureModel featureModel = factory.create();
+            this.featureModel = new FeatureModel();
+            // a constraint memory can be used by virtual constraints because each constraint has to be unique
+            final Map<String, Constraint> constraintMemory = new HashMap<>();
+            final Map<String, IOvModelVariationPoint> featureConstraintMemory = new HashMap<>();
 
-            // a constraint memory can be used by virutal constraints because each
-            // constraint has to be unique
-            Map<String, Node> constraintMemory = new HashMap<>();
-            Map<String, IOvModelVariationPoint> featureConstraintMemory = new HashMap<>();
-
-            featureModel.getProperty().setProperties(OvModelUtils.getCustomPropertiesEntries(ovModel));
-
-            for (IOvModelVariationPoint ovModelVariationPoint : OvModelUtils.getVariationPoints(ovModel)) {
+            for (final IOvModelVariationPoint ovModelVariationPoint : OvModelUtils.getVariationPoints(ovModel)) {
                 if (OvModelUtils.isPartOfOvModelRoot(ovModelVariationPoint)) {
-                    IFeature feature = this.ovModelElementToFeature(ovModelVariationPoint, factory, featureModel);
+                    final Feature feature = this.ovModelElementToFeature(ovModelVariationPoint, this.featureModel);
                     if (feature != null) {
-                        FeatureUtils.addFeature(featureModel, feature);
+                        this.featureModel.getFeatureMap().put(feature.getFeatureName(), feature);
                     }
-                    if (FeatureUtils.getRoot(featureModel) != null
-                            && FeatureUtils.getName(FeatureUtils.getRoot(featureModel))
-                            .equals(DefaultModelTransformationProperties.ARTIFICIAL_MODEL_NAME)) {
-                        IFeature rootFeature = FeatureUtils.getRoot(featureModel);
-                        FeatureUtils.addChild(rootFeature, feature);
-                    } else if (FeatureUtils.getRoot(featureModel) != null) {
-                        IFeature rootFeature = factory.createFeature(featureModel,
-                                DefaultModelTransformationProperties.ARTIFICIAL_MODEL_NAME);
-                        FeatureUtils.addFeature(featureModel, rootFeature);
-                        FeatureUtils.setOr(rootFeature);
-                        FeatureUtils.setAbstract(rootFeature, true);
-                        FeatureUtils.setHidden(rootFeature, true);
-                        FeatureUtils.addChild(rootFeature, FeatureUtils.getRoot(featureModel));
-                        FeatureUtils.addChild(rootFeature, feature);
-                        FeatureUtils.setRoot(featureModel, rootFeature);
+                    if (this.featureModel.getRootFeature() != null
+                            && this.featureModel.getRootFeature().getFeatureName().equals(DefaultModelTransformationProperties.ARTIFICIAL_MODEL_NAME)
+                    ) {
+                        final Feature rootFeature = this.featureModel.getRootFeature();
+                        final Group optionalGroup = new Group(Group.GroupType.OPTIONAL);
+                        optionalGroup.getFeatures().add(feature);
+                        rootFeature.addChildren(optionalGroup);
+                        this.featureModel.getFeatureMap().put(feature.getFeatureName(), feature);
+                        this.featureModel.getFeatureMap().put(rootFeature.getFeatureName(), rootFeature);
+                    } else if (this.featureModel.getRootFeature() != null) {
+                        final Feature rootFeature = new Feature(DefaultModelTransformationProperties.ARTIFICIAL_MODEL_NAME);
+                        rootFeature.getAttributes().put(
+                                ABSTRACT_ATTRIBUTE,
+                                new Attribute<Boolean>(
+                                        ABSTRACT_ATTRIBUTE,
+                                        Boolean.TRUE
+                                )
+                        );
+                        rootFeature.getAttributes().put(
+                                HIDDEN_ATTRIBUTE,
+                                new Attribute<Boolean>(
+                                        HIDDEN_ATTRIBUTE,
+                                        Boolean.TRUE
+                                )
+                        );
+                        final Group orGroup = new Group(Group.GroupType.OR);
+                        orGroup.getFeatures().add(feature);
+                        orGroup.getFeatures().add(this.featureModel.getRootFeature());
+                        rootFeature.addChildren(orGroup);
+                        this.featureModel.getFeatureMap().put(rootFeature.getFeatureName(), rootFeature);
+                        this.featureModel.setRootFeature(rootFeature);
                     } else {
-                        FeatureUtils.setRoot(featureModel, feature);
+                        this.featureModel.setRootFeature(feature);
                     }
                 } else {
                     featureConstraintMemory.put(ovModelVariationPoint.getName(), ovModelVariationPoint);
                 }
             }
 
-            for (IOvModelConstraint ovModelConstraint : OvModelUtils.getConstraints(ovModel)) {
-                Node node = this.elementToNode(ovModelConstraint, factory, featureModel, constraintMemory);
+            for (final IOvModelConstraint ovModelConstraint : OvModelUtils.getConstraints(ovModel)) {
+                final Constraint constraint = this.elementToNode(ovModelConstraint, this.featureModel, constraintMemory);
 
-                if (node != null && !constraintMemory.containsValue(node)) {
-                    IConstraint constraint = factory.createConstraint(featureModel, node);
-                    constraint.setDescription(OvModelUtils.getDescription(ovModelConstraint));
-                    constraint.setName(OvModelUtils.getName(ovModelConstraint));
-                    constraint.getCustomProperties()
-                            .setProperties(OvModelUtils.getCustomPropertiesEntries(ovModelConstraint));
-
-                    FeatureUtils.addConstraint(featureModel, constraint);
+                if (constraint != null && !constraintMemory.containsValue(constraint)) {
+                    this.featureModel.getConstraints().add(constraint);
                 }
             }
 
-            for (IOvModelVariationPoint ovModelVariationPoint : featureConstraintMemory.values()) {
-                Node node = this.elementToNode(ovModelVariationPoint, factory, featureModel, constraintMemory);
+            for (final IOvModelVariationPoint ovModelVariationPoint : featureConstraintMemory.values()) {
+                final Constraint constraint = this.elementToNode(ovModelVariationPoint, this.featureModel, constraintMemory);
 
-                if (node != null && !constraintMemory.containsValue(node)) {
-                    IConstraint constraint = factory.createConstraint(featureModel, node);
-                    constraint.setDescription(OvModelUtils.getDescription(ovModelVariationPoint));
-                    constraint.setName(OvModelUtils.getName(ovModelVariationPoint));
-                    constraint.getCustomProperties()
-                            .setProperties(OvModelUtils.getCustomPropertiesEntries(ovModelVariationPoint));
-
-                    FeatureUtils.addConstraint(featureModel, constraint);
+                if (constraint != null && !constraintMemory.containsValue(constraint)) {
+                    this.featureModel.getConstraints().add(constraint);
                 }
             }
 
-//			if (constraintMemory.size() != 0) {
-//				throw new NotSupportedTransformationException(IOvModelConstraint.class, Node.class);
-//			}
-            return featureModel;
-        } catch (NoSuchExtensionException | NotSupportedTransformationException e) {
+            return this.featureModel;
+        } catch (final NotSupportedTransformationException e) {
             throw new NotSupportedVariabilityTypeException(e);
         }
     }
 
     /**
      * This method transforms an {@link IOvModelVariationBase} to an
-     * {@link IFeature}. The {@link IOvModelVariationBase} should be part of the
-     * root feature tree. Otherwise the method
-     * {@link #variationBaseToNode(IOvModelVariationBase, IFeatureModelFactory, IFeatureModel, Map)}
+     * {@link Feature}. The {@link IOvModelVariationBase} should be part of the
+     * root feature tree. Otherwise, the method
+     * {@link #variationBaseToNode(IOvModelVariationBase, FeatureModel, Map)}
      * should be used.
      *
      * @param ovModelVariationBase the variation base which should be transformed to
      *                             a feature.
-     * @param factory              the factory which is used to create the
-     *                             corresponding features.
      * @param featureModel         the feature model which is build up.
      * @return the new feature
      */
-    private IFeature ovModelElementToFeature(IOvModelVariationBase ovModelVariationBase,
-                                             IFeatureModelFactory factory, IFeatureModel featureModel) {
-
-        IFeature feature = this.findFeatureByName(featureModel.getFeatures(), ovModelVariationBase);
+    private Feature ovModelElementToFeature(
+            final IOvModelVariationBase ovModelVariationBase,
+            final FeatureModel featureModel
+    ) {
+        Feature feature = featureModel.getFeatureMap().get(OvModelUtils.getName(ovModelVariationBase));
         if (feature != null) {
             return feature;
         }
 
-        feature = factory.createFeature(featureModel, OvModelUtils.getName(ovModelVariationBase));
+        feature = new Feature(OvModelUtils.getName(ovModelVariationBase));
         if (ovModelVariationBase instanceof IOvModelVariant) {
-            // Variants added with variant prefix are additional variants added to the
-            // model.
-            if (OvModelUtils.getName(ovModelVariationBase)
-                    .contains(DefaultOvModelTransformationProperties.VARIANT_PREFIX)) {
+            // Variants added with variant prefix are additional variants added to the model.
+            if (OvModelUtils.getName(ovModelVariationBase).contains(DefaultOvModelTransformationProperties.VARIANT_PREFIX)) {
                 return null;
             }
         } else if (ovModelVariationBase instanceof IOvModelVariationPoint) {
-            IOvModelVariationPoint ovModelVariantionPoint = (IOvModelVariationPoint) ovModelVariationBase;
-
-            for (IOvModelVariationBase ovModelVariationBaseMandatoryChild : OvModelUtils
-                    .getMandatoryChildren(ovModelVariantionPoint)) {
-                IFeature mandatoryChild = this.ovModelElementToFeature(ovModelVariationBaseMandatoryChild, factory,
-                        featureModel);
+            final IOvModelVariationPoint ovModelVariationPoint = (IOvModelVariationPoint) ovModelVariationBase;
+            for (final IOvModelVariationBase ovModelVariationBaseMandatoryChild : OvModelUtils.getMandatoryChildren(ovModelVariationPoint)) {
+                final Feature mandatoryChild = this.ovModelElementToFeature(
+                        ovModelVariationBaseMandatoryChild,
+                        featureModel
+                );
                 if (mandatoryChild != null) {
-                    FeatureUtils.addChild(feature, mandatoryChild);
+                    final Group mandatoryGroup = new Group(Group.GroupType.MANDATORY);
+                    mandatoryGroup.getFeatures().add(mandatoryChild);
+                    feature.addChildren(mandatoryGroup);
+                    mandatoryChild.setParentGroup(mandatoryGroup);
+                    featureModel.getFeatureMap().put(mandatoryChild.getFeatureName(), mandatoryChild);
+                    featureModel.getFeatureMap().put(feature.getFeatureName(), feature);
                 }
             }
-            for (IOvModelVariationBase ovModelVariationBaseOptionalChild : OvModelUtils
-                    .getOptionalChildren(ovModelVariantionPoint)) {
-                IFeature optionalChild = this.ovModelElementToFeature(ovModelVariationBaseOptionalChild, factory,
-                        featureModel);
+            for (final IOvModelVariationBase ovModelVariationBaseOptionalChild : OvModelUtils.getOptionalChildren(ovModelVariationPoint)) {
+                final Feature optionalChild = this.ovModelElementToFeature(
+                        ovModelVariationBaseOptionalChild,
+                        featureModel
+                );
                 if (optionalChild != null) {
-                    FeatureUtils.addChild(feature, optionalChild);
+                    final Group optionalGroup = new Group(Group.GroupType.OPTIONAL);
+                    optionalGroup.getFeatures().add(optionalChild);
+                    feature.addChildren(optionalGroup);
+                    optionalChild.setParentGroup(optionalGroup);
+                    featureModel.getFeatureMap().put(optionalChild.getFeatureName(), optionalChild);
+                    featureModel.getFeatureMap().put(feature.getFeatureName(), feature);
                 }
             }
 
-            if (OvModelUtils.isAlternative(ovModelVariantionPoint)) {
-                if (OvModelUtils.getMinChoices(ovModelVariantionPoint) == 1
-                        && OvModelUtils.getMaxChoices(ovModelVariantionPoint) == 1) {
-                    FeatureUtils.setAlternative(feature);
+            if (OvModelUtils.isAlternative(ovModelVariationPoint)) {
+                if (OvModelUtils.getMinChoices(ovModelVariationPoint) == 1 && OvModelUtils.getMaxChoices(ovModelVariationPoint) == 1) {
+                    TraVarTUtils.setGroup(
+                            featureModel,
+                            feature,
+                            feature.getParentFeature(),
+                            Group.GroupType.ALTERNATIVE
+
+                    );
                 } else {
-                    FeatureUtils.setOr(feature);
+                    TraVarTUtils.setGroup(
+                            featureModel,
+                            feature,
+                            feature.getParentFeature(),
+                            Group.GroupType.OR
+
+                    );
+
                 }
             } else {
-                FeatureUtils.setAnd(feature);
+                TraVarTUtils.setGroup(
+                        featureModel,
+                        feature,
+                        feature.getParentFeature(),
+                        Group.GroupType.MANDATORY
+
+                );
             }
         } else {
             throw new NotSupportedTransformationException(ovModelVariationBase.getClass(), IOvModelVariationBase.class);
         }
 
         this.setOvModelVariationBaseProperties(feature, ovModelVariationBase);
-
-        FeatureUtils.addFeature(featureModel, feature);
+        featureModel.getFeatureMap().put(feature.getFeatureName(), feature);
 
         return feature;
     }
 
     /**
      * This is a utility function which either calls
-     * {@link #constraintToNode(IOvModelConstraint, IFeatureModelFactory, IFeatureModel, Map)}
+     * {@link #constraintToNode(IOvModelConstraint, FeatureModel, Map)}
      * or
-     * {@link #variationBaseToNode(IOvModelVariationBase, IFeatureModelFactory, IFeatureModel, Map)}
+     * {@link #variationBaseToNode(IOvModelVariationBase, FeatureModel, Map)}
      * depending on whether it is a constraint, variation point or variant.
      *
      * @param ovModelElement   the element which should be transformed.
-     * @param factory          the factory which is used to create the new features.
      * @param featureModel     the feature model where the already transformed
      *                         constraints are stored.
      * @param constraintMemory a memory which contains the already transformed
      *                         constraints.
      * @return the transformed node.
-     * @throws NotSupportedTransformationException
+     * @throws NotSupportedTransformationException exception
      */
-    private Node elementToNode(IOvModelElement ovModelElement, IFeatureModelFactory factory,
-                               IFeatureModel featureModel, Map<String, Node> constraintMemory)
-            throws NotSupportedTransformationException {
+    private Constraint elementToNode(
+            final IOvModelElement ovModelElement,
+            final FeatureModel featureModel,
+            final Map<String, Constraint> constraintMemory
+    ) throws NotSupportedTransformationException {
         if (ovModelElement instanceof IOvModelConstraint) {
-            return this.constraintToNode((IOvModelConstraint) ovModelElement, factory, featureModel, constraintMemory);
+            return this.constraintToNode((IOvModelConstraint) ovModelElement, featureModel, constraintMemory);
         }
-        return this.variationBaseToNode((IOvModelVariationBase) ovModelElement, factory, featureModel, constraintMemory);
+        return this.variationBaseToNode((IOvModelVariationBase) ovModelElement, featureModel, constraintMemory);
     }
 
     /**
      * This method converts a constraint to a node.
      *
      * @param ovModelConstraint the constraint which should be transformed.
-     * @param factory           the factory which is used to create the new
-     *                          features.
      * @param featureModel      the feature model where the already transformed
      *                          constraints are stored.
      * @param constraintMemory  a memory which contains the already transformed
      *                          constraints.
      * @return the transformed node.
-     * @throws NotSupportedTransformationException
+     * @throws NotSupportedTransformationException exception
      */
-    private Node constraintToNode(IOvModelConstraint ovModelConstraint, IFeatureModelFactory factory,
-                                  IFeatureModel featureModel, Map<String, Node> constraintMemory)
-            throws NotSupportedTransformationException {
-        String sourceName = OvModelUtils.getName(OvModelUtils.getSource(ovModelConstraint));
-        String targetName = OvModelUtils.getName(OvModelUtils.getTarget(ovModelConstraint));
-        Node source = this.elementToNode(OvModelUtils.getSource(ovModelConstraint), factory, featureModel, constraintMemory);
-        Node target = this.elementToNode(OvModelUtils.getTarget(ovModelConstraint), factory, featureModel, constraintMemory);
+    private Constraint constraintToNode(
+            final IOvModelConstraint ovModelConstraint,
+            final FeatureModel featureModel,
+            final Map<String, Constraint> constraintMemory
+    ) throws NotSupportedTransformationException {
+        final String sourceName = OvModelUtils.getName(OvModelUtils.getSource(ovModelConstraint));
+        final String targetName = OvModelUtils.getName(OvModelUtils.getTarget(ovModelConstraint));
+        Constraint source = this.elementToNode(OvModelUtils.getSource(ovModelConstraint), featureModel, constraintMemory);
+        Constraint target = this.elementToNode(OvModelUtils.getTarget(ovModelConstraint), featureModel, constraintMemory);
 
         if (ovModelConstraint instanceof IOvModelExcludesConstraint) {
             // Drop the source if it is an artificial variation point.
             if (sourceName.contains(DefaultOvModelTransformationProperties.CONSTRAINT_VARIATION_POINT_PREFIX)) {
-                Not not = new Not(target);
+                final NotConstraint not = new NotConstraint(target);
                 constraintMemory.put(OvModelUtils.getName(OvModelUtils.getSource(ovModelConstraint)), not);
+
                 return not;
             }
-            return new Implies(source, new Not(target));
+            return new ImplicationConstraint(source, new NotConstraint(target));
         }
         if (!(ovModelConstraint instanceof IOvModelRequiresConstraint)) {
-            throw new NotSupportedTransformationException(ovModelConstraint.getClass(), Node.class.getClass());
+            throw new NotSupportedTransformationException(ovModelConstraint.getClass(), Constraint.class);
         }
         // get source and target from the constraint memory. They will only be found if
-        // they are as well constraints. Otherwise use the alredy
+        // they are as well constraints. Otherwise, use the already
         // converted source and targets.
         if (sourceName.contains(DefaultOvModelTransformationProperties.CONSTRAINT_VARIATION_POINT_PREFIX)
                 && constraintMemory.containsKey(sourceName)) {
@@ -284,85 +294,83 @@ public class OvModelToFeatureModelTransformer {
             target = constraintMemory.get(targetName);
             constraintMemory.remove(targetName);
         }
-        Implies implies = new Implies(source, target);
-        return implies;
+        return new ImplicationConstraint(source, target);
     }
 
     /**
      * This method transforms a variation base to a node. The variation base should
      * not be part of the model root. For features which are part of the model root
      * the method
-     * {@link #ovModelElementToFeature(IOvModelVariationBase, IFeatureModelFactory, IFeatureModel)}
+     * {@link #ovModelElementToFeature(IOvModelVariationBase, FeatureModel)}
      * should be used.
      *
      * @param ovModelVariationBase the variation base which should be transformed.
-     * @param factory              the factory which is used to create the new
-     *                             features.
      * @param featureModel         the feature model where the already transformed
      *                             constraints are stored.
      * @param constraintMemory     a memory which contains the already transformed
      *                             constraints.
      * @return the corresponding node of a variation point base.
-     * @throws NotSupportedTransformationException
+     * @throws NotSupportedTransformationException exception
      */
-    private Node variationBaseToNode(IOvModelVariationBase ovModelVariationBase,
-                                     IFeatureModelFactory factory, IFeatureModel featureModel,
-                                     Map<String, Node> constraintMemory) throws NotSupportedTransformationException {
+    private Constraint variationBaseToNode(
+            final IOvModelVariationBase ovModelVariationBase,
+            final FeatureModel featureModel,
+            final Map<String, Constraint> constraintMemory
+    ) throws NotSupportedTransformationException {
         if (ovModelVariationBase instanceof IOvModelVariant) {
-
-            IFeature var = this.ovModelElementToFeature(ovModelVariationBase, factory, featureModel);
+            final Feature var = this.ovModelElementToFeature(ovModelVariationBase, featureModel);
             if (var != null) {
-                Literal literal = new Literal(var.getName());
-                return literal;
+                return new LiteralConstraint(var.getFeatureName());
             }
             return null;
 
         }
         if (!(ovModelVariationBase instanceof IOvModelVariationPoint)) {
-            throw new NotSupportedTransformationException(ovModelVariationBase.getClass(), Node.class);
+            throw new NotSupportedTransformationException(ovModelVariationBase.getClass(), Constraint.class);
         }
-        IOvModelVariationPoint ovModelVariationPoint = (IOvModelVariationPoint) ovModelVariationBase;
+        final IOvModelVariationPoint ovModelVariationPoint = (IOvModelVariationPoint) ovModelVariationBase;
         // if there is a variation point which is part of root it must be a literal
-        // (cannot come from an constraint).
+        // (cannot come from a constraint).
         if (OvModelUtils.isPartOfOvModelRoot(ovModelVariationPoint)) {
-            IFeature var = this.ovModelElementToFeature(ovModelVariationBase, factory, featureModel);
+            final Feature var = this.ovModelElementToFeature(ovModelVariationBase, featureModel);
             if (var != null) {
-                Literal literal = new Literal(var.getName());
-                return literal;
+                return new LiteralConstraint(var.getFeatureName());
             }
-            throw new NotSupportedTransformationException(ovModelVariationBase.getClass(), Node.class);
+            throw new NotSupportedTransformationException(ovModelVariationBase.getClass(), Constraint.class);
         }
 
-        List<IOvModelVariationBase> ovModelChildren = new ArrayList<>();
+        final List<IOvModelVariationBase> ovModelChildren = new ArrayList<>();
         ovModelChildren.addAll(OvModelUtils.getMandatoryChildren(ovModelVariationPoint));
         ovModelChildren.addAll(OvModelUtils.getOptionalChildren(ovModelVariationPoint));
 
-        List<Node> children = new ArrayList<>();
-        List<IOvModelConstraint> foundConstraints = new ArrayList<>();
-        for (IOvModelVariationBase ovModelChild : ovModelChildren) {
+        final List<Constraint> children = new ArrayList<>();
+        final List<IOvModelConstraint> foundConstraints = new ArrayList<>();
+        for (final IOvModelVariationBase ovModelChild : ovModelChildren) {
 
-            Node element;
+            final Constraint element;
             if (constraintMemory.containsKey(ovModelChild.getName())) {
                 element = constraintMemory.get(ovModelChild.getName());
                 constraintMemory.remove(ovModelChild.getName());
             } else {
-                element = this.elementToNode(ovModelChild, factory, featureModel, constraintMemory);
+                element = this.elementToNode(ovModelChild, featureModel, constraintMemory);
             }
-            // on suspicion if there is a constraint used this. Either of these two cases
-            // can lead to invalid models.
-            List<IConstraint> constraintsWhereElementIsContained = this.getConstraintsWhereElementIsContained(
-                    featureModel.getConstraints(), element, true);
+            // on suspicion if there is a constraint used this. Either of these two cases can lead to invalid models.
+            final List<Constraint> constraintsWhereElementIsContained = this.getConstraintsWhereFeatureIsContained(
+                    featureModel.getConstraints(),
+                    element,
+                    Boolean.TRUE
+            );
 
             boolean found = false;
-            for (IOvModelConstraint ovModelConstraint : OvModelUtils
-                    .getReferencedConstraints(ovModelVariationPoint)) {
-                for (IConstraint constraint : constraintsWhereElementIsContained) {
-                    if (Objects.equals(constraint.getName(), OvModelUtils.getName(ovModelConstraint))) {
-                        if (found) { // for each ovModelChild at maximum one constraint should be found.
-                            throw new NotSupportedTransformationException(IOvModelConstraint.class, IConstraint.class);
+            for (final IOvModelConstraint ovModelConstraint : OvModelUtils.getReferencedConstraints(ovModelVariationPoint)) {
+                for (final Constraint constraint : constraintsWhereElementIsContained) {
+                    if (Objects.equals(constraint.toString(), OvModelUtils.getName(ovModelConstraint))) {
+                        if (found) {
+                            // for each ovModelChild at maximum one constraint should be found.
+                            throw new NotSupportedTransformationException(IOvModelConstraint.class, Constraint.class);
                         }
-                        children.add(constraint.getNode());
-                        featureModel.removeConstraint(constraint);
+                        children.add(constraint);
+                        featureModel.getConstraints().remove(constraint);
                         found = true;
                         foundConstraints.add(ovModelConstraint);
                     }
@@ -375,16 +383,15 @@ public class OvModelToFeatureModelTransformer {
 
         // all referenced constraints have to be found
         if (foundConstraints.size() != OvModelUtils.getReferencedConstraints(ovModelVariationPoint).size()) {
-            throw new NotSupportedTransformationException(IOvModelConstraint.class, IConstraint.class);
+            throw new NotSupportedTransformationException(IOvModelConstraint.class, Constraint.class);
         }
 
         // determine type of the node
-        if (OvModelUtils.getMinChoices(ovModelVariationPoint) == children.size()
-                && OvModelUtils.getMaxChoices(ovModelVariationPoint) == children.size()) {
+        if (OvModelUtils.getMinChoices(ovModelVariationPoint) == children.size() && OvModelUtils.getMaxChoices(ovModelVariationPoint) == children.size()) {
+            // if children size == 1 then mandatory
             return new And(children);
         }
-        if (OvModelUtils.getMinChoices(ovModelVariationPoint) == 1
-                && OvModelUtils.getMaxChoices(ovModelVariationPoint) == children.size()) {
+        if (OvModelUtils.getMinChoices(ovModelVariationPoint) == 1 && OvModelUtils.getMaxChoices(ovModelVariationPoint) == children.size()) {
             return new Or(children);
         }
         if (OvModelUtils.getMaxChoices(ovModelVariationPoint) == children.size()) {
@@ -396,16 +403,15 @@ public class OvModelToFeatureModelTransformer {
         if (OvModelUtils.getMinChoices(ovModelVariationPoint) == OvModelUtils.getMaxChoices(ovModelVariationPoint)
                 && OvModelUtils.getMinChoices(ovModelVariationPoint) != -1) {
             return new Choose(OvModelUtils.getMinChoices(ovModelVariationPoint), children);
-        } else if (children.size() == 1 && children.stream().allMatch(t -> t == null)) {
-            IFeature var = this.ovModelElementToFeature(ovModelVariationBase, factory, featureModel);
+        } else if (children.size() == 1 && children.stream().allMatch(Objects::isNull)) {
+            final Feature var = this.ovModelElementToFeature(ovModelVariationBase, featureModel);
             if (var != null) {
-                Literal literal = new Literal(var.getName());
-                return literal;
+                return new LiteralConstraint(var.getFeatureName());
             } else {
-                throw new NotSupportedTransformationException(ovModelVariationBase.getClass(), Node.class);
+                throw new NotSupportedTransformationException(ovModelVariationBase.getClass(), Constraint.class);
             }
         } else {
-            throw new NotSupportedTransformationException(ovModelVariationBase.getClass(), Node.class);
+            throw new NotSupportedTransformationException(ovModelVariationBase.getClass(), Constraint.class);
         }
     }
 
@@ -416,49 +422,34 @@ public class OvModelToFeatureModelTransformer {
      *                             set.
      * @param ovModelVariationBase the variation base.
      */
-    private void setOvModelVariationBaseProperties(IFeature feature,
-                                                   IOvModelVariationBase ovModelVariationBase) {
-        FeatureUtils.setMandatory(feature, !OvModelUtils.isOptional(ovModelVariationBase));
-        FeatureUtils.setHidden(feature, OvModelUtils.isHidden(ovModelVariationBase));
+    private void setOvModelVariationBaseProperties(
+            final Feature feature, final IOvModelVariationBase ovModelVariationBase
+    ) {
 
-        FeatureUtils.setDescription(feature, OvModelUtils.getDescription(ovModelVariationBase));
-        FeatureUtils.setAbstract(feature, OvModelUtils.isAbstract(ovModelVariationBase));
-        feature.getCustomProperties().setProperties(OvModelUtils.getCustomPropertiesEntries(ovModelVariationBase));
-    }
-
-    /**
-     * This method iterates over all given features to find a feature which matches
-     * a specific identifier.
-     *
-     * @param features             the features which should be looked threw.
-     * @param ovModelVariationBase the identifier for which the feature should be
-     *                             found.
-     * @return returns the searched feature or null if the feature is not found.
-     */
-    private IFeature findFeatureByName(Collection<IFeature> features, IIdentifiable ovModelVariationBase) {
-
-        Deque<IFeature> stack = new LinkedList<>();
-        stack.addAll(features);
-
-        while (!stack.isEmpty()) {
-            IFeature featureToInspect = stack.pop();
-
-            if (featureToInspect.getStructure().getChildren() != null) {
-                for (IFeatureStructure childFeatureStructureToInspect : featureToInspect.getStructure()
-                        .getChildren()) {
-                    IFeature childStructureToInspect = childFeatureStructureToInspect.getFeature();
-                    stack.push(childStructureToInspect);
-
-                    if (Objects.equals(FeatureUtils.getName(childStructureToInspect),
-                            OvModelUtils.getName(ovModelVariationBase))) {
-                        return childStructureToInspect;
-                    }
-                }
-            }
-
+        if (!OvModelUtils.isOptional(ovModelVariationBase)) {
+            final Feature parent = feature.getParentFeature();
+            feature.getParentGroup().getFeatures().remove(feature);
+            final Group mandatoryGroup = new Group(Group.GroupType.MANDATORY);
+            mandatoryGroup.getFeatures().add(feature);
+            parent.addChildren(mandatoryGroup);
+            this.featureModel.getFeatureMap().put(feature.getFeatureName(), feature);
+            this.featureModel.getFeatureMap().put(parent.getFeatureName(), parent);
         }
+        feature.getAttributes().put(
+                HIDDEN_ATTRIBUTE,
+                new Attribute<Boolean>(
+                        HIDDEN_ATTRIBUTE,
+                        OvModelUtils.isHidden(ovModelVariationBase)
+                )
+        );
 
-        return null;
+        feature.getAttributes().put(
+                ABSTRACT_ATTRIBUTE,
+                new Attribute<Boolean>(
+                        ABSTRACT_ATTRIBUTE,
+                        OvModelUtils.isAbstract(ovModelVariationBase)
+                )
+        );
     }
 
     /**
@@ -467,26 +458,38 @@ public class OvModelToFeatureModelTransformer {
      * @param constraints the constraints which should be searched threw.
      * @param element     the element which should be found.
      * @param isSource    if <code>true</code>, only the sources of the constraints
-     *                    will be checked. Otherwise source and target will be
+     *                    will be checked. Otherwise, source and target will be
      *                    checked.
      * @return The constraints where the element occurs.
      */
-    private List<IConstraint> getConstraintsWhereElementIsContained(List<IConstraint> constraints,
-                                                                    Node element, boolean isSource) {
-        List<IConstraint> constraintsWithElement = new ArrayList<>();
+    private List<Constraint> getConstraintsWhereFeatureIsContained(
+            final List<Constraint> constraints,
+
+            final Constraint element,
+            final boolean isSource
+    ) {
+        final List<Constraint> constraintsWithElement = new ArrayList<>();
+
+        // todo: check if works properly or not doesn't make much sense tbh
 
         constraintLoop:
-        for (IConstraint constraint : constraints) {
+        for (final Constraint constraint : constraints) {
+            final Constraint cnfConstraint = TraVarTUtils.buildConstraintFromFormula(
+                    TraVarTUtils.buildFormulaFromConstraint(
+                            constraint,
+                            new FormulaFactory()
+                    ).cnf()
+            );
 
-            Deque<Node> stack = new LinkedList<>();
-            stack.push(constraint.getNode());
+            final Deque<Constraint> stack = new LinkedList<>();
+            stack.push(cnfConstraint);
 
             nodeLoop:
             while (!stack.isEmpty()) {
-                Node nodeToInspect = stack.pop();
+                final Constraint nodeToInspect = stack.pop();
 
-                if (nodeToInspect.getChildren() != null) {
-                    for (Node childToInspect : nodeToInspect.getChildren()) {
+                if (nodeToInspect.getConstraintSubParts() != null) {
+                    for (final Constraint childToInspect : nodeToInspect.getConstraintSubParts()) {
                         stack.push(childToInspect);
 
                         if (childToInspect.equals(element)) {
