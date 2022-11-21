@@ -200,10 +200,7 @@ public class FeatureModelToOvModelTransformer {
     ) throws NotSupportedTransformationException {
         IOvModelElement constraint = null;
 
-        if (
-                node instanceof AndConstraint || node instanceof OrConstraint
-            //|| node instanceof AtLeast || node instanceof AtMost || node instanceof Choose
-        ) {
+        if (node instanceof AndConstraint || node instanceof OrConstraint) {
             final List<IOvModelVariationBase> ovChildren = new ArrayList<>();
             final IOvModelVariationPoint ovModelVariationPoint = factory.createVariationPoint(
                     ovModel,
@@ -228,7 +225,6 @@ public class FeatureModelToOvModelTransformer {
             }
 
             this.setOvModelVariationBaseProperties(ovModelVariationPoint, node);
-
             OvModelUtils.setAlternative(ovModelVariationPoint, !(node instanceof AndConstraint));
 
             if (hasConstraint) {
@@ -237,35 +233,18 @@ public class FeatureModelToOvModelTransformer {
 
             if (node instanceof AndConstraint) {
                 OvModelUtils.setMandatoryChildren(ovModelVariationPoint, ovChildren);
-            } else if (node instanceof OrConstraint) {
-                OvModelUtils.setOptionalChildren(ovModelVariationPoint, ovChildren);
             } else {
                 OvModelUtils.setOptionalChildren(ovModelVariationPoint, ovChildren);
             }
 
             if (node instanceof AndConstraint) {
                 OvModelUtils.setMinChoices(ovModelVariationPoint, ovChildren.size());
-                OvModelUtils.setMaxChoices(ovModelVariationPoint, ovChildren.size());
-            } else if (node instanceof OrConstraint) {
+            } else {
+                // if OrConstraint
                 // 22.06. OvModelUtils.setMinChoices(ovModelVariationPoint, 0);
                 OvModelUtils.setMinChoices(ovModelVariationPoint, 1);
-                OvModelUtils.setMaxChoices(ovModelVariationPoint, ovChildren.size());
             }
-
-            // TODO
-            //            else if (node instanceof AtLeast) {
-            //                final AtLeast atLeast = (AtLeast) node;
-            //                OvModelUtils.setMinChoices(ovModelVariationPoint, atLeast.min);
-            //                OvModelUtils.setMaxChoices(ovModelVariationPoint, ovChildren.size());
-            //            } else if (node instanceof AtMost) {
-            //                final AtMost atMost = (AtMost) node;
-            //                OvModelUtils.setMinChoices(ovModelVariationPoint, 0);
-            //                OvModelUtils.setMaxChoices(ovModelVariationPoint, atMost.max);
-            //            } else if (node instanceof Choose) {
-            //                final Choose choose = (Choose) node;
-            //                OvModelUtils.setMinChoices(ovModelVariationPoint, choose.n);
-            //                OvModelUtils.setMaxChoices(ovModelVariationPoint, choose.n);
-            //            }
+            OvModelUtils.setMaxChoices(ovModelVariationPoint, ovChildren.size());
         } else if (node instanceof LiteralConstraint) {
             final LiteralConstraint literal = (LiteralConstraint) node;
 

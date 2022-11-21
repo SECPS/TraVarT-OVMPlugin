@@ -323,7 +323,6 @@ public class OvModelToFeatureModelTransformer {
                 return new LiteralConstraint(var.getFeatureName());
             }
             return null;
-
         }
         if (!(ovModelVariationBase instanceof IOvModelVariationPoint)) {
             throw new NotSupportedTransformationException(ovModelVariationBase.getClass(), Constraint.class);
@@ -346,7 +345,6 @@ public class OvModelToFeatureModelTransformer {
         final List<Constraint> children = new ArrayList<>();
         final List<IOvModelConstraint> foundConstraints = new ArrayList<>();
         for (final IOvModelVariationBase ovModelChild : ovModelChildren) {
-
             final Constraint element;
             if (constraintMemory.containsKey(ovModelChild.getName())) {
                 element = constraintMemory.get(ovModelChild.getName());
@@ -387,23 +385,23 @@ public class OvModelToFeatureModelTransformer {
         }
 
         // determine type of the node
-        if (OvModelUtils.getMinChoices(ovModelVariationPoint) == children.size() && OvModelUtils.getMaxChoices(ovModelVariationPoint) == children.size()) {
-            // if children size == 1 then mandatory
-            return new And(children);
-        }
-        if (OvModelUtils.getMinChoices(ovModelVariationPoint) == 1 && OvModelUtils.getMaxChoices(ovModelVariationPoint) == children.size()) {
-            return new Or(children);
-        }
-        if (OvModelUtils.getMaxChoices(ovModelVariationPoint) == children.size()) {
-            return new AtLeast(OvModelUtils.getMinChoices(ovModelVariationPoint), children);
-        }
-        if (OvModelUtils.getMinChoices(ovModelVariationPoint) == 0) {
-            return new AtMost(OvModelUtils.getMaxChoices(ovModelVariationPoint), children);
-        }
-        if (OvModelUtils.getMinChoices(ovModelVariationPoint) == OvModelUtils.getMaxChoices(ovModelVariationPoint)
-                && OvModelUtils.getMinChoices(ovModelVariationPoint) != -1) {
-            return new Choose(OvModelUtils.getMinChoices(ovModelVariationPoint), children);
-        } else if (children.size() == 1 && children.stream().allMatch(Objects::isNull)) {
+        // TODO: Most probably no longer needed as already handled while converting the VP to Features
+//        if (OvModelUtils.getMinChoices(ovModelVariationPoint) == children.size() && OvModelUtils.getMaxChoices(ovModelVariationPoint) == children.size()) {
+//            return new And(children);
+//        }
+//        if (OvModelUtils.getMinChoices(ovModelVariationPoint) == 1 && OvModelUtils.getMaxChoices(ovModelVariationPoint) == children.size()) {
+//            return new Or(children);
+//        }
+//        if (OvModelUtils.getMaxChoices(ovModelVariationPoint) == children.size()) {
+//            return new AtLeast(OvModelUtils.getMinChoices(ovModelVariationPoint), children);
+//        }
+//        if (OvModelUtils.getMinChoices(ovModelVariationPoint) == 0) {
+//            return new AtMost(OvModelUtils.getMaxChoices(ovModelVariationPoint), children);
+//        }
+//        if (OvModelUtils.getMinChoices(ovModelVariationPoint) == OvModelUtils.getMaxChoices(ovModelVariationPoint) && OvModelUtils.getMinChoices(ovModelVariationPoint) != -1) {
+//            return new Choose(OvModelUtils.getMinChoices(ovModelVariationPoint), children);
+//        } else
+        if (children.size() == 1 && children.stream().allMatch(Objects::isNull)) {
             final Feature var = this.ovModelElementToFeature(ovModelVariationBase, featureModel);
             if (var != null) {
                 return new LiteralConstraint(var.getFeatureName());
