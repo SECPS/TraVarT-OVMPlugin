@@ -8,10 +8,6 @@ import at.jku.cps.travart.plugin.ovm.ovm.model.IOvModelVariationBase;
 import at.jku.cps.travart.plugin.ovm.ovm.model.IOvModelVariationPoint;
 import at.jku.cps.travart.plugin.ovm.ovm.model.constraint.IOvModelConstraint;
 import at.jku.cps.travart.plugin.ovm.ovm.transformation.DefaultOvModelTransformationProperties;
-import de.ovgu.featureide.fm.core.base.IPropertyContainer;
-import de.ovgu.featureide.fm.core.base.IPropertyContainer.Entry;
-import de.vill.model.Feature;
-import de.vill.model.FeatureModel;
 import de.vill.model.constraint.Constraint;
 
 import java.util.ArrayList;
@@ -19,7 +15,6 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
@@ -38,7 +33,7 @@ public class OvModelUtils {
      *                returned.
      * @return the list of variation points.
      */
-    public static List<IOvModelVariationPoint> getVariationPoints(IOvModel ovModel) {
+    public static List<IOvModelVariationPoint> getVariationPoints(final IOvModel ovModel) {
         return ovModel.getVariationPoints();
     }
 
@@ -49,7 +44,7 @@ public class OvModelUtils {
      *                will be returned.
      * @return the list of virtual variation points.
      */
-    public static List<IOvModelVariationPoint> getVirtualVariationPoints(IOvModel ovModel) {
+    public static List<IOvModelVariationPoint> getVirtualVariationPoints(final IOvModel ovModel) {
         return ovModel.getVariationPoints().stream()
                 .filter(
                         vp -> vp.getName().startsWith(DefaultOvModelTransformationProperties.CONSTRAINT_VARIATION_POINT_PREFIX)
@@ -64,7 +59,7 @@ public class OvModelUtils {
      *                              point will be added.
      * @param ovModelVariationPoint the variation point which is added.
      */
-    public static void addVariationPoint(IOvModel ovModel, IOvModelVariationPoint ovModelVariationPoint) {
+    public static void addVariationPoint(final IOvModel ovModel, final IOvModelVariationPoint ovModelVariationPoint) {
         ovModel.addVariationPoint(ovModelVariationPoint);
     }
 
@@ -74,7 +69,7 @@ public class OvModelUtils {
      * @param ovModel the OvModel for which the constraints will be returned.
      * @return the list of of constraints.
      */
-    public static List<IOvModelConstraint> getConstraints(IOvModel ovModel) {
+    public static List<IOvModelConstraint> getConstraints(final IOvModel ovModel) {
         return ovModel.getConstraints();
     }
 
@@ -86,49 +81,8 @@ public class OvModelUtils {
      *                          be added.
      * @param ovModelConstraint the constraint which is added.
      */
-    public static void addConstraint(IOvModel ovModel, IOvModelConstraint ovModelConstraint) {
+    public static void addConstraint(final IOvModel ovModel, final IOvModelConstraint ovModelConstraint) {
         ovModel.addConstraint(ovModelConstraint);
-    }
-
-    /**
-     * This method returns the custom properties of the {@link IOvModel}. The custom
-     * properties represent additional properties of an {@link IOvModel} overtaken
-     * from the {@link FeatureModel}. They have been added so that no information
-     * will be lost during transformation.
-     *
-     * @param ovModel the {@link IOvModel} for which the properties will be
-     *                returned.
-     * @return the custom properties of the ovModel.
-     */
-    public static IPropertyContainer getCustomProperties(IOvModel ovModel) {
-        return ovModel.getMetainformation().getCustomProperties();
-    }
-
-    /**
-     * This method returns the custom properties of the {@link IOvModel} as a set.
-     * The custom properties represent additional properties of an {@link IOvModel}
-     * overtaken from the {@link FeatureModel}. They have been added so that no
-     * information will be lost during transformation.
-     *
-     * @param ovModel the {@link IOvModel} for which the properties will be
-     *                returned.
-     * @return the custom properties of the ovModel as a set.
-     */
-    public static Set<Entry> getCustomPropertiesEntries(IOvModel ovModel) {
-        return ovModel.getMetainformation().getCustomProperties().getProperties();
-    }
-
-    /**
-     * This method sets the properties of the OvModel. The custom properties
-     * represent additional properties of an {@link IOvModel} overtaken from the
-     * {@link FeatureModel}. They have been added so that no information will be
-     * lost during transformation.
-     *
-     * @param ovModel    the {@link IOvModel} for which the properties will be set.
-     * @param properties the properties which will be set.
-     */
-    public static void setCustomPropertiesEntries(IOvModel ovModel, Set<Entry> properties) {
-        ovModel.getMetainformation().getCustomProperties().setProperties(properties);
     }
 
     /**
@@ -139,7 +93,7 @@ public class OvModelUtils {
      *                     returned.
      * @return the name of the identifiable.
      */
-    public static String getName(IIdentifiable identifiable) {
+    public static String getName(final IIdentifiable identifiable) {
         return identifiable.getName();
     }
 
@@ -150,7 +104,7 @@ public class OvModelUtils {
      * @param identifiable the {@link IIdentifiable} for which the name will be set.
      * @param name         the name.
      */
-    public static void setName(IIdentifiable identifiable, String name) {
+    public static void setName(final IIdentifiable identifiable, final String name) {
         if (name != null && !"".contentEquals(name)) {
             identifiable.setName(name);
         }
@@ -163,7 +117,7 @@ public class OvModelUtils {
      *                          returned.
      * @return The description of the constraint
      */
-    public static String getDescription(IOvModelConstraint ovModelConstraint) {
+    public static String getDescription(final IOvModelConstraint ovModelConstraint) {
         return ovModelConstraint.getMetainformation().getDescription();
     }
 
@@ -174,98 +128,8 @@ public class OvModelUtils {
      *                          set.
      * @param description       the description which will be set.
      */
-    public static void setDescription(IOvModelConstraint ovModelConstraint, String description) {
+    public static void setDescription(final IOvModelConstraint ovModelConstraint, final String description) {
         ovModelConstraint.getMetainformation().setDescription(description);
-    }
-
-    /**
-     * This method returns the custom properties of a variation base (variation
-     * point or variant). The custom properties represent additional properties of a
-     * variation base overtaken from an {@link Feature} during transformation. They
-     * have been added to a variation base so that no information will be lost
-     * during transformation.
-     *
-     * @param ovModelVariationBase the variation base (variation point or variant)
-     *                             for which the properties will be returned.
-     * @return The returned properties.
-     */
-    public static IPropertyContainer getCustomProperties(IOvModelVariationBase ovModelVariationBase) {
-        return ovModelVariationBase.getMetainformation().getCustomProperties();
-    }
-
-    /**
-     * This method returns the custom properties of a variation base (variation
-     * point or variant) as a set. The custom properties represent additional
-     * properties of a variation base overtaken from an {@link Feature} during
-     * transformation. They have been added to a variation base so that no
-     * information will be lost during transformation.
-     *
-     * @param ovModelVariationBase the variation base (variation point or variant)
-     *                             for which the properties will be returned as a
-     *                             set.
-     * @return The returned properties.
-     */
-    public static Set<Entry> getCustomPropertiesEntries(IOvModelVariationBase ovModelVariationBase) {
-        return ovModelVariationBase.getMetainformation().getCustomProperties().getProperties();
-    }
-
-    /**
-     * This method sets the properties of a variation base (variation point or
-     * variant). The custom properties represent additional properties of a
-     * variation base overtaken from an {@link Feature} during transformation. They
-     * have been added to a variation base so that no information will be lost
-     * during transformation.
-     *
-     * @param ovModelVariationBase the variation base (variation point or variant)
-     *                             where the properties will be set.
-     * @param properties           the properties which will be set.
-     */
-    public static void setCustomPropertiesEntries(IOvModelVariationBase ovModelVariationBase,
-                                                  Set<Entry> properties) {
-        ovModelVariationBase.getMetainformation().getCustomProperties().setProperties(properties);
-    }
-
-    /**
-     * This method returns the custom properties of a constraint. The custom
-     * properties represent additional properties of a constraint overtaken from a
-     * feature model {@link Constraint}. They have been added to a constraint so
-     * that no information will be lost during transformation.
-     *
-     * @param ovModelConstraint the variation base (variation point or variant)
-     *                          for which the properties will be returned.
-     * @return The returned properties.
-     */
-    public static IPropertyContainer getCustomProperties(IOvModelConstraint ovModelConstraint) {
-        return ovModelConstraint.getMetainformation().getCustomProperties();
-    }
-
-    /**
-     * This method returns the custom properties of a constraint as a set. The
-     * custom properties represent additional properties of a constraint overtaken
-     * from a feature model {@link Constraint}. They have been added to a
-     * constraint so that no information will be lost during transformation.
-     *
-     * @param ovModelConstraint the variation base (variation point or variant)
-     *                          for which the properties will be returned as a
-     *                          set.
-     * @return The returned properties.
-     */
-    public static Set<Entry> getCustomPropertiesEntries(IOvModelConstraint ovModelConstraint) {
-        return ovModelConstraint.getMetainformation().getCustomProperties().getProperties();
-    }
-
-    /**
-     * This method sets the properties of a constraint. The custom properties
-     * represent additional properties of a constraint overtaken from a feature
-     * model {@link Constraint} during transformation. They have been added to a
-     * constraint so that no information will be lost during transformation.
-     *
-     * @param ovModelConstraint the constraint where the properties will be set.
-     * @param properties        the properties which will be set.
-     */
-    public static void setCustomPropertiesEntries(IOvModelConstraint ovModelConstraint,
-                                                  Set<Entry> properties) {
-        ovModelConstraint.getMetainformation().getCustomProperties().setProperties(properties);
     }
 
     /**
@@ -276,7 +140,7 @@ public class OvModelUtils {
      *                             for which the description will be returned.
      * @return The description of the variaton base.
      */
-    public static String getDescription(IOvModelVariationBase ovModelVariationBase) {
+    public static String getDescription(final IOvModelVariationBase ovModelVariationBase) {
         return ovModelVariationBase.getMetainformation().getDescription();
     }
 
@@ -288,13 +152,13 @@ public class OvModelUtils {
      *                             for which the description will be set.
      * @param description          the description which will be set.
      */
-    public static void setDescription(IOvModelVariationBase ovModelVariationBase, String description) {
+    public static void setDescription(final IOvModelVariationBase ovModelVariationBase, final String description) {
         ovModelVariationBase.getMetainformation().setDescription(description);
     }
 
     /**
      * This method returns the referenced constraints. If a variation point came
-     * from a feature model {@link IConstraint} and its child have been transformed
+     * from a feature model {@link Constraint} and its child have been transformed
      * to an {@link IOvModel} constraint, this constraint is referenced here. This
      * is required for reconstructing the feature model from the corresponding
      * OvModel correctly.
@@ -303,9 +167,9 @@ public class OvModelUtils {
      *                             for which the constraints will be returned.
      * @return the constraints which are referenced.
      * @see OvModelUtils#isPartOfOvModelRoot(IOvModelVariationBase) to determine if
-     * a variation point came from a feature model {@link IConstraint}.
+     * a variation point came from a feature model {@link Constraint}.
      */
-    public static List<IOvModelConstraint> getReferencedConstraints(IOvModelVariationBase ovModelVariationBase) {
+    public static List<IOvModelConstraint> getReferencedConstraints(final IOvModelVariationBase ovModelVariationBase) {
         if (ovModelVariationBase.getMetainformation().getReferencedConstraints() == null) {
             ovModelVariationBase.getMetainformation().setReferencedConstraints(new ArrayList<IOvModelConstraint>());
         }
@@ -315,7 +179,7 @@ public class OvModelUtils {
     /**
      * This method adds a referenced constraint to a variation base (variation point
      * or variant). If a variation point came from a feature model
-     * {@link IConstraint} and its child have been transformed to an
+     * {@link Constraint} and its child have been transformed to an
      * {@link IOvModel} constraint, this constraint is referenced here. This is
      * required for reconstructing the feature model from the corresponding OvModel
      * correctly.
@@ -324,12 +188,12 @@ public class OvModelUtils {
      *                             where the constraint will be added.
      * @param ovModelConstraint    the constraint which will be added.
      * @see OvModelUtils#isPartOfOvModelRoot(IOvModelVariationBase) to determine if
-     * a variation point came from a feature model {@link IConstraint}.
+     * a variation point came from a feature model {@link Constraint}.
      */
-    public static void addReferencedConstraint(IOvModelVariationBase ovModelVariationBase,
-                                               IOvModelConstraint ovModelConstraint) {
+    public static void addReferencedConstraint(final IOvModelVariationBase ovModelVariationBase,
+                                               final IOvModelConstraint ovModelConstraint) {
         if (ovModelVariationBase.getMetainformation().getReferencedConstraints() == null) {
-            ovModelVariationBase.getMetainformation().setReferencedConstraints(new ArrayList<IOvModelConstraint>());
+            ovModelVariationBase.getMetainformation().setReferencedConstraints(new ArrayList<>());
         }
         ovModelVariationBase.getMetainformation().getReferencedConstraints().add(ovModelConstraint);
     }
@@ -343,7 +207,7 @@ public class OvModelUtils {
      *                             where it will be returned.
      * @return the property partOfModelRoot.
      */
-    public static boolean isPartOfOvModelRoot(IOvModelVariationBase ovModelVariationBase) {
+    public static boolean isPartOfOvModelRoot(final IOvModelVariationBase ovModelVariationBase) {
         return ovModelVariationBase.getMetainformation().isPartOfOvModelRoot();
     }
 
@@ -357,8 +221,8 @@ public class OvModelUtils {
      *                             where the property will be set.
      * @param partOfOvModelRoot    the value of the parameter.
      */
-    public static void setPartOfOvModelRoot(IOvModelVariationBase ovModelVariationBase,
-                                            boolean partOfOvModelRoot) {
+    public static void setPartOfOvModelRoot(final IOvModelVariationBase ovModelVariationBase,
+                                            final boolean partOfOvModelRoot) {
         ovModelVariationBase.getMetainformation().setPartOfOvModelRoot(partOfOvModelRoot);
     }
 
@@ -369,7 +233,7 @@ public class OvModelUtils {
      *                             where the property will returned.
      * @return the property abstract.
      */
-    public static boolean isAbstract(IOvModelVariationBase ovModelVariationBase) {
+    public static boolean isAbstract(final IOvModelVariationBase ovModelVariationBase) {
         return ovModelVariationBase.getMetainformation().isAbstract();
     }
 
@@ -380,7 +244,7 @@ public class OvModelUtils {
      *                             where the property will be set.
      * @param isAbstract           the value which will be set.
      */
-    public static void setAbstract(IOvModelVariationBase ovModelVariationBase, boolean isAbstract) {
+    public static void setAbstract(final IOvModelVariationBase ovModelVariationBase, final boolean isAbstract) {
         ovModelVariationBase.getMetainformation().setAbstract(isAbstract);
     }
 
@@ -391,7 +255,7 @@ public class OvModelUtils {
      *                             where the property will returned.
      * @return the property optional.
      */
-    public static boolean isOptional(IOvModelVariationBase ovModelVariationBase) {
+    public static boolean isOptional(final IOvModelVariationBase ovModelVariationBase) {
         return ovModelVariationBase.isOptional();
     }
 
@@ -402,7 +266,7 @@ public class OvModelUtils {
      *                             where the property will be set.
      * @param optional             the value which will be set.
      */
-    public static void setOptional(IOvModelVariationBase ovModelVariationBase, boolean optional) {
+    public static void setOptional(final IOvModelVariationBase ovModelVariationBase, final boolean optional) {
         ovModelVariationBase.setOptional(optional);
     }
 
@@ -413,7 +277,7 @@ public class OvModelUtils {
      *                             where the property will returned.
      * @return the property hidden.
      */
-    public static boolean isHidden(IOvModelVariationBase ovModelVariationBase) {
+    public static boolean isHidden(final IOvModelVariationBase ovModelVariationBase) {
         return ovModelVariationBase.getMetainformation().isHidden();
     }
 
@@ -424,7 +288,7 @@ public class OvModelUtils {
      *                             where the property will be set.
      * @param hidden               the value which will be set.
      */
-    public static void setHidden(IOvModelVariationBase ovModelVariationBase, boolean hidden) {
+    public static void setHidden(final IOvModelVariationBase ovModelVariationBase, final boolean hidden) {
         ovModelVariationBase.getMetainformation().setHidden(hidden);
     }
 
@@ -436,7 +300,7 @@ public class OvModelUtils {
      *                              returned.
      * @return <code>true</code> if there are mandatory children.
      */
-    public static boolean hasMandatoryChildren(IOvModelVariationPoint ovModelVariationPoint) {
+    public static boolean hasMandatoryChildren(final IOvModelVariationPoint ovModelVariationPoint) {
         return ovModelVariationPoint.hasMandatoryChildren();
     }
 
@@ -448,7 +312,7 @@ public class OvModelUtils {
      *                              returned.
      * @return the amount of mandatory children.
      */
-    public static int getMandatoryChildrenCount(IOvModelVariationPoint ovModelVariationPoint) {
+    public static int getMandatoryChildrenCount(final IOvModelVariationPoint ovModelVariationPoint) {
         return ovModelVariationPoint.getMandatoryChildrenCount();
     }
 
@@ -459,7 +323,7 @@ public class OvModelUtils {
      *                              returned.
      * @return the list of mandatory children.
      */
-    public static List<IOvModelVariationBase> getMandatoryChildren(IOvModelVariationPoint ovModelVariationPoint) {
+    public static List<IOvModelVariationBase> getMandatoryChildren(final IOvModelVariationPoint ovModelVariationPoint) {
         if (ovModelVariationPoint.getMandatoryChildren() == null) {
             ovModelVariationPoint.setMandatoryChildren(new ArrayList<IOvModelVariationBase>());
         }
@@ -474,8 +338,8 @@ public class OvModelUtils {
      *                              children will be set.
      * @param ovChildren            the new list of mandatory children.
      */
-    public static void setMandatoryChildren(IOvModelVariationPoint ovModelVariationPoint,
-                                            List<IOvModelVariationBase> ovChildren) {
+    public static void setMandatoryChildren(final IOvModelVariationPoint ovModelVariationPoint,
+                                            final List<IOvModelVariationBase> ovChildren) {
         ovModelVariationPoint.setMandatoryChildren(new ArrayList<>(ovChildren));
     }
 
@@ -486,8 +350,8 @@ public class OvModelUtils {
      *                              added.
      * @param ovChild               the child which should be added.
      */
-    public static void addMandatoryChild(IOvModelVariationPoint ovModelVariationPoint,
-                                         IOvModelVariationBase ovChild) {
+    public static void addMandatoryChild(final IOvModelVariationPoint ovModelVariationPoint,
+                                         final IOvModelVariationBase ovChild) {
         if (ovModelVariationPoint.getMandatoryChildren() == null) {
             ovModelVariationPoint.setMandatoryChildren(new ArrayList<IOvModelVariationBase>());
         }
@@ -502,7 +366,7 @@ public class OvModelUtils {
      *                              returned.
      * @return <code>true</code> if there are optional children.
      */
-    public static boolean hasOptionalChildren(IOvModelVariationPoint ovModelVariationPoint) {
+    public static boolean hasOptionalChildren(final IOvModelVariationPoint ovModelVariationPoint) {
         return ovModelVariationPoint.hasOptionalChildren();
     }
 
@@ -514,7 +378,7 @@ public class OvModelUtils {
      *                              returned.
      * @return the amount of optional children.
      */
-    public static int getOptionalChildrenCount(IOvModelVariationPoint ovModelVariationPoint) {
+    public static int getOptionalChildrenCount(final IOvModelVariationPoint ovModelVariationPoint) {
         return ovModelVariationPoint.getOptionalChildrenCount();
     }
 
@@ -525,7 +389,7 @@ public class OvModelUtils {
      *                              returned.
      * @return the list of optional children.
      */
-    public static List<IOvModelVariationBase> getOptionalChildren(IOvModelVariationPoint ovModelVariationPoint) {
+    public static List<IOvModelVariationBase> getOptionalChildren(final IOvModelVariationPoint ovModelVariationPoint) {
         if (ovModelVariationPoint.getOptionalChildren() == null) {
             ovModelVariationPoint.setOptionalChildren(new ArrayList<IOvModelVariationBase>());
         }
@@ -540,8 +404,8 @@ public class OvModelUtils {
      *                              children will be set.
      * @param ovChildren            the new list of optional children.
      */
-    public static void setOptionalChildren(IOvModelVariationPoint ovModelVariationPoint,
-                                           List<IOvModelVariationBase> ovChildren) {
+    public static void setOptionalChildren(final IOvModelVariationPoint ovModelVariationPoint,
+                                           final List<IOvModelVariationBase> ovChildren) {
         ovModelVariationPoint.setOptionalChildren(new ArrayList<>(ovChildren));
     }
 
@@ -552,8 +416,8 @@ public class OvModelUtils {
      *                              added.
      * @param ovChild               the child which should be added.
      */
-    public static void addOptionalChild(IOvModelVariationPoint ovModelVariationPoint,
-                                        IOvModelVariationBase ovChild) {
+    public static void addOptionalChild(final IOvModelVariationPoint ovModelVariationPoint,
+                                        final IOvModelVariationBase ovChild) {
         if (ovModelVariationPoint.getOptionalChildren() == null) {
             ovModelVariationPoint.setOptionalChildren(new ArrayList<IOvModelVariationBase>());
         }
@@ -567,7 +431,7 @@ public class OvModelUtils {
      *                              returned.
      * @return the property alternative.
      */
-    public static boolean isAlternative(IOvModelVariationPoint ovModelVariationPoint) {
+    public static boolean isAlternative(final IOvModelVariationPoint ovModelVariationPoint) {
         return ovModelVariationPoint.isAlternative();
     }
 
@@ -579,7 +443,7 @@ public class OvModelUtils {
      *                              set.
      * @param alternative           the value which will be set.
      */
-    public static void setAlternative(IOvModelVariationPoint ovModelVariationPoint, boolean alternative) {
+    public static void setAlternative(final IOvModelVariationPoint ovModelVariationPoint, final boolean alternative) {
         ovModelVariationPoint.setAlternative(alternative);
     }
 
@@ -593,7 +457,7 @@ public class OvModelUtils {
      *                              returned.
      * @return <code>true</code> if the property min choices is defined.
      */
-    public static boolean hasMinChoices(IOvModelVariationPoint ovModelVariationPoint) {
+    public static boolean hasMinChoices(final IOvModelVariationPoint ovModelVariationPoint) {
         return ovModelVariationPoint.hasMinChoices();
     }
 
@@ -605,7 +469,7 @@ public class OvModelUtils {
      *                              returned.
      * @return the minimum amount of choices.
      */
-    public static int getMinChoices(IOvModelVariationPoint ovModelVariationPoint) {
+    public static int getMinChoices(final IOvModelVariationPoint ovModelVariationPoint) {
         return ovModelVariationPoint.getMinChoices();
     }
 
@@ -618,7 +482,7 @@ public class OvModelUtils {
      *                              set.
      * @param min                   the value which will be set.
      */
-    public static void setMinChoices(IOvModelVariationPoint ovModelVariationPoint, int min) {
+    public static void setMinChoices(final IOvModelVariationPoint ovModelVariationPoint, final int min) {
         ovModelVariationPoint.setMinChoices(min);
     }
 
@@ -632,7 +496,7 @@ public class OvModelUtils {
      *                              returned.
      * @return <code>true</code> if the property max choices is defined.
      */
-    public static boolean hasMaxChoices(IOvModelVariationPoint ovModelVariationPoint) {
+    public static boolean hasMaxChoices(final IOvModelVariationPoint ovModelVariationPoint) {
         return ovModelVariationPoint.hasMaxChoices();
     }
 
@@ -644,7 +508,7 @@ public class OvModelUtils {
      *                              returned.
      * @return the maximum amount of choices.
      */
-    public static int getMaxChoices(IOvModelVariationPoint ovModelVariationPoint) {
+    public static int getMaxChoices(final IOvModelVariationPoint ovModelVariationPoint) {
         return ovModelVariationPoint.getMaxChoices();
     }
 
@@ -657,7 +521,7 @@ public class OvModelUtils {
      *                              set.
      * @param max                   the value which will be set.
      */
-    public static void setMaxChoices(IOvModelVariationPoint ovModelVariationPoint, int max) {
+    public static void setMaxChoices(final IOvModelVariationPoint ovModelVariationPoint, final int max) {
         ovModelVariationPoint.setMaxChoices(max);
     }
 
@@ -668,7 +532,7 @@ public class OvModelUtils {
      * @param ovModelConstraint the constraint where the property will be returned.
      * @return the source of the variation base (variation point or variant).
      */
-    public static IOvModelVariationBase getSource(IOvModelConstraint ovModelConstraint) {
+    public static IOvModelVariationBase getSource(final IOvModelConstraint ovModelConstraint) {
         return ovModelConstraint.getSource();
     }
 
@@ -680,7 +544,7 @@ public class OvModelUtils {
      * @param source            the source as variation base (variation point or
      *                          variant) of the constraint.
      */
-    public static void setSource(IOvModelConstraint ovModelConstraint, IOvModelVariationBase source) {
+    public static void setSource(final IOvModelConstraint ovModelConstraint, final IOvModelVariationBase source) {
         ovModelConstraint.setSource(source);
     }
 
@@ -692,7 +556,7 @@ public class OvModelUtils {
      * @return the target of the constraint as variation base (variation point or
      * variant).
      */
-    public static IOvModelVariationBase getTarget(IOvModelConstraint ovModelConstraint) {
+    public static IOvModelVariationBase getTarget(final IOvModelConstraint ovModelConstraint) {
         return ovModelConstraint.getTarget();
     }
 
@@ -704,23 +568,23 @@ public class OvModelUtils {
      * @param target            the target variation base (variation point or
      *                          variant) of the constraint.
      */
-    public static void setTarget(IOvModelConstraint ovModelConstraint, IOvModelVariationBase target) {
+    public static void setTarget(final IOvModelConstraint ovModelConstraint, final IOvModelVariationBase target) {
         ovModelConstraint.setTarget(target);
     }
 
-    public static Map<IConfigurable, Boolean> getIConfigurable(IOvModel ovModel) {
-        Map<IConfigurable, Boolean> configurables = new HashMap<>();
+    public static Map<IConfigurable, Boolean> getIConfigurable(final IOvModel ovModel) {
+        final Map<IConfigurable, Boolean> configurables = new HashMap<>();
         fillListConfigurable(ovModel.getVariationPoints(), configurables);
-        for (IOvModelConstraint constraint : ovModel.getConstraints()) {
+        for (final IOvModelConstraint constraint : ovModel.getConstraints()) {
             fillListConfigurable(Arrays.asList(constraint.getSource()), configurables);
             fillListConfigurable(Arrays.asList(constraint.getTarget()), configurables);
         }
         return configurables;
     }
 
-    private static void fillListConfigurable(List<? extends IOvModelVariationBase> ovModelElements,
-                                             Map<IConfigurable, Boolean> configurables) {
-        for (IOvModelVariationBase ovModelVariationBase : ovModelElements) {
+    private static void fillListConfigurable(final List<? extends IOvModelVariationBase> ovModelElements,
+                                             final Map<IConfigurable, Boolean> configurables) {
+        for (final IOvModelVariationBase ovModelVariationBase : ovModelElements) {
             if (!configurables.containsKey(ovModelVariationBase)) {
                 configurables.put(ovModelVariationBase, ovModelVariationBase.isSelected());
             }
@@ -745,33 +609,33 @@ public class OvModelUtils {
      * @param logger  the logger to write to.
      * @param ovModel the model to print the statistics from.
      */
-    public static void logModelStatistics(Logger logger, IOvModel ovModel) {
+    public static void logModelStatistics(final Logger logger, final IOvModel ovModel) {
         logger.log(Level.INFO, String.format("#Variation Points: %s", countVariationPoints(ovModel)));
         logger.log(Level.INFO, String.format("#Variants: %s", countVariants(ovModel)));
         logger.log(Level.INFO, String.format("#Constraints: %s", ovModel.getConstraintCount()));
     }
 
-    public static long getNumberOfVariationPoints(IOvModel ovModel) {
+    public static long getNumberOfVariationPoints(final IOvModel ovModel) {
         return countVariationPoints(ovModel);
     }
 
-    public static long getNumberOfVariants(IOvModel ovModel) {
+    public static long getNumberOfVariants(final IOvModel ovModel) {
         return countVariants(ovModel);
     }
 
-    public static long getNumberOfConstraints(IOvModel ovModel) {
+    public static long getNumberOfConstraints(final IOvModel ovModel) {
         return ovModel.getConstraintCount();
     }
 
-    private static long countVariants(IOvModel ovModel) {
+    private static long countVariants(final IOvModel ovModel) {
         return countVariantsRec(ovModel.getVariationPoints());
     }
 
-    private static long countVariantsRec(List<? extends IOvModelVariationBase> ovModelElements) {
+    private static long countVariantsRec(final List<? extends IOvModelVariationBase> ovModelElements) {
         long counter = 0;
-        for (IOvModelVariationBase ovModelVariationBase : ovModelElements) {
+        for (final IOvModelVariationBase ovModelVariationBase : ovModelElements) {
             if (ovModelVariationBase instanceof IOvModelVariationPoint) {
-                IOvModelVariationPoint vp = (IOvModelVariationPoint) ovModelVariationBase;
+                final IOvModelVariationPoint vp = (IOvModelVariationPoint) ovModelVariationBase;
                 counter += countVariantsRec(vp.getMandatoryChildren());
                 counter += countVariantsRec(vp.getOptionalChildren());
             }
@@ -782,16 +646,16 @@ public class OvModelUtils {
         return counter;
     }
 
-    private static long countVariationPoints(IOvModel ovModel) {
+    private static long countVariationPoints(final IOvModel ovModel) {
         return countVariationPointsRec(ovModel.getVariationPoints());
     }
 
-    private static long countVariationPointsRec(List<? extends IOvModelVariationBase> ovModelElements) {
+    private static long countVariationPointsRec(final List<? extends IOvModelVariationBase> ovModelElements) {
         long counter = 0;
-        for (IOvModelVariationBase ovModelVariationBase : ovModelElements) {
+        for (final IOvModelVariationBase ovModelVariationBase : ovModelElements) {
             if (ovModelVariationBase instanceof IOvModelVariationPoint) {
                 counter++;
-                IOvModelVariationPoint vp = (IOvModelVariationPoint) ovModelVariationBase;
+                final IOvModelVariationPoint vp = (IOvModelVariationPoint) ovModelVariationBase;
                 counter += countVariationPointsRec(vp.getMandatoryChildren());
                 counter += countVariationPointsRec(vp.getOptionalChildren());
             }

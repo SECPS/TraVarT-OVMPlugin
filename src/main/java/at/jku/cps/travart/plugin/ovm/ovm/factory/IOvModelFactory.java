@@ -6,7 +6,6 @@ import at.jku.cps.travart.plugin.ovm.ovm.model.IOvModelVariant;
 import at.jku.cps.travart.plugin.ovm.ovm.model.IOvModelVariationPoint;
 import at.jku.cps.travart.plugin.ovm.ovm.model.constraint.IOvModelExcludesConstraint;
 import at.jku.cps.travart.plugin.ovm.ovm.model.constraint.IOvModelRequiresConstraint;
-import de.ovgu.featureide.fm.core.base.IFactory;
 
 /**
  * The factories which produce new OvModels or items of an {@link IOvModel}

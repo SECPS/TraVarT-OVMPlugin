@@ -1,8 +1,5 @@
 package at.jku.cps.travart.plugin.ovm.ovm.model;
 
-import de.ovgu.featureide.fm.core.base.IFeatureModel;
-import de.ovgu.featureide.fm.core.base.IPropertyContainer;
-
 /**
  * Manages all additional properties of an {@link IOvModel}. The metainformation
  * stores all information which is defined for a feature model in FeatureIDE
@@ -10,17 +7,6 @@ import de.ovgu.featureide.fm.core.base.IPropertyContainer;
  * solely the description and the properties are stored.
  */
 public interface IOvModelMetainformation {
-
-    /**
-     * This method returns the custom properties of the {@link IOvModel}. The custom
-     * properties represent additional properties of an {@link IOvModel} overtaken
-     * from the {@link IFeatureModel} during transformation. They have been added so
-     * that no information will be lost during transformation.
-     *
-     * @return the custom properties of the ovModel.
-     */
-    IPropertyContainer getCustomProperties();
-
     /**
      * This method returns the description of an {@link IOvModel}.
      *

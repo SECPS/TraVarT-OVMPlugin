@@ -19,7 +19,7 @@ public interface IOvModelVariationBase extends IOvModelElement, IValidateInterna
      *
      * @return the metainformation.
      */
-    IOvModelVariationBaseMetainformation getMetainformation();
+    IOvModelVariationBaseMetaInformation getMetainformation();
 
     /**
      * This method sets the metainformation of a variation base (variation point or
@@ -29,7 +29,7 @@ public interface IOvModelVariationBase extends IOvModelElement, IValidateInterna
      *
      * @param metaInformation the metainformation which should be overwritten.
      */
-    void setMetaInformation(IOvModelVariationBaseMetainformation metaInformation);
+    void setMetaInformation(IOvModelVariationBaseMetaInformation metaInformation);
 
     /**
      * This method returns the property optional. The property optional is not part

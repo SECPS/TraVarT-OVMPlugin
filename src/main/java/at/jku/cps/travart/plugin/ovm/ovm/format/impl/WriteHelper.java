@@ -9,7 +9,7 @@ import at.jku.cps.travart.plugin.ovm.ovm.model.IOvModelElement;
 import at.jku.cps.travart.plugin.ovm.ovm.model.IOvModelMetainformation;
 import at.jku.cps.travart.plugin.ovm.ovm.model.IOvModelVariant;
 import at.jku.cps.travart.plugin.ovm.ovm.model.IOvModelVariationBase;
-import at.jku.cps.travart.plugin.ovm.ovm.model.IOvModelVariationBaseMetainformation;
+import at.jku.cps.travart.plugin.ovm.ovm.model.IOvModelVariationBaseMetaInformation;
 import at.jku.cps.travart.plugin.ovm.ovm.model.IOvModelVariationPoint;
 import at.jku.cps.travart.plugin.ovm.ovm.model.constraint.IOvModelConstraint;
 import at.jku.cps.travart.plugin.ovm.ovm.model.constraint.IOvModelConstraintMetainformation;
@@ -68,10 +68,10 @@ public class WriteHelper {
      * @param doc     the document to which the {@link IOvModel} should be written.
      * @throws OvModelSerialisationException
      */
-    public static void writeModel(IOvModel ovModel, Document doc) throws OvModelSerialisationException {
-        List<IOvModelElement> alreadySerialisedElements = new ArrayList<>();
+    public static void writeModel(final IOvModel ovModel, final Document doc) throws OvModelSerialisationException {
+        final List<IOvModelElement> alreadySerialisedElements = new ArrayList<>();
 
-        Element ovModelElement = doc.createElement(OV_MODEL);
+        final Element ovModelElement = doc.createElement(OV_MODEL);
         doc.appendChild(ovModelElement);
 
         writeProperties(ovModel, ovModelElement, alreadySerialisedElements);
@@ -83,8 +83,8 @@ public class WriteHelper {
         // write variant points of constraints after the constraints itself which will
         // leads to nicer serialization
         // (because they can then refer to constraints with a Reference).
-        List<IOvModelVariationPoint> variantPointsNotPartOfRoot = new ArrayList<>();
-        for (IOvModelVariationPoint variationPoint : OvModelUtils.getVariationPoints(ovModel)) {
+        final List<IOvModelVariationPoint> variantPointsNotPartOfRoot = new ArrayList<>();
+        for (final IOvModelVariationPoint variationPoint : OvModelUtils.getVariationPoints(ovModel)) {
             if (OvModelUtils.isPartOfOvModelRoot(variationPoint)) {
                 write(variationPoint, ovModelElement, alreadySerialisedElements);
             } else {
@@ -92,7 +92,7 @@ public class WriteHelper {
             }
         }
 
-        for (IOvModelConstraint constraints : OvModelUtils.getConstraints(ovModel)) {
+        for (final IOvModelConstraint constraints : OvModelUtils.getConstraints(ovModel)) {
             if (constraints instanceof IOvModelExcludesConstraint) {
                 write((IOvModelExcludesConstraint) constraints, ovModelElement, alreadySerialisedElements);
             } else {
@@ -102,7 +102,7 @@ public class WriteHelper {
 
         // write variant points of constraints after the constraints itself which will
         // leads to nicer serialization.
-        for (IOvModelVariationPoint variationPoint : variantPointsNotPartOfRoot) {
+        for (final IOvModelVariationPoint variationPoint : variantPointsNotPartOfRoot) {
             write(variationPoint, ovModelElement, alreadySerialisedElements);
         }
     }
@@ -120,7 +120,7 @@ public class WriteHelper {
      *                                  to already serialized elements).
      * @throws OvModelSerialisationException
      */
-    private static void write(IOvModelElement object, Node node, Collection<IOvModelElement> alreadySerialisedElements)
+    private static void write(final IOvModelElement object, final Node node, final Collection<IOvModelElement> alreadySerialisedElements)
             throws OvModelSerialisationException {
 
         if (object instanceof IOvModelVariant) {
@@ -147,15 +147,15 @@ public class WriteHelper {
      *                                  to already serialized elements).
      * @throws OvModelSerialisationException
      */
-    public static void write(IOvModelVariant object, Node node, Collection<IOvModelElement> alreadySerialisedElements)
+    public static void write(final IOvModelVariant object, final Node node, final Collection<IOvModelElement> alreadySerialisedElements)
             throws OvModelSerialisationException {
         if (alreadySerialisedElements.contains(object)) {
-            Element ovModelVariantReference = node.getOwnerDocument().createElement(OV_MODEL_VARIANT_REFERENCE);
+            final Element ovModelVariantReference = node.getOwnerDocument().createElement(OV_MODEL_VARIANT_REFERENCE);
             node.appendChild(ovModelVariantReference);
 
             writeProperties((IIdentifiable) object, ovModelVariantReference, alreadySerialisedElements);
         } else {
-            Element ovModelVariant = node.getOwnerDocument().createElement(OV_MODEL_VARIANT);
+            final Element ovModelVariant = node.getOwnerDocument().createElement(OV_MODEL_VARIANT);
             node.appendChild(ovModelVariant);
 
             writeProperties(object, ovModelVariant, alreadySerialisedElements);
@@ -176,45 +176,45 @@ public class WriteHelper {
      *                                  to already serialized elements).
      * @throws OvModelSerialisationException
      */
-    public static void write(IOvModelVariationPoint object, Node node,
-                             Collection<IOvModelElement> alreadySerialisedElements) throws OvModelSerialisationException {
+    public static void write(final IOvModelVariationPoint object, final Node node,
+                             final Collection<IOvModelElement> alreadySerialisedElements) throws OvModelSerialisationException {
         if (alreadySerialisedElements.contains(object)) {
-            Element ovModelVariantReference = node.getOwnerDocument()
+            final Element ovModelVariantReference = node.getOwnerDocument()
                     .createElement(OV_MODEL_VARIATION_POINT_REFERENCE);
             node.appendChild(ovModelVariantReference);
 
             writeProperties((IIdentifiable) object, ovModelVariantReference, alreadySerialisedElements);
         } else {
 
-            Element ovModelVariationPoint = node.getOwnerDocument().createElement(OV_MODEL_VARIATION_POINT);
+            final Element ovModelVariationPoint = node.getOwnerDocument().createElement(OV_MODEL_VARIATION_POINT);
             node.appendChild(ovModelVariationPoint);
 
             writeProperties(object, ovModelVariationPoint, alreadySerialisedElements);
 
-            Attr alternative = node.getOwnerDocument().createAttribute(ALTERNATIVE);
+            final Attr alternative = node.getOwnerDocument().createAttribute(ALTERNATIVE);
             alternative.setValue(String.valueOf(OvModelUtils.isAlternative(object)));
             ovModelVariationPoint.setAttributeNode(alternative);
 
-            Attr minChoices = node.getOwnerDocument().createAttribute(MIN_CHOICES);
+            final Attr minChoices = node.getOwnerDocument().createAttribute(MIN_CHOICES);
             minChoices.setValue(String.valueOf(OvModelUtils.getMinChoices(object)));
             ovModelVariationPoint.setAttributeNode(minChoices);
 
-            Attr maxChoices = node.getOwnerDocument().createAttribute(MAX_CHOICES);
+            final Attr maxChoices = node.getOwnerDocument().createAttribute(MAX_CHOICES);
             maxChoices.setValue(String.valueOf(OvModelUtils.getMaxChoices(object)));
             ovModelVariationPoint.setAttributeNode(maxChoices);
 
             if (OvModelUtils.getMandatoryChildren(object).size() > 0) {
-                Element ovMandatoryChildren = node.getOwnerDocument().createElement(MANDATORY_CHILDREN);
+                final Element ovMandatoryChildren = node.getOwnerDocument().createElement(MANDATORY_CHILDREN);
                 ovModelVariationPoint.appendChild(ovMandatoryChildren);
-                for (IOvModelVariationBase mandatoryChildren : OvModelUtils.getMandatoryChildren(object)) {
+                for (final IOvModelVariationBase mandatoryChildren : OvModelUtils.getMandatoryChildren(object)) {
                     write(mandatoryChildren, ovMandatoryChildren, alreadySerialisedElements);
                 }
             }
 
             if (OvModelUtils.getOptionalChildren(object).size() > 0) {
-                Element ovOptionalChildren = node.getOwnerDocument().createElement(OPTIONAL_CHILDREN);
+                final Element ovOptionalChildren = node.getOwnerDocument().createElement(OPTIONAL_CHILDREN);
                 ovModelVariationPoint.appendChild(ovOptionalChildren);
-                for (IOvModelVariationBase optionalChildren : OvModelUtils.getOptionalChildren(object)) {
+                for (final IOvModelVariationBase optionalChildren : OvModelUtils.getOptionalChildren(object)) {
                     write(optionalChildren, ovOptionalChildren, alreadySerialisedElements);
                 }
             }
@@ -234,12 +234,12 @@ public class WriteHelper {
      *                                  to already serialized elements).
      * @throws OvModelSerialisationException
      */
-    public static void write(IOvModelMetainformation object, Node node,
-                             Collection<IOvModelElement> alreadySerialisedElements) {
-        Element ovModelMetainformation = node.getOwnerDocument().createElement(OV_MODEL_METAINFORMATION);
+    public static void write(final IOvModelMetainformation object, final Node node,
+                             final Collection<IOvModelElement> alreadySerialisedElements) {
+        final Element ovModelMetainformation = node.getOwnerDocument().createElement(OV_MODEL_METAINFORMATION);
         node.appendChild(ovModelMetainformation);
 
-        Attr description = node.getOwnerDocument().createAttribute(DESCRIPTION);
+        final Attr description = node.getOwnerDocument().createAttribute(DESCRIPTION);
         description.setValue(object.getDescription());
         ovModelMetainformation.setAttributeNode(description);
 
@@ -247,7 +247,7 @@ public class WriteHelper {
     }
 
     /**
-     * This method writes an {@link IOvModelVariationBaseMetainformation} to an
+     * This method writes an {@link IOvModelVariationBaseMetaInformation} to an
      * XML-{@link Node}.
      *
      * @param object                    the content which should be written.
@@ -258,32 +258,32 @@ public class WriteHelper {
      *                                  to already serialized elements).
      * @throws OvModelSerialisationException
      */
-    public static void write(IOvModelVariationBaseMetainformation object, Node node,
-                             Collection<IOvModelElement> alreadySerialisedElements) throws OvModelSerialisationException {
-        Element ovModelMetainformation = node.getOwnerDocument()
+    public static void write(final IOvModelVariationBaseMetaInformation object, final Node node,
+                             final Collection<IOvModelElement> alreadySerialisedElements) throws OvModelSerialisationException {
+        final Element ovModelMetainformation = node.getOwnerDocument()
                 .createElement(OV_MODEL_VARIATION_BASE_METAINFORMATION);
         node.appendChild(ovModelMetainformation);
 
-        Attr attAbstract = node.getOwnerDocument().createAttribute(ABSTRACT);
+        final Attr attAbstract = node.getOwnerDocument().createAttribute(ABSTRACT);
         attAbstract.setValue(String.valueOf(object.isAbstract()));
         ovModelMetainformation.setAttributeNode(attAbstract);
 
-        Attr hidden = node.getOwnerDocument().createAttribute(HIDDEN);
+        final Attr hidden = node.getOwnerDocument().createAttribute(HIDDEN);
         hidden.setValue(String.valueOf(object.isHidden()));
         ovModelMetainformation.setAttributeNode(hidden);
 
-        Attr partOfOvModelRoot = node.getOwnerDocument().createAttribute(PART_OF_OVMODEL_ROOT);
+        final Attr partOfOvModelRoot = node.getOwnerDocument().createAttribute(PART_OF_OVMODEL_ROOT);
         partOfOvModelRoot.setValue(String.valueOf(object.isPartOfOvModelRoot()));
         ovModelMetainformation.setAttributeNode(partOfOvModelRoot);
 
-        Attr description = node.getOwnerDocument().createAttribute(DESCRIPTION);
+        final Attr description = node.getOwnerDocument().createAttribute(DESCRIPTION);
         description.setValue(object.getDescription());
         ovModelMetainformation.setAttributeNode(description);
 
         if (object.getReferencedConstraints() != null && object.getReferencedConstraints().size() > 0) {
-            Element referencedConstraints = node.getOwnerDocument().createElement(REFERENCED_CONSTRAINTS);
+            final Element referencedConstraints = node.getOwnerDocument().createElement(REFERENCED_CONSTRAINTS);
             ovModelMetainformation.appendChild(referencedConstraints);
-            for (IOvModelConstraint referencedConstraint : object.getReferencedConstraints()) {
+            for (final IOvModelConstraint referencedConstraint : object.getReferencedConstraints()) {
                 write(referencedConstraint, referencedConstraints, alreadySerialisedElements);
             }
         }
@@ -303,13 +303,13 @@ public class WriteHelper {
      *                                  to already serialized elements).
      * @throws OvModelSerialisationException
      */
-    public static void write(IOvModelConstraintMetainformation object, Node node,
-                             Collection<IOvModelElement> alreadySerialisedElements) {
-        Element ovModelMetainformation = node.getOwnerDocument()
+    public static void write(final IOvModelConstraintMetainformation object, final Node node,
+                             final Collection<IOvModelElement> alreadySerialisedElements) {
+        final Element ovModelMetainformation = node.getOwnerDocument()
                 .createElement(OV_MODEL_CONSTRAINT_METAINFORMATION);
         node.appendChild(ovModelMetainformation);
 
-        Attr description = node.getOwnerDocument().createAttribute(DESCRIPTION);
+        final Attr description = node.getOwnerDocument().createAttribute(DESCRIPTION);
         description.setValue(object.getDescription());
         ovModelMetainformation.setAttributeNode(description);
 
@@ -328,16 +328,16 @@ public class WriteHelper {
      *                                  to already serialized elements).
      * @throws OvModelSerialisationException
      */
-    public static void write(IOvModelExcludesConstraint object, Node node,
-                             Collection<IOvModelElement> alreadySerialisedElements) throws OvModelSerialisationException {
+    public static void write(final IOvModelExcludesConstraint object, final Node node,
+                             final Collection<IOvModelElement> alreadySerialisedElements) throws OvModelSerialisationException {
         if (alreadySerialisedElements.contains(object)) {
-            Element ovModelVariantReference = node.getOwnerDocument()
+            final Element ovModelVariantReference = node.getOwnerDocument()
                     .createElement(OV_MODEL_EXCLUDES_CONSTRAINT_REFERENCE);
             node.appendChild(ovModelVariantReference);
 
             writeProperties((IIdentifiable) object, ovModelVariantReference, alreadySerialisedElements);
         } else {
-            Element ovModelExcludesConstraint = node.getOwnerDocument()
+            final Element ovModelExcludesConstraint = node.getOwnerDocument()
                     .createElement(OV_MODEL_EXCLUDES_CONSTRAINT);
             node.appendChild(ovModelExcludesConstraint);
 
@@ -359,17 +359,17 @@ public class WriteHelper {
      *                                  to already serialized elements).
      * @throws OvModelSerialisationException
      */
-    public static void write(IOvModelRequiresConstraint object, Node node,
-                             Collection<IOvModelElement> alreadySerialisedElements) throws OvModelSerialisationException {
+    public static void write(final IOvModelRequiresConstraint object, final Node node,
+                             final Collection<IOvModelElement> alreadySerialisedElements) throws OvModelSerialisationException {
 
         if (alreadySerialisedElements.contains(object)) {
-            Element ovModelVariantReference = node.getOwnerDocument()
+            final Element ovModelVariantReference = node.getOwnerDocument()
                     .createElement(OV_MODEL_REQUIRES_CONSTRAINT_REFERENCE);
             node.appendChild(ovModelVariantReference);
 
             writeProperties((IIdentifiable) object, ovModelVariantReference, alreadySerialisedElements);
         } else {
-            Element ovModelRequiresConstraint = node.getOwnerDocument()
+            final Element ovModelRequiresConstraint = node.getOwnerDocument()
                     .createElement(OV_MODEL_REQUIRES_CONSTRAINT);
             node.appendChild(ovModelRequiresConstraint);
 
@@ -391,9 +391,9 @@ public class WriteHelper {
      *                                  serialized (is used for creating references
      *                                  to already serialized elements).
      */
-    public static void writeProperties(IIdentifiable object, Element element,
-                                       Collection<IOvModelElement> alreadySerialisedElements) {
-        Attr name = element.getOwnerDocument().createAttribute(NAME);
+    public static void writeProperties(final IIdentifiable object, final Element element,
+                                       final Collection<IOvModelElement> alreadySerialisedElements) {
+        final Attr name = element.getOwnerDocument().createAttribute(NAME);
         name.setValue(OvModelUtils.getName(object));
         element.setAttributeNode(name);
     }
@@ -410,8 +410,8 @@ public class WriteHelper {
      *                                  serialized (is used for creating references
      *                                  to already serialized elements).
      */
-    public static void writeProperties(IOvModel object, Element element,
-                                       Collection<IOvModelElement> alreadySerialisedElements) {
+    public static void writeProperties(final IOvModel object, final Element element,
+                                       final Collection<IOvModelElement> alreadySerialisedElements) {
         writeProperties((IIdentifiable) object, element, alreadySerialisedElements);
     }
 
@@ -427,8 +427,8 @@ public class WriteHelper {
      *                                  serialized (is used for creating references
      *                                  to already serialized elements).
      */
-    public static void writeProperties(IOvModelElement object, Element element,
-                                       Collection<IOvModelElement> alreadySerialisedElements) {
+    public static void writeProperties(final IOvModelElement object, final Element element,
+                                       final Collection<IOvModelElement> alreadySerialisedElements) {
         writeProperties((IIdentifiable) object, element, alreadySerialisedElements);
     }
 
@@ -444,11 +444,11 @@ public class WriteHelper {
      *                                  serialized (is used for creating references
      *                                  to already serialized elements).
      */
-    public static void writeProperties(IOvModelVariationBase object, Element element,
-                                       Collection<IOvModelElement> alreadySerialisedElements) throws OvModelSerialisationException {
+    public static void writeProperties(final IOvModelVariationBase object, final Element element,
+                                       final Collection<IOvModelElement> alreadySerialisedElements) throws OvModelSerialisationException {
         writeProperties((IOvModelElement) object, element, alreadySerialisedElements);
 
-        Attr optional = element.getOwnerDocument().createAttribute(OPTIONAL);
+        final Attr optional = element.getOwnerDocument().createAttribute(OPTIONAL);
         optional.setValue(String.valueOf(OvModelUtils.isOptional(object)));
         element.setAttributeNode(optional);
 
@@ -467,8 +467,8 @@ public class WriteHelper {
      *                                  serialized (is used for creating references
      *                                  to already serialized elements).
      */
-    public static void writeProperties(IOvModelConstraint object, Element element,
-                                       Collection<IOvModelElement> alreadySerialisedElements) throws OvModelSerialisationException {
+    public static void writeProperties(final IOvModelConstraint object, final Element element,
+                                       final Collection<IOvModelElement> alreadySerialisedElements) throws OvModelSerialisationException {
         writeProperties((IOvModelElement) object, element, alreadySerialisedElements);
 
         write(object.getMetainformation(), element, alreadySerialisedElements);

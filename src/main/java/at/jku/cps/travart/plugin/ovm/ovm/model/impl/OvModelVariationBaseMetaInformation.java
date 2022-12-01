@@ -1,48 +1,34 @@
 package at.jku.cps.travart.plugin.ovm.ovm.model.impl;
 
-import at.jku.cps.travart.plugin.ovm.ovm.model.IOvModelVariationBaseMetainformation;
+import at.jku.cps.travart.plugin.ovm.ovm.model.IOvModelVariationBaseMetaInformation;
 import at.jku.cps.travart.plugin.ovm.ovm.model.constraint.IOvModelConstraint;
-import de.ovgu.featureide.fm.core.base.IPropertyContainer;
-import de.ovgu.featureide.fm.core.base.impl.MapPropertyContainer;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Represents a concrete implementation of an
- * {@link IOvModelVariationBaseMetainformation}.
+ * {@link IOvModelVariationBaseMetaInformation}.
  *
  * @author johannstoebich
- * @see IOvModelVariationBaseMetainformation
+ * @see IOvModelVariationBaseMetaInformation
  */
-public class OvModelVariationBaseMetainformation implements IOvModelVariationBaseMetainformation {
+public class OvModelVariationBaseMetaInformation implements IOvModelVariationBaseMetaInformation {
 
     protected boolean isAbstract;
     protected boolean hidden;
     protected boolean partOfOvModelRoot;
     protected String description;
     protected List<IOvModelConstraint> referencedConstraints;
-    protected IPropertyContainer customProperties;
 
-    public OvModelVariationBaseMetainformation() {
-        this.referencedConstraints = new ArrayList<IOvModelConstraint>();
-        this.customProperties = new MapPropertyContainer();
+    public OvModelVariationBaseMetaInformation() {
+        this.referencedConstraints = new ArrayList<>();
     }
 
     /**
      * (non-Javadoc)
      *
-     * @see at.jku.cps.travart.plugin.ovm.ovm.model.IOvModelVariationBaseMetainformation#getCustomProperties()
-     */
-    @Override
-    public IPropertyContainer getCustomProperties() {
-        return this.customProperties;
-    }
-
-    /**
-     * (non-Javadoc)
-     *
-     * @see at.jku.cps.travart.plugin.ovm.ovm.model.IOvModelVariationBaseMetainformation#getDescription()
+     * @see IOvModelVariationBaseMetaInformation#getDescription()
      */
     @Override
     public String getDescription() {
@@ -52,7 +38,7 @@ public class OvModelVariationBaseMetainformation implements IOvModelVariationBas
     /**
      * (non-Javadoc)
      *
-     * @see at.jku.cps.travart.plugin.ovm.ovm.model.IOvModelVariationBaseMetainformation#setDescription(String)
+     * @see IOvModelVariationBaseMetaInformation#setDescription(String)
      */
     @Override
     public void setDescription(final String description) {
@@ -62,7 +48,7 @@ public class OvModelVariationBaseMetainformation implements IOvModelVariationBas
     /**
      * (non-Javadoc)
      *
-     * @see at.jku.cps.travart.plugin.ovm.ovm.model.IOvModelVariationBaseMetainformation#isAbstract()
+     * @see IOvModelVariationBaseMetaInformation#isAbstract()
      */
     @Override
     public boolean isAbstract() {
@@ -72,7 +58,7 @@ public class OvModelVariationBaseMetainformation implements IOvModelVariationBas
     /**
      * (non-Javadoc)
      *
-     * @see at.jku.cps.travart.plugin.ovm.ovm.model.IOvModelVariationBaseMetainformation#setAbstract(boolean)
+     * @see IOvModelVariationBaseMetaInformation#setAbstract(boolean)
      */
     @Override
     public void setAbstract(final boolean isAbstract) {
@@ -82,7 +68,7 @@ public class OvModelVariationBaseMetainformation implements IOvModelVariationBas
     /**
      * (non-Javadoc)
      *
-     * @see at.jku.cps.travart.plugin.ovm.ovm.model.IOvModelVariationBaseMetainformation#isHidden()
+     * @see IOvModelVariationBaseMetaInformation#isHidden()
      */
     @Override
     public boolean isHidden() {
@@ -92,7 +78,7 @@ public class OvModelVariationBaseMetainformation implements IOvModelVariationBas
     /**
      * (non-Javadoc)
      *
-     * @see at.jku.cps.travart.plugin.ovm.ovm.model.IOvModelVariationBaseMetainformation#setHidden(boolean)
+     * @see IOvModelVariationBaseMetaInformation#setHidden(boolean)
      */
     @Override
     public void setHidden(final boolean hidden) {
@@ -102,7 +88,7 @@ public class OvModelVariationBaseMetainformation implements IOvModelVariationBas
     /**
      * (non-Javadoc)
      *
-     * @see at.jku.cps.travart.plugin.ovm.ovm.model.IOvModelVariationBaseMetainformation#isPartOfOvModelRoot()
+     * @see IOvModelVariationBaseMetaInformation#isPartOfOvModelRoot()
      */
     @Override
     public boolean isPartOfOvModelRoot() {
@@ -112,7 +98,7 @@ public class OvModelVariationBaseMetainformation implements IOvModelVariationBas
     /**
      * (non-Javadoc)
      *
-     * @see at.jku.cps.travart.plugin.ovm.ovm.model.IOvModelVariationBaseMetainformation#setPartOfOvModelRoot(boolean)
+     * @see IOvModelVariationBaseMetaInformation#setPartOfOvModelRoot(boolean)
      */
     @Override
     public void setPartOfOvModelRoot(final boolean partOfOvModelRoot) {
@@ -122,7 +108,7 @@ public class OvModelVariationBaseMetainformation implements IOvModelVariationBas
     /**
      * (non-Javadoc)
      *
-     * @see at.jku.cps.travart.plugin.ovm.ovm.model.IOvModelVariationBaseMetainformation#getReferencedConstraints()
+     * @see IOvModelVariationBaseMetaInformation#getReferencedConstraints()
      */
     @Override
     public List<IOvModelConstraint> getReferencedConstraints() {
@@ -132,7 +118,7 @@ public class OvModelVariationBaseMetainformation implements IOvModelVariationBas
     /**
      * (non-Javadoc)
      *
-     * @see at.jku.cps.travart.plugin.ovm.ovm.model.IOvModelVariationBaseMetainformation#setReferencedConstraints(List)
+     * @see IOvModelVariationBaseMetaInformation#setReferencedConstraints(List)
      */
     @Override
     public void setReferencedConstraints(final List<IOvModelConstraint> referencedConstraints) {
@@ -171,7 +157,7 @@ public class OvModelVariationBaseMetainformation implements IOvModelVariationBas
         if (this.getClass() != obj.getClass()) {
             return false;
         }
-        final OvModelVariationBaseMetainformation other = (OvModelVariationBaseMetainformation) obj;
+        final OvModelVariationBaseMetaInformation other = (OvModelVariationBaseMetaInformation) obj;
         if (this.description == null) {
             if (other.description != null) {
                 return false;
@@ -185,10 +171,7 @@ public class OvModelVariationBaseMetainformation implements IOvModelVariationBas
         if (this.isAbstract != other.isAbstract) {
             return false;
         }
-        if (this.partOfOvModelRoot != other.partOfOvModelRoot) {
-            return false;
-        }
-        return true;
+        return this.partOfOvModelRoot == other.partOfOvModelRoot;
     }
 
 }

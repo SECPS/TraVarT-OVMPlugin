@@ -1,8 +1,6 @@
 package at.jku.cps.travart.plugin.ovm.ovm.model.impl;
 
 import at.jku.cps.travart.plugin.ovm.ovm.model.IOvModelMetainformation;
-import de.ovgu.featureide.fm.core.base.IPropertyContainer;
-import de.ovgu.featureide.fm.core.base.impl.MapPropertyContainer;
 
 /**
  * Represents a concrete implementation of an {@link IOvModelMetainformation}.
@@ -12,22 +10,9 @@ import de.ovgu.featureide.fm.core.base.impl.MapPropertyContainer;
  */
 public class OvModelMetainformation implements IOvModelMetainformation {
 
-    protected IPropertyContainer customProperties;
-
     protected String description;
 
     public OvModelMetainformation() {
-        this.customProperties = new MapPropertyContainer();
-    }
-
-    /**
-     * (non-Javadoc)
-     *
-     * @see at.jku.cps.travart.plugin.ovm.ovm.model.IOvModelMetainformation#getCustomProperties()
-     */
-    @Override
-    public IPropertyContainer getCustomProperties() {
-        return this.customProperties;
     }
 
     /**

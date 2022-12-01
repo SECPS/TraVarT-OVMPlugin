@@ -1,9 +1,6 @@
 package at.jku.cps.travart.plugin.ovm.ovm.model;
 
 import at.jku.cps.travart.plugin.ovm.ovm.model.constraint.IOvModelConstraint;
-import de.ovgu.featureide.fm.core.base.IConstraint;
-import de.ovgu.featureide.fm.core.base.IFeature;
-import de.ovgu.featureide.fm.core.base.IPropertyContainer;
 
 import java.util.List;
 
@@ -13,18 +10,17 @@ import java.util.List;
  * The metainformation stores all information which is defined for a feature in
  * FeatureIDE however cannot be represented by an {@link IOvModelVariationBase}.
  */
-public interface IOvModelVariationBaseMetainformation {
+public interface IOvModelVariationBaseMetaInformation {
 
     /**
      * This method returns the custom properties of a variation base (variation
      * point or variant). The custom properties represent additional properties of a
-     * variation base overtaken from an {@link IFeature} during transformation. They
+     * variation base overtaken from an {@link Feature} during transformation. They
      * have been added to a variation base so that no information will be lost
      * during transformation.
      *
      * @return The returned properties.
      */
-    IPropertyContainer getCustomProperties();
 
     /**
      * This method returns the description of a variation base (variation point or
@@ -91,28 +87,28 @@ public interface IOvModelVariationBaseMetainformation {
 
     /**
      * This method returns the referenced constraints. If a variation point came
-     * from a feature model {@link IConstraint} and its child have been transformed
+     * from a feature model {@link de.vill.model.constraint.Constraint} and its child have been transformed
      * to an {@link IOvModel} constraint, this constraint is referenced here. This
      * is required for reconstructing the feature model from the corresponding
      * OvModel correctly.
      *
      * @return the constraints which are referenced.
      * @see #isPartOfOvModelRoot() to determine if a variation point came from a
-     * feature model {@link IConstraint}.
+     * feature model {@link de.vill.model.constraint.Constraint}.
      */
     List<IOvModelConstraint> getReferencedConstraints();
 
     /**
      * This method sets (overwrites) the referenced constraints of a variation base
      * (variation point or variant). If a variation point came from a feature model
-     * {@link IConstraint} and its child have been transformed to an
+     * {@link de.vill.model.constraint.Constraint} and its child have been transformed to an
      * {@link IOvModel} constraint, this constraint is referenced here. This is
      * required for reconstructing the feature model from the corresponding OvModel
      * correctly.
      *
      * @param referencedConstraints the constraints which will be set.
      * @see #isPartOfOvModelRoot() to determine if a variation point came from a
-     * feature model {@link IConstraint}.
+     * feature model {@link de.vill.model.constraint.Constraint}.
      */
     void setReferencedConstraints(List<IOvModelConstraint> referencedConstraints);
 

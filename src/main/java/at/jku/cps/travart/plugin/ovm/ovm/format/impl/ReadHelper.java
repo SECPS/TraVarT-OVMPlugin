@@ -11,7 +11,7 @@ import at.jku.cps.travart.plugin.ovm.ovm.model.IOvModelElement;
 import at.jku.cps.travart.plugin.ovm.ovm.model.IOvModelMetainformation;
 import at.jku.cps.travart.plugin.ovm.ovm.model.IOvModelVariant;
 import at.jku.cps.travart.plugin.ovm.ovm.model.IOvModelVariationBase;
-import at.jku.cps.travart.plugin.ovm.ovm.model.IOvModelVariationBaseMetainformation;
+import at.jku.cps.travart.plugin.ovm.ovm.model.IOvModelVariationBaseMetaInformation;
 import at.jku.cps.travart.plugin.ovm.ovm.model.IOvModelVariationPoint;
 import at.jku.cps.travart.plugin.ovm.ovm.model.constraint.IOvModelConstraint;
 import at.jku.cps.travart.plugin.ovm.ovm.model.constraint.IOvModelConstraintMetainformation;
@@ -71,23 +71,23 @@ public class ReadHelper {
      * @return the finally read {@link IOvModel}
      * @throws OvModelSerialisationException
      */
-    public static IOvModel readModel(Document document, IOvModel ovModel, IOvModelFactory factory)
+    public static IOvModel readModel(final Document document, final IOvModel ovModel, final IOvModelFactory factory)
             throws OvModelSerialisationException {
-        NodeList nodes = document.getElementsByTagName(OV_MODEL);
+        final NodeList nodes = document.getElementsByTagName(OV_MODEL);
         if (nodes == null || nodes.getLength() != 1) {
             throw new OvModelWrongElementException(OV_MODEL);
         }
-        Node node = nodes.item(0);
+        final Node node = nodes.item(0);
         if (!(node instanceof Element)) {
             throw new OvModelWrongElementException(node.getNodeName());
         }
 
         readProperties((Element) node, ovModel, ovModel, factory);
 
-        Element metainformation = getChildElementByTagName((Element) node, OV_MODEL_METAINFORMATION, true);
+        final Element metainformation = getChildElementByTagName((Element) node, OV_MODEL_METAINFORMATION, true);
         read(metainformation, ovModel.getMetainformation(), ovModel, factory);
 
-        for (Element element : getChildElements((Element) node, true)) {
+        for (final Element element : getChildElements((Element) node, true)) {
             if (at.jku.cps.travart.plugin.ovm.ovm.format.impl.PropertyHelper.getSingeltonInstance().isFeatureModelProperties(element)) {
                 continue;
             }
@@ -95,7 +95,7 @@ public class ReadHelper {
                 continue;
             }
 
-            IOvModelElement ovModelElement = read(element, ovModel, factory);
+            final IOvModelElement ovModelElement = read(element, ovModel, factory);
             if (ovModelElement instanceof IOvModelConstraint) {
                 OvModelUtils.addConstraint(ovModel, (IOvModelConstraint) ovModelElement);
             } else {
@@ -118,31 +118,31 @@ public class ReadHelper {
      * @return the created element.
      * @throws OvModelSerialisationException
      */
-    private static IOvModelElement read(Element element, IOvModel ovModel, IOvModelFactory factory)
+    private static IOvModelElement read(final Element element, final IOvModel ovModel, final IOvModelFactory factory)
             throws OvModelSerialisationException {
-        String type = element.getNodeName();
-        String name = element.getAttribute(NAME);
+        final String type = element.getNodeName();
+        final String name = element.getAttribute(NAME);
 
         if (type.equals(OV_MODEL_VARIANT)) {
-            IOvModelVariant ovModelVariant = factory.createVariant(ovModel, name);
+            final IOvModelVariant ovModelVariant = factory.createVariant(ovModel, name);
             read(element, ovModelVariant, ovModel, factory);
             return ovModelVariant;
         } else if (type.equals(OV_MODEL_VARIATION_POINT)) {
-            IOvModelVariationPoint ovModelVariationPoint = factory.createVariationPoint(ovModel, name);
+            final IOvModelVariationPoint ovModelVariationPoint = factory.createVariationPoint(ovModel, name);
             read(element, ovModelVariationPoint, ovModel, factory);
             return ovModelVariationPoint;
         } else if (type.equals(OV_MODEL_EXCLUDES_CONSTRAINT)) {
-            IOvModelExcludesConstraint ovModelExcludesConstraint = factory.createExcludesConstraint(ovModel);
+            final IOvModelExcludesConstraint ovModelExcludesConstraint = factory.createExcludesConstraint(ovModel);
             read(element, ovModelExcludesConstraint, ovModel, factory);
             return ovModelExcludesConstraint;
         } else if (type.equals(OV_MODEL_REQUIRES_CONSTRAINT)) {
-            IOvModelRequiresConstraint ovModelRequiresConstraint = factory.createRequiresConstraint(ovModel);
+            final IOvModelRequiresConstraint ovModelRequiresConstraint = factory.createRequiresConstraint(ovModel);
             read(element, ovModelRequiresConstraint, ovModel, factory);
             return ovModelRequiresConstraint;
         } else if (type.equals(OV_MODEL_VARIANT_REFERENCE) || type.equals(OV_MODEL_VARIATION_POINT_REFERENCE)
                 || type.equals(OV_MODEL_EXCLUDES_CONSTRAINT_REFERENCE)
                 || type.equals(OV_MODEL_REQUIRES_CONSTRAINT_REFERENCE)) {
-            IOvModelElement ovElement = ovModel.getElement(factory.createIdentifiable(0, name));
+            final IOvModelElement ovElement = ovModel.getElement(factory.createIdentifiable(0, name));
             if (ovElement == null) {
                 throw new OvModelWrongElementException(type, name);
             }
@@ -163,7 +163,7 @@ public class ReadHelper {
      *                the {@link IOvModel}.
      * @throws OvModelSerialisationException
      */
-    public static void read(Element element, IOvModelVariant object, IOvModel ovModel, IOvModelFactory factory)
+    public static void read(final Element element, final IOvModelVariant object, final IOvModel ovModel, final IOvModelFactory factory)
             throws OvModelSerialisationException {
         readProperties(element, object, ovModel, factory);
     }
@@ -180,40 +180,40 @@ public class ReadHelper {
      *                the {@link IOvModel}.
      * @throws OvModelSerialisationException
      */
-    public static void read(Element element, IOvModelVariationPoint object, IOvModel ovModel, IOvModelFactory factory)
+    public static void read(final Element element, final IOvModelVariationPoint object, final IOvModel ovModel, final IOvModelFactory factory)
             throws OvModelSerialisationException {
         readProperties(element, object, ovModel, factory);
 
-        String alternative = element.getAttribute(ALTERNATIVE);
+        final String alternative = element.getAttribute(ALTERNATIVE);
         if (alternative != null && alternative.contentEquals(String.valueOf(true))) {
             OvModelUtils.setAlternative(object, true);
         } else {
             OvModelUtils.setAlternative(object, false);
         }
 
-        String minChoices = element.getAttribute(MIN_CHOICES);
+        final String minChoices = element.getAttribute(MIN_CHOICES);
         if (minChoices != null) {
             OvModelUtils.setMinChoices(object, Integer.parseInt(minChoices));
         }
 
-        String maxChoices = element.getAttribute(MAX_CHOICES);
+        final String maxChoices = element.getAttribute(MAX_CHOICES);
         if (maxChoices != null) {
             OvModelUtils.setMaxChoices(object, Integer.parseInt(maxChoices));
         }
 
-        Element ovMandatoryChildren = getChildElementByTagName(element, MANDATORY_CHILDREN, false);
+        final Element ovMandatoryChildren = getChildElementByTagName(element, MANDATORY_CHILDREN, false);
         if (ovMandatoryChildren != null) {
-            for (Element childElement : getChildElements(ovMandatoryChildren, true)) {
-                IOvModelVariationBase ovModelVariationBase = (IOvModelVariationBase) read(childElement, ovModel,
+            for (final Element childElement : getChildElements(ovMandatoryChildren, true)) {
+                final IOvModelVariationBase ovModelVariationBase = (IOvModelVariationBase) read(childElement, ovModel,
                         factory);
                 object.addMandatoryChild(ovModelVariationBase);
             }
         }
 
-        Element ovOptionalChildren = getChildElementByTagName(element, OPTIONAL_CHILDREN, false);
+        final Element ovOptionalChildren = getChildElementByTagName(element, OPTIONAL_CHILDREN, false);
         if (ovOptionalChildren != null) {
-            for (Element childElement : getChildElements(ovOptionalChildren, true)) {
-                IOvModelVariationBase ovModelVariationBase = (IOvModelVariationBase) read(childElement, ovModel,
+            for (final Element childElement : getChildElements(ovOptionalChildren, true)) {
+                final IOvModelVariationBase ovModelVariationBase = (IOvModelVariationBase) read(childElement, ovModel,
                         factory);
                 object.addOptionalChild(ovModelVariationBase);
             }
@@ -232,20 +232,20 @@ public class ReadHelper {
      *                the {@link IOvModel}.
      * @throws OvModelSerialisationException
      */
-    public static void read(Element element, IOvModelMetainformation object, IOvModel ovModel,
-                            IOvModelFactory factory) {
-        String description = element.getAttribute(DESCRIPTION);
+    public static void read(final Element element, final IOvModelMetainformation object, final IOvModel ovModel,
+                            final IOvModelFactory factory) {
+        final String description = element.getAttribute(DESCRIPTION);
         object.setDescription(description);
 
         at.jku.cps.travart.plugin.ovm.ovm.format.impl.PropertyHelper.readProperties(object.getCustomProperties(), element);
     }
 
     /**
-     * This method populates an {@link IOvModelVariationBaseMetainformation}.
+     * This method populates an {@link IOvModelVariationBaseMetaInformation}.
      *
      * @param element the XML-{@link Element} which contains the serialization of
      *                the metainformation.
-     * @param object  the {@link IOvModelVariationBaseMetainformation} which should
+     * @param object  the {@link IOvModelVariationBaseMetaInformation} which should
      *                be populated.
      * @param ovModel the {@link IOvModel} the newly created metainformation belongs
      *                to.
@@ -253,24 +253,24 @@ public class ReadHelper {
      *                the {@link IOvModel}.
      * @throws OvModelSerialisationException
      */
-    public static void read(Element element, IOvModelVariationBaseMetainformation object, IOvModel ovModel,
-                            IOvModelFactory factory) throws OvModelSerialisationException {
-        String abstractStr = element.getAttribute(ABSTRACT);
+    public static void read(final Element element, final IOvModelVariationBaseMetaInformation object, final IOvModel ovModel,
+                            final IOvModelFactory factory) throws OvModelSerialisationException {
+        final String abstractStr = element.getAttribute(ABSTRACT);
         object.setAbstract(abstractStr != null && abstractStr.contentEquals(String.valueOf(true)));
 
-        String hidden = element.getAttribute(HIDDEN);
+        final String hidden = element.getAttribute(HIDDEN);
         object.setHidden(hidden != null && hidden.contentEquals(String.valueOf(true)));
 
-        String partOfOvModelRoot = element.getAttribute(PART_OF_OVMODEL_ROOT);
+        final String partOfOvModelRoot = element.getAttribute(PART_OF_OVMODEL_ROOT);
         object.setPartOfOvModelRoot(partOfOvModelRoot != null && partOfOvModelRoot.contentEquals(String.valueOf(true)));
 
-        String description = element.getAttribute(DESCRIPTION);
+        final String description = element.getAttribute(DESCRIPTION);
         object.setDescription(description);
 
-        Element referencedConstraints = getChildElementByTagName(element, REFERENCED_CONSTRAINTS, false);
+        final Element referencedConstraints = getChildElementByTagName(element, REFERENCED_CONSTRAINTS, false);
         if (referencedConstraints != null) {
-            for (Element childElement : getChildElements(referencedConstraints, true)) {
-                IOvModelElement constraint = read(childElement, ovModel, factory);
+            for (final Element childElement : getChildElements(referencedConstraints, true)) {
+                final IOvModelElement constraint = read(childElement, ovModel, factory);
                 if (!(constraint instanceof IOvModelConstraint)) {
                     throw new OvModelWrongElementException(childElement.getTagName(), childElement.getNodeName());
                 }
@@ -294,9 +294,9 @@ public class ReadHelper {
      *                the {@link IOvModel}.
      * @throws OvModelSerialisationException
      */
-    public static void read(Element element, IOvModelConstraintMetainformation object, IOvModel ovModel,
-                            IOvModelFactory factory) {
-        String description = element.getAttribute(DESCRIPTION);
+    public static void read(final Element element, final IOvModelConstraintMetainformation object, final IOvModel ovModel,
+                            final IOvModelFactory factory) {
+        final String description = element.getAttribute(DESCRIPTION);
         object.setDescription(description);
 
         at.jku.cps.travart.plugin.ovm.ovm.format.impl.PropertyHelper.readProperties(object.getCustomProperties(), element);
@@ -314,8 +314,8 @@ public class ReadHelper {
      *                the {@link IOvModel}.
      * @throws OvModelSerialisationException
      */
-    public static void read(Element element, IOvModelExcludesConstraint object, IOvModel ovModel,
-                            IOvModelFactory factory) throws OvModelSerialisationException {
+    public static void read(final Element element, final IOvModelExcludesConstraint object, final IOvModel ovModel,
+                            final IOvModelFactory factory) throws OvModelSerialisationException {
         readProperties(element, object, ovModel, factory);
     }
 
@@ -331,8 +331,8 @@ public class ReadHelper {
      *                the {@link IOvModel}.
      * @throws OvModelSerialisationException
      */
-    public static void read(Element element, IOvModelRequiresConstraint object, IOvModel ovModel,
-                            IOvModelFactory factory) throws OvModelSerialisationException {
+    public static void read(final Element element, final IOvModelRequiresConstraint object, final IOvModel ovModel,
+                            final IOvModelFactory factory) throws OvModelSerialisationException {
         readProperties(element, object, ovModel, factory);
     }
 
@@ -350,8 +350,8 @@ public class ReadHelper {
      * @param factory the factory that should be used for creating the contents of
      *                the {@link IOvModel}.
      */
-    public static void readProperties(Element element, IIdentifiable object, IOvModel ovModel,
-                                      IOvModelFactory factory) {
+    public static void readProperties(final Element element, final IIdentifiable object, final IOvModel ovModel,
+                                      final IOvModelFactory factory) {
         OvModelUtils.setName(object, element.getAttribute(NAME));
     }
 
@@ -366,7 +366,7 @@ public class ReadHelper {
      * @param factory the factory that should be used for creating the contents of
      *                the {@link IOvModel}.
      */
-    public static void readProperties(Element element, IOvModel object, IOvModel ovModel, IOvModelFactory factory) {
+    public static void readProperties(final Element element, final IOvModel object, final IOvModel ovModel, final IOvModelFactory factory) {
         readProperties(element, (IIdentifiable) object, ovModel, factory);
     }
 
@@ -383,8 +383,8 @@ public class ReadHelper {
      * @param factory the factory that should be used for creating the contents of
      *                the {@link IOvModel}.
      */
-    public static void readProperties(Element element, IOvModelElement object, IOvModel ovModel,
-                                      IOvModelFactory factory) {
+    public static void readProperties(final Element element, final IOvModelElement object, final IOvModel ovModel,
+                                      final IOvModelFactory factory) {
         readProperties(element, (IIdentifiable) object, ovModel, factory);
     }
 
@@ -402,18 +402,18 @@ public class ReadHelper {
      * @param factory the factory that should be used for creating the contents of
      *                the {@link IOvModel}.
      */
-    public static void readProperties(Element element, IOvModelVariationBase object, IOvModel ovModel,
-                                      IOvModelFactory factory) throws OvModelSerialisationException {
+    public static void readProperties(final Element element, final IOvModelVariationBase object, final IOvModel ovModel,
+                                      final IOvModelFactory factory) throws OvModelSerialisationException {
         readProperties(element, (IOvModelElement) object, ovModel, factory);
 
-        String optional = element.getAttribute(OPTIONAL);
+        final String optional = element.getAttribute(OPTIONAL);
         if (optional != null && optional.contentEquals(String.valueOf(true))) {
             OvModelUtils.setOptional(object, true);
         } else {
             OvModelUtils.setOptional(object, false);
         }
 
-        Element metainformation = getChildElementByTagName(element, OV_MODEL_VARIATION_BASE_METAINFORMATION,
+        final Element metainformation = getChildElementByTagName(element, OV_MODEL_VARIATION_BASE_METAINFORMATION,
                 true);
         read(metainformation, object.getMetainformation(), ovModel, factory);
     }
@@ -431,21 +431,21 @@ public class ReadHelper {
      * @param factory the factory that should be used for creating the contents of
      *                the {@link IOvModel}.
      */
-    public static void readProperties(Element node, IOvModelConstraint object, IOvModel ovModel,
-                                      IOvModelFactory factory) throws OvModelSerialisationException {
+    public static void readProperties(final Element node, final IOvModelConstraint object, final IOvModel ovModel,
+                                      final IOvModelFactory factory) throws OvModelSerialisationException {
         readProperties(node, (IOvModelElement) object, ovModel, factory);
 
-        Element metainformation = getChildElementByTagName(node, OV_MODEL_CONSTRAINT_METAINFORMATION, true);
+        final Element metainformation = getChildElementByTagName(node, OV_MODEL_CONSTRAINT_METAINFORMATION, true);
         read(metainformation, object.getMetainformation(), ovModel, factory);
 
-        List<Element> elements = getChildElements(node, true);
+        final List<Element> elements = getChildElements(node, true);
         elements.removeIf(element -> element.getTagName().equals(OV_MODEL_CONSTRAINT_METAINFORMATION));
         if (elements.size() != 2) {
             throw new OvModelWrongCountOfElements(node.getNodeName(), 2, elements.size());
         }
 
-        IOvModelElement source = read(elements.get(0), ovModel, factory);
-        IOvModelElement target = read(elements.get(1), ovModel, factory);
+        final IOvModelElement source = read(elements.get(0), ovModel, factory);
+        final IOvModelElement target = read(elements.get(1), ovModel, factory);
 
         if (!(source instanceof IOvModelVariationBase)) {
             throw new OvModelWrongElementException("Source cannot be of type " + source.getClass());
@@ -473,9 +473,9 @@ public class ReadHelper {
      * @return the found element, otherwise null or an exception.
      * @throws OvModelSerialisationException
      */
-    private static Element getChildElementByTagName(Element element, String name, boolean throwExceptionWhenNotFound)
+    private static Element getChildElementByTagName(final Element element, final String name, final boolean throwExceptionWhenNotFound)
             throws OvModelSerialisationException {
-        List<Element> childElements = getChildElementsByTagName(element, name);
+        final List<Element> childElements = getChildElementsByTagName(element, name);
         if (childElements.size() == 0 && !throwExceptionWhenNotFound) {
             return null;
         } else if (childElements.size() != 1) {
@@ -494,10 +494,10 @@ public class ReadHelper {
      * @return the found elements, otherwise an empty list.
      * @throws OvModelSerialisationException
      */
-    private static List<Element> getChildElementsByTagName(Element parent, String name)
+    private static List<Element> getChildElementsByTagName(final Element parent, final String name)
             throws OvModelSerialisationException {
-        List<Element> childElements = new ArrayList<>();
-        for (Element child : getChildElements(parent, false)) {
+        final List<Element> childElements = new ArrayList<>();
+        for (final Element child : getChildElements(parent, false)) {
             if (name.equals(child.getNodeName())) {
                 childElements.add(child);
             }
@@ -524,9 +524,9 @@ public class ReadHelper {
      * @return the list of elements.
      * @throws OvModelSerialisationException
      */
-    private static List<Element> getChildElements(Element parent,
-                                                  boolean thowExceptionOnEverythingElseThanElementAndText) throws OvModelSerialisationException {
-        List<Element> childElements = new ArrayList<>();
+    private static List<Element> getChildElements(final Element parent,
+                                                  final boolean thowExceptionOnEverythingElseThanElementAndText) throws OvModelSerialisationException {
+        final List<Element> childElements = new ArrayList<>();
         for (Node child = parent.getFirstChild(); child != null; child = child.getNextSibling()) {
             if (child instanceof Element) {
                 childElements.add((Element) child);

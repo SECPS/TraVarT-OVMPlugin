@@ -12,8 +12,6 @@ import at.jku.cps.travart.plugin.ovm.ovm.model.constraint.IOvModelConstraint;
 import at.jku.cps.travart.plugin.ovm.ovm.model.constraint.IOvModelExcludesConstraint;
 import at.jku.cps.travart.plugin.ovm.ovm.model.constraint.IOvModelRequiresConstraint;
 import at.jku.cps.travart.plugin.ovm.ovm.transformation.DefaultOvModelTransformationProperties;
-import de.ovgu.featureide.fm.core.base.impl.FeatureModel;
-import de.ovgu.featureide.fm.core.functional.Functional;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -22,11 +20,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 /**
- * Legal Notice: Some of this code or comments are overtaken from the
- * FeatrueIDE's {@link FeatureModel}.
- * <p>
  * Represents a concrete implementation of an {@link IOvModel}.
  *
  * @author johannstoebich
@@ -107,8 +103,6 @@ public class OvModel extends Identifiable implements IOvModel {
 
     /**
      * (non-Javadoc)
-     *
-     * @see de.ovgu.featureide.core.ovm.model.base.IOvmModel#addConstraint(de.ovgu.featureide.core.ovm.model.base.IOvmConstraint)
      */
     @Override
     public boolean addConstraint(final IOvModelConstraint constraint) {
@@ -117,9 +111,6 @@ public class OvModel extends Identifiable implements IOvModel {
 
     /**
      * (non-Javadoc)
-     *
-     * @see de.ovgu.featureide.core.ovm.model.base.IOvmModel#addConstraint(de.ovgu.featureide.core.ovm.model.base.IOvmConstraint,
-     * int)
      */
     @Override
     public void addConstraint(final IOvModelConstraint constraint, final int index) {
@@ -128,8 +119,6 @@ public class OvModel extends Identifiable implements IOvModel {
 
     /**
      * (non-Javadoc)
-     *
-     * @see de.ovgu.featureide.core.ovm.model.IOvModel#addVariationPoint(de.ovgu.featureide.core.ovm.model.IOvModelVariationPoint)
      */
     @Override
     public boolean addVariationPoint(final IOvModelVariationPoint variationPoint) {
@@ -138,8 +127,6 @@ public class OvModel extends Identifiable implements IOvModel {
 
     /**
      * (non-Javadoc)
-     *
-     * @see de.ovgu.featureide.core.ovm.model.IOvModel#afterSelection()
      */
     @Override
     public void afterSelection() {
@@ -369,8 +356,6 @@ public class OvModel extends Identifiable implements IOvModel {
 
     /**
      * (non-Javadoc)
-     *
-     * @see de.ovgu.featureide.core.ovm.model.base.IOvmModel#getConstraintCount()
      */
     @Override
     public int getConstraintCount() {
@@ -379,8 +364,6 @@ public class OvModel extends Identifiable implements IOvModel {
 
     /**
      * (non-Javadoc)
-     *
-     * @see de.ovgu.featureide.core.ovm.model.base.IOvmModel#getConstraintIndex(de.ovgu.featureide.core.ovm.model.base.IOvmConstraint)
      */
     @Override
     public int getConstraintIndex(final IOvModelConstraint constraint) {
@@ -389,8 +372,6 @@ public class OvModel extends Identifiable implements IOvModel {
 
     /**
      * (non-Javadoc)
-     *
-     * @see de.ovgu.featureide.core.ovm.model.base.IOvmModel#getConstraints()
      */
     @Override
     public List<IOvModelConstraint> getConstraints() {
@@ -399,19 +380,21 @@ public class OvModel extends Identifiable implements IOvModel {
 
     /**
      * (non-Javadoc)
-     *
-     * @see de.ovgu.featureide.core.ovm.model.base.IOvmModel#setConstraints(Iterable)
      */
     @Override
     public void setConstraints(final Iterable<IOvModelConstraint> constraints) {
         this.constraints.clear();
-        this.constraints.addAll(Functional.toList(constraints));
+        this.constraints.addAll(
+                StreamSupport.stream(
+                                constraints.spliterator(),
+                                false
+                        )
+                        .collect(Collectors.toList())
+        );
     }
 
     /**
      * (non-Javadoc)
-     *
-     * @see de.ovgu.featureide.core.ovm.model.IOvModel#getElement(de.ovgu.featureide.core.ovm.model.IIdentifiable)
      */
     @Override
     public IOvModelElement getElement(final IIdentifiable identifiable) {
@@ -433,8 +416,6 @@ public class OvModel extends Identifiable implements IOvModel {
 
     /**
      * (non-Javadoc)
-     *
-     * @see de.ovgu.featureide.core.ovm.model.IOvModel#getFactoryId()
      */
     @Override
     public String getFactoryId() {
@@ -443,8 +424,6 @@ public class OvModel extends Identifiable implements IOvModel {
 
     /**
      * (non-Javadoc)
-     *
-     * @see de.ovgu.featureide.core.ovm.model.IOvModel#getMetainformation()
      */
     @Override
     public IOvModelMetainformation getMetainformation() {
@@ -453,8 +432,6 @@ public class OvModel extends Identifiable implements IOvModel {
 
     /**
      * (non-Javadoc)
-     *
-     * @see de.ovgu.featureide.core.ovm.model.IOvModel#getNumberOfVariationPoints()
      */
     @Override
     public int getNumberOfVariationPoints() {
@@ -463,8 +440,6 @@ public class OvModel extends Identifiable implements IOvModel {
 
     /**
      * (non-Javadoc)
-     *
-     * @see de.ovgu.featureide.core.ovm.model.IOvModel#getSourceFile()
      */
     @Override
     public String getSourceFile() {
@@ -473,8 +448,6 @@ public class OvModel extends Identifiable implements IOvModel {
 
     /**
      * (non-Javadoc)
-     *
-     * @see de.ovgu.featureide.core.ovm.model.IOvModel#setSourceFile(String)
      */
     @Override
     public void setSourceFile(final String sourceFile) {
@@ -483,8 +456,6 @@ public class OvModel extends Identifiable implements IOvModel {
 
     /**
      * (non-Javadoc)
-     *
-     * @see de.ovgu.featureide.core.ovm.model.IOvModel#getVariationPoints()
      */
     @Override
     public List<IOvModelVariationPoint> getVariationPoints() {
@@ -508,8 +479,6 @@ public class OvModel extends Identifiable implements IOvModel {
 
     /**
      * (non-Javadoc)
-     *
-     * @see de.ovgu.featureide.core.configuration.IValidate#isValid()
      */
     @Override
     public boolean isValid() {
@@ -531,8 +500,6 @@ public class OvModel extends Identifiable implements IOvModel {
 
     /**
      * (non-Javadoc)
-     *
-     * @see de.ovgu.featureide.core.ovm.model.base.IOvmModel#removeConstraint(int)
      */
     @Override
     public void removeConstraint(final int index) {
@@ -541,8 +508,6 @@ public class OvModel extends Identifiable implements IOvModel {
 
     /**
      * (non-Javadoc)
-     *
-     * @see de.ovgu.featureide.core.ovm.model.base.IOvmModel#removeConstraint(de.ovgu.featureide.core.ovm.model.base.IOvmConstraint)
      */
     @Override
     public boolean removeConstraint(final IOvModelConstraint constraint) {
@@ -551,8 +516,6 @@ public class OvModel extends Identifiable implements IOvModel {
 
     /**
      * (non-Javadoc)
-     *
-     * @see de.ovgu.featureide.core.ovm.model.IOvModel#deleteVariationPoint(de.ovgu.featureide.core.ovm.model.IOvModelVariationPoint)
      */
     @Override
     public boolean removeVariationPoint(final IOvModelVariationPoint variationPoint) {
@@ -561,9 +524,6 @@ public class OvModel extends Identifiable implements IOvModel {
 
     /**
      * (non-Javadoc)
-     *
-     * @see de.ovgu.featureide.core.ovm.model.base.IOvmModel#replaceConstraint(de.ovgu.featureide.core.ovm.model.base.IOvmConstraint,
-     * int)
      */
     @Override
     public void replaceConstraint(final IOvModelConstraint constraint, final int index) {

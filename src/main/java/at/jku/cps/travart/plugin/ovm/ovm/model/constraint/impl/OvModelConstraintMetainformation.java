@@ -1,8 +1,6 @@
 package at.jku.cps.travart.plugin.ovm.ovm.model.constraint.impl;
 
 import at.jku.cps.travart.plugin.ovm.ovm.model.constraint.IOvModelConstraintMetainformation;
-import de.ovgu.featureide.fm.core.base.IPropertyContainer;
-import de.ovgu.featureide.fm.core.base.impl.MapPropertyContainer;
 
 /**
  * Represents a concrete implementation of an
@@ -14,10 +12,8 @@ import de.ovgu.featureide.fm.core.base.impl.MapPropertyContainer;
 public class OvModelConstraintMetainformation implements IOvModelConstraintMetainformation {
 
     protected String description;
-    protected IPropertyContainer customProperties;
 
     public OvModelConstraintMetainformation() {
-        this.customProperties = new MapPropertyContainer();
     }
 
     /**
@@ -36,19 +32,10 @@ public class OvModelConstraintMetainformation implements IOvModelConstraintMetai
      * @see at.jku.cps.travart.plugin.ovm.ovm.model.constraint.IOvModelConstraintMetainformation#setDescription(String)
      */
     @Override
-    public void setDescription(String description) {
+    public void setDescription(final String description) {
         this.description = description;
     }
 
-    /**
-     * (non-Javadoc)
-     *
-     * @see at.jku.cps.travart.plugin.ovm.ovm.model.constraint.IOvModelConstraintMetainformation#getCustomProperties()
-     */
-    @Override
-    public IPropertyContainer getCustomProperties() {
-        return this.customProperties;
-    }
 
     /**
      * (non-Javadoc)
@@ -69,7 +56,7 @@ public class OvModelConstraintMetainformation implements IOvModelConstraintMetai
      * @see Object#equals(Object)
      */
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(final Object obj) {
         if (this == obj) {
             return true;
         }
@@ -79,11 +66,9 @@ public class OvModelConstraintMetainformation implements IOvModelConstraintMetai
         if (this.getClass() != obj.getClass()) {
             return false;
         }
-        OvModelConstraintMetainformation other = (OvModelConstraintMetainformation) obj;
+        final OvModelConstraintMetainformation other = (OvModelConstraintMetainformation) obj;
         if (this.description == null) {
-            if (other.description != null) {
-                return false;
-            }
+            return other.description == null;
         } else if (!this.description.equals(other.description)) {
             return false;
         }

@@ -1,8 +1,6 @@
 package at.jku.cps.travart.plugin.ovm.ovm.format.impl;
 
-import de.ovgu.featureide.fm.core.base.IPropertyContainer;
 import de.ovgu.featureide.fm.core.io.xml.XmlFeatureModelFormat;
-import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 /**
@@ -34,39 +32,14 @@ public class PropertyHelper extends XmlFeatureModelFormat {
     }
 
     /**
-     * This method writes the feature model properties into an element. This
-     * properties can be separated into GRAPHICS, CALCULATIONS and PROPERTY
-     * properties.
-     *
-     * @param doc        the document in which the properties should be written.
-     * @param properties the container which contains the properties.
-     * @param element    the XML-{@link Element} where the properties should be
-     *                   stored.
-     */
-    public static void writeProperties(Document doc, IPropertyContainer properties, Element element) {
-        getSingeltonInstance().addProperties(doc, properties, element);
-    }
-
-    /**
-     * This method read the feature model properties. This properties can be
-     * separated into GRAPHICS, CALCULATIONS and PROPERTY properties.
-     *
-     * @param properties the container in which the properties should be stored.
-     * @param element    the XML-{@link Element} containing the properties.
-     */
-    public static void readProperties(IPropertyContainer properties, Element element) {
-        getSingeltonInstance().parseFeatureModelProperties(properties, element);
-    }
-
-    /**
      * This method checks if the XML-{@link Element} contains feature model
      * properties. This properties can be separated into GRAPHICS, CALCULATIONS and
      * PROPERTY properties.
      *
      * @param element the XML-{@link Element} containing the properties.
      */
-    public boolean isFeatureModelProperties(Element element) {
-        String nodeName = element.getNodeName();
+    public boolean isFeatureModelProperties(final Element element) {
+        final String nodeName = element.getNodeName();
         switch (nodeName) {
             case GRAPHICS:
             case CALCULATIONS:
@@ -74,23 +47,6 @@ public class PropertyHelper extends XmlFeatureModelFormat {
                 return true;
             default:
                 return false;
-        }
-    }
-
-    protected void parseFeatureModelProperties(IPropertyContainer properties, Element e) {
-        for (Element propertyElement : getElements(e.getChildNodes())) {
-            String nodeName = propertyElement.getNodeName();
-            switch (nodeName) {
-                case GRAPHICS:
-                    this.parseProperty(properties, propertyElement, GRAPHICS);
-                    break;
-                case CALCULATIONS:
-                    this.parseProperty(properties, propertyElement, CALCULATIONS);
-                    break;
-                case PROPERTY:
-                    this.parseProperty(properties, propertyElement, null);
-                    break;
-            }
         }
     }
 }

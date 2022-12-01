@@ -1,7 +1,7 @@
 package at.jku.cps.travart.plugin.ovm.ovm.model.impl;
 
 import at.jku.cps.travart.plugin.ovm.ovm.model.IOvModelVariationBase;
-import at.jku.cps.travart.plugin.ovm.ovm.model.IOvModelVariationBaseMetainformation;
+import at.jku.cps.travart.plugin.ovm.ovm.model.IOvModelVariationBaseMetaInformation;
 
 /**
  * Represents a concrete implementation of an {@link IOvModelVariationBase}.
@@ -11,13 +11,13 @@ import at.jku.cps.travart.plugin.ovm.ovm.model.IOvModelVariationBaseMetainformat
  */
 public abstract class OvModelVariationBase extends OvModelElement implements IOvModelVariationBase {
 
-    protected IOvModelVariationBaseMetainformation metainformation;
+    protected IOvModelVariationBaseMetaInformation metainformation;
     protected boolean optional;
     private boolean selected;
 
     public OvModelVariationBase() {
         super();
-        this.metainformation = new OvModelVariationBaseMetainformation();
+        this.metainformation = new OvModelVariationBaseMetaInformation();
     }
 
     /**
@@ -26,17 +26,17 @@ public abstract class OvModelVariationBase extends OvModelElement implements IOv
      * @see de.ovgu.featureide.core.ovm.model.IOvModelVariationBase#getMetaInformation()
      */
     @Override
-    public IOvModelVariationBaseMetainformation getMetainformation() {
+    public IOvModelVariationBaseMetaInformation getMetainformation() {
         return this.metainformation;
     }
 
     /**
      * (non-Javadoc)
      *
-     * @see de.ovgu.featureide.core.ovm.model.IOvModelVariationBase#setMetaInformation(IOvModelVariationBaseMetainformation)
+     * @see de.ovgu.featureide.core.ovm.model.IOvModelVariationBase#setMetaInformation(IOvModelVariationBaseMetaInformation)
      */
     @Override
-    public void setMetaInformation(IOvModelVariationBaseMetainformation metaInformation) {
+    public void setMetaInformation(final IOvModelVariationBaseMetaInformation metaInformation) {
         this.metainformation = metaInformation;
     }
 
@@ -56,7 +56,7 @@ public abstract class OvModelVariationBase extends OvModelElement implements IOv
      * @see de.ovgu.featureide.core.ovm.model.IOvModelVariationBase#setOptional(boolean)
      */
     @Override
-    public void setOptional(boolean optional) {
+    public void setOptional(final boolean optional) {
         this.optional = optional;
     }
 
@@ -76,7 +76,7 @@ public abstract class OvModelVariationBase extends OvModelElement implements IOv
      * @see at.jku.cps.vmt.core.common.core.configuration.IConfigurable#setSelected(boolean)
      */
     @Override
-    public void setSelected(boolean selected) {
+    public void setSelected(final boolean selected) {
         this.selected = selected;
     }
 
@@ -86,7 +86,7 @@ public abstract class OvModelVariationBase extends OvModelElement implements IOv
      * @see de.ovgu.featureide.core.configuration.IValidateInternal#isValid(boolean)
      */
     @Override
-    public boolean isValid(boolean isMandatory) {
+    public boolean isValid(final boolean isMandatory) {
         return !isMandatory || this.isSelected();
     }
 
@@ -110,7 +110,7 @@ public abstract class OvModelVariationBase extends OvModelElement implements IOv
      * @see Object#equals(Object)
      */
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(final Object obj) {
         if (this == obj) {
             return true;
         }
@@ -120,7 +120,7 @@ public abstract class OvModelVariationBase extends OvModelElement implements IOv
         if (this.getClass() != obj.getClass()) {
             return false;
         }
-        OvModelVariationBase other = (OvModelVariationBase) obj;
+        final OvModelVariationBase other = (OvModelVariationBase) obj;
         if (this.optional != other.optional) {
             return false;
         }

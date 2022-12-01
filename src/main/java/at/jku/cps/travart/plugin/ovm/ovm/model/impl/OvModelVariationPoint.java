@@ -5,7 +5,6 @@ import at.jku.cps.travart.plugin.ovm.ovm.model.IOvModelElement;
 import at.jku.cps.travart.plugin.ovm.ovm.model.IOvModelVariationBase;
 import at.jku.cps.travart.plugin.ovm.ovm.model.IOvModelVariationPoint;
 import at.jku.cps.travart.plugin.ovm.ovm.transformation.DefaultOvModelTransformationProperties;
-import de.ovgu.featureide.fm.core.functional.Functional;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -149,7 +148,7 @@ public class OvModelVariationPoint extends OvModelVariationBase implements IOvMo
     @Override
     public void setMandatoryChildren(final List<IOvModelVariationBase> mandatoryChildren) {
         this.mandatoryChildren.clear();
-        this.mandatoryChildren.addAll(Functional.toList(mandatoryChildren));
+        this.mandatoryChildren.addAll(mandatoryChildren);
     }
 
     /**
@@ -210,7 +209,7 @@ public class OvModelVariationPoint extends OvModelVariationBase implements IOvMo
     @Override
     public void setOptionalChildren(final List<IOvModelVariationBase> optionalChildren) {
         this.optionalChildren.clear();
-        this.optionalChildren.addAll(Functional.toList(optionalChildren));
+        this.optionalChildren.addAll(optionalChildren);
     }
 
     /**
@@ -251,8 +250,6 @@ public class OvModelVariationPoint extends OvModelVariationBase implements IOvMo
 
     /**
      * (non-Javadoc)
-     *
-     * @see de.ovgu.featureide.core.configuration.IValidateInternal#isValid(boolean)
      */
     @Override
     public boolean isValid(final boolean isMandatory) {
@@ -343,8 +340,6 @@ public class OvModelVariationPoint extends OvModelVariationBase implements IOvMo
 
     /**
      * (non-Javadoc)
-     *
-     * @see de.ovgu.featureide.core.ovm.model.IOvModelElement#getElement(de.ovgu.featureide.core.ovm.model.IIdentifiable)
      */
     @Override
     public IOvModelElement getElement(final IIdentifiable identifiable) {
